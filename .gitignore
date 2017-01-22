@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+.qmake.stash
+Makefile
+softProjector.pro.user
+unknownsys_build/*
+win32_build/*
+unix_build/*
+mac_build/*
