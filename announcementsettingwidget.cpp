@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "announcementsettingwidget.h"
+#include "announcementsettingwidget.hpp"
 #include "ui_announcementsettingwidget.h"
 
 AnnouncementSettingWidget::AnnouncementSettingWidget(QWidget *parent) :

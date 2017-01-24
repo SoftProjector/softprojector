@@ -87,45 +87,45 @@ SOURCES += main.cpp \
     projectordisplayscreen.cpp \
     imagegenerator.cpp \
     spimageprovider.cpp
-HEADERS += softprojector.h \
-    songwidget.h \
-    biblewidget.h \
-    editwidget.h \
-    song.h \
-    bible.h \
-    settingsdialog.h \
-    aboutdialog.h \
-    addsongbookdialog.h \
-    highlight.h \
-    managedatadialog.h \
-    managedata.h \
-    announcewidget.h \
-    helpdialog.h \
-    songcounter.h \
-    bibleinformationdialog.h \
-    settings.h \
-    generalsettingwidget.h \
-    biblesettingwidget.h \
-    songsettingwidget.h \
-    announcementsettingwidget.h \
-    printpreviewdialog.h \
-    controlbutton.h \
-    passivesettingwidget.h \
-    theme.h \
-    picturewidget.h \
-    slideshow.h \
-    mediawidget.h \
-    videoplayerwidget.h \
-    videoinfo.h \
-    spfunctions.h \
-    slideshoweditor.h \
-    editannouncementdialog.h \
-    announcement.h \
-    schedule.h \
-    picturesettingwidget.h \
-    moduledownloaddialog.h \
-    moduleprogressdialog.h \
-    displaysetting.h \
+HEADERS += softprojector.hpp \
+    songwidget.hpp \
+    biblewidget.hpp \
+    editwidget.hpp \
+    song.hpp \
+    bible.hpp \
+    settingsdialog.hpp \
+    aboutdialog.hpp \
+    addsongbookdialog.hpp \
+    highlight.hpp \
+    managedatadialog.hpp \
+    managedata.hpp \
+    announcewidget.hpp \
+    helpdialog.hpp \
+    songcounter.hpp \
+    bibleinformationdialog.hpp \
+    settings.hpp \
+    generalsettingwidget.hpp \
+    biblesettingwidget.hpp \
+    songsettingwidget.hpp \
+    announcementsettingwidget.hpp \
+    printpreviewdialog.hpp \
+    controlbutton.hpp \
+    passivesettingwidget.hpp \
+    theme.hpp \
+    picturewidget.hpp \
+    slideshow.hpp \
+    mediawidget.hpp \
+    videoplayerwidget.hpp \
+    videoinfo.hpp \
+    spfunctions.hpp \
+    slideshoweditor.hpp \
+    editannouncementdialog.hpp \
+    announcement.hpp \
+    schedule.hpp \
+    picturesettingwidget.hpp \
+    moduledownloaddialog.hpp \
+    moduleprogressdialog.hpp \
+    displaysetting.hpp \
     projectordisplayscreen.hpp \
     imagegenerator.hpp \
     spimageprovider.hpp

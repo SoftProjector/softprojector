@@ -20,7 +20,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QtSql>
-#include "softprojector.h"
+#include "softprojector.hpp"
 
 // Definitions for database versions 'dbVer' numbers
 // x - Official release. ex: 2 - for SoftProjector 2

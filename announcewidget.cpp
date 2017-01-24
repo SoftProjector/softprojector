@@ -19,7 +19,7 @@
 
 #include <QtSql>
 #include <QDebug>
-#include "announcewidget.h"
+#include "announcewidget.hpp"
 #include "ui_announcewidget.h"
 
 AnnounceWidget::AnnounceWidget(QWidget *parent) :

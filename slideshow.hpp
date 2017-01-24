@@ -17,35 +17,51 @@
 //
 ***************************************************************************/
 
-#ifndef SCHEDULE_H
-#define SCHEDULE_H
+#ifndef SLIDESHOW_H
+#define SLIDESHOW_H
 
-#include "bible.h"
-#include "song.h"
-#include "slideshow.h"
-#include "videoinfo.h"
-#include "announcement.h"
+#include <QtSql>
+#include <QString>
+#include <QPixmap>
+#include <QDebug>
+#include <QProgressDialog>
 
-class Schedule
+#include "spfunctions.hpp"
+
+class SlideShowItem
 {
 public:
-    Schedule();
-    Schedule(BibleHistory &b);
-    Schedule(Song &s);
-    Schedule(SlideShow &s);
-    Schedule(VideoInfo &m);
-    Schedule(Announcement &a);
-
-    QString stype;
+    SlideShowItem();
+    int slideId;
+    int order;
     QString name;
-    QIcon icon;
-    int scid;
-
-    BibleHistory bible;
-    Song song;
-    SlideShow slideshow;
-    VideoInfo media;
-    Announcement announce;
+    QString path;
+    QPixmap image;
+    QPixmap imageSmall;
+    QPixmap imagePreview;
 };
 
-#endif // SCHEDULE_H
+class SlideShowInfo
+{
+public:
+    SlideShowInfo();
+    int slideSwId;
+    QString name;
+    QString info;
+};
+
+class SlideShow
+{
+public:
+    SlideShow();
+    int slideShowId;
+    QString name;
+    QString info;
+    QList<SlideShowItem> slides;
+
+public slots:
+    void loadSlideShow(int id);
+    void saveSideShow(QString savelbl, QWidget *ptW, QList<int> delList);
+};
+
+#endif // SLIDESHOW_H

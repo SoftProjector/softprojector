@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "bibleinformationdialog.h"
+#include "bibleinformationdialog.hpp"
 #include "ui_bibleinformationdialog.h"
 
 BibleInformationDialog::BibleInformationDialog(QWidget *parent) :

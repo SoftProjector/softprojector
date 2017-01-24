@@ -27,8 +27,8 @@
 //#include <phonon/AudioOutput>
 //#include <phonon/SeekSlider>
 //#include <phonon/VolumeSlider>
-#include "videoplayerwidget.h"
-#include "videoinfo.h"
+#include "videoplayerwidget.hpp"
+#include "videoinfo.hpp"
 
 namespace Ui {
 class MediaWidget;

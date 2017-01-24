@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "moduledownloaddialog.h"
+#include "moduledownloaddialog.hpp"
 #include "ui_moduledownloaddialog.h"
 
 ModuleDownloadDialog::ModuleDownloadDialog(QWidget *parent) :

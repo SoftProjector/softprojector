@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "picturewidget.h"
+#include "picturewidget.hpp"
 #include "ui_picturewidget.h"
 
 PictureWidget::PictureWidget(QWidget *parent) :

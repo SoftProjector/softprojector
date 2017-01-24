@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "addsongbookdialog.h"
+#include "addsongbookdialog.hpp"
 #include "ui_addsongbookdialog.h"
 
 AddSongbookDialog::AddSongbookDialog(QWidget *parent) :

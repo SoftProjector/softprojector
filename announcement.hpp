@@ -21,7 +21,7 @@
 #define ANNOUNCEMENT_H
 
 #include <QtGui>
-#include "spfunctions.h"
+#include "spfunctions.hpp"
 
 class AnnounceSlide
 {

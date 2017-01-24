@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "displaysetting.h"
+#include "displaysetting.hpp"
 
 DisplaySetting::DisplaySetting()
 {

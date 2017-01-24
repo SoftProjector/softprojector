@@ -22,8 +22,8 @@
 
 //#include <QtCore>
 #include <QtSql>
-//#include "spfunctions.h"
-#include "settings.h"
+//#include "spfunctions.hpp"
+#include "settings.hpp"
 /*
 class PassiveSettings
 {

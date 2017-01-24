@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "settings.h"
+#include "settings.hpp"
 
 TextSettingsBase::TextSettingsBase()
 {

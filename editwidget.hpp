@@ -22,10 +22,10 @@
 
 #include <QWidget>
 #include <QtGui>
-#include "song.h"
-#include "addsongbookdialog.h"
-#include "highlight.h"
-#include "printpreviewdialog.h"
+#include "song.hpp"
+#include "addsongbookdialog.hpp"
+#include "highlight.hpp"
+#include "printpreviewdialog.hpp"
 
 namespace Ui {
 class EditWidget;

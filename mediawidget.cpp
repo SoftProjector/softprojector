@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "mediawidget.h"
+#include "mediawidget.hpp"
 #include "ui_mediawidget.h"
 
 MediaWidget::MediaWidget(QWidget *parent) :

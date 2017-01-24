@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "managedatadialog.h"
+#include "managedatadialog.hpp"
 #include "ui_managedatadialog.h"
 
 Module::Module()

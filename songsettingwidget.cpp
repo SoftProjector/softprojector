@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "songsettingwidget.h"
+#include "songsettingwidget.hpp"
 #include "ui_songsettingwidget.h"
 
 SongSettingWidget::SongSettingWidget(QWidget *parent) :

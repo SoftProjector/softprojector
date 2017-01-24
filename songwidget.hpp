@@ -21,9 +21,9 @@
 #define SONGWIDGET_H
 
 #include <QWidget>
-#include "song.h"
-#include "songcounter.h"
-#include "editwidget.h"
+#include "song.hpp"
+#include "songcounter.hpp"
+#include "editwidget.hpp"
 
 namespace Ui {
 class SongWidget;

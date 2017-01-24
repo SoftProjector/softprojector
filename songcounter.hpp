@@ -22,7 +22,7 @@
 
 #include <QDialog>
 #include <QtSql>
-#include "song.h"
+#include "song.hpp"
 
 namespace Ui {
 class SongCounter;

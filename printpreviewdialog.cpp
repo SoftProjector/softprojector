@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "printpreviewdialog.h"
+#include "printpreviewdialog.hpp"
 #include "ui_printpreviewdialog.h"
 
 PrintPreviewDialog::PrintPreviewDialog(QWidget *parent) :

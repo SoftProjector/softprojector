@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "biblesettingwidget.h"
+#include "biblesettingwidget.hpp"
 #include "ui_biblesettingwidget.h"
 
 BibleSettingWidget::BibleSettingWidget(QWidget *parent) :

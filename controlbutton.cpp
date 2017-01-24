@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "controlbutton.h"
+#include "controlbutton.hpp"
 
 ControlButton::ControlButton(QWidget * parent)
     : QPushButton(parent)

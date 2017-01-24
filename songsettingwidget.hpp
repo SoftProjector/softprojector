@@ -17,29 +17,27 @@
 //
 ***************************************************************************/
 
-#ifndef ANNOUNCEMENTSETTINGWIDGET_H
-#define ANNOUNCEMENTSETTINGWIDGET_H
+#ifndef SONGSETTINGWIDGET_H
+#define SONGSETTINGWIDGET_H
 
+//#include <QWidget>
 #include <QtWidgets>
-#include "theme.h"
-#include "spfunctions.h"
-#include "settings.h"
+#include "theme.hpp"
 
 namespace Ui {
-class AnnouncementSettingWidget;
+class SongSettingWidget;
 }
 
-class AnnouncementSettingWidget : public QWidget
+class SongSettingWidget : public QWidget
 {
     Q_OBJECT
-
 public:
-    explicit AnnouncementSettingWidget(QWidget *parent = 0);
-    ~AnnouncementSettingWidget();
+    explicit SongSettingWidget(QWidget *parent = 0);
+    ~SongSettingWidget();
 
 public slots:
-    void setSettings(TextSettings& settings, TextSettings &settings2);
-    void getSettings(TextSettings& settings, TextSettings &settings2);
+    void getSettings(SongSettings &settings, SongSettings &settings2);
+    void setSettings(SongSettings &settings, SongSettings &settings2);
     void setDispScreen2Visible(bool visible);
     void setBackgroungds(QString name, QPixmap back);
 
@@ -48,25 +46,34 @@ signals:
 
 private slots:
     void loadSettings();
-    void on_buttonBackground_clicked();
-    void on_pushButtonDefault_clicked();
     void on_checkBoxUseShadow_stateChanged(int arg1);
-    void on_groupBoxUseDisp2_toggled(bool arg1);
     void on_checkBoxUseShadow2_stateChanged(int arg1);
-    void on_buttonBackground2_clicked();
+    void on_toolButtonInfoColor_clicked();
+    void on_toolButtonInfoColor2_clicked();
+    void on_toolButtonInfoFont_clicked();
+    void on_toolButtonInfoFont2_clicked();
+    void on_toolButtonEndingColor_clicked();
+    void on_toolButtonEndingColor2_clicked();
+    void on_toolButtonEndingFont_clicked();
+    void on_toolButtonEndingFont2_clicked();
+    void on_buttonSongBackground_clicked();
+    void on_buttonSongBackground2_clicked();
     void on_toolButtonColor_clicked();
     void on_toolButtonColor2_clicked();
     void on_toolButtonFont_clicked();
     void on_toolButtonFont2_clicked();
+    void on_groupBoxDisplay2_toggled(bool arg1);
+    void on_pushButtonDefault_clicked();
     QString getFontText(QFont font);
-
     void on_pushButtonApplyToAll_clicked();
 
 private:
-    TextSettings mySettings, mySettings2;
-    Ui::AnnouncementSettingWidget *ui;
+    SongSettings mySettings;
+    SongSettings mySettings2;
+
+    Ui::SongSettingWidget *ui;
 protected:
     virtual void changeEvent(QEvent *e);
 };
 
-#endif // ANNOUNCEMENTSETTINGWIDGET_H
+#endif // SONGSETTINGWIDGET_H

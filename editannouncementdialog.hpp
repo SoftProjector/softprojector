@@ -22,8 +22,8 @@
 
 #include <QDialog>
 #include <QDebug>
-#include "announcement.h"
-#include "highlight.h"
+#include "announcement.hpp"
+#include "highlight.hpp"
 
 namespace Ui {
 class EditAnnouncementDialog;

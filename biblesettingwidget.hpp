@@ -22,9 +22,9 @@
 
 #include <QtWidgets>
 #include <QtSql>
-#include "theme.h"
-#include "settings.h"
-#include "spfunctions.h"
+#include "theme.hpp"
+#include "settings.hpp"
+#include "spfunctions.hpp"
 
 namespace Ui {
 class BibleSettingWidget;

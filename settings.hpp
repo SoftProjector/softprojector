@@ -22,7 +22,7 @@
 
 #include <QtSql>
 #include <QPixmap>
-#include "spfunctions.h"
+#include "spfunctions.hpp"
 
 void saveIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);
 void updateIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);

@@ -22,7 +22,7 @@
 
 #include <QtGui>
 #include <QtSql>
-#include "theme.h"
+#include "theme.hpp"
 
 class ManageData
 {

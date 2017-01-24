@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "slideshoweditor.h"
+#include "slideshoweditor.hpp"
 #include "ui_slideshoweditor.h"
 
 SlideShowEditor::SlideShowEditor(QWidget *parent) :

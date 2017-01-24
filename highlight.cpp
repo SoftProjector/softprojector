@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "highlight.h"
+#include "highlight.hpp"
 
 Highlight::Highlight(QTextDocument *parent)
     : QSyntaxHighlighter(parent)

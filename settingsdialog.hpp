@@ -21,14 +21,14 @@
 #define SETTINGSDIALOG_H
 
 #include <QtWidgets>
-#include "settings.h"
-#include "theme.h"
-#include "generalsettingwidget.h"
-#include "passivesettingwidget.h"
-#include "biblesettingwidget.h"
-#include "songsettingwidget.h"
-#include "announcementsettingwidget.h"
-#include "picturesettingwidget.h"
+#include "settings.hpp"
+#include "theme.hpp"
+#include "generalsettingwidget.hpp"
+#include "passivesettingwidget.hpp"
+#include "biblesettingwidget.hpp"
+#include "songsettingwidget.hpp"
+#include "announcementsettingwidget.hpp"
+#include "picturesettingwidget.hpp"
 
 namespace Ui {
 class SettingsDialog;

@@ -9,11 +9,11 @@
 #include <QMediaPlaylist>
 #include "spimageprovider.hpp"
 #include "imagegenerator.hpp"
-#include "settings.h"
-#include "bible.h"
-#include "song.h"
-#include "announcement.h"
-//#include "slideshow.h"
+#include "settings.hpp"
+#include "bible.hpp"
+#include "song.hpp"
+#include "announcement.hpp"
+//#include "slideshow.hpp"
 
 namespace Ui {
 class ProjectorDisplayScreen;

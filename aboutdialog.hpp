@@ -17,44 +17,32 @@
 //
 ***************************************************************************/
 
-#ifndef PASSIVESETTINGWIDGET_H
-#define PASSIVESETTINGWIDGET_H
+#ifndef ABOUTDIALOG_H
+#define ABOUTDIALOG_H
 
-#include <QWidget>
-#include <QFileDialog>
-#include <QDebug>
-#include "theme.h"
-#include "settings.h"
+#include <QDialog>
+#include "softprojector.hpp"
 
 namespace Ui {
-class PassiveSettingWidget;
+    class AboutDialog;
 }
 
-class PassiveSettingWidget : public QWidget
-{
+class AboutDialog : public QDialog {
     Q_OBJECT
-    
+    Q_DISABLE_COPY(AboutDialog)
 public:
-    explicit PassiveSettingWidget(QWidget *parent = 0);
-    ~PassiveSettingWidget();
+    explicit AboutDialog(QWidget *parent, QString version_string);
+    virtual ~AboutDialog();
 
-public slots:
-    void setSetings(TextSettings &settings, TextSettings &settings2);
-    void getSettings(TextSettings &settings, TextSettings &settings2);
-    void setDispScreen2Visible(bool visible);
-
-private slots:
-    void loadSettings();
-    void on_buttonBrowseBackgound_clicked();
-    void on_groupBoxDisp2Sets_toggled(bool arg1);
-    void on_buttonBrowseBackgound2_clicked();
-    void on_pushButtonDefault_clicked();
-
-private:
-    Ui::PassiveSettingWidget *ui;
-    TextSettings mySettings,mySettings2;
 protected:
     virtual void changeEvent(QEvent *e);
+
+private:
+    Ui::AboutDialog *ui;
+    SoftProjector *softProjector;
+
+private slots:
+    void on_pushButton_clicked();
 };
 
-#endif // PASSIVESETTINGWIDGET_H
+#endif // ABOUTDIALOG_H

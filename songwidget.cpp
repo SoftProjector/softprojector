@@ -18,7 +18,7 @@
 ***************************************************************************/
 
 #include <QDebug>
-#include "songwidget.h"
+#include "songwidget.hpp"
 #include "ui_songwidget.h"
 
 SongWidget::SongWidget(QWidget *parent) :

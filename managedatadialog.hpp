@@ -25,13 +25,13 @@
 #include <QtSql>
 #include <QtNetwork/QtNetwork>
 
-#include "managedata.h"
-#include "song.h"
-#include "addsongbookdialog.h"
-#include "bibleinformationdialog.h"
-#include "theme.h"
-#include "moduledownloaddialog.h"
-#include "moduleprogressdialog.h"
+#include "managedata.hpp"
+#include "song.hpp"
+#include "addsongbookdialog.hpp"
+#include "bibleinformationdialog.hpp"
+#include "theme.hpp"
+#include "moduledownloaddialog.hpp"
+#include "moduleprogressdialog.hpp"
 
 namespace Ui {
 class ManageDataDialog;

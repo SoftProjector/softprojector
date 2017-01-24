@@ -22,10 +22,10 @@
 
 #include <QtGui>
 #include <QtSql>
-#include "slideshow.h"
-#include "slideshoweditor.h"
-#include "settings.h"
-#include "spfunctions.h"
+#include "slideshow.hpp"
+#include "slideshoweditor.hpp"
+#include "settings.hpp"
+#include "spfunctions.hpp"
 
 namespace Ui {
 class PictureWidget;

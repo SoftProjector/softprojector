@@ -17,52 +17,37 @@
 //
 ***************************************************************************/
 
-#ifndef SLIDESHOWEDITOR_H
-#define SLIDESHOWEDITOR_H
+#ifndef PICTURESETTINGWIDGET_H
+#define PICTURESETTINGWIDGET_H
 
-//#include <QWidget>
-#include <QDialog>
-#include <QFileDialog>
+#include <QWidget>
 #include <QMessageBox>
-#include <QtSql>
-
-#include "slideshow.h"
-#include "settings.h"
+#include "settings.hpp"
 
 namespace Ui {
-class SlideShowEditor;
+class PictureSettingWidget;
 }
 
-//class SlideShowEditor : public QWidget
-class SlideShowEditor : public QDialog
+class PictureSettingWidget : public QWidget
 {
     Q_OBJECT
-    Q_DISABLE_COPY(SlideShowEditor)// for Dialog test
+    
 public:
-    explicit SlideShowEditor(QWidget *parent = 0);
-    ~SlideShowEditor();
-    void setSettings(SlideShowSettings &settings){mySettings = settings;}
-    void setSlideShow(SlideShow ss);
+    explicit PictureSettingWidget(QWidget *parent = 0);
+    ~PictureSettingWidget();
+    void setSettings(SlideShowSettings &settings);
+    void getSettings(SlideShowSettings &settings);
     
 private slots:
-    void loadSlideShow();
-    void reloadSlides();
-    void updateButtonState();
-
-    void on_pushButtonAddImages_clicked();
-    void on_pushButtonRemoveImage_clicked();
-    void on_pushButtonMoveUp_clicked();
-    void on_pushButtonMoveDown_clicked();
-    void on_pushButtonSave_clicked();
-    void on_pushButtonCancel_clicked();
-    void on_listWidgetSlides_currentRowChanged(int currentRow);
+    void on_comboBoxBoundAmount_currentIndexChanged(int index);
+    void on_lineEditBound_textChanged(const QString &arg1);
+    void on_lineEditBound_editingFinished();
 
 private:
-    Ui::SlideShowEditor *ui;
-    SlideShow editSS;
-    QProgressDialog progress;
-    QList<int> deleteList;
     SlideShowSettings mySettings;
+    Ui::PictureSettingWidget *ui;
+protected:
+    virtual void changeEvent(QEvent *e);
 };
 
-#endif // SLIDESHOWEDITOR_H
+#endif // PICTURESETTINGWIDGET_H

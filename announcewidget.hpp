@@ -21,8 +21,8 @@
 #define ANNOUNCEWIDGET_H
 
 #include <QtGui>
-#include "announcement.h"
-#include "editannouncementdialog.h"
+#include "announcement.hpp"
+#include "editannouncementdialog.hpp"
 
 namespace Ui {
 class AnnounceWidget;

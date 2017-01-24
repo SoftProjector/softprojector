@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "moduleprogressdialog.h"
+#include "moduleprogressdialog.hpp"
 #include "ui_moduleprogressdialog.h"
 
 ModuleProgressDialog::ModuleProgressDialog(QWidget *parent) :

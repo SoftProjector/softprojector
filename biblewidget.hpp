@@ -23,9 +23,9 @@
 #include <QWidget>
 #include <QButtonGroup>
 #include <QtGui>
-#include "bible.h"
-#include "highlight.h"
-#include "settings.h"
+#include "bible.hpp"
+#include "highlight.hpp"
+#include "settings.hpp"
 
 namespace Ui {
 class BibleWidget;

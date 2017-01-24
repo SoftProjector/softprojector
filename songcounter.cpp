@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "songcounter.h"
+#include "songcounter.hpp"
 #include "ui_songcounter.h"
 
 SongCounter::SongCounter(QWidget *parent, QString loc) :

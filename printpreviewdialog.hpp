@@ -23,10 +23,10 @@
 #include <QtGui>
 #include <QtCore>
 #include <QtPrintSupport>
-#include "song.h"
-#include "bible.h"
-#include "announcewidget.h"
-#include "schedule.h"
+#include "song.hpp"
+#include "bible.hpp"
+#include "announcewidget.hpp"
+#include "schedule.hpp"
 
 namespace Ui {
 class PrintPreviewDialog;

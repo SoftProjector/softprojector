@@ -18,7 +18,7 @@
 ***************************************************************************/
 
 #include <QUrl>
-#include "helpdialog.h"
+#include "helpdialog.hpp"
 #include "ui_helpdialog.h"
 
 HelpDialog::HelpDialog(QWidget *parent) :

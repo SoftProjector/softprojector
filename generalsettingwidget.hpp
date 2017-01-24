@@ -21,9 +21,9 @@
 #define GENERALSETTINGWIDGET_H
 
 #include <QtWidgets>
-#include "settings.h"
-#include "addsongbookdialog.h"
-#include "theme.h"
+#include "settings.hpp"
+#include "addsongbookdialog.hpp"
+#include "theme.hpp"
 
 namespace Ui {
 class GeneralSettingWidget;

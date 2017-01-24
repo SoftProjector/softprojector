@@ -21,8 +21,8 @@
 #define BIBLE_H
 
 #include <QtSql>
-#include "theme.h"
-#include "settings.h"
+#include "theme.hpp"
+#include "settings.hpp"
 
 class BibleVerse
 {
