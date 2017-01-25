@@ -664,9 +664,9 @@ void SoftProjector::updateScreen()
                 if(ui->listShow->item(i)->isSelected())
                     currentRows.append(i);
             }
-            pds1->renderBibleText(bibleWidget->bible.
-                                            getCurrentVerseAndCaption(currentRows,theme.bible,mySettings.bibleSets)
-                                            ,theme.bible);
+            pds1->renderBibleText(bibleWidget->bible.getCurrentVerseAndCaption(
+                                      currentRows,theme.bible,mySettings.bibleSets),
+                                  theme.bible);
             if(hasDisplayScreen2)
             {
 //                if(theme.bible2.useDisp2settings)

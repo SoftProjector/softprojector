@@ -135,7 +135,7 @@ void Theme::saveThemeNew()
 void Theme::savePassiveNew(int screen, TextSettings &settings)
 {
     QSqlQuery sq;
-    sq.prepare("INSERT INTO ThemePassive (theme_id, disp, use_background, background_name, backgroundPix, use_disp_2) "
+    sq.prepare("INSERT INTO ThemePassive (theme_id, disp, use_background, background_name, background, use_disp_2) "
                "VALUES(?,?,?,?,?,?)");
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
@@ -181,7 +181,7 @@ void Theme::saveSongNew(int screen, SongSettings &settings)
     QSqlQuery sq;
     sq.prepare("INSERT INTO ThemeSong (theme_id, disp, use_shadow, use_fading, use_blur_shadow, show_stanza_title, "
                "show_key, show_number, info_color, info_font, info_align, show_song_ending, ending_color, ending_font, "
-               "ending_type, ending_position, use_background, background_name, backgroundPix, text_font, text_color, "
+               "ending_type, ending_position, use_background, background_name, background, text_font, text_color, "
                "text_align_v, text_align_h, screen_use, screen_position, use_disp_2) "
                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     sq.addBindValue(m_info.themeId);
@@ -217,7 +217,7 @@ void Theme::saveAnnounceNew(int screen, TextSettings &settings)
 {
     QSqlQuery sq;
     sq.prepare("INSERT INTO ThemeAnnounce (theme_id, disp, use_shadow, use_fading, use_blur_shadow, use_background, "
-               "background_name, backgroundPix, text_font, text_color, text_align_v, text_align_h, use_disp_2) "
+               "background_name, background, text_font, text_color, text_align_v, text_align_h, use_disp_2) "
                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
