@@ -12,7 +12,7 @@ ProjectorDisplayScreen::ProjectorDisplayScreen(QWidget *parent) :
     dispView->engine()->addImageProvider(QLatin1String("improvider"),imProvider);
     QWidget *w = QWidget::createWindowContainer(dispView,this);
     dispView->setSource(QUrl("qrc:/DisplayArea.qml"));
-//    dispView->setSource(QUrl("../../DisplayArea.qml"));
+    //    dispView->setSource(QUrl("../../DisplayArea.qml"));
     ui->verticalLayout->addWidget(w);
 
     backImSwitch1 = backImSwitch2 = textImSwitch1 = textImSwitch2 = false;
@@ -155,7 +155,7 @@ void ProjectorDisplayScreen::updateScreen()
 {
     QObject *root = dispView->rootObject();
     QMetaObject::invokeMethod(root,"stopTransitions");
-//    QString tranType = "seq";
+    //    QString tranType = "seq";
 
     // if background is a video, play video, else stop it.
     if(backType == 2)
@@ -239,45 +239,107 @@ void ProjectorDisplayScreen::renderPassiveText(QPixmap &back, bool useBack)
 
 void ProjectorDisplayScreen::renderBibleText(Verse bVerse, BibleSettings &bSets)
 {
-    tranType = bSets.transitionType;
-    backType = bSets.backgroundType;
-    setTextPixmap(imGen.generateBibleImage(bVerse,bSets));
-    setBackPixmap(bSets.backgroundPix,bSets.backgroundColor);
-    if(backType ==2)
-        setVideoSource(bSets.backgroundVideoPath);
-//    if(bSets.useBackground)
-//        setBackPixmap(bSets.background,0);
-//    else
-//        setBackPixmap(imGen.generateColorImage(m_color),0);
+    // TODO: This is temporary until database is fixed
+    if(bSets.useFading)
+    {
+        tranType = TR_FADE;
+    }
+    else
+    {
+        tranType = TR_NONE;
+    }
 
+    if(bSets.useBackground)
+    {
+        setBackPixmap(bSets.backgroundPix,0);
+        backType = B_PICTURE;
+    }
+    else
+    {
+        setBackPixmap(imGen.generateColorImage(m_color),0);
+        backType = B_NONE;
+    }
+
+    //tranType = bSets.transitionType;
+    //backType = bSets.backgroundType;
+    setTextPixmap(imGen.generateBibleImage(bVerse,bSets));
+    //setBackPixmap(bSets.backgroundPix,bSets.backgroundColor);
+    //if(backType ==2)
+    //{
+    //    setVideoSource(bSets.backgroundVideoPath);
+    //}
 
     updateScreen();
 }
 
 void ProjectorDisplayScreen::renderSongText(Stanza stanza, SongSettings &sSets)
 {
-    setTextPixmap(imGen.generateSongImage(stanza,sSets));
-    if(sSets.backgroundType == 1)
-        setBackPixmap(sSets.backgroundPix,0);
+    // TODO: This is temporary until database is fixed
+    if(sSets.useFading)
+    {
+        tranType = TR_FADE;
+    }
     else
+    {
+        tranType = TR_NONE;
+    }
+
+    if(sSets.useBackground)
+    {
+        setBackPixmap(sSets.backgroundPix,0);
+        backType = B_PICTURE;
+    }
+    else
+    {
         setBackPixmap(imGen.generateColorImage(m_color),0);
-    tranType = sSets.transitionType;
+        backType = B_NONE;
+    }
+
+    setTextPixmap(imGen.generateSongImage(stanza,sSets));
+    //if(sSets.backgroundType == 1)
+    //    setBackPixmap(sSets.backgroundPix,0);
+    //else
+    //    setBackPixmap(imGen.generateColorImage(m_color),0);
+    //tranType = sSets.transitionType;
     updateScreen();
 }
 
 void ProjectorDisplayScreen::renderAnnounceText(AnnounceSlide announce, TextSettings &aSets)
 {
-    setTextPixmap(imGen.generateAnnounceImage(announce,aSets));
-    if(aSets.transitionType == 1)
-        setBackPixmap(aSets.backgroundPix,0);
+    // TODO: This is temporary until database is fixed
+    if(aSets.useFading)
+    {
+        tranType = TR_FADE;
+    }
     else
+    {
+        tranType = TR_NONE;
+    }
+
+    if(aSets.useBackground)
+    {
+        setBackPixmap(aSets.backgroundPix,0);
+        backType = B_PICTURE;
+    }
+    else
+    {
         setBackPixmap(imGen.generateColorImage(m_color),0);
-    tranType = aSets.transitionType;
+        backType = B_NONE;
+    }
+
+    setTextPixmap(imGen.generateAnnounceImage(announce,aSets));
+    //if(aSets.transitionType == 1)
+    //    setBackPixmap(aSets.backgroundPix,0);
+    //else
+    //    setBackPixmap(imGen.generateColorImage(m_color),0);
+    //tranType = aSets.transitionType;
     updateScreen();
 }
 
 void ProjectorDisplayScreen::renderSlideShow(QPixmap slide, SlideShowSettings &ssSets)
 {
+    tranType = TR_FADE;
+
     bool expand;
     if(slide.width()<imGen.width() && slide.height()<imGen.height())
         expand = ssSets.expandSmall;

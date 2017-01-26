@@ -27,6 +27,67 @@
 void saveIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);
 void updateIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);
 
+enum HorizontalAlingment
+{
+    A_TOP,
+    A_MIDDLE,
+    A_BOTTOM
+};
+
+enum VerticalAlingment
+{
+    A_LEFT,
+    A_CENTER,
+    A_RIGHT
+};
+
+enum TransitionType
+{
+    TR_NONE,
+    TR_FADE,
+    TR_FADE_OUT,
+    TR_MOVE_RIGHT,
+    TR_MOVE_LEFT,
+    TR_MOVE_UP,
+    TR_MOVE_DOWN,
+    TR_COMMON
+};
+
+enum EffectType
+{
+    E_NONE,
+    E_SHADOW,
+    E_BLURRED_SHADDOW,
+    E_COMMON
+};
+
+enum BackgroundType
+{
+    B_NONE,
+    B_SOLID_COLOR,
+    B_PICTURE,
+    B_VIDEO,
+    B_COMMON
+};
+
+enum ScreenPosition
+{
+    TOP_OF_SCREEN,
+    BOTTOM_OF_SCREEN
+};
+
+enum SongEndingType
+{
+    SE_STAR,
+    SE_DASH,
+    SE_CIRCLE,
+    SE_SMALL_DOT,
+    SE_BIG_DOT,
+    SE_SMALL_BOX,
+    SE_BIG_BOX,
+    SE_COPYRIGHT
+};
+
 class TextSettingsBase
 {
 public:

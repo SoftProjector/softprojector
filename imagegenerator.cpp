@@ -55,8 +55,10 @@ QPixmap ImageGenerator::generateBibleImage(Verse verse, BibleSettings &bSets)
     m_bSets.captionFont.setPointSize(m_bSets.captionFont.pointSize() * 3);
 
     // TODO:FIX
-    m_shadow = (m_bSets.effectsType == 1 || m_bSets.effectsType == 2);
-    m_blurShadow = (m_bSets.effectsType == 2);
+//    m_shadow = (m_bSets.effectsType == 1 || m_bSets.effectsType == 2);
+//    m_blurShadow = (m_bSets.effectsType == 2);
+    m_shadow = m_bSets.useShadow;
+    m_blurShadow = m_bSets.useBlurShadow;
 
     m_isTextPrepared = false;
     return renderText();
@@ -72,8 +74,10 @@ QPixmap ImageGenerator::generateSongImage(Stanza stanza, SongSettings &sSets)
     m_sSets.infoFont.setPointSize(m_sSets.infoFont.pointSize() * 3);
 
     // TODO:FIX
-    m_shadow = (m_sSets.effectsType == 1 || m_sSets.effectsType == 2);
-    m_blurShadow = (m_sSets.effectsType == 2);
+//    m_shadow = (m_sSets.effectsType == 1 || m_sSets.effectsType == 2);
+//    m_blurShadow = (m_sSets.effectsType == 2);
+    m_shadow = m_sSets.useShadow;
+    m_blurShadow = m_sSets.useBlurShadow;
 
     m_isTextPrepared = false;
     return renderText();
@@ -84,9 +88,12 @@ QPixmap ImageGenerator::generateAnnounceImage(AnnounceSlide announce, TextSettin
     m_type = 3;
     m_announce = announce;
     m_aSets = aSets;
+    m_aSets.textFont.setPointSize(m_aSets.textFont.pointSize() * 3);
     // TODO:FIX
-    m_shadow = (m_aSets.effectsType == 1 || m_aSets.effectsType == 2);
-    m_blurShadow = (m_aSets.effectsType == 2);
+//    m_shadow = (m_aSets.effectsType == 1 || m_aSets.effectsType == 2);
+//    m_blurShadow = (m_aSets.effectsType == 2);
+    m_shadow = m_aSets.useShadow;
+    m_blurShadow = m_aSets.useBlurShadow;
 
     m_isTextPrepared = false;
     return renderText();
