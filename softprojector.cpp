@@ -296,15 +296,18 @@ void SoftProjector::showDisplayScreen(bool show)
     if(show)
     {
         pds1->showFullScreen();
+        pds1->positionControls(mySettings.general.displayControls);
+        pds1->setControlsVisible(true);
 //        pds1->positionOpjects();
     }
     else
     {
         pds1->hide();
+        QPixmap p;
+        pds1->renderPassiveText(p,false);
         ui->actionCloseDisplay->setEnabled(false);
     }
-    pds1->positionControls(mySettings.general.displayControls);
-    pds1->setControlsVisible(true);
+
 }
 
 void SoftProjector::saveSettings()
