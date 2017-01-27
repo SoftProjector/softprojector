@@ -388,7 +388,8 @@ void SongSettingWidget::on_pushButtonDefault_clicked()
 
 QString SongSettingWidget::getFontText(QFont font)
 {
-    QString st(QString("%1: %2").arg(font.rawName()).arg(font.pointSize()));
+    QString f = font.toString().split(",").at(0);
+    QString st(QString("%1: %2").arg(f).arg(font.pointSize()));
     if(font.bold())
         st += ", " + tr("Bold");
     if(font.italic())
