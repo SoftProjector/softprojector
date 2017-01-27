@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>1009</height>
+    <width>456</width>
+    <height>1150</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -370,7 +370,7 @@
         </property>
         <property name="icon">
          <iconset resource="softprojector.qrc">
-          <normaloff>:/icons/icons/apply_to_all.png</normaloff>:/icons/icons/apply_to_all.png</iconset>
+          <normaloff>:/icons/icons/common.png</normaloff>:/icons/icons/common.png</iconset>
         </property>
        </widget>
       </item>
