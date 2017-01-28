@@ -1,7 +1,7 @@
 /***************************************************************************
 //
 //    softProjector - an open source media projection software
-//    Copyright (C) 2014  Vladislav Kobzar, Matvey Adzhigirey and Ilya Spivakov
+//    Copyright (C) 2017  Vladislav Kobzar
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 //
 ***************************************************************************/
 
-#ifndef SONG_H
-#define SONG_H
+#ifndef SONG_HPP
+#define SONG_HPP
 #include <QtGui>
 #include <QtSql>
 
@@ -159,4 +159,4 @@ public:
     int lastUser(QString songbook_id);
 };
 
-#endif // SONG_H
+#endif // SONG_HPP

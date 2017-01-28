@@ -1,7 +1,7 @@
 ##**************************************************************************
 ##
 ##    softProjector - an open source media projection software
-##    Copyright (C) 2014  Vladislav Kobzar, Matvey Adzhigirey and Ilya Spivakov
+##    Copyright (C) 2017  Vladislav Kobzar
 ##
 ##    This program is free software: you can redistribute it and/or modify
 ##    it under the terms of the GNU General Public License as published by

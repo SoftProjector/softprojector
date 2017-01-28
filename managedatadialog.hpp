@@ -1,7 +1,7 @@
 /***************************************************************************
 //
 //    softProjector - an open source media projection software
-//    Copyright (C) 2014  Vladislav Kobzar, Matvey Adzhigirey and Ilya Spivakov
+//    Copyright (C) 2017  Vladislav Kobzar
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 //
 ***************************************************************************/
 
-#ifndef MANAGEDATADIALOG_H
-#define MANAGEDATADIALOG_H
+#ifndef MANAGEDATADIALOG_HPP
+#define MANAGEDATADIALOG_HPP
 
 #include <QDialog>
 #include <QtWidgets>
@@ -149,4 +149,4 @@ private slots:
     QString cleanSongLines(QString songText);
 };
 
-#endif // MANAGEDATADIALOG_H
+#endif // MANAGEDATADIALOG_HPP

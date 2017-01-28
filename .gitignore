@@ -28,7 +28,8 @@
 *.out
 *.app
 .qmake.stash
-Makefile
+Makefile*
+object_script*
 softProjector.pro.user
 unknownsys_build/*
 win32_build/*

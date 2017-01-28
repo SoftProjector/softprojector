@@ -1,7 +1,7 @@
 /***************************************************************************
 //
 //    softProjector - an open source media projection software
-//    Copyright (C) 2014  Vladislav Kobzar, Matvey Adzhigirey and Ilya Spivakov
+//    Copyright (C) 2017  Vladislav Kobzar
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 //
 ***************************************************************************/
 
-#ifndef SPFUNCTIONS_H
-#define SPFUNCTIONS_H
+#ifndef SPFUNCTIONS_HPP
+#define SPFUNCTIONS_HPP
 
 #include <QString>
 #include <QStringList>
@@ -36,4 +36,4 @@ QString getSupportedImageFormats();
 //    spFunctions();
 //};
 
-#endif // SPFUNCTIONS_H
+#endif // SPFUNCTIONS_HPP

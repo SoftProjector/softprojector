@@ -1,7 +1,7 @@
 /***************************************************************************
 //
 //    softProjector - an open source media projection software
-//    Copyright (C) 2014  Vladislav Kobzar, Matvey Adzhigirey and Ilya Spivakov
+//    Copyright (C) 2017  Vladislav Kobzar
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 //
 ***************************************************************************/
 
-#ifndef PASSIVESETTINGWIDGET_H
-#define PASSIVESETTINGWIDGET_H
+#ifndef PASSIVESETTINGWIDGET_HPP
+#define PASSIVESETTINGWIDGET_HPP
 
 #include <QWidget>
 #include <QFileDialog>
@@ -57,4 +57,4 @@ protected:
     virtual void changeEvent(QEvent *e);
 };
 
-#endif // PASSIVESETTINGWIDGET_H
+#endif // PASSIVESETTINGWIDGET_HPP

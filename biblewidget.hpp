@@ -1,7 +1,7 @@
 /***************************************************************************
 //
 //    softProjector - an open source media projection software
-//    Copyright (C) 2014  Vladislav Kobzar, Matvey Adzhigirey and Ilya Spivakov
+//    Copyright (C) 2017  Vladislav Kobzar
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 //
 ***************************************************************************/
 
-#ifndef BIBLEWIDGET_H
-#define BIBLEWIDGET_H
+#ifndef BIBLEWIDGET_HPP
+#define BIBLEWIDGET_HPP
 
 #include <QWidget>
 #include <QButtonGroup>
@@ -97,4 +97,4 @@ private:
     QButtonGroup search_type_buttongroup;
 };
 
-#endif // BIBLEWIDGET_H
+#endif // BIBLEWIDGET_HPP

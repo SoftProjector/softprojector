@@ -1,7 +1,7 @@
 /***************************************************************************
 //
 //    softProjector - an open source media projection software
-//    Copyright (C) 2014  Vladislav Kobzar, Matvey Adzhigirey and Ilya Spivakov
+//    Copyright (C) 2017  Vladislav Kobzar
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 //
 ***************************************************************************/
 
-#ifndef SLIDESHOWEDITOR_H
-#define SLIDESHOWEDITOR_H
+#ifndef SLIDESHOWEDITOR_HPP
+#define SLIDESHOWEDITOR_HPP
 
 //#include <QWidget>
 #include <QDialog>
@@ -65,4 +65,4 @@ private:
     SlideShowSettings mySettings;
 };
 
-#endif // SLIDESHOWEDITOR_H
+#endif // SLIDESHOWEDITOR_HPP
