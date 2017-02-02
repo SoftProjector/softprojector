@@ -67,6 +67,10 @@ private slots:
     void setVideoSource(QString path);
     void updateScreen();
 
+    void exitSlideClicked();
+    void nextSlideClicked();
+    void prevSlideClicked();
+
 signals:
     void exitSlide();
     void nextSlide();

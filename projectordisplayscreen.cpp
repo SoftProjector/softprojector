@@ -31,8 +31,13 @@ ProjectorDisplayScreen::ProjectorDisplayScreen(QWidget *parent) :
     dispView->engine()->addImageProvider(QLatin1String("improvider"),imProvider);
     QWidget *w = QWidget::createWindowContainer(dispView,this);
     dispView->setSource(QUrl("qrc:/DisplayArea.qml"));
-    //    dispView->setSource(QUrl("../../DisplayArea.qml"));
     ui->verticalLayout->addWidget(w);
+
+    // Create Display object for retriaving signals back from the display screen
+    QObject *dispObj = dispView->rootObject();
+    connect(dispObj,SIGNAL(exitClicked()),this,SLOT(exitSlideClicked()));
+    connect(dispObj,SIGNAL(nextClicked()),this,SLOT(nextSlideClicked()));
+    connect(dispObj,SIGNAL(prevClicked()),this,SLOT(prevSlideClicked()));
 
     backImSwitch1 = backImSwitch2 = textImSwitch1 = textImSwitch2 = false;
     back1to2 = text1to2 = isNewBack = true;
@@ -208,6 +213,20 @@ void ProjectorDisplayScreen::updateScreen()
     }
 }
 
+void ProjectorDisplayScreen::exitSlideClicked()
+{
+    emit exitSlide();
+}
+
+void ProjectorDisplayScreen::nextSlideClicked()
+{
+    emit nextSlide();
+}
+
+void ProjectorDisplayScreen::prevSlideClicked()
+{
+    emit prevSlide();
+}
 
 void ProjectorDisplayScreen::keyReleaseEvent(QKeyEvent *event)
 {

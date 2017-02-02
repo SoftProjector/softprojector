@@ -36,6 +36,10 @@ Rectangle {
 
     property int tranTime: 500
 
+    signal exitClicked()
+    signal nextClicked()
+    signal prevClicked()
+
     MediaPlayer
     {
         id: player
@@ -156,6 +160,10 @@ Rectangle {
                 {
                     prevBtn.source = "qrc:/icons/icons/controlPrevHovered.png"
                 }
+                onClicked:
+                {
+                    dispArea.prevClicked()
+                }
             }
         }
 
@@ -189,6 +197,10 @@ Rectangle {
                 {
                     nextBtn.source = "qrc:/icons/icons/controlNextHovered.png"
                 }
+                onClicked:
+                {
+                    dispArea.nextClicked()
+                }
             }
         }
 
@@ -221,6 +233,10 @@ Rectangle {
                 onReleased:
                 {
                     exitBtn.source = "qrc:/icons/icons/controlExitHovered.png"
+                }
+                onClicked:
+                {
+                    dispArea.exitClicked()
                 }
             }
         }
