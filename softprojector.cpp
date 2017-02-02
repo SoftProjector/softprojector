@@ -176,8 +176,7 @@ SoftProjector::SoftProjector(QWidget *parent)
     */
     ui->widgetPlayBackControls->setVisible(false);
 
-    version_string = "2"; // to be used only for official release
-    //version_string = "2 Beta"; // to be used between official releases
+    version_string = "2.1";
     this->setWindowTitle("SoftProjector " + version_string);
 }
 
