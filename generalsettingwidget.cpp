@@ -53,6 +53,7 @@ void GeneralSettingWidget::setSettings(GeneralSettings settings)
 void GeneralSettingWidget::loadSettings()
 {
     ui->checkBoxDisplayOnTop->setChecked(mySettings.displayIsOnTop);
+    ui->checkBoxDisplayOnStartUp->setChecked(mySettings.displayOnStartUp);
 
     // Load Themes
     loadThemes();
@@ -120,6 +121,7 @@ void GeneralSettingWidget::loadThemes()
 GeneralSettings GeneralSettingWidget::getSettings()
 {
     mySettings.displayIsOnTop = ui->checkBoxDisplayOnTop->isChecked();
+    mySettings.displayOnStartUp = ui->checkBoxDisplayOnStartUp->isChecked();
 
     int tmx = ui->comboBoxTheme->currentIndex();
     if(tmx != -1)

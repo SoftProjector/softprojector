@@ -780,6 +780,8 @@ void Settings::loadSettings()
                 v = set.at(1).trimmed();
                 if(n == "displayIsOnTop")
                     general.displayIsOnTop = (v=="true");
+                else if(n == "displayOnStartUp")
+                    general.displayOnStartUp = (v=="true");
                 else if(n == "currentThemeId")
                     general.currentThemeId = v.toInt();
                 else if (n == "displayScreen")
@@ -902,6 +904,10 @@ void Settings::saveSettings()
         gset = "displayIsOnTop = true";
     else
         gset = "displayIsOnTop = false";
+    if(general.displayOnStartUp)
+        gset += "\ndisplayOnStartUp = true";
+    else
+        gset += "\ndisplayOnStartUp = false";
     gset += "\ncurrentThemeId = " + QString::number(general.currentThemeId);
     gset += "\ndisplayScreen = " + QString::number(general.displayScreen);
     gset += "\ndisplayScreen2 = " + QString::number(general.displayScreen2);

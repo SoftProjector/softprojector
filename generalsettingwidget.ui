@@ -131,6 +131,13 @@
         </property>
        </spacer>
       </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QCheckBox" name="checkBoxDisplayOnStartUp">
+        <property name="text">
+         <string>Show Display Screen on SoftProjector Startup</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
