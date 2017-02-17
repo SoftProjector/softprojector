@@ -68,9 +68,6 @@ SoftProjector::SoftProjector(QWidget *parent)
 
     positionDisplayWindow();
 
-//    pds1->renderText(false);
-//    pds2->renderText(false);
-
     showing = false;
 
     ui->projectTab->clear();
@@ -343,14 +340,6 @@ void SoftProjector::updateSetting(GeneralSettings &g, Theme &t, SlideShowSetting
     theme = t;
     bibleWidget->setSettings(mySettings.bibleSets);
     pictureWidget->setSettings(mySettings.slideSets);
-    
-    // Apply display settings;
-    pds1->resetImGenSize();
-//    pds1->setNewPassiveWallpaper(theme.passive.background,theme.passive.useBackground);
-//    if(theme.passive2.useDisp2settings)
-//        pds2->setNewPassiveWallpaper(theme.passive2.background,theme.passive2.useBackground);
-//    else
-//        pds2->setNewPassiveWallpaper(theme.passive.background,theme.passive.useBackground);
 }
 
 void SoftProjector::applySetting(GeneralSettings &g, Theme &t, SlideShowSettings &s,
@@ -760,8 +749,9 @@ void SoftProjector::on_actionCloseDisplay_triggered()
         {
             pds2->hide();
         }
+        showing = false;
     }
-    showing = false;
+
     updateCloseDisplayButtons(ui->actionCloseDisplay->isChecked());
 }
 
