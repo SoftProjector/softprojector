@@ -226,32 +226,23 @@ void SoftProjector::positionDisplayWindow()
         if (desktop->isVirtualDesktop())
         {
             // Move the display widget to screen 1 (secondary screen):
-//            QPoint top_left = desktop->screenGeometry(mySettings.general.displayScreen).topLeft();
-//            pds1->move(top_left);
             pds1->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen));
         }
 
-//        if(!ui->actionCloseDisplay->isChecked())
-//            ui->actionCloseDisplay->trigger();
-
         pds1->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
         pds1->resetImGenSize();
-         pds1->renderPassiveText(theme.passive.backgroundPix,true);
-
+        pds1->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
+        pds1->setControlsVisible(false);
 
         if(mySettings.general.displayOnStartUp)
-{
-        pds1->showFullScreen();
+        {
+            pds1->showFullScreen();
 
-       //TODO:FIX
-//        if(!ui->actionCloseDisplay->isChecked())
-//            ui->actionCloseDisplay->trigger();
-        ui->actionCloseDisplay->setChecked(true);
-        updateCloseDisplayButtons(true);
+            ui->actionCloseDisplay->setChecked(true);
+            updateCloseDisplayButtons(true);
 
         }
 
-        pds1->setControlsVisible(false);
         // check if to display secondary display screen
         if(mySettings.general.displayScreen2>=0)
         {
@@ -259,15 +250,18 @@ void SoftProjector::positionDisplayWindow()
             if (desktop->isVirtualDesktop())
             {
                 // Move the display widget to screen 1 (secondary screen):
-//                QPoint top_left = desktop->screenGeometry(mySettings.general.pds2).topLeft();
-//                pds2->move(top_left);
                 pds2->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen2));
                 pds2->resetImGenSize();
+
             }
-            pds2->showFullScreen();
+
             pds2->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
-//            pds2->positionOpjects();
+            pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
             pds2->setControlsVisible(false);
+            if(mySettings.general.displayOnStartUp)
+            {
+                pds2->showFullScreen();
+            }
         }
         else
         {
@@ -297,7 +291,6 @@ void SoftProjector::showDisplayScreen(bool show)
         pds1->showFullScreen();
         pds1->positionControls(mySettings.general.displayControls);
         pds1->setControlsVisible(true);
-//        pds1->positionOpjects();
     }
     else
     {
@@ -616,18 +609,20 @@ void SoftProjector::updateScreen()
     if(!showing)
     {
         // Do not display any text:
-//        pds1->renderText(false);
+        pds1->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
 
         if(isSingleScreen)
             showDisplayScreen(false);
 
-//        if(hasDisplayScreen2)
-//            pds2->renderText(false);
+        if(hasDisplayScreen2)
+        {
+            pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
+        }
         ui->actionShow->setEnabled(true);
         ui->actionHide->setEnabled(false);
         ui->actionClear->setEnabled(false);
     }
-    else if ((currentRow >=0 && !new_list) || (type == "video" && !new_list))
+    else if ((currentRow >=0 || type == "video")  && !new_list)
     {
         if(isSingleScreen)
         {
@@ -637,17 +632,9 @@ void SoftProjector::updateScreen()
         else
         {
             if(pds1->isHidden() || !ui->actionCloseDisplay->isChecked())
-//                pds1->showFullScreen();
-
-                    ui->actionCloseDisplay->trigger();
-
-//            if(hasDisplayScreen2)
-//            {
-//                if(pds2->isHidden())
-//                    pds2->showFullScreen();
-//            }
-//            if(!ui->actionCloseDisplay->isEnabled())
-//                ui->actionCloseDisplay->setEnabled(true);
+            {
+                ui->actionCloseDisplay->trigger();
+            }
         }
 
         ui->actionShow->setEnabled(false);
@@ -671,14 +658,18 @@ void SoftProjector::updateScreen()
                                   theme.bible);
             if(hasDisplayScreen2)
             {
-//                if(theme.bible2.useDisp2settings)
-//                    pds2->renderBibleText(bibleWidget->bible.
-//                                                    getCurrentVerseAndCaption(currentRows,theme.bible2,
-//                                                                              mySettings.bibleSets2),theme.bible2);
-//                else
+                if(theme.bible2.useDisp2settings)
+                {
                     pds2->renderBibleText(bibleWidget->bible.
-                                                    getCurrentVerseAndCaption(currentRows,theme.bible,
-                                                                              mySettings.bibleSets),theme.bible);
+                                          getCurrentVerseAndCaption(currentRows,theme.bible2,
+                                                                    mySettings.bibleSets2),theme.bible2);
+                }
+                else
+                {
+                    pds2->renderBibleText(bibleWidget->bible.
+                                          getCurrentVerseAndCaption(currentRows,theme.bible,
+                                                                    mySettings.bibleSets),theme.bible);
+                }
             }
         }
         else if(type=="song")
@@ -686,10 +677,14 @@ void SoftProjector::updateScreen()
             pds1->renderSongText(current_song.getStanza(currentRow),theme.song);
             if(hasDisplayScreen2)
             {
-//                if(theme.song2.useDisp2settings)
-//                    pds2->renderSongText(current_song.getStanza(currentRow),theme.song2);
-//                else
+                if(theme.song2.useDisp2settings)
+                {
+                    pds2->renderSongText(current_song.getStanza(currentRow),theme.song2);
+                }
+                else
+                {
                     pds2->renderSongText(current_song.getStanza(currentRow),theme.song);
+                }
             }
         }
         else if(type == "announce")
@@ -697,17 +692,23 @@ void SoftProjector::updateScreen()
             pds1->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
             if(hasDisplayScreen2)
             {
-//                if(theme.announce2.useDisp2settings)
-//                    pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce2);
-//                else
+                if(theme.announce2.useDisp2settings)
+                {
+                    pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce2);
+                }
+                else
+                {
                     pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+                }
             }
         }
         else if(type == "pix")
         {
             pds1->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
             if(hasDisplayScreen2)
+            {
                 pds2->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
+            }
         }
         else if(type == "video")
         {
@@ -746,20 +747,22 @@ void SoftProjector::on_actionCloseDisplay_triggered()
 {
     if(ui->actionCloseDisplay->isChecked())
     {
-        // If ui->actionCloseDisplay->isChecked() == true, turn it ON
-        ui->actionCloseDisplay->setIcon(QIcon(":/icons/icons/display_on.png"));
         pds1->showFullScreen();
         if(hasDisplayScreen2)
+        {
             pds2->showFullScreen();
+        }
     }
     else
     {
-        // If ui->actionCloseDisplay->isChecked() == true, turn it OFF
-        ui->actionCloseDisplay->setIcon(QIcon(":/icons/icons/display_off.png"));
         pds1->hide();
         if(hasDisplayScreen2)
+        {
             pds2->hide();
+        }
     }
+    showing = false;
+    updateCloseDisplayButtons(ui->actionCloseDisplay->isChecked());
 }
 
 void SoftProjector::updateCloseDisplayButtons(bool isOn)

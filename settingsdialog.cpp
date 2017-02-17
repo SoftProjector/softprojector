@@ -147,7 +147,9 @@ void SettingsDialog::applySettings()
     if(is_always_on_top!=gsettings.displayIsOnTop
             || current_display_screen!=gsettings.displayScreen
             || currentDisplayScreen2!=gsettings.displayScreen2)
+    {
         emit positionsDisplayWindow();
+    }
 
     // Redraw the screen:
     emit updateScreen();
