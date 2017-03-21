@@ -19,22 +19,26 @@
 
 #include "videoplayerwidget.hpp"
 
-VideoPlayerWidget::VideoPlayerWidget(QWidget *parent): QMediaPlayer(parent)/*:
-    Phonon::VideoWidget(parent)*/
-
+VideoPlayerWidget::VideoPlayerWidget(QWidget *parent): QVideoWidget(parent)
 {
+    setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 
+    QPalette p = palette();
+    p.setColor(QPalette::Window, Qt::black);
+    setPalette(p);
+
+    setAspectRatioMode(Qt::KeepAspectRatio);
 }
 
 void VideoPlayerWidget::setFullScreen(bool enabled)
 {
-//    Phonon::VideoWidget::setFullScreen(enabled);
+    setFullScreen(enabled);
 }
 
 void VideoPlayerWidget::mouseDoubleClickEvent(QMouseEvent *e)
 {
-//    Phonon::VideoWidget::mouseDoubleClickEvent(e);
-//    setFullScreen(!isFullScreen());
+    setFullScreen(!isFullScreen());
+    e->accept();
 }
 
 void VideoPlayerWidget::keyPressEvent(QKeyEvent *e)
@@ -52,7 +56,10 @@ void VideoPlayerWidget::keyPressEvent(QKeyEvent *e)
         e->accept();
         return;
     }
-//    Phonon::VideoWidget::keyPressEvent(e);
+    else
+    {
+        QVideoWidget::keyPressEvent(e);
+    }
 }
 
 bool VideoPlayerWidget::event(QEvent *e)
@@ -86,7 +93,8 @@ bool VideoPlayerWidget::event(QEvent *e)
         break;
     }
 
-//    return Phonon::VideoWidget::event(e);
+    QVideoWidget::event(e);
+
     return false;
 }
 
@@ -100,4 +108,5 @@ void VideoPlayerWidget::timerEvent(QTimerEvent *e)
 //#endif
 //    }
 //    Phonon::VideoWidget::timerEvent(e);
+//    QVideoWidget::timerEvent(e);
 }

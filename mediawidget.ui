@@ -96,6 +96,24 @@
         </layout>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayoutTime">
+         <item>
+          <widget class="QSlider" name="horizontalSliderTime">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelTime">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayoutControls">
          <item>
           <widget class="QPushButton" name="pushButtonOpen">
@@ -105,41 +123,37 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="pushButtonStop">
+           <property name="icon">
+            <iconset resource="softprojector.qrc">
+             <normaloff>:/icons/icons/stop.png</normaloff>:/icons/icons/stop.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="pushButtonPlayPause">
-           <property name="text">
-            <string/>
+           <property name="icon">
+            <iconset resource="softprojector.qrc">
+             <normaloff>:/icons/icons/play.png</normaloff>:/icons/icons/play.png</iconset>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Aspect Ratio:</string>
+          <widget class="QPushButton" name="pushButtonMute">
+           <property name="icon">
+            <iconset resource="softprojector.qrc">
+             <normaloff>:/icons/icons/speaker.png</normaloff>:/icons/icons/speaker.png</iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxAspectRatio">
-           <item>
-            <property name="text">
-             <string>Auto</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Scale</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4/3</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>16/9</string>
-            </property>
-           </item>
+          <widget class="QSlider" name="horizontalSliderVolume">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
           </widget>
          </item>
          <item>
@@ -157,17 +171,6 @@
          </item>
         </layout>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayoutTime">
-         <item>
-          <widget class="QLabel" name="labelTime">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
       </layout>
      </widget>
     </widget>
@@ -178,7 +181,6 @@
   <tabstop>listWidgetMediaFiles</tabstop>
   <tabstop>pushButtonOpen</tabstop>
   <tabstop>pushButtonPlayPause</tabstop>
-  <tabstop>comboBoxAspectRatio</tabstop>
   <tabstop>pushButtonGoLive</tabstop>
  </tabstops>
  <resources>

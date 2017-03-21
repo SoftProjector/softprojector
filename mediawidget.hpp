@@ -21,6 +21,7 @@
 #define MEDIAWIDGET_HPP
 
 #include <QtWidgets>
+#include <QMediaPlayer>
 #include <QtSql>
 //#include <phonon>
 //#include <phonon/MediaObject>
@@ -61,13 +62,14 @@ signals:
 private slots:
     void playFile(QString filePath);
     void updateInfo();
-    void updateTime();
+    void updateDuration(qint64 newDuration);
+    void updateTime(qint64 progress);
     void finished();
     void playPause();
 
     void handleDrop(QDropEvent *e);
     void loadMediaLibrary();
-//    void stateChanged(Phonon::State newstate, Phonon::State oldstate);
+    void stateChanged(QMediaPlayer::State state);
 
     void hasVideoChanged(bool);
     void insertFiles(QStringList &files);
@@ -78,7 +80,8 @@ private slots:
     void on_pushButtonGoLive_clicked();
     void on_listWidgetMediaFiles_itemSelectionChanged();
     void on_listWidgetMediaFiles_doubleClicked(const QModelIndex &index);
-    void on_comboBoxAspectRatio_currentIndexChanged(int index);
+
+    void on_horizontalSliderTime_sliderMoved(int position);
 
 private:
     Ui::MediaWidget *ui;
@@ -86,11 +89,10 @@ private:
     QIcon playIcon;
     QIcon pauseIcon;
 
-//    Phonon::SeekSlider *timeSlider;
-//    Phonon::VolumeSlider *volumeSlider;
-//    Phonon::MediaObject mediaPlayer;
-//    Phonon::AudioOutput m_AudioOutput;
+    QMediaPlayer *player;
     VideoPlayerWidget *videoWidget;
+
+    qint64 duration;
 
     QString audioExt;
     QString videoExt;

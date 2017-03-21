@@ -21,11 +21,9 @@
 #define VIDEOPLAYERWIDGET_HPP
 
 #include <QtWidgets>
-#include <QMediaPlayer>
-//#include <phonon>
-//#include <phonon/VideoWidget>
+#include <QVideoWidget>
 
-class VideoPlayerWidget :QMediaPlayer//: public Phonon::VideoWidget
+class VideoPlayerWidget : public QVideoWidget
 {
     Q_OBJECT
 public:

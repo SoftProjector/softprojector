@@ -78,7 +78,7 @@ SoftProjector::SoftProjector(QWidget *parent)
     ui->projectTab->addTab(bibleWidget,QIcon(":/icons/icons/book.png"), tr("Bible (F6)"));
     ui->projectTab->addTab(songWidget,QIcon(":/icons/icons/song_tab.png"), tr("Songs (F7)"));
     ui->projectTab->addTab(pictureWidget,QIcon(":/icons/icons/photo.png"),tr("Pictures"));
-//    ui->projectTab->addTab(mediaPlayer,QIcon(":/icons/icons/video.png"),tr("Media"));
+    ui->projectTab->addTab(mediaPlayer,QIcon(":/icons/icons/video.png"),tr("Media"));
     ui->projectTab->addTab(announceWidget,QIcon(":/icons/icons/announce.png"), tr("Announcements (F8)"));
     ui->projectTab->setCurrentIndex(0);
 
@@ -836,18 +836,18 @@ void SoftProjector::updateEditActions()
         ui->actionCopy->setIcon(QIcon());
         ui->actionDelete->setIcon(QIcon(":/icons/icons/slideshow_delete.png"));
     }
-//    else if (ctab == 3) // Media Tab
-//    {
-//        ui->actionNew->setText(tr("&Add Media Files..."));
-//        ui->actionEdit->setText("");
-//        ui->actionCopy->setText("");
-//        ui->actionDelete->setText(tr("&Remove Media Files"));
-//        ui->actionNew->setIcon(QIcon(":/icons/icons/video_add.png"));
-//        ui->actionEdit->setIcon(QIcon());
-//        ui->actionCopy->setIcon(QIcon());
-//        ui->actionDelete->setIcon(QIcon(":/icons/icons/video_remove.png"));
-//    }
-    else if (ctab == 3) // Announcement Tab
+    else if (ctab == 3) // Media Tab
+    {
+        ui->actionNew->setText(tr("&Add Media Files..."));
+        ui->actionEdit->setText("");
+        ui->actionCopy->setText("");
+        ui->actionDelete->setText(tr("&Remove Media Files"));
+        ui->actionNew->setIcon(QIcon(":/icons/icons/video_add.png"));
+        ui->actionEdit->setIcon(QIcon());
+        ui->actionCopy->setIcon(QIcon());
+        ui->actionDelete->setIcon(QIcon(":/icons/icons/video_remove.png"));
+    }
+    else if (ctab == 4) // Announcement Tab
     {
         ui->actionNew->setText(tr("&New Announcement..."));
         ui->actionEdit->setText(tr("&Edit Announcement..."));
@@ -870,7 +870,7 @@ void SoftProjector::updateEditActions()
         ui->actionDelete->setIcon(QIcon());
     }
 
-    /*
+
     // Set Edit Action Menu Visibility
     ui->actionNew->setVisible(ctab == 1 || ctab == 2 || ctab == 3 || ctab == 4);
     ui->actionEdit->setVisible(ctab == 1 || ctab == 2 || ctab == 4);
@@ -886,8 +886,8 @@ void SoftProjector::updateEditActions()
     /////////////////////////////////////////
     // Set Print Action Menu enabled
     ui->actionPrint->setEnabled(ctab == 0 || ctab == 1 || ctab == 4);
-    */
 
+/*
     // Set Edit Action Menu Visibility
     ui->actionNew->setVisible(ctab == 1 || ctab == 2 || ctab == 3 );
     ui->actionEdit->setVisible(ctab == 1 || ctab == 2 || ctab == 3);
@@ -903,6 +903,7 @@ void SoftProjector::updateEditActions()
     /////////////////////////////////////////
     // Set Print Action Menu enabled
     ui->actionPrint->setEnabled(ctab == 0 || ctab == 1 || ctab == 3);
+    */
 }
 
 void SoftProjector::on_actionNew_triggered()
@@ -912,9 +913,9 @@ void SoftProjector::on_actionNew_triggered()
         newSong();
     else if(ctab == 2)
         newSlideShow();
-//    else if(ctab == 3)
-//        addMediaToLibrary();
     else if(ctab == 3)
+        addMediaToLibrary();
+    else if(ctab == 4)
         newAnnouncement();
 }
 
@@ -925,7 +926,7 @@ void SoftProjector::on_actionEdit_triggered()
         editSong();
     else if(ctab == 2)
         editSlideShow();
-    else if(ctab == 3)
+    else if(ctab == 4)
         editAnnouncement();
 }
 
@@ -934,7 +935,7 @@ void SoftProjector::on_actionCopy_triggered()
     int ctab = ui->projectTab->currentIndex();
     if(ctab == 1)
         copySong();
-    else if(ctab == 3)
+    else if(ctab == 4)
         copyAnnouncement();
 }
 
@@ -947,9 +948,9 @@ void SoftProjector::on_actionDelete_triggered()
         deleteSong();
     else if(ctab == 2)
         deleteSlideShow();
-//    else if(ctab == 3)
-//        removeMediaFromLibrary();
     else if(ctab == 3)
+        removeMediaFromLibrary();
+    else if(ctab == 4)
         deleteAnnoucement();
 }
 

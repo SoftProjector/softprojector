@@ -26,7 +26,8 @@ QT += core \
     qml \
     quick \
     printsupport \
-    multimedia
+    multimedia \
+    multimediawidgets
 
 TARGET = SoftProjector
 TEMPLATE = app
