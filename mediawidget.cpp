@@ -40,6 +40,7 @@ MediaWidget::MediaWidget(QWidget *parent) :
     connect(player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(hasVideoChanged(bool)));
 //    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
 
+<<<<<<< HEAD
 
     connect(player, SIGNAL(mutedChanged(bool)),this,SLOT(setMutted(bool)));
     connect(player, SIGNAL(volumeChanged(int)),this,SLOT(setVolume(int)));
@@ -48,6 +49,11 @@ MediaWidget::MediaWidget(QWidget *parent) :
 
     ui->horizontalSliderVolume->setValue(100);
 
+=======
+    videoWidget = new VideoPlayerWidget(this);
+    player->setVideoOutput(videoWidget);
+
+>>>>>>> initial partial reimplementation of Media Player
     ui->horizontalSliderTime->setRange(0,player->duration()/1000);
 //    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int))); // USE TimeSlider Call
 
@@ -65,7 +71,10 @@ MediaWidget::MediaWidget(QWidget *parent) :
     unmuteIcon = QIcon(":icons/icons/speaker.png");
 
     ui->pushButtonPlayPause->setIcon(playIcon);
+<<<<<<< HEAD
     ui->pushButtonMute->setIcon(unmuteIcon);
+=======
+>>>>>>> initial partial reimplementation of Media Player
 //    ui->comboBoxAspectRatio->setEnabled(false);
 
 //    timeSlider = new Phonon::SeekSlider(this);
