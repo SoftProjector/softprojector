@@ -40,8 +40,13 @@ MediaWidget::MediaWidget(QWidget *parent) :
     connect(player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(hasVideoChanged(bool)));
 //    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
 
+
+    connect(player, SIGNAL(mutedChanged(bool)),this,SLOT(setMutted(bool)));
+    connect(player, SIGNAL(volumeChanged(int)),this,SLOT(setVolume(int)));
     videoWidget = new VideoPlayerWidget(this);
     player->setVideoOutput(videoWidget);
+
+    ui->horizontalSliderVolume->setValue(100);
 
     ui->horizontalSliderTime->setRange(0,player->duration()/1000);
 //    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int))); // USE TimeSlider Call
@@ -56,8 +61,11 @@ MediaWidget::MediaWidget(QWidget *parent) :
 
     playIcon = QIcon(":icons/icons/play.png");
     pauseIcon = QIcon(":icons/icons/pause.png");
+    muteIcon = QIcon(":icons/icons/speakerMute.png");
+    unmuteIcon = QIcon(":icons/icons/speaker.png");
 
     ui->pushButtonPlayPause->setIcon(playIcon);
+    ui->pushButtonMute->setIcon(unmuteIcon);
 //    ui->comboBoxAspectRatio->setEnabled(false);
 
 //    timeSlider = new Phonon::SeekSlider(this);
@@ -508,4 +516,34 @@ bool MediaWidget::isValidMedia()
 void MediaWidget::on_horizontalSliderTime_sliderMoved(int position)
 {
     player->setPosition(position * 1000);
+}
+
+void MediaWidget::on_pushButtonMute_toggled(bool checked)
+{
+    player->setMuted(checked);
+    ui->horizontalSliderVolume->setEnabled(!checked);
+}
+
+void MediaWidget::setMutted(bool mutted)
+{
+    ui->pushButtonMute->setChecked(mutted);
+    ui->horizontalSliderVolume->setEnabled(!mutted);
+    if(mutted)
+    {
+        ui->pushButtonMute->setIcon(muteIcon);
+    }
+    else
+    {
+        ui->pushButtonMute->setIcon(unmuteIcon);
+    }
+}
+
+void MediaWidget::on_horizontalSliderVolume_valueChanged(int value)
+{
+    player->setVolume(value);
+}
+
+void MediaWidget::setVolume(int value)
+{
+    ui->horizontalSliderVolume->setValue(value);
 }

@@ -83,11 +83,19 @@ private slots:
 
     void on_horizontalSliderTime_sliderMoved(int position);
 
+    void on_pushButtonMute_toggled(bool checked);
+    void setMutted(bool mutted);
+
+    void on_horizontalSliderVolume_valueChanged(int value);
+    void setVolume(int value);
+
 private:
     Ui::MediaWidget *ui;
 
     QIcon playIcon;
     QIcon pauseIcon;
+    QIcon muteIcon;
+    QIcon unmuteIcon;
 
     QMediaPlayer *player;
     VideoPlayerWidget *videoWidget;
