@@ -37,7 +37,7 @@ signals:
     void handleDrops(QDropEvent *e);
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent *e);
+//    void mouseDoubleClickEvent(QMouseEvent *e);
     void keyPressEvent(QKeyEvent *e);
     bool event(QEvent *e);
     void timerEvent(QTimerEvent *e);

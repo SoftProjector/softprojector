@@ -40,8 +40,6 @@ MediaWidget::MediaWidget(QWidget *parent) :
     connect(player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(hasVideoChanged(bool)));
 //    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
 
-<<<<<<< HEAD
-
     connect(player, SIGNAL(mutedChanged(bool)),this,SLOT(setMutted(bool)));
     connect(player, SIGNAL(volumeChanged(int)),this,SLOT(setVolume(int)));
     videoWidget = new VideoPlayerWidget(this);
@@ -49,11 +47,9 @@ MediaWidget::MediaWidget(QWidget *parent) :
 
     ui->horizontalSliderVolume->setValue(100);
 
-=======
     videoWidget = new VideoPlayerWidget(this);
     player->setVideoOutput(videoWidget);
 
->>>>>>> initial partial reimplementation of Media Player
     ui->horizontalSliderTime->setRange(0,player->duration()/1000);
 //    connect(slider, SIGNAL(sliderMoved(int)), this, SLOT(seek(int))); // USE TimeSlider Call
 
@@ -71,10 +67,8 @@ MediaWidget::MediaWidget(QWidget *parent) :
     unmuteIcon = QIcon(":icons/icons/speaker.png");
 
     ui->pushButtonPlayPause->setIcon(playIcon);
-<<<<<<< HEAD
     ui->pushButtonMute->setIcon(unmuteIcon);
-=======
->>>>>>> initial partial reimplementation of Media Player
+
 //    ui->comboBoxAspectRatio->setEnabled(false);
 
 //    timeSlider = new Phonon::SeekSlider(this);
@@ -283,8 +277,6 @@ void MediaWidget::playFile(QString filePath)
     QMediaContent m(fileUrl);
     player->setMedia(m);
     player->play();
-//    mediaPlayer.setCurrentSource(Phonon::MediaSource(filePath));
-//    mediaPlayer.play();
 }
 
 void MediaWidget::updateInfo()
@@ -292,11 +284,7 @@ void MediaWidget::updateInfo()
     int maxLength = 50;
     QString font = "<font color=#49fff9>";
 
-    QString fName = player->currentMedia().canonicalUrl().fileName();// = mediaPlayer.currentSource().fileName();
-//    QFileInfo f(fileName);
-//    QString fName = f.fileName();
-
-//    QMap <QString, QString> metaData = mediaPlayer.metaData();
+    QString fName = player->currentMedia().canonicalUrl().fileName();
     QString tAlbum = player->metaData(QMediaMetaData::AlbumTitle).toString();
     QString tTitle = player->metaData(QMediaMetaData::Title).toString();
     QString tArtist = player->metaData(QMediaMetaData::AlbumArtist).toString();
@@ -524,7 +512,11 @@ bool MediaWidget::isValidMedia()
 
 void MediaWidget::on_horizontalSliderTime_sliderMoved(int position)
 {
-    player->setPosition(position * 1000);
+    if(!ui->horizontalSliderTime->isSliderDown())
+    {
+          player->setPosition(position * 1000);
+    }
+
 }
 
 void MediaWidget::on_pushButtonMute_toggled(bool checked)
@@ -555,4 +547,14 @@ void MediaWidget::on_horizontalSliderVolume_valueChanged(int value)
 void MediaWidget::setVolume(int value)
 {
     ui->horizontalSliderVolume->setValue(value);
+}
+
+void MediaWidget::on_pushButtonStop_clicked()
+{
+    player->stop();
+}
+
+void MediaWidget::on_horizontalSliderTime_sliderReleased()
+{
+    player->setPosition(ui->horizontalSliderTime->value()* 1000);
 }

@@ -89,6 +89,10 @@ private slots:
     void on_horizontalSliderVolume_valueChanged(int value);
     void setVolume(int value);
 
+    void on_pushButtonStop_clicked();
+
+    void on_horizontalSliderTime_sliderReleased();
+
 private:
     Ui::MediaWidget *ui;
 

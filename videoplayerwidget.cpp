@@ -35,11 +35,11 @@ void VideoPlayerWidget::setFullScreen(bool enabled)
     setFullScreen(enabled);
 }
 
-void VideoPlayerWidget::mouseDoubleClickEvent(QMouseEvent *e)
-{
-    setFullScreen(!isFullScreen());
-    e->accept();
-}
+//void VideoPlayerWidget::mouseDoubleClickEvent(QMouseEvent *e)
+//{
+//    setFullScreen(!isFullScreen());
+//    e->accept();
+//}
 
 void VideoPlayerWidget::keyPressEvent(QKeyEvent *e)
 {
@@ -50,12 +50,12 @@ void VideoPlayerWidget::keyPressEvent(QKeyEvent *e)
         e->accept();
         return;
     }
-    else if (key == Qt::Key_Escape)
-    {
-        setFullScreen(false);
-        e->accept();
-        return;
-    }
+//    else if (key == Qt::Key_Escape)
+//    {
+//        setFullScreen(false);
+//        e->accept();
+//        return;
+//    }
     else
     {
         QVideoWidget::keyPressEvent(e);
