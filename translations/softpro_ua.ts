@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="uk_UA">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -396,22 +395,22 @@ or would like to contribute data, please visit:&lt;br&gt;
         <translation>файли малюнків (%1)</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="248"/>
+        <location filename="../announcementsettingwidget.cpp" line="249"/>
         <source>Bold</source>
         <translation>Жирний</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="250"/>
+        <location filename="../announcementsettingwidget.cpp" line="251"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="252"/>
+        <location filename="../announcementsettingwidget.cpp" line="253"/>
         <source>StrikeOut</source>
         <translation>Закреслений</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="254"/>
+        <location filename="../announcementsettingwidget.cpp" line="255"/>
         <source>Underline</source>
         <translation>Підкреслений</translation>
     </message>
@@ -457,19 +456,19 @@ Copyright:</source>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="28"/>
-        <location filename="../biblesettingwidget.ui" line="678"/>
+        <location filename="../biblesettingwidget.ui" line="687"/>
         <source>Primary Bible:</source>
         <translation>Перша Біблія:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="48"/>
-        <location filename="../biblesettingwidget.ui" line="698"/>
+        <location filename="../biblesettingwidget.ui" line="707"/>
         <source>Secondary Bible:</source>
         <translation>Друга Біблія:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="68"/>
-        <location filename="../biblesettingwidget.ui" line="718"/>
+        <location filename="../biblesettingwidget.ui" line="727"/>
         <source>Trinary Bible:</source>
         <translation>Третя Біблія:</translation>
     </message>
@@ -485,51 +484,51 @@ Copyright:</source>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="113"/>
-        <location filename="../biblesettingwidget.ui" line="778"/>
+        <location filename="../biblesettingwidget.ui" line="787"/>
         <source>Effects</source>
         <translation>Ефекти</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="119"/>
-        <location filename="../biblesettingwidget.ui" line="784"/>
+        <location filename="../biblesettingwidget.ui" line="793"/>
         <source>If checked, when switching displayed text, fades the old text out and fades the new text in .</source>
         <translation>Плавне затухання при зміні кадрів.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="122"/>
-        <location filename="../biblesettingwidget.ui" line="787"/>
+        <location filename="../biblesettingwidget.ui" line="796"/>
         <source>Use fading effects</source>
         <translation>Використовувати ефект затухання</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="129"/>
         <location filename="../biblesettingwidget.ui" line="142"/>
-        <location filename="../biblesettingwidget.ui" line="794"/>
-        <location filename="../biblesettingwidget.ui" line="807"/>
+        <location filename="../biblesettingwidget.ui" line="803"/>
+        <location filename="../biblesettingwidget.ui" line="816"/>
         <source>Useful when using a wallpaper image. Displays a fancy shadow effect.</source>
         <translation>При використанні фонових малюнків утворюються цікаві штуки. Спробуйте.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="132"/>
-        <location filename="../biblesettingwidget.ui" line="797"/>
+        <location filename="../biblesettingwidget.ui" line="806"/>
         <source>Use shadow</source>
         <translation>Використовувати тінь</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="145"/>
-        <location filename="../biblesettingwidget.ui" line="810"/>
+        <location filename="../biblesettingwidget.ui" line="819"/>
         <source>Use blurred shadow</source>
         <translation>Використовувати розмиту тінь</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="155"/>
-        <location filename="../biblesettingwidget.ui" line="857"/>
+        <location filename="../biblesettingwidget.ui" line="866"/>
         <source>Use Background Image</source>
         <translation>Використовувати малюнок тла</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="171"/>
-        <location filename="../biblesettingwidget.ui" line="873"/>
+        <location filename="../biblesettingwidget.ui" line="882"/>
         <source>Browse...</source>
         <translation>Огляд...</translation>
     </message>
@@ -541,32 +540,32 @@ Copyright:</source>
     <message>
         <location filename="../biblesettingwidget.ui" line="200"/>
         <location filename="../biblesettingwidget.ui" line="331"/>
-        <location filename="../biblesettingwidget.ui" line="928"/>
-        <location filename="../biblesettingwidget.ui" line="1096"/>
+        <location filename="../biblesettingwidget.ui" line="937"/>
+        <location filename="../biblesettingwidget.ui" line="1105"/>
         <source>Color...</source>
         <translation>Колір...</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="471"/>
-        <location filename="../biblesettingwidget.ui" line="1273"/>
+        <location filename="../biblesettingwidget.ui" line="1282"/>
         <source>Amount of screen to use:</source>
         <translation>Частина екрана, що використовується:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="478"/>
-        <location filename="../biblesettingwidget.ui" line="1280"/>
+        <location filename="../biblesettingwidget.ui" line="1289"/>
         <source>Percent of screen to be used.</source>
         <translation>Частина екрана, яка використовуватиметься, у відсотках.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="498"/>
-        <location filename="../biblesettingwidget.ui" line="1300"/>
+        <location filename="../biblesettingwidget.ui" line="1309"/>
         <source>Select to use either top portion of the screen or bottom.</source>
         <translation>Оберіть, яку частину (верхню чи нижню) дисплею використовувати.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="502"/>
-        <location filename="../biblesettingwidget.ui" line="1304"/>
+        <location filename="../biblesettingwidget.ui" line="1313"/>
         <source>Top of Screen</source>
         <translation>Вверху екрана</translation>
     </message>
@@ -581,7 +580,7 @@ Copyright:</source>
         <translation>Використовувати власні налаштування для другого дисплею</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.ui" line="1309"/>
+        <location filename="../biblesettingwidget.ui" line="1318"/>
         <source>Bottom of Screen</source>
         <translation>Внизу екрану</translation>
     </message>
@@ -595,19 +594,19 @@ Copyright:</source>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="268"/>
-        <location filename="../biblesettingwidget.ui" line="996"/>
+        <location filename="../biblesettingwidget.ui" line="1005"/>
         <source>Top</source>
         <translation>Зверху</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="273"/>
-        <location filename="../biblesettingwidget.ui" line="1001"/>
+        <location filename="../biblesettingwidget.ui" line="1010"/>
         <source>Middle</source>
         <translation>Середина</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="278"/>
-        <location filename="../biblesettingwidget.ui" line="1006"/>
+        <location filename="../biblesettingwidget.ui" line="1015"/>
         <source>Bottom</source>
         <translation>Внизу</translation>
     </message>
@@ -618,30 +617,30 @@ Copyright:</source>
     <message>
         <location filename="../biblesettingwidget.ui" line="287"/>
         <location filename="../biblesettingwidget.ui" line="420"/>
-        <location filename="../biblesettingwidget.ui" line="1015"/>
-        <location filename="../biblesettingwidget.ui" line="1185"/>
+        <location filename="../biblesettingwidget.ui" line="1024"/>
+        <location filename="../biblesettingwidget.ui" line="1194"/>
         <source>Left</source>
         <translation>Ліворуч</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="292"/>
         <location filename="../biblesettingwidget.ui" line="425"/>
-        <location filename="../biblesettingwidget.ui" line="1020"/>
-        <location filename="../biblesettingwidget.ui" line="1190"/>
+        <location filename="../biblesettingwidget.ui" line="1029"/>
+        <location filename="../biblesettingwidget.ui" line="1199"/>
         <source>Center</source>
         <translation>Центр</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="297"/>
         <location filename="../biblesettingwidget.ui" line="430"/>
-        <location filename="../biblesettingwidget.ui" line="1025"/>
-        <location filename="../biblesettingwidget.ui" line="1195"/>
+        <location filename="../biblesettingwidget.ui" line="1034"/>
+        <location filename="../biblesettingwidget.ui" line="1204"/>
         <source>Right</source>
         <translation>Праворуч</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="192"/>
-        <location filename="../biblesettingwidget.ui" line="920"/>
+        <location filename="../biblesettingwidget.ui" line="929"/>
         <source>Text Properties</source>
         <translation>Текст</translation>
     </message>
@@ -656,8 +655,8 @@ Copyright:</source>
     <message>
         <location filename="../biblesettingwidget.ui" line="236"/>
         <location filename="../biblesettingwidget.ui" line="367"/>
-        <location filename="../biblesettingwidget.ui" line="964"/>
-        <location filename="../biblesettingwidget.ui" line="1132"/>
+        <location filename="../biblesettingwidget.ui" line="973"/>
+        <location filename="../biblesettingwidget.ui" line="1141"/>
         <source>Font...</source>
         <oldsource>Font</oldsource>
         <translation>Шрифт...</translation>
@@ -665,46 +664,46 @@ Copyright:</source>
     <message>
         <location filename="../biblesettingwidget.ui" line="260"/>
         <location filename="../biblesettingwidget.ui" line="412"/>
-        <location filename="../biblesettingwidget.ui" line="988"/>
-        <location filename="../biblesettingwidget.ui" line="1177"/>
+        <location filename="../biblesettingwidget.ui" line="997"/>
+        <location filename="../biblesettingwidget.ui" line="1186"/>
         <source>Alignment:</source>
         <translation>Вирівнювання:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="323"/>
-        <location filename="../biblesettingwidget.ui" line="1088"/>
+        <location filename="../biblesettingwidget.ui" line="1097"/>
         <source>Caption Properties</source>
         <translation>Властивості заголовку</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="391"/>
         <location filename="../biblesettingwidget.ui" line="491"/>
-        <location filename="../biblesettingwidget.ui" line="1156"/>
-        <location filename="../biblesettingwidget.ui" line="1293"/>
+        <location filename="../biblesettingwidget.ui" line="1165"/>
+        <location filename="../biblesettingwidget.ui" line="1302"/>
         <source>Position:</source>
         <translation>Положення:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="399"/>
-        <location filename="../biblesettingwidget.ui" line="1164"/>
+        <location filename="../biblesettingwidget.ui" line="1173"/>
         <source>Above Text</source>
         <translation>Перед текстом</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="404"/>
-        <location filename="../biblesettingwidget.ui" line="1169"/>
+        <location filename="../biblesettingwidget.ui" line="1178"/>
         <source>Below Text</source>
         <translation>Після тексту</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="456"/>
-        <location filename="../biblesettingwidget.ui" line="1221"/>
+        <location filename="../biblesettingwidget.ui" line="1230"/>
         <source>Show Bible Version Abbriviation</source>
         <translation>Показувати абревіатуру Біблії</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="463"/>
-        <location filename="../biblesettingwidget.ui" line="1265"/>
+        <location filename="../biblesettingwidget.ui" line="1274"/>
         <source>Amount Of Screen To Use</source>
         <oldsource>Amount Of Sceen To Use</oldsource>
         <translation>Частина екрана, який використовується</translation>
@@ -735,7 +734,7 @@ Copyright:</source>
         <translation type="obsolete">Знизу</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.ui" line="1353"/>
+        <location filename="../biblesettingwidget.ui" line="1362"/>
         <source>Reset All To Default</source>
         <translation>Скинути усі налаштування</translation>
     </message>
@@ -770,22 +769,22 @@ Copyright:</source>
         <translation>файли малюнків (%1)</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="637"/>
+        <location filename="../biblesettingwidget.cpp" line="638"/>
         <source>Bold</source>
         <translation>Жирний</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="639"/>
+        <location filename="../biblesettingwidget.cpp" line="640"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="641"/>
+        <location filename="../biblesettingwidget.cpp" line="642"/>
         <source>StrikeOut</source>
         <translation>Закреслений</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="643"/>
+        <location filename="../biblesettingwidget.cpp" line="644"/>
         <source>Underline</source>
         <translation>Підкреслений</translation>
     </message>
@@ -1042,29 +1041,24 @@ results.</source>
 <context>
     <name>DisplayScreen</name>
     <message>
-        <location filename="../displayscreen.ui" line="14"/>
         <source>Dispaly Screen</source>
-        <translation>Екран</translation>
+        <translation type="vanished">Екран</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="479"/>
         <source>Video Player Error</source>
-        <translation>Помилка відеоплеєра</translation>
+        <translation type="vanished">Помилка відеоплеєра</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="765"/>
         <source>Words by: %1, Music by: %2</source>
-        <translation>Лірика: %1, Музика: %2</translation>
+        <translation type="vanished">Лірика: %1, Музика: %2</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="767"/>
         <source>Words by: %1</source>
-        <translation>Лірика: %1</translation>
+        <translation type="vanished">Лірика: %1</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="769"/>
         <source>Music by: %1</source>
-        <translation>Музика: %1</translation>
+        <translation type="vanished">Музика: %1</translation>
     </message>
 </context>
 <context>
@@ -1694,97 +1688,102 @@ Verse 2
         <translation>Додатковий дисплей:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="140"/>
+        <location filename="../generalsettingwidget.ui" line="137"/>
+        <source>Show Display Screen on SoftProjector Startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../generalsettingwidget.ui" line="147"/>
         <source>Primary Display Screen Controls</source>
         <translation>Засоби керування основним дисплеем</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="148"/>
+        <location filename="../generalsettingwidget.ui" line="155"/>
         <source>Button Size:</source>
         <translation>Розмір кнопок:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="156"/>
+        <location filename="../generalsettingwidget.ui" line="163"/>
         <source>16x16</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="161"/>
+        <location filename="../generalsettingwidget.ui" line="168"/>
         <source>24x24</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="166"/>
+        <location filename="../generalsettingwidget.ui" line="173"/>
         <source>32x32</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="171"/>
+        <location filename="../generalsettingwidget.ui" line="178"/>
         <source>48x48</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="176"/>
+        <location filename="../generalsettingwidget.ui" line="183"/>
         <source>64x64</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="181"/>
+        <location filename="../generalsettingwidget.ui" line="188"/>
         <source>96x96</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="202"/>
+        <location filename="../generalsettingwidget.ui" line="209"/>
         <source>Alignment:</source>
         <translation>Вирівнювання:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="210"/>
+        <location filename="../generalsettingwidget.ui" line="217"/>
         <source>Top</source>
         <translation>Зверху</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="215"/>
+        <location filename="../generalsettingwidget.ui" line="222"/>
         <source>Middle</source>
         <translation>Середина</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="220"/>
+        <location filename="../generalsettingwidget.ui" line="227"/>
         <source>Bottom</source>
         <translation>Внизу</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="229"/>
+        <location filename="../generalsettingwidget.ui" line="236"/>
         <source>Left</source>
         <translation>Ліворуч</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="234"/>
+        <location filename="../generalsettingwidget.ui" line="241"/>
         <source>Center</source>
         <translation>Центр</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="239"/>
+        <location filename="../generalsettingwidget.ui" line="246"/>
         <source>Right</source>
         <translation>Праворуч</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="251"/>
+        <location filename="../generalsettingwidget.ui" line="258"/>
         <source>Opacity:</source>
         <translation>Прозорість:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="258"/>
+        <location filename="../generalsettingwidget.ui" line="265"/>
         <source>Transparent</source>
         <translation>Прозорий</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="275"/>
+        <location filename="../generalsettingwidget.ui" line="282"/>
         <source>Opaque</source>
         <translation>непрозорий</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="284"/>
+        <location filename="../generalsettingwidget.ui" line="291"/>
         <source>NOTE: Display screen controls will be visible on the primary display screen only when one monitor is avaliable.</source>
         <translation>Зауважте, засоби контролю дисплею видимі на основному дисплеї лише за умови наявності одного монітору.</translation>
     </message>
@@ -1850,7 +1849,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600; color:#ff0000;&quot;&gt;ЗАУВАЖТЕ:&lt;/span&gt;&lt;span style=&quot; font-size:8pt; color:#ff0000;&quot;&gt; Опція вибору екрану наразі розробляється. &lt;br /&gt;Зміна номеру екрану дозволяє виставити стільницю, &lt;br /&gt;на якій він буде відображатися. &lt;br /&gt;У Вінді стільниць порядок зліва направо. &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="312"/>
+        <location filename="../generalsettingwidget.ui" line="319"/>
         <source>Reset All To Default</source>
         <translation>Скинути усі налаштування</translation>
     </message>
@@ -1863,37 +1862,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Файли зображень (*.png *.jpg *.jpeg)</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="78"/>
+        <location filename="../generalsettingwidget.cpp" line="79"/>
         <source>none</source>
         <translation>Не обрано</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="158"/>
+        <location filename="../generalsettingwidget.cpp" line="160"/>
         <source>None</source>
         <translation>Не обрано</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="191"/>
+        <location filename="../generalsettingwidget.cpp" line="193"/>
         <source>Edit Theme</source>
         <translation>Редагувати тему</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="192"/>
+        <location filename="../generalsettingwidget.cpp" line="194"/>
         <source>Theme Name:</source>
         <translation>Назва теми:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="192"/>
+        <location filename="../generalsettingwidget.cpp" line="194"/>
         <source>Comments:</source>
         <translation>Коментарі:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="193"/>
+        <location filename="../generalsettingwidget.cpp" line="195"/>
         <source>Default</source>
         <translation>Стандартний</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="193"/>
+        <location filename="../generalsettingwidget.cpp" line="195"/>
         <source>This theme will contain program default settings.</source>
         <translation>Ця тема містить налаштування програми за замовчуванням.</translation>
     </message>
@@ -1906,17 +1905,12 @@ p, li { white-space: pre-wrap; }
         <translation>Довідка по softProjector</translation>
     </message>
     <message>
-        <location filename="../helpdialog.ui" line="21"/>
-        <source>about:blank</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../helpdialog.ui" line="44"/>
+        <location filename="../helpdialog.ui" line="35"/>
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="../helpdialog.ui" line="47"/>
+        <location filename="../helpdialog.ui" line="38"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
@@ -2532,28 +2526,27 @@ Has been saved to:
     </message>
     <message>
         <location filename="../mediawidget.cpp" line="50"/>
-        <location filename="../mediawidget.cpp" line="409"/>
+        <location filename="../mediawidget.cpp" line="412"/>
         <source>&lt;center&gt;No media&lt;/center&gt;</source>
         <translation>&lt;center&gt;Тут наразі нічого немає&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="124"/>
         <source>No Media</source>
-        <translation>Немає медіа</translation>
+        <translation type="vanished">Немає медіа</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="357"/>
+        <location filename="../mediawidget.cpp" line="360"/>
         <source>Open Music/Video File</source>
         <translation>Відкрити файл музики/відео</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="358"/>
-        <location filename="../mediawidget.cpp" line="382"/>
+        <location filename="../mediawidget.cpp" line="361"/>
+        <location filename="../mediawidget.cpp" line="385"/>
         <source>Media Files (%1);;Audio Files (%2);;Video Files (%3)</source>
         <translation>Медіа файли (%1);; файли аудіо (%2);; відео файли (%3)</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="381"/>
+        <location filename="../mediawidget.cpp" line="384"/>
         <source>Select Music/Video Files to Open</source>
         <translation>Вибір файлів музики/відео</translation>
     </message>
@@ -2612,7 +2605,7 @@ Has been saved to:
         <translation type="obsolete">Українська</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1303"/>
+        <location filename="../softprojector.cpp" line="1344"/>
         <source>English</source>
         <comment>Do not change</comment>
         <translation>Українська</translation>
@@ -2996,6 +2989,14 @@ Notes:
     </message>
 </context>
 <context>
+    <name>ProjectorDisplayScreen</name>
+    <message>
+        <location filename="../projectordisplayscreen.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialog</name>
     <message>
         <location filename="../settingsdialog.ui" line="14"/>
@@ -3024,51 +3025,45 @@ Notes:
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="97"/>
-        <source>Media</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../settingsdialog.ui" line="106"/>
         <source>Announcements</source>
         <translation>Оголошення</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="138"/>
+        <location filename="../settingsdialog.ui" line="166"/>
         <source>General SoftProjector Settings</source>
         <translation>Загальні налаштування SoftProjector</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="186"/>
+        <location filename="../settingsdialog.ui" line="223"/>
         <source>Passive Settings</source>
         <translation>Налаштування пасивного режиму</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="193"/>
+        <location filename="../settingsdialog.ui" line="230"/>
         <source>This setting are displayed when nothing is to be projected.</source>
         <translation>Ці налаштування використовуються коли нічого не відображається.</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="241"/>
+        <location filename="../settingsdialog.ui" line="287"/>
         <source>Bible Settings</source>
         <translation>Налаштування відображення Біблій</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="289"/>
+        <location filename="../settingsdialog.ui" line="344"/>
         <source>Song Settings</source>
         <translation>Налаштування відображення пісень</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="337"/>
+        <location filename="../settingsdialog.ui" line="401"/>
         <source>Picture Settings</source>
         <translation>Налаштування пасивного режиму</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="382"/>
         <source>Media Settings</source>
-        <translation>Налаштування media</translation>
+        <translation type="vanished">Налаштування media</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="427"/>
+        <location filename="../settingsdialog.ui" line="455"/>
         <source>Announcement Settings</source>
         <translation>Налаштування відображення оголошень</translation>
     </message>
@@ -3266,32 +3261,30 @@ Please enter a title.</source>
 <context>
     <name>SoftProjector</name>
     <message>
-        <location filename="../softprojector.cpp" line="77"/>
-        <location filename="../softprojector.cpp" line="1342"/>
+        <location filename="../softprojector.cpp" line="74"/>
+        <location filename="../softprojector.cpp" line="1383"/>
         <source>Bible (F6)</source>
         <translation>Біблія (F6)</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="78"/>
-        <location filename="../softprojector.cpp" line="1343"/>
+        <location filename="../softprojector.cpp" line="75"/>
+        <location filename="../softprojector.cpp" line="1384"/>
         <source>Songs (F7)</source>
         <translation>Пісні (F7)</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="79"/>
-        <location filename="../softprojector.cpp" line="1344"/>
+        <location filename="../softprojector.cpp" line="76"/>
+        <location filename="../softprojector.cpp" line="1385"/>
         <source>Pictures</source>
         <translation>Зображення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="80"/>
-        <location filename="../softprojector.cpp" line="1345"/>
         <source>Media</source>
-        <translation>Медіа</translation>
+        <translation type="vanished">Медіа</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="81"/>
-        <location filename="../softprojector.cpp" line="1346"/>
+        <location filename="../softprojector.cpp" line="78"/>
+        <location filename="../softprojector.cpp" line="1387"/>
         <source>Announcements (F8)</source>
         <translation>Оголошення (F8)</translation>
     </message>
@@ -3322,285 +3315,283 @@ Please enter a title.</source>
         <translation type="obsolete">Музика: %1</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1009"/>
+        <location filename="../softprojector.cpp" line="1050"/>
         <source>Cannot start new edit</source>
         <translation>Відсутня можливість розпочати нове редагування</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="989"/>
-        <location filename="../softprojector.cpp" line="1010"/>
-        <location filename="../softprojector.cpp" line="1041"/>
+        <location filename="../softprojector.cpp" line="1030"/>
+        <location filename="../softprojector.cpp" line="1051"/>
+        <location filename="../softprojector.cpp" line="1082"/>
         <source>Another song is already been edited.</source>
         <translation>О-о, інша пісня уже редагується.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="391"/>
+        <location filename="../softprojector.cpp" line="393"/>
         <source>Schedule not saved</source>
         <translation>Прорама не збережена</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="392"/>
+        <location filename="../softprojector.cpp" line="394"/>
         <source>Do you want to save current schedule?</source>
         <translation>Ви бажаєте зберегти поточну прораму?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="770"/>
+        <location filename="../softprojector.cpp" line="793"/>
         <source>&amp;Clear Bible History List</source>
         <translation>&amp;Очистити исторію показу Біблії</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="778"/>
+        <location filename="../softprojector.cpp" line="801"/>
         <source>&amp;New Song...</source>
         <translation>Нова &amp;пісня...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="779"/>
+        <location filename="../softprojector.cpp" line="802"/>
         <source>&amp;Edit Song...</source>
         <translation>Редагувати &amp;пісню...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="780"/>
+        <location filename="../softprojector.cpp" line="803"/>
         <source>&amp;Copy Song...</source>
         <translation>&amp;Копіювати пісню...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="781"/>
+        <location filename="../softprojector.cpp" line="804"/>
         <source>&amp;Delete Song</source>
         <translation>&amp;Видалити пісню</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="789"/>
+        <location filename="../softprojector.cpp" line="812"/>
         <source>&amp;New Slide Show...</source>
         <translation>&amp;Нове слайдшоу...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="790"/>
+        <location filename="../softprojector.cpp" line="813"/>
         <source>&amp;Edit Slide Show...</source>
         <translation>Редагувати &amp;слайдшоу...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="792"/>
+        <location filename="../softprojector.cpp" line="815"/>
         <source>&amp;Delete Slide Show</source>
         <translation>&amp;Видалити слайдшоу</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="800"/>
         <source>&amp;Add Media Files...</source>
-        <translation>&amp;Додати файли медіа...</translation>
+        <translation type="vanished">&amp;Додати файли медіа...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="803"/>
         <source>&amp;Remove Media Files</source>
-        <translation>&amp;Видалити медіа файли</translation>
+        <translation type="vanished">&amp;Видалити медіа файли</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="811"/>
+        <location filename="../softprojector.cpp" line="834"/>
         <source>&amp;New Announcement...</source>
         <translation>&amp;Нове оголошення...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="812"/>
+        <location filename="../softprojector.cpp" line="835"/>
         <source>&amp;Edit Announcement...</source>
         <translation>&amp;Редагувати оголошення...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="813"/>
+        <location filename="../softprojector.cpp" line="836"/>
         <source>&amp;Copy Announcement...</source>
         <translation>&amp;Копіювати оголошення...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="814"/>
+        <location filename="../softprojector.cpp" line="837"/>
         <source>&amp;Delete Announcement</source>
         <translation>&amp;Видалити оголошення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="990"/>
-        <location filename="../softprojector.cpp" line="1011"/>
-        <location filename="../softprojector.cpp" line="1042"/>
+        <location filename="../softprojector.cpp" line="1031"/>
+        <location filename="../softprojector.cpp" line="1052"/>
+        <location filename="../softprojector.cpp" line="1083"/>
         <source>Please save and/or close current edited song before edited a different song.</source>
         <translation>Будьте ласкаві, збережіть і(або) закрийте поточну пісню перед тим, як братися редагувати іншу.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1025"/>
-        <location filename="../softprojector.cpp" line="1056"/>
-        <location filename="../softprojector.cpp" line="1095"/>
-        <location filename="../softprojector.cpp" line="1408"/>
+        <location filename="../softprojector.cpp" line="1066"/>
+        <location filename="../softprojector.cpp" line="1097"/>
+        <location filename="../softprojector.cpp" line="1136"/>
+        <location filename="../softprojector.cpp" line="1449"/>
         <source>No song selected</source>
         <translation>Не обрано жодної пісні</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1057"/>
+        <location filename="../softprojector.cpp" line="1098"/>
         <source>No song has been selected to copy</source>
         <translation>Не обрано жодної пісні для копіювання</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1058"/>
+        <location filename="../softprojector.cpp" line="1099"/>
         <source>Please select a song to copy</source>
         <translation>Будьте такі ласкаві, оберіть пісню</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1096"/>
+        <location filename="../softprojector.cpp" line="1137"/>
         <source>No song has been selected to delete</source>
         <translation>Не обрано жодної пісні для вилучення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1097"/>
+        <location filename="../softprojector.cpp" line="1138"/>
         <source>Please select a song to delete</source>
         <translation>Будьте такі ласкаві, оберіть пісню для вилучення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1126"/>
-        <location filename="../softprojector.cpp" line="1164"/>
+        <location filename="../softprojector.cpp" line="1167"/>
+        <location filename="../softprojector.cpp" line="1205"/>
         <source>No slideshow selected</source>
         <translation>Не обрано слайдшоу</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1127"/>
+        <location filename="../softprojector.cpp" line="1168"/>
         <source>No slideshow has been selected to edit.</source>
         <translation>Жодне слайдшоу не обрано для редагування.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1128"/>
+        <location filename="../softprojector.cpp" line="1169"/>
         <source>Please select a slideshow to edit.</source>
         <translation>Будьте ласкаві, оберіть слайдшоу для редагування.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1140"/>
+        <location filename="../softprojector.cpp" line="1181"/>
         <source>Delete slideshow?</source>
         <translation>Дійсно видалити слайдшоу?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1141"/>
+        <location filename="../softprojector.cpp" line="1182"/>
         <source>Delete slideshow: &quot;</source>
         <translation>Видалити слайдшоу: &quot;</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1142"/>
+        <location filename="../softprojector.cpp" line="1183"/>
         <source>This action will permanentrly delete this slideshow</source>
         <translation>Слфйдшоу буде вилучено аж до закінчення Вічості</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1165"/>
+        <location filename="../softprojector.cpp" line="1206"/>
         <source>No slideshow has been selected to delete.</source>
         <translation>Жодне слайдшоу не обрано для видалення.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1166"/>
+        <location filename="../softprojector.cpp" line="1207"/>
         <source>Please select a slideshow to delete.</source>
         <translation>Будьте такі ласкаві, оберіть слайдшоу для видалення.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1184"/>
+        <location filename="../softprojector.cpp" line="1225"/>
         <source>No media selected</source>
         <translation>Не обрано медіа</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1185"/>
+        <location filename="../softprojector.cpp" line="1226"/>
         <source>No media item has been selected to delete.</source>
         <translation>Жодного медіа не обрано для видалення.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1186"/>
+        <location filename="../softprojector.cpp" line="1227"/>
         <source>Please select a media item to delete.</source>
         <translation>Будьте такі ласкаві, оберіть медиа для видалення.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1204"/>
-        <location filename="../softprojector.cpp" line="1219"/>
-        <location filename="../softprojector.cpp" line="1257"/>
+        <location filename="../softprojector.cpp" line="1245"/>
+        <location filename="../softprojector.cpp" line="1260"/>
+        <location filename="../softprojector.cpp" line="1298"/>
         <source>No Announcement Selected</source>
         <translation>Не обрано оголошення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1205"/>
+        <location filename="../softprojector.cpp" line="1246"/>
         <source>No announcement has been selected to edit</source>
         <translation>Жодного оголошення не обрано для редагування</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1206"/>
+        <location filename="../softprojector.cpp" line="1247"/>
         <source>Please select an announcement to edit</source>
         <translation>Будьте такі ласкаві, оберіть оголошення для редагування</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1220"/>
+        <location filename="../softprojector.cpp" line="1261"/>
         <source>No announcement has been selected to copy</source>
         <translation>Жодного оголошення не обрано для копіювання</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1221"/>
+        <location filename="../softprojector.cpp" line="1262"/>
         <source>Please select an announcement to copy</source>
         <translation>Будьте такі ласкаві, оберіть оголошення для копіювання</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1233"/>
+        <location filename="../softprojector.cpp" line="1274"/>
         <source>Delete Announcement?</source>
         <translation>Дійсно видалити оголошення?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1234"/>
+        <location filename="../softprojector.cpp" line="1275"/>
         <source>Delete announcement: &quot;</source>
         <translation>Видалити оголошення: &quot;</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1235"/>
+        <location filename="../softprojector.cpp" line="1276"/>
         <source>This action will permanentrly delete this announcement</source>
         <translation>Оголошення буде вилучено аж до закінчення Вічості</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1258"/>
+        <location filename="../softprojector.cpp" line="1299"/>
         <source>No announcement has been selected to delete</source>
         <translation>Жодного оголошення не обрано для видалення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1259"/>
+        <location filename="../softprojector.cpp" line="1300"/>
         <source>Please select an announcement to delete</source>
         <translation>Будьте такі ласкаві, оберіть оголошення для видалення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1425"/>
+        <location filename="../softprojector.cpp" line="1466"/>
         <source>No announcement selected</source>
         <translation>Не обрано оголошення</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1426"/>
+        <location filename="../softprojector.cpp" line="1467"/>
         <source>No announcement has been selected to be printed.</source>
         <translation>Жодного оголошення не обрано для друку.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1427"/>
+        <location filename="../softprojector.cpp" line="1468"/>
         <source>Please select a announcement to be printed.</source>
         <translation>Будьте такі ласкаві, оберіть оголошення для друку.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1753"/>
-        <location filename="../softprojector.cpp" line="1790"/>
-        <location filename="../softprojector.cpp" line="1856"/>
+        <location filename="../softprojector.cpp" line="1795"/>
+        <location filename="../softprojector.cpp" line="1832"/>
+        <location filename="../softprojector.cpp" line="1898"/>
         <source>Save Schedule?</source>
         <translation>Зберегти прораму?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1754"/>
+        <location filename="../softprojector.cpp" line="1796"/>
         <source>Do you want to save current schedule before creating a new schedule?</source>
         <translation>Ви бажаєте збереги поточну програму перед створенням нової?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1791"/>
+        <location filename="../softprojector.cpp" line="1833"/>
         <source>Do you want to save current schedule before opening a new schedule?</source>
         <translation>Ви бажаєте збереги поточну програму перед тим, як відккрити іншу?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1815"/>
+        <location filename="../softprojector.cpp" line="1857"/>
         <source>Open SoftProjector schedule:</source>
         <translation>Відкрити програму SoftProjector:</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1816"/>
-        <location filename="../softprojector.cpp" line="1838"/>
+        <location filename="../softprojector.cpp" line="1858"/>
+        <location filename="../softprojector.cpp" line="1880"/>
         <source>SoftProjector schedule file </source>
         <translation>Файли прорам SoftProjector </translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1837"/>
+        <location filename="../softprojector.cpp" line="1879"/>
         <source>Save SoftProjector schedule as:</source>
         <translation>Зберегти програму SoftProjector як:</translation>
     </message>
@@ -3617,29 +3608,29 @@ Please enter a title.</source>
         <translation type="obsolete">Зберегти програму softProjector як:</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1857"/>
+        <location filename="../softprojector.cpp" line="1899"/>
         <source>Do you want to save current schedule before closing it?</source>
         <translation>Стоп, можливо було б доцільно зберегти цю програму перед тим як її закрити?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1893"/>
+        <location filename="../softprojector.cpp" line="1935"/>
         <source>Saving schedule file...</source>
         <translation>Зберегти програму у файл...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1902"/>
+        <location filename="../softprojector.cpp" line="1944"/>
         <source>An error has ocured when overwriting existing file.
 Please try again with different file name.</source>
         <translation>Виникла помилка перезапису фалу.
 Будь ласка, спробуйте інше ім’я для цього фалу.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="2169"/>
+        <location filename="../softprojector.cpp" line="2211"/>
         <source>Opening schedule file...</source>
         <translation>Відкрити файл програми...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="2242"/>
+        <location filename="../softprojector.cpp" line="2284"/>
         <source>The schedule file you are trying to open is of uncompatible version.
 Compatible version: 2
 This schedule file version: </source>
@@ -3656,22 +3647,22 @@ This schedule file version: </source>
         <translation type="obsolete">Будьте ласкаві, оберіть пісню для редагування.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="988"/>
+        <location filename="../softprojector.cpp" line="1029"/>
         <source>Cannot create a new song</source>
         <translation>Відсутня можливість створити нову пісню</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1026"/>
+        <location filename="../softprojector.cpp" line="1067"/>
         <source>No song has been selected to edit.</source>
         <translation>Не обрано жодної пісні для редагування.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1027"/>
+        <location filename="../softprojector.cpp" line="1068"/>
         <source>Please select a song to edit.</source>
         <translation>Будьте такі ласкаві, оберіть пісню для редагування.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1040"/>
+        <location filename="../softprojector.cpp" line="1081"/>
         <source>Cannot copy this song</source>
         <translation>Відсутня можливість скопіювати цю пісню</translation>
     </message>
@@ -3684,17 +3675,17 @@ This schedule file version: </source>
         <translation type="obsolete">Будьте ласкаві, оберіть пісню для копіювання</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1070"/>
+        <location filename="../softprojector.cpp" line="1111"/>
         <source>Delete song?</source>
         <translation>А якщо подумати?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1071"/>
+        <location filename="../softprojector.cpp" line="1112"/>
         <source>Delete song &quot;</source>
         <translation>Вилучення пісні &quot;</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1072"/>
+        <location filename="../softprojector.cpp" line="1113"/>
         <source>This action will permanentrly delete this song</source>
         <translation>Пісня буде вилучена аж до закінчення Вічості</translation>
     </message>
@@ -3754,12 +3745,12 @@ You may try upgrading your version of softProjector.</source>
 Рекомендується оновити програму.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1409"/>
+        <location filename="../softprojector.cpp" line="1450"/>
         <source>No song has been selected to be printed.</source>
         <translation>Не обрано жодної пісні для лруку.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1410"/>
+        <location filename="../softprojector.cpp" line="1451"/>
         <source>Please select a song to be printed.</source>
         <translation>Будьте ласкаві, оберіть пісню для друку.</translation>
     </message>
@@ -4708,22 +4699,22 @@ You may try upgrading your version of softProjector.</source>
         <translation>файли малюнків (%1)</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="393"/>
+        <location filename="../songsettingwidget.cpp" line="394"/>
         <source>Bold</source>
         <translation>Жирний</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="395"/>
+        <location filename="../songsettingwidget.cpp" line="396"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="397"/>
+        <location filename="../songsettingwidget.cpp" line="398"/>
         <source>StrikeOut</source>
         <translation>Закреслений</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="399"/>
+        <location filename="../songsettingwidget.cpp" line="400"/>
         <source>Underline</source>
         <translation>Підкреслений</translation>
     </message>

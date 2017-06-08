@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de" sourcelanguage="en_US">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="de" sourcelanguage="en_US">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -455,22 +454,22 @@ p, li { white-space: pre-wrap; }
         <translation>Bilder(%1)</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="248"/>
+        <location filename="../announcementsettingwidget.cpp" line="249"/>
         <source>Bold</source>
         <translation>Fett</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="250"/>
+        <location filename="../announcementsettingwidget.cpp" line="251"/>
         <source>Italic</source>
         <translation>Kursiv</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="252"/>
+        <location filename="../announcementsettingwidget.cpp" line="253"/>
         <source>StrikeOut</source>
         <translation>Durchgestrichen</translation>
     </message>
     <message>
-        <location filename="../announcementsettingwidget.cpp" line="254"/>
+        <location filename="../announcementsettingwidget.cpp" line="255"/>
         <source>Underline</source>
         <translation>Unterstreichen</translation>
     </message>
@@ -517,19 +516,19 @@ Urheberrecht:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="28"/>
-        <location filename="../biblesettingwidget.ui" line="678"/>
+        <location filename="../biblesettingwidget.ui" line="687"/>
         <source>Primary Bible:</source>
         <translation>Erste Bibel:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="48"/>
-        <location filename="../biblesettingwidget.ui" line="698"/>
+        <location filename="../biblesettingwidget.ui" line="707"/>
         <source>Secondary Bible:</source>
         <translation>Zweite Bibel:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="68"/>
-        <location filename="../biblesettingwidget.ui" line="718"/>
+        <location filename="../biblesettingwidget.ui" line="727"/>
         <source>Trinary Bible:</source>
         <translation>Dritte Bibel:</translation>
     </message>
@@ -545,51 +544,51 @@ Urheberrecht:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="113"/>
-        <location filename="../biblesettingwidget.ui" line="778"/>
+        <location filename="../biblesettingwidget.ui" line="787"/>
         <source>Effects</source>
         <translation>Effekte</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="119"/>
-        <location filename="../biblesettingwidget.ui" line="784"/>
+        <location filename="../biblesettingwidget.ui" line="793"/>
         <source>If checked, when switching displayed text, fades the old text out and fades the new text in .</source>
         <translation>Wenn aktiviert, beim Umschalten wird der alte Text aus- und der neue eingeblendet.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="122"/>
-        <location filename="../biblesettingwidget.ui" line="787"/>
+        <location filename="../biblesettingwidget.ui" line="796"/>
         <source>Use fading effects</source>
         <translation>Animationseffekte verwenden</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="129"/>
         <location filename="../biblesettingwidget.ui" line="142"/>
-        <location filename="../biblesettingwidget.ui" line="794"/>
-        <location filename="../biblesettingwidget.ui" line="807"/>
+        <location filename="../biblesettingwidget.ui" line="803"/>
+        <location filename="../biblesettingwidget.ui" line="816"/>
         <source>Useful when using a wallpaper image. Displays a fancy shadow effect.</source>
         <translation>Nützlich, wenn ein Hintergrundbild benutzt wird. Zeigt einen besonderen Schatten-Effekt an.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="132"/>
-        <location filename="../biblesettingwidget.ui" line="797"/>
+        <location filename="../biblesettingwidget.ui" line="806"/>
         <source>Use shadow</source>
         <translation>Schatten verwenden</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="145"/>
-        <location filename="../biblesettingwidget.ui" line="810"/>
+        <location filename="../biblesettingwidget.ui" line="819"/>
         <source>Use blurred shadow</source>
         <translation>Verschwommene Schatten verwenden</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="155"/>
-        <location filename="../biblesettingwidget.ui" line="857"/>
+        <location filename="../biblesettingwidget.ui" line="866"/>
         <source>Use Background Image</source>
         <translation>Verwenden Sie ein Hintergrundbild</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="171"/>
-        <location filename="../biblesettingwidget.ui" line="873"/>
+        <location filename="../biblesettingwidget.ui" line="882"/>
         <source>Browse...</source>
         <translation>Durchsuchen...</translation>
     </message>
@@ -601,32 +600,32 @@ Urheberrecht:</translation>
     <message>
         <location filename="../biblesettingwidget.ui" line="200"/>
         <location filename="../biblesettingwidget.ui" line="331"/>
-        <location filename="../biblesettingwidget.ui" line="928"/>
-        <location filename="../biblesettingwidget.ui" line="1096"/>
+        <location filename="../biblesettingwidget.ui" line="937"/>
+        <location filename="../biblesettingwidget.ui" line="1105"/>
         <source>Color...</source>
         <translation>Farbe...</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="471"/>
-        <location filename="../biblesettingwidget.ui" line="1273"/>
+        <location filename="../biblesettingwidget.ui" line="1282"/>
         <source>Amount of screen to use:</source>
         <translation>Fläche vom Bildschirm benutzen:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="478"/>
-        <location filename="../biblesettingwidget.ui" line="1280"/>
+        <location filename="../biblesettingwidget.ui" line="1289"/>
         <source>Percent of screen to be used.</source>
         <translation>Prozentuale Nutzung vom Bildschirm.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="498"/>
-        <location filename="../biblesettingwidget.ui" line="1300"/>
+        <location filename="../biblesettingwidget.ui" line="1309"/>
         <source>Select to use either top portion of the screen or bottom.</source>
         <translation>Nutzungswahl zwischen des oberen oder des unteren Teils am Bildschirm.</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="502"/>
-        <location filename="../biblesettingwidget.ui" line="1304"/>
+        <location filename="../biblesettingwidget.ui" line="1313"/>
         <source>Top of Screen</source>
         <translation>Oben auf dem Bildschirm</translation>
     </message>
@@ -641,7 +640,7 @@ Urheberrecht:</translation>
         <translation>Einstellungen für den 2. Bildschirm</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.ui" line="1309"/>
+        <location filename="../biblesettingwidget.ui" line="1318"/>
         <source>Bottom of Screen</source>
         <translation>Unten auf dem Bildschirm</translation>
     </message>
@@ -655,19 +654,19 @@ Urheberrecht:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="268"/>
-        <location filename="../biblesettingwidget.ui" line="996"/>
+        <location filename="../biblesettingwidget.ui" line="1005"/>
         <source>Top</source>
         <translation>Oben</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="273"/>
-        <location filename="../biblesettingwidget.ui" line="1001"/>
+        <location filename="../biblesettingwidget.ui" line="1010"/>
         <source>Middle</source>
         <translation>Zentrieren</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="278"/>
-        <location filename="../biblesettingwidget.ui" line="1006"/>
+        <location filename="../biblesettingwidget.ui" line="1015"/>
         <source>Bottom</source>
         <translation>Unten</translation>
     </message>
@@ -678,30 +677,30 @@ Urheberrecht:</translation>
     <message>
         <location filename="../biblesettingwidget.ui" line="287"/>
         <location filename="../biblesettingwidget.ui" line="420"/>
-        <location filename="../biblesettingwidget.ui" line="1015"/>
-        <location filename="../biblesettingwidget.ui" line="1185"/>
+        <location filename="../biblesettingwidget.ui" line="1024"/>
+        <location filename="../biblesettingwidget.ui" line="1194"/>
         <source>Left</source>
         <translation>Links</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="292"/>
         <location filename="../biblesettingwidget.ui" line="425"/>
-        <location filename="../biblesettingwidget.ui" line="1020"/>
-        <location filename="../biblesettingwidget.ui" line="1190"/>
+        <location filename="../biblesettingwidget.ui" line="1029"/>
+        <location filename="../biblesettingwidget.ui" line="1199"/>
         <source>Center</source>
         <translation>Zentrieren</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="297"/>
         <location filename="../biblesettingwidget.ui" line="430"/>
-        <location filename="../biblesettingwidget.ui" line="1025"/>
-        <location filename="../biblesettingwidget.ui" line="1195"/>
+        <location filename="../biblesettingwidget.ui" line="1034"/>
+        <location filename="../biblesettingwidget.ui" line="1204"/>
         <source>Right</source>
         <translation>Rechts</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="192"/>
-        <location filename="../biblesettingwidget.ui" line="920"/>
+        <location filename="../biblesettingwidget.ui" line="929"/>
         <source>Text Properties</source>
         <translation>Texteigenschaften</translation>
     </message>
@@ -716,8 +715,8 @@ Urheberrecht:</translation>
     <message>
         <location filename="../biblesettingwidget.ui" line="236"/>
         <location filename="../biblesettingwidget.ui" line="367"/>
-        <location filename="../biblesettingwidget.ui" line="964"/>
-        <location filename="../biblesettingwidget.ui" line="1132"/>
+        <location filename="../biblesettingwidget.ui" line="973"/>
+        <location filename="../biblesettingwidget.ui" line="1141"/>
         <source>Font...</source>
         <oldsource>Font</oldsource>
         <translation>Schrift...</translation>
@@ -725,46 +724,46 @@ Urheberrecht:</translation>
     <message>
         <location filename="../biblesettingwidget.ui" line="260"/>
         <location filename="../biblesettingwidget.ui" line="412"/>
-        <location filename="../biblesettingwidget.ui" line="988"/>
-        <location filename="../biblesettingwidget.ui" line="1177"/>
+        <location filename="../biblesettingwidget.ui" line="997"/>
+        <location filename="../biblesettingwidget.ui" line="1186"/>
         <source>Alignment:</source>
         <translation>Ausrichtung:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="323"/>
-        <location filename="../biblesettingwidget.ui" line="1088"/>
+        <location filename="../biblesettingwidget.ui" line="1097"/>
         <source>Caption Properties</source>
         <translation>Untertitel-Eigenschaften</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="391"/>
         <location filename="../biblesettingwidget.ui" line="491"/>
-        <location filename="../biblesettingwidget.ui" line="1156"/>
-        <location filename="../biblesettingwidget.ui" line="1293"/>
+        <location filename="../biblesettingwidget.ui" line="1165"/>
+        <location filename="../biblesettingwidget.ui" line="1302"/>
         <source>Position:</source>
         <translation>Position:</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="399"/>
-        <location filename="../biblesettingwidget.ui" line="1164"/>
+        <location filename="../biblesettingwidget.ui" line="1173"/>
         <source>Above Text</source>
         <translation>Über dem Text</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="404"/>
-        <location filename="../biblesettingwidget.ui" line="1169"/>
+        <location filename="../biblesettingwidget.ui" line="1178"/>
         <source>Below Text</source>
         <translation>Unter dem Text</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="456"/>
-        <location filename="../biblesettingwidget.ui" line="1221"/>
+        <location filename="../biblesettingwidget.ui" line="1230"/>
         <source>Show Bible Version Abbriviation</source>
         <translation>Abkürzung der Bibel-Version anzeigen</translation>
     </message>
     <message>
         <location filename="../biblesettingwidget.ui" line="463"/>
-        <location filename="../biblesettingwidget.ui" line="1265"/>
+        <location filename="../biblesettingwidget.ui" line="1274"/>
         <source>Amount Of Screen To Use</source>
         <oldsource>Amount Of Sceen To Use</oldsource>
         <translation>Fläche vom Bildschirm benutzen</translation>
@@ -787,7 +786,7 @@ Urheberrecht:</translation>
         <translation type="obsolete">Ausrichten: </translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.ui" line="1353"/>
+        <location filename="../biblesettingwidget.ui" line="1362"/>
         <source>Reset All To Default</source>
         <translation>Alles zurücksetzen</translation>
     </message>
@@ -822,22 +821,22 @@ Urheberrecht:</translation>
         <translation>Bilder(%1)</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="637"/>
+        <location filename="../biblesettingwidget.cpp" line="638"/>
         <source>Bold</source>
         <translation>Fett</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="639"/>
+        <location filename="../biblesettingwidget.cpp" line="640"/>
         <source>Italic</source>
         <translation>Kursiv</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="641"/>
+        <location filename="../biblesettingwidget.cpp" line="642"/>
         <source>StrikeOut</source>
         <translation>Durchgestrichen</translation>
     </message>
     <message>
-        <location filename="../biblesettingwidget.cpp" line="643"/>
+        <location filename="../biblesettingwidget.cpp" line="644"/>
         <source>Underline</source>
         <translation>Unterstreichen</translation>
     </message>
@@ -1115,29 +1114,24 @@ results.</source>
 <context>
     <name>DisplayScreen</name>
     <message>
-        <location filename="../displayscreen.ui" line="14"/>
         <source>Dispaly Screen</source>
-        <translation>Bildschirm</translation>
+        <translation type="vanished">Bildschirm</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="479"/>
         <source>Video Player Error</source>
-        <translation>Video-Player Fehler</translation>
+        <translation type="vanished">Video-Player Fehler</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="765"/>
         <source>Words by: %1, Music by: %2</source>
-        <translation>Dichter: %1, Komponist: %2</translation>
+        <translation type="vanished">Dichter: %1, Komponist: %2</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="767"/>
         <source>Words by: %1</source>
-        <translation>Dichter: %1</translation>
+        <translation type="vanished">Dichter: %1</translation>
     </message>
     <message>
-        <location filename="../displayscreen.cpp" line="769"/>
         <source>Music by: %1</source>
-        <translation>Komponist: %1</translation>
+        <translation type="vanished">Komponist: %1</translation>
     </message>
 </context>
 <context>
@@ -1758,97 +1752,102 @@ Vers 2
         <translation>Zweiter Bildschirm:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="140"/>
+        <location filename="../generalsettingwidget.ui" line="137"/>
+        <source>Show Display Screen on SoftProjector Startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../generalsettingwidget.ui" line="147"/>
         <source>Primary Display Screen Controls</source>
         <translation>Erster Bildschirm Steuerung</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="148"/>
+        <location filename="../generalsettingwidget.ui" line="155"/>
         <source>Button Size:</source>
         <translation>Tasten-Größe:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="156"/>
+        <location filename="../generalsettingwidget.ui" line="163"/>
         <source>16x16</source>
         <translation>16x16</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="161"/>
+        <location filename="../generalsettingwidget.ui" line="168"/>
         <source>24x24</source>
         <translation>24x24</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="166"/>
+        <location filename="../generalsettingwidget.ui" line="173"/>
         <source>32x32</source>
         <translation>32x32</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="171"/>
+        <location filename="../generalsettingwidget.ui" line="178"/>
         <source>48x48</source>
         <translation>48x48</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="176"/>
+        <location filename="../generalsettingwidget.ui" line="183"/>
         <source>64x64</source>
         <translation>64x64</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="181"/>
+        <location filename="../generalsettingwidget.ui" line="188"/>
         <source>96x96</source>
         <translation>96x96</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="202"/>
+        <location filename="../generalsettingwidget.ui" line="209"/>
         <source>Alignment:</source>
         <translation>Ausrichtung:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="210"/>
+        <location filename="../generalsettingwidget.ui" line="217"/>
         <source>Top</source>
         <translation>Oben</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="215"/>
+        <location filename="../generalsettingwidget.ui" line="222"/>
         <source>Middle</source>
         <translation>Zentrieren</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="220"/>
+        <location filename="../generalsettingwidget.ui" line="227"/>
         <source>Bottom</source>
         <translation>Unten</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="229"/>
+        <location filename="../generalsettingwidget.ui" line="236"/>
         <source>Left</source>
         <translation>Links</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="234"/>
+        <location filename="../generalsettingwidget.ui" line="241"/>
         <source>Center</source>
         <translation>Zentrieren</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="239"/>
+        <location filename="../generalsettingwidget.ui" line="246"/>
         <source>Right</source>
         <translation>Rechts</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="251"/>
+        <location filename="../generalsettingwidget.ui" line="258"/>
         <source>Opacity:</source>
         <translation>Undurchsichtigkeit:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="258"/>
+        <location filename="../generalsettingwidget.ui" line="265"/>
         <source>Transparent</source>
         <translation>Transparent</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="275"/>
+        <location filename="../generalsettingwidget.ui" line="282"/>
         <source>Opaque</source>
         <translation>Undurchsichtig</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="284"/>
+        <location filename="../generalsettingwidget.ui" line="291"/>
         <source>NOTE: Display screen controls will be visible on the primary display screen only when one monitor is avaliable.</source>
         <translation>HINWEIS: Bildschirm-Steuerung wird auf dem ersten Bildschirm sichtbar sein, wenn nur ein Monitor vorhanden ist.</translation>
     </message>
@@ -1913,7 +1912,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot;font-size:8pt; font-weight:600; color:#ff0000;&quot;&gt;NOTE: &lt;/span&gt;&lt;span style=&quot; font-size:8pt; color:#ff0000;&quot;&gt; Bildschirm-Anzeige ist momentan in der Entwicklung. Beim Ändern der Bildschirm-Nummer wird auch geändert, auf welchem Bildschirm die Projektion angezeigt werden soll.&lt;br /&gt;In Windows, die Reihenfolge von links nach rechts&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.ui" line="312"/>
+        <location filename="../generalsettingwidget.ui" line="319"/>
         <source>Reset All To Default</source>
         <translation>Alles zurücksetzen</translation>
     </message>
@@ -1926,37 +1925,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Bilder (*.png *.jpg *.jpeg)</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="78"/>
+        <location filename="../generalsettingwidget.cpp" line="79"/>
         <source>none</source>
         <translation>kein(e)</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="158"/>
+        <location filename="../generalsettingwidget.cpp" line="160"/>
         <source>None</source>
         <translation>Kein(e)</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="191"/>
+        <location filename="../generalsettingwidget.cpp" line="193"/>
         <source>Edit Theme</source>
         <translation>Thema bearbeiten</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="192"/>
+        <location filename="../generalsettingwidget.cpp" line="194"/>
         <source>Theme Name:</source>
         <translation>Thema-Name:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="192"/>
+        <location filename="../generalsettingwidget.cpp" line="194"/>
         <source>Comments:</source>
         <translation>Kommentare:</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="193"/>
+        <location filename="../generalsettingwidget.cpp" line="195"/>
         <source>Default</source>
         <translation>Standart</translation>
     </message>
     <message>
-        <location filename="../generalsettingwidget.cpp" line="193"/>
+        <location filename="../generalsettingwidget.cpp" line="195"/>
         <source>This theme will contain program default settings.</source>
         <translation>Dieses Thema wird die Programm-Standardeinstellungen enthalten.</translation>
     </message>
@@ -1969,17 +1968,16 @@ p, li { white-space: pre-wrap; }
         <translation>softProjector Hilfe</translation>
     </message>
     <message>
-        <location filename="../helpdialog.ui" line="21"/>
         <source>about:blank</source>
-        <translation>über:leer</translation>
+        <translation type="vanished">über:leer</translation>
     </message>
     <message>
-        <location filename="../helpdialog.ui" line="44"/>
+        <location filename="../helpdialog.ui" line="35"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../helpdialog.ui" line="47"/>
+        <location filename="../helpdialog.ui" line="38"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
@@ -2613,28 +2611,27 @@ Gespeichert als:
     </message>
     <message>
         <location filename="../mediawidget.cpp" line="50"/>
-        <location filename="../mediawidget.cpp" line="409"/>
+        <location filename="../mediawidget.cpp" line="412"/>
         <source>&lt;center&gt;No media&lt;/center&gt;</source>
         <translation>&lt;center&gt;Kein Medium&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="124"/>
         <source>No Media</source>
-        <translation>Kein Medium</translation>
+        <translation type="vanished">Kein Medium</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="357"/>
+        <location filename="../mediawidget.cpp" line="360"/>
         <source>Open Music/Video File</source>
         <translation>Öffnen Musik-/Video-Datei</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="358"/>
-        <location filename="../mediawidget.cpp" line="382"/>
+        <location filename="../mediawidget.cpp" line="361"/>
+        <location filename="../mediawidget.cpp" line="385"/>
         <source>Media Files (%1);;Audio Files (%2);;Video Files (%3)</source>
         <translation>Media-Dateien (%1);;Audio-Dateien (%2);;Video-Dateien (%3)</translation>
     </message>
     <message>
-        <location filename="../mediawidget.cpp" line="381"/>
+        <location filename="../mediawidget.cpp" line="384"/>
         <source>Select Music/Video Files to Open</source>
         <translation>Music-/Videodateien zum Öffnen wählen</translation>
     </message>
@@ -2692,7 +2689,7 @@ Gespeichert als:
         <translation type="obsolete">Deutsch</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1303"/>
+        <location filename="../softprojector.cpp" line="1344"/>
         <source>English</source>
         <comment>Do not change</comment>
         <translation>Deutsch</translation>
@@ -3076,6 +3073,14 @@ Notizen:
     </message>
 </context>
 <context>
+    <name>ProjectorDisplayScreen</name>
+    <message>
+        <location filename="../projectordisplayscreen.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialog</name>
     <message>
         <location filename="../settingsdialog.ui" line="14"/>
@@ -3103,52 +3108,50 @@ Notizen:
         <translation>Bild</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="97"/>
         <source>Media</source>
-        <translation>Media</translation>
+        <translation type="vanished">Media</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="106"/>
+        <location filename="../settingsdialog.ui" line="97"/>
         <source>Announcements</source>
         <translation>Ankündigungen</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="138"/>
+        <location filename="../settingsdialog.ui" line="166"/>
         <source>General SoftProjector Settings</source>
         <translation>Allgeimene SoftProjector Einstellungen</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="186"/>
+        <location filename="../settingsdialog.ui" line="223"/>
         <source>Passive Settings</source>
         <translation>Passiv-Einstellungen</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="193"/>
+        <location filename="../settingsdialog.ui" line="230"/>
         <source>This setting are displayed when nothing is to be projected.</source>
         <translation>Diese Einstellung werden angezeigt, wenn nichts zu projizieren ist.</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="241"/>
+        <location filename="../settingsdialog.ui" line="287"/>
         <source>Bible Settings</source>
         <translation>Bibel-Einstellungen</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="289"/>
+        <location filename="../settingsdialog.ui" line="344"/>
         <source>Song Settings</source>
         <translation>Lied-Einstellungen</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="337"/>
+        <location filename="../settingsdialog.ui" line="401"/>
         <source>Picture Settings</source>
         <translation>Bild-Einstellungen</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="382"/>
         <source>Media Settings</source>
-        <translation>Media-Einstellungen</translation>
+        <translation type="vanished">Media-Einstellungen</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="427"/>
+        <location filename="../settingsdialog.ui" line="455"/>
         <source>Announcement Settings</source>
         <translation>Ankündigunen-Einstellungen</translation>
     </message>
@@ -3351,32 +3354,30 @@ Bitte geben Sie einen Titel ein.</translation>
         <translation type="obsolete">Diese Software ist kostenlos und ohne Kodierung. Wenn Sie bei der Verbesserung dieses Programms mithelfen möchten, besuchen Sie bitte sourceforge.net/projects/softprojector/</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="77"/>
-        <location filename="../softprojector.cpp" line="1342"/>
+        <location filename="../softprojector.cpp" line="74"/>
+        <location filename="../softprojector.cpp" line="1383"/>
         <source>Bible (F6)</source>
         <translation>Bibel (F6)</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="78"/>
-        <location filename="../softprojector.cpp" line="1343"/>
+        <location filename="../softprojector.cpp" line="75"/>
+        <location filename="../softprojector.cpp" line="1384"/>
         <source>Songs (F7)</source>
         <translation>Lieder (F7)</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="79"/>
-        <location filename="../softprojector.cpp" line="1344"/>
+        <location filename="../softprojector.cpp" line="76"/>
+        <location filename="../softprojector.cpp" line="1385"/>
         <source>Pictures</source>
         <translation>Bilder</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="80"/>
-        <location filename="../softprojector.cpp" line="1345"/>
         <source>Media</source>
-        <translation>Media</translation>
+        <translation type="vanished">Media</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="81"/>
-        <location filename="../softprojector.cpp" line="1346"/>
+        <location filename="../softprojector.cpp" line="78"/>
+        <location filename="../softprojector.cpp" line="1387"/>
         <source>Announcements (F8)</source>
         <translation>Ankündigungen (F8)</translation>
     </message>
@@ -3407,110 +3408,108 @@ Bitte geben Sie einen Titel ein.</translation>
         <translation type="obsolete">Komponist: %1</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1009"/>
+        <location filename="../softprojector.cpp" line="1050"/>
         <source>Cannot start new edit</source>
         <translation>Neue Bearbeitung kann nicht strarten</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="989"/>
-        <location filename="../softprojector.cpp" line="1010"/>
-        <location filename="../softprojector.cpp" line="1041"/>
+        <location filename="../softprojector.cpp" line="1030"/>
+        <location filename="../softprojector.cpp" line="1051"/>
+        <location filename="../softprojector.cpp" line="1082"/>
         <source>Another song is already been edited.</source>
         <oldsource>Another song is already beeb edited.</oldsource>
         <translation>Ein weiteres Lied ist bereits bearbeitet.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="391"/>
+        <location filename="../softprojector.cpp" line="393"/>
         <source>Schedule not saved</source>
         <translation>Plan nicht gespeichert</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="392"/>
+        <location filename="../softprojector.cpp" line="394"/>
         <source>Do you want to save current schedule?</source>
         <translation>Möchten Sie den aktuellen Plan speichern?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="770"/>
+        <location filename="../softprojector.cpp" line="793"/>
         <source>&amp;Clear Bible History List</source>
         <translation>&amp;Bibelhistory-Liste entfernen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="778"/>
+        <location filename="../softprojector.cpp" line="801"/>
         <source>&amp;New Song...</source>
         <translation>&amp;Neues Lied...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="779"/>
+        <location filename="../softprojector.cpp" line="802"/>
         <source>&amp;Edit Song...</source>
         <translation>&amp;Lied bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="780"/>
+        <location filename="../softprojector.cpp" line="803"/>
         <source>&amp;Copy Song...</source>
         <translation>&amp;Lied kopieren...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="781"/>
+        <location filename="../softprojector.cpp" line="804"/>
         <source>&amp;Delete Song</source>
         <translation>&amp;Lied löschen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="789"/>
+        <location filename="../softprojector.cpp" line="812"/>
         <source>&amp;New Slide Show...</source>
         <translation>&amp;Neue Diashow...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="790"/>
+        <location filename="../softprojector.cpp" line="813"/>
         <source>&amp;Edit Slide Show...</source>
         <translation>&amp;Diashow bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="792"/>
+        <location filename="../softprojector.cpp" line="815"/>
         <source>&amp;Delete Slide Show</source>
         <translation>&amp;Diashow löschen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="800"/>
         <source>&amp;Add Media Files...</source>
-        <translation>&amp;Hinzufügen der Mediadateien...</translation>
+        <translation type="vanished">&amp;Hinzufügen der Mediadateien...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="803"/>
         <source>&amp;Remove Media Files</source>
-        <translation>&amp;Entfernen der Mediadateien</translation>
+        <translation type="vanished">&amp;Entfernen der Mediadateien</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="811"/>
+        <location filename="../softprojector.cpp" line="834"/>
         <source>&amp;New Announcement...</source>
         <translation>&amp;Neue Ankündigug...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="812"/>
+        <location filename="../softprojector.cpp" line="835"/>
         <source>&amp;Edit Announcement...</source>
         <translation>&amp;Ankündigung bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="813"/>
+        <location filename="../softprojector.cpp" line="836"/>
         <source>&amp;Copy Announcement...</source>
         <translation>&amp;Ankündigung kopieren...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="814"/>
+        <location filename="../softprojector.cpp" line="837"/>
         <source>&amp;Delete Announcement</source>
         <translation>&amp;Ankündigung löschen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="990"/>
-        <location filename="../softprojector.cpp" line="1011"/>
-        <location filename="../softprojector.cpp" line="1042"/>
+        <location filename="../softprojector.cpp" line="1031"/>
+        <location filename="../softprojector.cpp" line="1052"/>
+        <location filename="../softprojector.cpp" line="1083"/>
         <source>Please save and/or close current edited song before edited a different song.</source>
         <translation>Bitte speichern und/oder schließen Sie das aktuell bearbeitete Lied vor einer neuen Liedbearbeitung.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1025"/>
-        <location filename="../softprojector.cpp" line="1056"/>
-        <location filename="../softprojector.cpp" line="1095"/>
-        <location filename="../softprojector.cpp" line="1408"/>
+        <location filename="../softprojector.cpp" line="1066"/>
+        <location filename="../softprojector.cpp" line="1097"/>
+        <location filename="../softprojector.cpp" line="1136"/>
+        <location filename="../softprojector.cpp" line="1449"/>
         <source>No song selected</source>
         <translation>Kein Lied gewählt</translation>
     </message>
@@ -3523,208 +3522,208 @@ Bitte geben Sie einen Titel ein.</translation>
         <translation type="obsolete">Zum Bearbeiten wählen Sie bitte ein Lied.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="988"/>
+        <location filename="../softprojector.cpp" line="1029"/>
         <source>Cannot create a new song</source>
         <translation>Ein neues Lied kann nicht erstellt werden</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1026"/>
+        <location filename="../softprojector.cpp" line="1067"/>
         <source>No song has been selected to edit.</source>
         <translation>Kein Lied zum Bearbeiten gewählt.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1027"/>
+        <location filename="../softprojector.cpp" line="1068"/>
         <source>Please select a song to edit.</source>
         <translation>Bitte ein Lied zum Bearbeiten wählen.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1040"/>
+        <location filename="../softprojector.cpp" line="1081"/>
         <source>Cannot copy this song</source>
         <translation>Dieses Lied kann nicht kopiert werden</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1057"/>
+        <location filename="../softprojector.cpp" line="1098"/>
         <source>No song has been selected to copy</source>
         <translation>Kein Lied zum Kopieren gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1058"/>
+        <location filename="../softprojector.cpp" line="1099"/>
         <source>Please select a song to copy</source>
         <translation>Bitte ein Lied zum Kopieren wählen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1096"/>
+        <location filename="../softprojector.cpp" line="1137"/>
         <source>No song has been selected to delete</source>
         <translation>Kein Lied zum Löschen gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1097"/>
+        <location filename="../softprojector.cpp" line="1138"/>
         <source>Please select a song to delete</source>
         <translation>Bitte ein Lied zum Löschen wählen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1126"/>
-        <location filename="../softprojector.cpp" line="1164"/>
+        <location filename="../softprojector.cpp" line="1167"/>
+        <location filename="../softprojector.cpp" line="1205"/>
         <source>No slideshow selected</source>
         <translation>Keine Diashow gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1127"/>
+        <location filename="../softprojector.cpp" line="1168"/>
         <source>No slideshow has been selected to edit.</source>
         <translation>Keine Diashow zum Bearbeiten gewählt.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1128"/>
+        <location filename="../softprojector.cpp" line="1169"/>
         <source>Please select a slideshow to edit.</source>
         <translation>Bitte eine Diashow zum Bearbeiten wählen.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1140"/>
+        <location filename="../softprojector.cpp" line="1181"/>
         <source>Delete slideshow?</source>
         <translation>Diashow löschen?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1141"/>
+        <location filename="../softprojector.cpp" line="1182"/>
         <source>Delete slideshow: &quot;</source>
         <translation>Löschen der Diashow: &quot;</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1142"/>
+        <location filename="../softprojector.cpp" line="1183"/>
         <source>This action will permanentrly delete this slideshow</source>
         <translation>Durch diese Aktion wird die Diashow unwiderruflich gelöscht</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1165"/>
+        <location filename="../softprojector.cpp" line="1206"/>
         <source>No slideshow has been selected to delete.</source>
         <translation>Keine Diashow zum Löschen gewählt.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1166"/>
+        <location filename="../softprojector.cpp" line="1207"/>
         <source>Please select a slideshow to delete.</source>
         <translation>Bitte eine Diashow zum Löschen wählen.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1184"/>
+        <location filename="../softprojector.cpp" line="1225"/>
         <source>No media selected</source>
         <translation>Kein Media gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1185"/>
+        <location filename="../softprojector.cpp" line="1226"/>
         <source>No media item has been selected to delete.</source>
         <translation>Kein Media-Artikel zum Löschen gewählt.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1186"/>
+        <location filename="../softprojector.cpp" line="1227"/>
         <source>Please select a media item to delete.</source>
         <translation>Bitte ein Media-Artikel zum Löschen wählen.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1204"/>
-        <location filename="../softprojector.cpp" line="1219"/>
-        <location filename="../softprojector.cpp" line="1257"/>
+        <location filename="../softprojector.cpp" line="1245"/>
+        <location filename="../softprojector.cpp" line="1260"/>
+        <location filename="../softprojector.cpp" line="1298"/>
         <source>No Announcement Selected</source>
         <translation>Keine Ankündigung gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1205"/>
+        <location filename="../softprojector.cpp" line="1246"/>
         <source>No announcement has been selected to edit</source>
         <translation>Keine Ankündigung zum Bearbeiten gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1206"/>
+        <location filename="../softprojector.cpp" line="1247"/>
         <source>Please select an announcement to edit</source>
         <translation>Bitte eine Ankündigung zum Bearbeiten wählen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1220"/>
+        <location filename="../softprojector.cpp" line="1261"/>
         <source>No announcement has been selected to copy</source>
         <translation>Keine Ankündigung zum Kopieren gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1221"/>
+        <location filename="../softprojector.cpp" line="1262"/>
         <source>Please select an announcement to copy</source>
         <translation>Bitte eine Ankündigung zum Kopieren wählen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1233"/>
+        <location filename="../softprojector.cpp" line="1274"/>
         <source>Delete Announcement?</source>
         <translation>Ankündigung löschen?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1234"/>
+        <location filename="../softprojector.cpp" line="1275"/>
         <source>Delete announcement: &quot;</source>
         <translation>Löschen der Ankündigung: &quot;</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1235"/>
+        <location filename="../softprojector.cpp" line="1276"/>
         <source>This action will permanentrly delete this announcement</source>
         <translation>Durch diese Aktion wird die Ankündigung unwiderruflich gelöscht</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1258"/>
+        <location filename="../softprojector.cpp" line="1299"/>
         <source>No announcement has been selected to delete</source>
         <translation>Keine Ankündigung zum Löschen gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1259"/>
+        <location filename="../softprojector.cpp" line="1300"/>
         <source>Please select an announcement to delete</source>
         <translation>Bitte eine Ankündigung zum Löschen wählen</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1409"/>
+        <location filename="../softprojector.cpp" line="1450"/>
         <source>No song has been selected to be printed.</source>
         <translation>Kein Lied zum Drucken gewählt.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1410"/>
+        <location filename="../softprojector.cpp" line="1451"/>
         <source>Please select a song to be printed.</source>
         <translation>Bitte ein Lied zum Drucken wählen.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1425"/>
+        <location filename="../softprojector.cpp" line="1466"/>
         <source>No announcement selected</source>
         <translation>Keine Ankündigung gewählt</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1426"/>
+        <location filename="../softprojector.cpp" line="1467"/>
         <source>No announcement has been selected to be printed.</source>
         <translation>Keine Ankündigung zum Drucken gewählt.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1427"/>
+        <location filename="../softprojector.cpp" line="1468"/>
         <source>Please select a announcement to be printed.</source>
         <translation>Bitte eine Ankündigung zum Drucken wählen.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1753"/>
-        <location filename="../softprojector.cpp" line="1790"/>
-        <location filename="../softprojector.cpp" line="1856"/>
+        <location filename="../softprojector.cpp" line="1795"/>
+        <location filename="../softprojector.cpp" line="1832"/>
+        <location filename="../softprojector.cpp" line="1898"/>
         <source>Save Schedule?</source>
         <translation>Plan speichern?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1754"/>
+        <location filename="../softprojector.cpp" line="1796"/>
         <source>Do you want to save current schedule before creating a new schedule?</source>
         <translation>Möchten Sie den aktuellen Plan speichern bevor Sie einen neuen Plan erstellen?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1791"/>
+        <location filename="../softprojector.cpp" line="1833"/>
         <source>Do you want to save current schedule before opening a new schedule?</source>
         <translation>Möchten Sie den aktuellen Plan speichern bevor Sie einen neuen Plan öffnen?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1815"/>
+        <location filename="../softprojector.cpp" line="1857"/>
         <source>Open SoftProjector schedule:</source>
         <translation>SoftProjector-Plan öffnen:</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1816"/>
-        <location filename="../softprojector.cpp" line="1838"/>
+        <location filename="../softprojector.cpp" line="1858"/>
+        <location filename="../softprojector.cpp" line="1880"/>
         <source>SoftProjector schedule file </source>
         <translation>SoftProjector-Plandatei </translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1837"/>
+        <location filename="../softprojector.cpp" line="1879"/>
         <source>Save SoftProjector schedule as:</source>
         <translation>SoftProjector-Plan speichern als:</translation>
     </message>
@@ -3741,29 +3740,29 @@ Bitte geben Sie einen Titel ein.</translation>
         <translation type="obsolete">softProjector-Plan speichern als:</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1857"/>
+        <location filename="../softprojector.cpp" line="1899"/>
         <source>Do you want to save current schedule before closing it?</source>
         <translation>Möchten Sie den aktuellen Plan speichern bevor Sie schließen?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1893"/>
+        <location filename="../softprojector.cpp" line="1935"/>
         <source>Saving schedule file...</source>
         <translation>Plandatei speichern...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1902"/>
+        <location filename="../softprojector.cpp" line="1944"/>
         <source>An error has ocured when overwriting existing file.
 Please try again with different file name.</source>
         <translation>Ein Fehler ist beim Überschreiben der bestehenden Datei aufgetreten.
 Bitte versuchen Sie es mit einem anderen Dateinamen.</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="2169"/>
+        <location filename="../softprojector.cpp" line="2211"/>
         <source>Opening schedule file...</source>
         <translation>Plandatei öffnen...</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="2242"/>
+        <location filename="../softprojector.cpp" line="2284"/>
         <source>The schedule file you are trying to open is of uncompatible version.
 Compatible version: 2
 This schedule file version: </source>
@@ -3840,12 +3839,12 @@ Bitte versuchen Sie, ein Upgrade Ihrer Version von softProjector zu machen.</tra
         <translation type="obsolete">Wählen Sie ein Lied zum speichern</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1070"/>
+        <location filename="../softprojector.cpp" line="1111"/>
         <source>Delete song?</source>
         <translation>Lied löschen?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1071"/>
+        <location filename="../softprojector.cpp" line="1112"/>
         <source>Delete song &quot;</source>
         <translation>Löschen des Liedes &quot;</translation>
     </message>
@@ -3862,7 +3861,7 @@ Bitte versuchen Sie, ein Upgrade Ihrer Version von softProjector zu machen.</tra
         <translation type="obsolete">Sind Sie sich sicher, dass Sie ein Lied loschen mochten?</translation>
     </message>
     <message>
-        <location filename="../softprojector.cpp" line="1072"/>
+        <location filename="../softprojector.cpp" line="1113"/>
         <source>This action will permanentrly delete this song</source>
         <translation>Durch diese Aktion wird das Lied unwiderruflich gelöscht</translation>
     </message>
@@ -4815,22 +4814,22 @@ Bitte versuchen Sie, ein Upgrade Ihrer Version von softProjector zu machen.</tra
         <translation>Bilder(%1)</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="393"/>
+        <location filename="../songsettingwidget.cpp" line="394"/>
         <source>Bold</source>
         <translation>Fett</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="395"/>
+        <location filename="../songsettingwidget.cpp" line="396"/>
         <source>Italic</source>
         <translation>Kursiv</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="397"/>
+        <location filename="../songsettingwidget.cpp" line="398"/>
         <source>StrikeOut</source>
         <translation>Durchgestrichen</translation>
     </message>
     <message>
-        <location filename="../songsettingwidget.cpp" line="399"/>
+        <location filename="../songsettingwidget.cpp" line="400"/>
         <source>Underline</source>
         <translation>Unterstreichen</translation>
     </message>
