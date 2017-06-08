@@ -40,6 +40,7 @@ EditWidget::EditWidget(QWidget *parent) :
 EditWidget::~EditWidget()
 {
     delete highlight;
+    delete song_num_validator;
     delete ui;
 }
 
@@ -195,7 +196,7 @@ void EditWidget::setSave(){
     newSong.number = ui->lineEditSongNumber->text().toInt();
     newSong.songbook_id = song_database.getSongbookIdStringFromName(ui->songbook_label->text());
     newSong.songbook_name = ui->songbook_label->text();
-    newSong.title = ui->lineEditTitle->text();
+    newSong.title = ui->lineEditTitle->text().trimmed();
     newSong.category = cat_ids.at(ui->comboBoxCategory->currentIndex());
     newSong.tune = ui->lineEditKey->text();
     newSong.wordsBy = ui->lineEditWordsBy->text();
@@ -440,7 +441,7 @@ int EditWidget::isInDatabase(Song *song)
     song->songID = s_id.toInt();
 
     // get song title
-    if(s_title!=song->title)
+    if(s_title!=song->title.trimmed())
         return 0;
     else
         return s_id.toInt();
