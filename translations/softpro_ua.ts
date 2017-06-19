@@ -2608,7 +2608,7 @@ Has been saved to:
         <location filename="../softprojector.cpp" line="1344"/>
         <source>English</source>
         <comment>Do not change</comment>
-        <translation>Українська</translation>
+        <translation type="unfinished">Українська</translation>
     </message>
 </context>
 <context>
