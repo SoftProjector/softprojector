@@ -33,6 +33,10 @@ SoftProjector::SoftProjector(QWidget *parent)
     // Reset current theme id if initial was 0
     mySettings.general.currentThemeId = theme.getThemeId();
 
+    // Update Themes Bible Versions
+    theme.bible.versions = mySettings.bibleSets;
+    theme.bible2.versions = mySettings.bibleSets2;
+
     //Setting up the Display Screen
     desktop = new QDesktopWidget();
     // NOTE: With virtual desktop, desktop->screen() will always return the main screen,
@@ -340,6 +344,9 @@ void SoftProjector::updateSetting(GeneralSettings &g, Theme &t, SlideShowSetting
     theme = t;
     bibleWidget->setSettings(mySettings.bibleSets);
     pictureWidget->setSettings(mySettings.slideSets);
+
+    theme.bible.versions = mySettings.bibleSets;
+    theme.bible2.versions = mySettings.bibleSets2;
 }
 
 void SoftProjector::applySetting(GeneralSettings &g, Theme &t, SlideShowSettings &s,

@@ -178,6 +178,17 @@ public:
 
 };
 
+class BibleVersionSettings
+{
+public:
+    BibleVersionSettings();
+    QString primaryBible;
+    QString secondaryBible;
+    QString trinaryBible;
+    QString operatorBible;
+    bool settingsChanged;
+};
+
 class BibleSettings : public TextSettings
 {
 public:
@@ -204,6 +215,8 @@ public:
 
     void setChangeHandes();
     void resetChangeHandles();
+
+    BibleVersionSettings versions;
 };
 
 class SongSettings : public TextSettings
@@ -295,17 +308,6 @@ public:
     QByteArray songSplitter;
     bool isWindowMaximized;
     QString uiTranslation;
-};
-
-class BibleVersionSettings
-{
-public:
-    BibleVersionSettings();
-    QString primaryBible;
-    QString secondaryBible;
-    QString trinaryBible;
-    QString operatorBible;
-    bool settingsChanged;
 };
 
 class SlideShowSettings

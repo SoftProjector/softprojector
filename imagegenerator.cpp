@@ -208,6 +208,17 @@ QRect ImageGenerator::boundRectOrDrawText(QPainter *painter, bool draw, int left
 
 void ImageGenerator::drawBibleText(QPainter *painter, bool isShadow)
 {
+    // Translation flags
+    bool havePrimary = ("none" != m_bSets.versions.primaryBible);
+    bool haveSecondary = ("none" != m_bSets.versions.secondaryBible);
+    bool haveTrinary = ("none" != m_bSets.versions.trinaryBible);
+
+    if(!havePrimary)
+    {
+        // Primary Bible must exist but it is none. Do not draw anything
+        return;
+    }
+
     // Margins:
     int left = 30;
     int top = 20;
@@ -225,10 +236,26 @@ void ImageGenerator::drawBibleText(QPainter *painter, bool isShadow)
         maxtop = top+h-maxh;
 
     // apply max screen use settings
-    h=maxh;
-    top=maxtop;
+    h = maxh;
+    top = maxtop;
 
-    // Keep decreasing the font size until the text fits into the allocated space:
+    // Repurpose maxh for maxh for max height for one translation including text and caption
+    if(havePrimary && haveSecondary && haveTrinary)
+    {
+        maxh = h/3;
+    }
+    else if(havePrimary && haveSecondary)
+    {
+        maxh = h/2;
+    }
+    else
+    {
+       maxh = h;
+    }
+
+    // Adjust tops for 2nd and 3rd translations
+    int top2 = top + maxh;
+    int top3 = top + maxh + maxh;
 
     // Rects for storing the position of the text and caption drawing:
     QRect trect1, crect1, trect2, crect2, trect3, crect3;
@@ -258,89 +285,58 @@ void ImageGenerator::drawBibleText(QPainter *painter, bool isShadow)
     else if(m_bSets.captionAlingment==2)
         cflags += Qt::AlignRight;
 
-    bool exit = false;
+    bool exit1 = false, exit2 = false, exit3 = false;
     if(!m_isTextPrepared)
     {
         m_bdSets.clear();
-        while( !exit )
+        while(!(exit1 && exit2 && exit3))
         {
-            if(m_verse.secondary_text.isEmpty() && m_verse.trinary_text.isEmpty())
+            if(havePrimary)
             {
-                // Prepare primary version only, 2nd and 3rd do not exist
+                // Prepare primary version
                 // Figure out how much space the drawing will take at the current font size:
                 drawBibleTextToRect(painter,trect1,crect1,m_verse.primary_text,m_verse.primary_caption,
-                                    tflags,cflags,top,left,w,h);
+                                    tflags,cflags,top,left,w,maxh);
 
                 // Make sure that all fits into the screen
-                int th = trect1.height()+crect1.height();
-                exit = (th<=h);
+                exit1 = ((trect1.height()+crect1.height())<=maxh);
             }
-            else if(!m_verse.secondary_text.isEmpty() && m_verse.trinary_text.isEmpty())
+            else
             {
-                // Prepare primary and secondary versions, trinary does not exist
-                // Figure out how much space the drawing will take at the current font size for primary:
-                drawBibleTextToRect(painter,trect1,crect1,m_verse.primary_text,m_verse.primary_caption,
-                                    tflags,cflags,top,left,w,h/2);
-
-                // set new top for secondary
-                int top2 = crect1.bottom();
-                if(top2<h/2+top)
-                    top2=h/2+top;
-
-                // Figure out how much space the drawing will take at the current font size for secondary:
-                drawBibleTextToRect(painter,trect2,crect2,m_verse.secondary_text,m_verse.secondary_caption,
-                                    tflags,cflags,top2,left,w,h/2);
-
-                int th1 = trect1.height()+crect1.height();
-                int th2 = trect2.height()+crect2.height();
-
-                // Make sure that primary fits
-                exit = (th1<=h/2);
-                if (exit)
-                    // If secondary fits, make sure secondary fits
-                    exit = (th2<=h/2);
+                exit1 = true;
             }
-            else if(!m_verse.secondary_text.isEmpty() && !m_verse.trinary_text.isEmpty())
+
+            if(haveSecondary)
             {
-                // Prepare primary and secondary and trinary versions
-                // Figure out how much space the drawing will take at the current font size for primary:
-                drawBibleTextToRect(painter,trect1,crect1,m_verse.primary_text,m_verse.primary_caption,
-                                    tflags,cflags,top,left,w,h*1/3);
-
-                // set new top for secondary
-                int top2 = crect1.bottom();
-                if(top2<h*1/3+top)
-                    top2=h*1/3+top;
-
-                // Figure out how much space the drawing will take at the current font size for secondary:
+                // Prepare Secondary version
+                // Figure out how much space the drawing will take at the current font size:
                 drawBibleTextToRect(painter,trect2,crect2,m_verse.secondary_text,m_verse.secondary_caption,
-                                    tflags,cflags,top2,left,w,h*1/3);
+                                    tflags,cflags,top2,left,w,maxh);
 
-                // set new top for trinaty
-                top2 = crect2.bottom();
-                if(top2<h*2/3+top)
-                    top2 = h*2/3+top;
+                // Make sure that all fits into the screen
+                exit2 = ((trect2.height()+crect2.height())<=maxh);
+            }
+            else
+            {
+                exit2 = true;
+            }
 
-                // Figure out how much space the drawing will take at the current font size for trinary:
+            if(haveTrinary)
+            {
+                // Prepare Trinary version
+                // Figure out how much space the drawing will take at the current font size:
                 drawBibleTextToRect(painter,trect3,crect3,m_verse.trinary_text,m_verse.trinary_caption,
-                                    tflags,cflags,top2,left,w,h*1/3);
+                                    tflags,cflags,top3,left,w,maxh);
 
-                int th1 = trect1.height()+crect1.height();
-                int th2 = trect2.height()+crect2.height();
-                int th3 = trect3.height()+crect3.height();
-
-                // Make sure that primary fits
-                exit = (th1<=h*1/3);
-                if(exit)
-                    // If secondary fits, make sure secondary fits
-                    exit = (th2<=h*1/3);
-                if(exit)
-                    // If also trinary fits, make sure trinary fits
-                    exit = (th3<=h*1/3);
-
+                // Make sure that all fits into the screen
+                exit3 = ((trect3.height()+crect3.height())<=maxh);
+            }
+            else
+            {
+                exit3 = true;
             }
 
-            if( !exit ) // The current font is too large, decrease and try again:
+            if(!(exit1 && exit2 && exit3)) // The current font is too large, decrease and try again:
             {
                 int current_size = m_bSets.textFont.pointSize();
                 int curCap_size = m_bSets.captionFont.pointSize();
@@ -352,7 +348,7 @@ void ImageGenerator::drawBibleText(QPainter *painter, bool isShadow)
                     m_bSets.captionFont.setPointSize(curCap_size);
                 }
             }
-        }
+       }
 
         m_isTextPrepared = true;
         m_bdSets.ptRect = trect1;
@@ -366,29 +362,51 @@ void ImageGenerator::drawBibleText(QPainter *painter, bool isShadow)
     }
 
     // Draw the bible text verse(s) at the final size:
-
     painter->setFont(m_bdSets.tFont);
     if(isShadow)
+    {
         painter->setPen(m_bSets.textShadowColor);
+    }
     else
+    {
         painter->setPen(m_bSets.textColor);
-    painter->drawText(m_bdSets.ptRect, tflags, m_verse.primary_text);
-    if(!m_verse.secondary_text.isNull())
-        painter->drawText(m_bdSets.stRect, tflags, m_verse.secondary_text);
-    if(!m_verse.trinary_text.isNull())
-        painter->drawText(m_bdSets.ttRect, tflags, m_verse.trinary_text);
+    }
 
-    // Draw the verse caption(s) at the final size:
+    painter->drawText(left,m_bdSets.ptRect.top(),w,m_bdSets.ptRect.height(), tflags, m_verse.primary_text);
+
+    if(haveSecondary && !m_verse.secondary_text.isEmpty())
+    {
+        painter->drawText(left,m_bdSets.stRect.top(),w,m_bdSets.ptRect.height(), tflags, m_verse.secondary_text);
+    }
+
+    if(haveTrinary && !m_verse.trinary_text.isEmpty())
+    {
+        painter->drawText(left,m_bdSets.ttRect.top(),w,m_bdSets.ptRect.height(), tflags, m_verse.trinary_text);
+    }
+
     painter->setFont(m_bdSets.cFont);
+
+    // Draw the bible text caption(s) at the final size:
     if(isShadow)
+    {
         painter->setPen(m_bSets.captionShadowColor);
+    }
     else
+    {
         painter->setPen(m_bSets.captionColor);
+    }
+
     painter->drawText(m_bdSets.pcRect, cflags, m_verse.primary_caption);
-    if(!m_verse.secondary_text.isNull())
+
+    if(haveSecondary && !m_verse.secondary_text.isEmpty())
+    {
         painter->drawText(m_bdSets.scRect, cflags, m_verse.secondary_caption);
-    if(!m_verse.trinary_caption.isNull())
+    }
+
+    if(haveTrinary && !m_verse.trinary_text.isEmpty())
+    {
         painter->drawText(m_bdSets.tcRect, cflags, m_verse.trinary_caption);
+    }
 }
 
 void ImageGenerator::drawBibleTextToRect(QPainter *painter, QRect& trect, QRect& crect, QString ttext,
