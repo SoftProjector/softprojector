@@ -781,6 +781,21 @@ bool Song::isValid()
         return false;
 }
 
+void Song::getSettings(SongSettings &settings)
+{
+    settings.textAlingmentV = alignmentV;
+    settings.textAlingmentH = alignmentH;
+    settings.useBackground = useBackground;
+    settings.backgroundName = backgroundName;
+    settings.backgroundPix = background;
+    settings.textColor = color;
+    settings.textFont = font;
+    settings.infoColor = infoColor;
+    settings.infoFont = infoFont;
+    settings.endingColor = endingColor;
+    settings.endingFont = endingFont;
+}
+
 int SongDatabase::lastUser(QString songbook_id)
 {
     int last;

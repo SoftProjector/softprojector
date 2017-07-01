@@ -21,6 +21,7 @@
 #define SONG_HPP
 #include <QtGui>
 #include <QtSql>
+#include "settings.hpp"
 
 QString clean(QString str);
 bool isStanzaTitle(QString string);
@@ -71,6 +72,7 @@ public:
     Stanza getStanza(int current);
     QString getSongbookName();
     bool isValid();
+    void getSettings(SongSettings &settings);
 
     //members
     int songID; // Database ID of this song

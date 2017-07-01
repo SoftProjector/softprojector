@@ -670,16 +670,27 @@ void SoftProjector::updateScreen()
         }
         else if(type=="song")
         {
-            pds1->renderSongText(current_song.getStanza(currentRow),theme.song);
+            // Get Song Settings
+            SongSettings s1 = theme.song;
+            SongSettings s2 = theme.song2;
+
+            // Apply Song specific settings if there is one
+            if(current_song.usePrivateSettings)
+            {
+                current_song.getSettings(s1);
+                current_song.getSettings(s2);
+            }
+
+            pds1->renderSongText(current_song.getStanza(currentRow),s1);
             if(hasDisplayScreen2)
             {
                 if(theme.song2.useDisp2settings)
                 {
-                    pds2->renderSongText(current_song.getStanza(currentRow),theme.song2);
+                    pds2->renderSongText(current_song.getStanza(currentRow),s2);
                 }
                 else
                 {
-                    pds2->renderSongText(current_song.getStanza(currentRow),theme.song);
+                    pds2->renderSongText(current_song.getStanza(currentRow),s1);
                 }
             }
         }
