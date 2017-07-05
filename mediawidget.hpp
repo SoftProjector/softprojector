@@ -28,6 +28,7 @@
 //#include <phonon/AudioOutput>
 //#include <phonon/SeekSlider>
 //#include <phonon/VolumeSlider>
+#include "mediacontrol.hpp"
 #include "videoplayerwidget.hpp"
 #include "videoinfo.hpp"
 
@@ -62,10 +63,6 @@ signals:
 private slots:
     void playFile(QString filePath);
     void updateInfo();
-    void updateDuration(qint64 newDuration);
-    void updateTime(qint64 progress);
-    void finished();
-    void playPause();
 
     void handleDrop(QDropEvent *e);
     void loadMediaLibrary();
@@ -75,23 +72,10 @@ private slots:
     void insertFiles(QStringList &files);
     void prepareForProjection();
 
-    void on_pushButtonOpen_clicked();
-    void on_pushButtonPlayPause_clicked();
+//    void on_pushButtonOpen_clicked();
     void on_pushButtonGoLive_clicked();
     void on_listWidgetMediaFiles_itemSelectionChanged();
     void on_listWidgetMediaFiles_doubleClicked(const QModelIndex &index);
-
-    void on_horizontalSliderTime_sliderMoved(int position);
-
-    void on_pushButtonMute_toggled(bool checked);
-    void setMutted(bool mutted);
-
-    void on_horizontalSliderVolume_valueChanged(int value);
-    void setVolume(int value);
-
-    void on_pushButtonStop_clicked();
-
-    void on_horizontalSliderTime_sliderReleased();
 
 private:
     Ui::MediaWidget *ui;
@@ -103,6 +87,7 @@ private:
 
     QMediaPlayer *player;
     VideoPlayerWidget *videoWidget;
+    MediaControl *mediaControls;
 
     qint64 duration;
 
