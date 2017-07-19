@@ -52,6 +52,7 @@ public slots:
     void sendToPreviewFromSchedule(Song &song);
     void sendToProjector(Song song, int row);
     void songsViewRowChanged(const QModelIndex &current, const QModelIndex &previous);
+    void setSearchActive();
 
 protected:
     virtual void changeEvent(QEvent *e);

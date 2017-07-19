@@ -618,3 +618,9 @@ void SongWidget::on_pushButtonClearResults_clicked()
     sendToPreview(s);
     updateButtonStates();
 }
+
+void SongWidget::setSearchActive()
+{
+    ui->lineEditSearch->setFocus();
+    ui->lineEditSearch->selectAll();
+}
