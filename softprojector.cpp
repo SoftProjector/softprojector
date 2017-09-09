@@ -54,6 +54,7 @@ SoftProjector::SoftProjector(QWidget *parent)
     helpDialog = new HelpDialog();
     pictureWidget = new PictureWidget;
     mediaPlayer = new MediaWidget;
+    mediaControls = new MediaControl(this);
 
     ui->setupUi(this);
 
@@ -162,22 +163,23 @@ SoftProjector::SoftProjector(QWidget *parent)
     ui->widgetMultiVerse->setVisible(false);
 
     // Set up video controls
-    /*
-    playerSlider = new Phonon::SeekSlider(this);
-    playerSlider->setMediaObject(pds1->videoPlayer);
-    ui->horizontalLayoutPlayBackTime->insertWidget(1,playerSlider);
+    ui->verticalLayoutDisplayControls->insertWidget(1,mediaControls);
+    mediaControls->setVisible(false);
+    mediaControls->setVolume(100);
+    connect(pds1,SIGNAL(videoPositionChanged(qint64)),
+            mediaControls,SLOT(updateTime(qint64)));
+    connect(pds1,SIGNAL(videoDurationChanged(qint64)),
+            mediaControls,SLOT(setMaximumTime(qint64)));
+    connect(pds1,SIGNAL(videoPlaybackStateChanged(QMediaPlayer::State)),
+            mediaControls,SLOT(updatePlayerState(QMediaPlayer::State)));
+    connect(mediaControls,SIGNAL(play()),this,SLOT(playVideo()));
+    connect(mediaControls,SIGNAL(pause()),this,SLOT(pauseVideo()));
+    connect(mediaControls,SIGNAL(stop()),this,SLOT(stopVideo()));
+    connect(mediaControls,SIGNAL(volumeChanged(int)),pds1,SLOT(setVideoVolume(int)));
+    connect(mediaControls,SIGNAL(muted(bool)),pds1,SLOT(setVideoMuted(bool)));
+    connect(mediaControls,SIGNAL(timeChanged(qint64)),this,SLOT(setVideoPosition(qint64)));
 
-    playerAudioOutput = new Phonon::AudioOutput(Phonon::VideoCategory);
-    volumeSlider = new Phonon::VolumeSlider(playerAudioOutput);
-    Phonon::createPath(pds1->videoPlayer,playerAudioOutput);
-    ui->horizontalLayoutPlayBackButtons->addWidget(volumeSlider);
-
-    connect(pds1, SIGNAL(sendTimeText(QString)),this, SLOT(setTimeText(QString)));
-    connect(pds1, SIGNAL(updatePlayButton(bool)),this,SLOT(setButtonPlayIcon(bool)));
-    */
-    ui->widgetPlayBackControls->setVisible(false);
-
-    version_string = "2.1";
+    version_string = "2.2";
     this->setWindowTitle("SoftProjector " + version_string);
 }
 
@@ -462,10 +464,10 @@ void SoftProjector::on_actionClose_triggered()
 void SoftProjector::setAnnounceText(Announcement announce, int row)
 {
     currentAnnounce = announce;
-    type = "announce";
+    pType = ANNOUCEMENT;
     ui->widgetMultiVerse->setVisible(false);
     ui->rbMultiVerse->setChecked(false);
-    ui->widgetPlayBackControls->setVisible(false);
+    mediaControls->setVisible(false);
     showing = true;
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/announce.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
@@ -487,10 +489,10 @@ void SoftProjector::setSongList(Song song, int row)
     current_song_verse = row;
 
     // Display the specified song text in the right-most column of softProjector
-    type = "song";
+    pType = SONG;
     ui->widgetMultiVerse->setVisible(false);
     ui->rbMultiVerse->setChecked(false);
-    ui->widgetPlayBackControls->setVisible(false);
+    mediaControls->setVisible(false);
     showing = true;
     new_list = true;
     ui->listShow->clear();
@@ -508,9 +510,9 @@ void SoftProjector::setSongList(Song song, int row)
 void SoftProjector::setChapterList(QStringList chapter_list, QString caption, QItemSelection selectedItems)
 {
     // Called to show a bible verse from a chapter in the preview list
-    type = "bible";
+    pType = BIBLE;
     ui->widgetMultiVerse->setVisible(true);
-    ui->widgetPlayBackControls->setVisible(false);
+    mediaControls->setVisible(false);
     showing = true;
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/book.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
@@ -534,11 +536,11 @@ void SoftProjector::setChapterList(QStringList chapter_list, QString caption, QI
 void SoftProjector::setPictureList(QList<SlideShowItem> &image_list,int row,QString name)
 {
     // Called to show picture list
-    type = "pix";
+    pType = PICTURE;
     showing = true;
     ui->widgetMultiVerse->setVisible(false);
     ui->rbMultiVerse->setChecked(false);
-    ui->widgetPlayBackControls->setVisible(false);
+    mediaControls->setVisible(false);
     new_list = true;
     pictureShowList = image_list;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/photo.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
@@ -564,19 +566,57 @@ void SoftProjector::setPictureList(QList<SlideShowItem> &image_list,int row,QStr
 void SoftProjector::setVideo(VideoInfo &video)
 {
     // Called when showing video
-    type = "video";
+    pType = VIDEO;
     currentVideo = video;
     showing = true;
     ui->widgetMultiVerse->setVisible(false);
     ui->rbMultiVerse->setChecked(false);
-    if(!ui->widgetPlayBackControls->isVisible())
-        ui->widgetPlayBackControls->setVisible(true);
+    if(!mediaControls->isVisible())
+    {
+        mediaControls->setVisible(true);
+    }
     new_list = true;
     ui->listShow->clear();
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/video.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(currentVideo.fileName);
     new_list = false;
     updateScreen();
+}
+
+void SoftProjector::playVideo()
+{
+    pds1->playVideo();
+    if(hasDisplayScreen2)
+    {
+        pds2->playVideo();
+    }
+}
+
+void SoftProjector::pauseVideo()
+{
+    pds1->pauseVideo();
+    if(hasDisplayScreen2)
+    {
+        pds2->pauseVideo();
+    }
+}
+
+void SoftProjector::stopVideo()
+{
+    pds1->stopVideo();
+    if(hasDisplayScreen2)
+    {
+        pds2->stopVideo();
+    }
+}
+
+void SoftProjector::setVideoPosition(qint64 position)
+{
+    pds1->setVideoPosition(position);
+    if(hasDisplayScreen2)
+    {
+        pds2->setVideoPosition(position);
+    }
 }
 
 void SoftProjector::on_listShow_currentRowChanged(int currentRow)
@@ -614,11 +654,12 @@ void SoftProjector::updateScreen()
         {
             pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
         }
+           stopVideo();
         ui->actionShow->setEnabled(true);
         ui->actionHide->setEnabled(false);
         ui->actionClear->setEnabled(false);
     }
-    else if ((currentRow >=0 || type == "video")  && !new_list)
+    else if ((currentRow >=0 || pType == VIDEO)  && !new_list)
     {
         if(isSingleScreen)
         {
@@ -635,94 +676,132 @@ void SoftProjector::updateScreen()
 
         ui->actionShow->setEnabled(false);
         ui->actionHide->setEnabled(true);
-        if(type=="bible" || type=="song" || type=="announce")
+        switch (pType)
+        {
+        case BIBLE:
+        case SONG:
+        case ANNOUCEMENT:
             ui->actionClear->setEnabled(true);
-        else
+            break;
+        default:
             ui->actionClear->setEnabled(false);
+            break;
+        }
 
-        if(type=="bible")
+        switch (pType)
         {
-            int srows(ui->listShow->count());
-            QList<int> currentRows;
-            for(int i(0); i<srows; ++i)
-            {
-                if(ui->listShow->item(i)->isSelected())
-                    currentRows.append(i);
-            }
-            pds1->renderBibleText(bibleWidget->bible.getCurrentVerseAndCaption(
-                                      currentRows,theme.bible,mySettings.bibleSets),
-                                  theme.bible);
-            if(hasDisplayScreen2)
-            {
-                if(theme.bible2.useDisp2settings)
-                {
-                    pds2->renderBibleText(bibleWidget->bible.
-                                          getCurrentVerseAndCaption(currentRows,theme.bible2,
-                                                                    mySettings.bibleSets2),theme.bible2);
-                }
-                else
-                {
-                    pds2->renderBibleText(bibleWidget->bible.
-                                          getCurrentVerseAndCaption(currentRows,theme.bible,
-                                                                    mySettings.bibleSets),theme.bible);
-                }
-            }
+        case BIBLE:
+            showBible();
+            break;
+        case SONG:
+            showSong(currentRow);
+            break;
+        case ANNOUCEMENT:
+            showAnnounce(currentRow);
+            break;
+        case PICTURE:
+            showPicture(currentRow);
+            break;
+        case VIDEO:
+            showVideo();
+            break;
+        default:
+            // ERROR Unown type to show.
+            break;
         }
-        else if(type=="song")
-        {
-            // Get Song Settings
-            SongSettings s1 = theme.song;
-            SongSettings s2 = theme.song2;
+    }
+}
 
-            // Apply Song specific settings if there is one
-            if(current_song.usePrivateSettings)
-            {
-                current_song.getSettings(s1);
-                current_song.getSettings(s2);
-            }
+void SoftProjector::showBible()
+{
+    int srows(ui->listShow->count());
+    QList<int> currentRows;
+    for(int i(0); i<srows; ++i)
+    {
+        if(ui->listShow->item(i)->isSelected())
+            currentRows.append(i);
+    }
+    pds1->renderBibleText(bibleWidget->bible.getCurrentVerseAndCaption(
+                              currentRows,theme.bible,mySettings.bibleSets),
+                          theme.bible);
+    if(hasDisplayScreen2)
+    {
+        if(theme.bible2.useDisp2settings)
+        {
+            pds2->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible2,
+                                                            mySettings.bibleSets2),theme.bible2);
+        }
+        else
+        {
+            pds2->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible,
+                                                            mySettings.bibleSets),theme.bible);
+        }
+    }
+}
 
-            pds1->renderSongText(current_song.getStanza(currentRow),s1);
-            if(hasDisplayScreen2)
-            {
-                if(theme.song2.useDisp2settings)
-                {
-                    pds2->renderSongText(current_song.getStanza(currentRow),s2);
-                }
-                else
-                {
-                    pds2->renderSongText(current_song.getStanza(currentRow),s1);
-                }
-            }
-        }
-        else if(type == "announce")
+void SoftProjector::showSong(int currentRow)
+{
+    // Get Song Settings
+    SongSettings s1 = theme.song;
+    SongSettings s2 = theme.song2;
+
+    // Apply Song specific settings if there is one
+    if(current_song.usePrivateSettings)
+    {
+        current_song.getSettings(s1);
+        current_song.getSettings(s2);
+    }
+
+    pds1->renderSongText(current_song.getStanza(currentRow),s1);
+    if(hasDisplayScreen2)
+    {
+        if(theme.song2.useDisp2settings)
         {
-            pds1->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
-            if(hasDisplayScreen2)
-            {
-                if(theme.announce2.useDisp2settings)
-                {
-                    pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce2);
-                }
-                else
-                {
-                    pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
-                }
-            }
+            pds2->renderSongText(current_song.getStanza(currentRow),s2);
         }
-        else if(type == "pix")
+        else
         {
-            pds1->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
-            if(hasDisplayScreen2)
-            {
-                pds2->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
-            }
+            pds2->renderSongText(current_song.getStanza(currentRow),s1);
         }
-        else if(type == "video")
+    }
+}
+
+void SoftProjector::showAnnounce(int currentRow)
+{
+    pds1->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+    if(hasDisplayScreen2)
+    {
+        if(theme.announce2.useDisp2settings)
         {
-//            pds1->renderVideo(currentVideo);
-//            if(hasDisplayScreen2)
-//                pds2->renderVideo(currentVideo);
+            pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce2);
         }
+        else
+        {
+            pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+        }
+    }
+}
+
+void SoftProjector::showPicture(int currentRow)
+{
+    pds1->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
+    if(hasDisplayScreen2)
+    {
+        pds2->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
+    }
+}
+
+void SoftProjector::showVideo()
+{
+    pds1->renderVideo(currentVideo);
+    pds1->setVideoVolume(100);
+    if(hasDisplayScreen2)
+    {
+        pds2->setVideoVolume(0);
+        pds2->setVideoMuted(true);
+        pds2->renderVideo(currentVideo);
     }
 }
 
@@ -887,21 +966,21 @@ void SoftProjector::updateEditActions()
     // Set Print Action Menu enabled
     ui->actionPrint->setEnabled(ctab == 0 || ctab == 1 || ctab == 4);
 
-    // Set Edit Action Menu Visibility
-    ui->actionNew->setVisible(ctab == 1 || ctab == 2 || ctab == 3 );
-    ui->actionEdit->setVisible(ctab == 1 || ctab == 2 || ctab == 3);
-    ui->actionCopy->setVisible(ctab == 1 || ctab == 3);
-    ui->actionDelete->setVisible(ctab == 0 || ctab == 1 || ctab == 2 || ctab == 3 );
+//    // Set Edit Action Menu Visibility
+//    ui->actionNew->setVisible(ctab == 1 || ctab == 2 || ctab == 3 );
+//    ui->actionEdit->setVisible(ctab == 1 || ctab == 2 || ctab == 3);
+//    ui->actionCopy->setVisible(ctab == 1 || ctab == 3);
+//    ui->actionDelete->setVisible(ctab == 0 || ctab == 1 || ctab == 2 || ctab == 3 );
 
-    // Set Edit Action Menu enabled
-    ui->actionNew->setEnabled(ctab == 1 || ctab == 2 || ctab == 3);
-    ui->actionEdit->setEnabled(ctab == 1 || ctab == 2 || ctab == 3);
-    ui->actionCopy->setEnabled(ctab == 1 || ctab == 3);
-    ui->actionDelete->setEnabled(ctab == 0 || ctab == 1 || ctab == 2 || ctab == 3);
+//    // Set Edit Action Menu enabled
+//    ui->actionNew->setEnabled(ctab == 1 || ctab == 2 || ctab == 3);
+//    ui->actionEdit->setEnabled(ctab == 1 || ctab == 2 || ctab == 3);
+//    ui->actionCopy->setEnabled(ctab == 1 || ctab == 3);
+//    ui->actionDelete->setEnabled(ctab == 0 || ctab == 1 || ctab == 2 || ctab == 3);
 
-    /////////////////////////////////////////
-    // Set Print Action Menu enabled
-    ui->actionPrint->setEnabled(ctab == 0 || ctab == 1 || ctab == 3);
+//    /////////////////////////////////////////
+//    // Set Print Action Menu enabled
+//    ui->actionPrint->setEnabled(ctab == 0 || ctab == 1 || ctab == 3);
 
 }
 
@@ -1540,8 +1619,8 @@ void SoftProjector::prevSlide()
         ui->listShow->setCurrentRow(current-1);
 }
 
-void SoftProjector::on_pushButtonPlay_clicked()
-{
+//void SoftProjector::on_pushButtonPlay_clicked()
+//{
     /*
      * if(pds1->videoPlayer->state() == Phonon::PlayingState)
     {
@@ -1561,20 +1640,7 @@ void SoftProjector::on_pushButtonPlay_clicked()
         if(hasDisplayScreen2)
             pds2->videoPlayer->play();
     }*/
-}
-
-void SoftProjector::setButtonPlayIcon(bool isPlaying)
-{
-    if (isPlaying)
-        ui->pushButtonPlay->setIcon(QIcon(":icons/icons/pause.png"));
-    else
-        ui->pushButtonPlay->setIcon(QIcon(":icons/icons/play.png"));
-}
-
-void SoftProjector::setTimeText(QString cTime)
-{
-    ui->labelTime->setText(cTime);
-}
+//}
 
 void SoftProjector::on_actionScheduleAdd_triggered()
 {

@@ -67,6 +67,7 @@ enum BackgroundType
     B_SOLID_COLOR,
     B_PICTURE,
     B_VIDEO,
+    B_VIDEO_PLAYBACK,
     B_COMMON
 };
 

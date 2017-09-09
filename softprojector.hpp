@@ -21,15 +21,14 @@
 #define SOFTPROJECTOR_HPP
 
 #include <QMainWindow>
-//#include <phonon>
 #include "songwidget.hpp"
 #include "biblewidget.hpp"
 #include "announcewidget.hpp"
-//#include "displayscreen.hpp"
 #include "projectordisplayscreen.hpp"
 #include "editwidget.hpp"
 #include "bible.hpp"
 #include "managedatadialog.hpp"
+#include "mediacontrol.hpp"
 #include "settingsdialog.hpp"
 #include "songcounter.hpp"
 #include "settings.hpp"
@@ -49,6 +48,15 @@ namespace Ui
 class SoftProjectorClass;
 }
 
+enum PresentationType
+{
+    BIBLE,
+    SONG,
+    ANNOUCEMENT,
+    PICTURE,
+    VIDEO
+};
+
 class SoftProjector : public QMainWindow
 {
     Q_OBJECT
@@ -66,6 +74,7 @@ public:
     ProjectorDisplayScreen *pds2;
     PictureWidget *pictureWidget;
     MediaWidget *mediaPlayer;
+    MediaControl *mediaControls;
 
     bool showing; // whether we are currently showing to the projector
     Song current_song;
@@ -93,7 +102,7 @@ private:
     Ui::SoftProjectorClass *ui;
     SettingsDialog *settingsDialog;
     HelpDialog *helpDialog;
-    QString type;
+    PresentationType pType;
     bool new_list;
     QActionGroup *languageGroup;
     QString languagePath;
@@ -139,6 +148,11 @@ private slots:
     void on_actionCopy_triggered();
     void on_actionDelete_triggered();
     void updateWindowText();
+    void showBible();
+    void showSong(int currentRow);
+    void showAnnounce(int currentRow);
+    void showPicture(int currentRow);
+    void showVideo();
 
     void retranslateUis();
     void createLanguageActions();
@@ -171,6 +185,10 @@ private slots:
     void setChapterList(QStringList chapter_list, QString caption, QItemSelection selectedItems);
     void setPictureList(QList<SlideShowItem> &image_list, int row, QString name);
     void setVideo(VideoInfo &video);
+    void playVideo();
+    void pauseVideo();
+    void stopVideo();
+    void setVideoPosition(qint64 position);
 
     void on_listShow_itemSelectionChanged();
     void on_rbMultiVerse_toggled(bool checked);
@@ -179,11 +197,6 @@ private slots:
 
     void nextSlide();
     void prevSlide();
-
-    // video playback functions
-    void on_pushButtonPlay_clicked();
-    void setButtonPlayIcon(bool isPlaying);
-    void setTimeText(QString cTime);
 
     // schedule functions
     void on_actionScheduleAdd_triggered();

@@ -39,7 +39,7 @@ class MediaWidget;
 class MediaWidget : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     explicit MediaWidget(QWidget *parent = 0);
     ~MediaWidget();
@@ -66,7 +66,7 @@ private slots:
 
     void handleDrop(QDropEvent *e);
     void loadMediaLibrary();
-    void stateChanged(QMediaPlayer::State state);
+    void statusChanged(QMediaPlayer::MediaStatus status);
 
     void hasVideoChanged(bool);
     void insertFiles(QStringList &files);
@@ -95,6 +95,7 @@ private:
     QString videoExt;
     QStringList mediaFilePaths;
     QStringList mediaFileNames;
+    QUrl currentMediaUrl;
 };
 
 #endif // MEDIAWIDGET_HPP

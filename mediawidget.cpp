@@ -34,8 +34,8 @@ MediaWidget::MediaWidget(QWidget *parent) :
      ui->horizontalLayoutControls->addWidget(mediaControls);
 
     connect(player, SIGNAL(metaDataChanged()), this, SLOT(updateInfo()));
-//    connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)),
-//            this, SLOT(statusChanged(QMediaPlayer::MediaStatus)));
+    connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)),
+            this, SLOT(statusChanged(QMediaPlayer::MediaStatus)));
 //    connect(player, SIGNAL(bufferStatusChanged(int)), this, SLOT(bufferingProgress(int)));
     connect(player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(hasVideoChanged(bool)));
 //    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
@@ -128,68 +128,21 @@ void MediaWidget::loadMediaLibrary()
 }
 
 
-void MediaWidget::stateChanged(QMediaPlayer::State state)
+void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
 {
-//    switch (state)
-//    {
-//    case QMediaPlayer::StoppedState:
-//        ui->pushButtonPlayPause->setIcon(playIcon);
-////        ui->pushButtonPlayPause->setEnabled(true);
-//        break;
-//    case QMediaPlayer::PausedState:
-//        ui->pushButtonPlayPause->setIcon(playIcon);
-////        if (mediaPlayer.currentSource().type() != Phonon::MediaSource::Invalid)
-////            ui->pushButtonPlayPause->setEnabled(true);
-////        else
-////            ui->pushButtonPlayPause->setEnabled(false);
-//        break;
-//    case QMediaPlayer::PlayingState:
-////        ui->pushButtonPlayPause->setEnabled(true);
-//        ui->pushButtonPlayPause->setIcon(pauseIcon);
-
-//        break;
-//    }
-    /*
-    switch (status)
-    {
-    case Phonon::ErrorState:
-        if (mediaPlayer.errorType() == Phonon::FatalError)
-        {
-            ui->pushButtonPlayPause->setEnabled(false);
-            hasVideoChanged(false);
-            ui->labelInfo->setText(QString("<center>%1</center>").arg(tr("No Media")));
-        }
-        else
-            mediaPlayer.pause();
-
-        QMessageBox::warning(this, "softProjector MediaPlayer", mediaPlayer.errorString(), QMessageBox::Close);
+    switch (status) {
+     case QMediaPlayer::InvalidMedia:
+        qDebug()<<"InvalidMedia: "<<player->errorString();
+        ui->labelInfo->setText(QString("<center><strong><font color=#ff5555>%1:</font></strong><br>"
+                                       "<font color=#49fff9>%2</font><br>%3.</center>")
+                               .arg(tr("ERROR Playing media file"))
+                               .arg(currentMediaUrl.fileName())
+                               .arg(tr("It is possible that SoftProjector does not support given media format")));
         break;
-
-    case Phonon::StoppedState:
-        ui->pushButtonPlayPause->setIcon(playIcon);
-        ui->pushButtonPlayPause->setEnabled(true);
+    default:
         break;
-    case Phonon::PausedState:
-        ui->pushButtonPlayPause->setIcon(playIcon);
-        if (mediaPlayer.currentSource().type() != Phonon::MediaSource::Invalid)
-            ui->pushButtonPlayPause->setEnabled(true);
-        else
-            ui->pushButtonPlayPause->setEnabled(false);
-        break;
-    case Phonon::PlayingState:
-        ui->pushButtonPlayPause->setEnabled(true);
-        ui->pushButtonPlayPause->setIcon(pauseIcon);
-
-        break;
-    case Phonon::BufferingState:
-
-        break;
-    case Phonon::LoadingState:
-
-        break;
-    }*/
+    }
 }
-
 
 void MediaWidget::handleDrop(QDropEvent *e)
 {
@@ -252,8 +205,8 @@ void MediaWidget::dragMoveEvent(QDragMoveEvent *e)
 void MediaWidget::playFile(QString filePath)
 {
     player->stop();
-    QUrl fileUrl = QUrl::fromLocalFile(filePath);
-    QMediaContent m(fileUrl);
+    currentMediaUrl = QUrl::fromLocalFile(filePath);
+    QMediaContent m(currentMediaUrl);
     player->setMedia(m);
 }
 
@@ -332,29 +285,12 @@ void MediaWidget::hasVideoChanged(bool bHasVideo)
 
 void MediaWidget::prepareForProjection()
 {
-//    mediaPlayer.pause();
-//    QFileInfo fn( mediaPlayer.currentSource().fileName());
-//    VideoInfo v;
-//    v.aspectRatio = ui->comboBoxAspectRatio->currentIndex();
-//    v.fileName = fn.fileName();
-//    v.filePath = fn.filePath();
-//    emit toProjector(v);
+    player->pause();
+    VideoInfo v;
+    v.fileName = mediaFileNames.at(ui->listWidgetMediaFiles->currentRow());
+    v.filePath = mediaFilePaths.at(ui->listWidgetMediaFiles->currentRow());
+    emit toProjector(v);
 }
-
-//void MediaWidget::on_pushButtonOpen_clicked()
-//{
-//    QString file = QFileDialog::getOpenFileName(this,tr("Open Music/Video File"),".",
-//                                                tr("Media Files (%1);;Audio Files (%2);;Video Files (%3)")
-//                                                .arg(audioExt + " " + videoExt) // media files
-//                                                .arg(audioExt) // audio files
-//                                                .arg(videoExt)); // video files
-//    if(!file.isEmpty())
-//    {
-//        ui->listWidgetMediaFiles->clearSelection();
-//        playFile(file);
-//    }
-//}
-
 
 void MediaWidget::on_pushButtonGoLive_clicked()
 {
