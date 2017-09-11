@@ -376,12 +376,12 @@ void ImageGenerator::drawBibleText(QPainter *painter, bool isShadow)
 
     if(haveSecondary && !m_verse.secondary_text.isEmpty())
     {
-        painter->drawText(left,m_bdSets.stRect.top(),w,m_bdSets.ptRect.height(), tflags, m_verse.secondary_text);
+        painter->drawText(left,m_bdSets.stRect.top(),w,m_bdSets.stRect.height(), tflags, m_verse.secondary_text);
     }
 
     if(haveTrinary && !m_verse.trinary_text.isEmpty())
     {
-        painter->drawText(left,m_bdSets.ttRect.top(),w,m_bdSets.ptRect.height(), tflags, m_verse.trinary_text);
+        painter->drawText(left,m_bdSets.ttRect.top(),w,m_bdSets.ttRect.height(), tflags, m_verse.trinary_text);
     }
 
     painter->setFont(m_bdSets.cFont);
