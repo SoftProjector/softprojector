@@ -67,6 +67,7 @@ private slots:
     void handleDrop(QDropEvent *e);
     void loadMediaLibrary();
     void statusChanged(QMediaPlayer::MediaStatus status);
+    void displayErrorMessage();
 
     void hasVideoChanged(bool);
     void insertFiles(QStringList &files);

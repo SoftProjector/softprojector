@@ -50,6 +50,7 @@ MediaWidget::MediaWidget(QWidget *parent) :
 
 
     connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), mediaControls, SLOT(updatePlayerState(QMediaPlayer::State)));
+    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
     connect(player, SIGNAL(durationChanged(qint64)), mediaControls, SLOT(setMaximumTime(qint64)));
     connect(player, SIGNAL(positionChanged(qint64)), mediaControls, SLOT(updateTime(qint64)));
     connect(player, SIGNAL(volumeChanged(int)),mediaControls,SLOT(setVolume(int)));
@@ -127,21 +128,42 @@ void MediaWidget::loadMediaLibrary()
     }
 }
 
-
 void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
 {
     switch (status) {
-     case QMediaPlayer::InvalidMedia:
-        qDebug()<<"InvalidMedia: "<<player->errorString();
-        ui->labelInfo->setText(QString("<center><strong><font color=#ff5555>%1:</font></strong><br>"
-                                       "<font color=#49fff9>%2</font><br>%3.</center>")
-                               .arg(tr("ERROR Playing media file"))
-                               .arg(currentMediaUrl.fileName())
-                               .arg(tr("It is possible that SoftProjector does not support given media format")));
+    case QMediaPlayer::BufferingMedia:
+    case QMediaPlayer::LoadingMedia:
+        ui->labelInfo->setText(QString("<center><strong><font color=#49fff9>%1</font>")
+                               .arg(tr("Loading...")));
         break;
-    default:
+    case QMediaPlayer::StalledMedia:
+        ui->labelInfo->setText(QString("<center><strong><font color=#49fff9>%1</font>")
+                               .arg(tr("Media Stalled")));
+        break;
+    case QMediaPlayer::InvalidMedia:
+        displayErrorMessage();
         break;
     }
+}
+
+void MediaWidget::displayErrorMessage()
+{
+    QString errMsg1 = tr("Possible Fail reasons:");
+    QString errMsg2 = tr(" - Unsupported media format");
+    QString errMsg3 = tr(" - Media file no longer existn or invalid path to file");
+
+    if(!player->errorString().isEmpty())
+    {
+        errMsg1 = player->errorString();
+        errMsg2 = errMsg3 = "";
+    }
+    ui->labelInfo->setText(QString("<center><strong><font color=#ff5555>%1:</font></strong><br>"
+                                   "<font color=#49fff9>%2</font><br>%3<br>%4<br>%5</center>")
+                           .arg(tr("ERROR Playing media file"))
+                           .arg(currentMediaUrl.fileName())
+                           .arg(errMsg1)
+                           .arg(errMsg2)
+                           .arg(errMsg3));
 }
 
 void MediaWidget::handleDrop(QDropEvent *e)

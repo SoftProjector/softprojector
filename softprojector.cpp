@@ -965,23 +965,6 @@ void SoftProjector::updateEditActions()
     /////////////////////////////////////////
     // Set Print Action Menu enabled
     ui->actionPrint->setEnabled(ctab == 0 || ctab == 1 || ctab == 4);
-
-//    // Set Edit Action Menu Visibility
-//    ui->actionNew->setVisible(ctab == 1 || ctab == 2 || ctab == 3 );
-//    ui->actionEdit->setVisible(ctab == 1 || ctab == 2 || ctab == 3);
-//    ui->actionCopy->setVisible(ctab == 1 || ctab == 3);
-//    ui->actionDelete->setVisible(ctab == 0 || ctab == 1 || ctab == 2 || ctab == 3 );
-
-//    // Set Edit Action Menu enabled
-//    ui->actionNew->setEnabled(ctab == 1 || ctab == 2 || ctab == 3);
-//    ui->actionEdit->setEnabled(ctab == 1 || ctab == 2 || ctab == 3);
-//    ui->actionCopy->setEnabled(ctab == 1 || ctab == 3);
-//    ui->actionDelete->setEnabled(ctab == 0 || ctab == 1 || ctab == 2 || ctab == 3);
-
-//    /////////////////////////////////////////
-//    // Set Print Action Menu enabled
-//    ui->actionPrint->setEnabled(ctab == 0 || ctab == 1 || ctab == 3);
-
 }
 
 void SoftProjector::on_actionNew_triggered()
