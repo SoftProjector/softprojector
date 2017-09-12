@@ -21,11 +21,9 @@
 #define VIDEOPLAYERWIDGET_HPP
 
 #include <QtWidgets>
-#include <QMediaPlayer>
-//#include <phonon>
-//#include <phonon/VideoWidget>
+#include <QVideoWidget>
 
-class VideoPlayerWidget :QMediaPlayer//: public Phonon::VideoWidget
+class VideoPlayerWidget : public QVideoWidget
 {
     Q_OBJECT
 public:
@@ -39,7 +37,7 @@ signals:
     void handleDrops(QDropEvent *e);
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent *e);
+//    void mouseDoubleClickEvent(QMouseEvent *e);
     void keyPressEvent(QKeyEvent *e);
     bool event(QEvent *e);
     void timerEvent(QTimerEvent *e);

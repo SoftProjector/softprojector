@@ -21,12 +21,14 @@
 #define MEDIAWIDGET_HPP
 
 #include <QtWidgets>
+#include <QMediaPlayer>
 #include <QtSql>
 //#include <phonon>
 //#include <phonon/MediaObject>
 //#include <phonon/AudioOutput>
 //#include <phonon/SeekSlider>
 //#include <phonon/VolumeSlider>
+#include "mediacontrol.hpp"
 #include "videoplayerwidget.hpp"
 #include "videoinfo.hpp"
 
@@ -37,7 +39,7 @@ class MediaWidget;
 class MediaWidget : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     explicit MediaWidget(QWidget *parent = 0);
     ~MediaWidget();
@@ -61,41 +63,40 @@ signals:
 private slots:
     void playFile(QString filePath);
     void updateInfo();
-    void updateTime();
-    void finished();
-    void playPause();
 
     void handleDrop(QDropEvent *e);
     void loadMediaLibrary();
-//    void stateChanged(Phonon::State newstate, Phonon::State oldstate);
+    void statusChanged(QMediaPlayer::MediaStatus status);
+    void displayErrorMessage();
 
     void hasVideoChanged(bool);
     void insertFiles(QStringList &files);
     void prepareForProjection();
 
-    void on_pushButtonOpen_clicked();
-    void on_pushButtonPlayPause_clicked();
+//    void on_pushButtonOpen_clicked();
     void on_pushButtonGoLive_clicked();
     void on_listWidgetMediaFiles_itemSelectionChanged();
     void on_listWidgetMediaFiles_doubleClicked(const QModelIndex &index);
-    void on_comboBoxAspectRatio_currentIndexChanged(int index);
 
 private:
     Ui::MediaWidget *ui;
 
     QIcon playIcon;
     QIcon pauseIcon;
+    QIcon muteIcon;
+    QIcon unmuteIcon;
 
-//    Phonon::SeekSlider *timeSlider;
-//    Phonon::VolumeSlider *volumeSlider;
-//    Phonon::MediaObject mediaPlayer;
-//    Phonon::AudioOutput m_AudioOutput;
+    QMediaPlayer *player;
     VideoPlayerWidget *videoWidget;
+    MediaControl *mediaControls;
+
+    qint64 duration;
 
     QString audioExt;
     QString videoExt;
     QStringList mediaFilePaths;
     QStringList mediaFileNames;
+    QUrl currentMediaUrl;
 };
 
 #endif // MEDIAWIDGET_HPP

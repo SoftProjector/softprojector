@@ -26,7 +26,8 @@ QT += core \
     qml \
     quick \
     printsupport \
-    multimedia
+    multimedia \
+    multimediawidgets
 
 TARGET = SoftProjector
 TEMPLATE = app
@@ -86,7 +87,8 @@ SOURCES += main.cpp \
     displaysetting.cpp \
     projectordisplayscreen.cpp \
     imagegenerator.cpp \
-    spimageprovider.cpp
+    spimageprovider.cpp \
+    mediacontrol.cpp
 HEADERS += softprojector.hpp \
     songwidget.hpp \
     biblewidget.hpp \
@@ -128,7 +130,8 @@ HEADERS += softprojector.hpp \
     displaysetting.hpp \
     projectordisplayscreen.hpp \
     imagegenerator.hpp \
-    spimageprovider.hpp
+    spimageprovider.hpp \
+    mediacontrol.hpp
 FORMS += softprojector.ui \
     songwidget.ui \
     biblewidget.ui \
@@ -154,7 +157,8 @@ FORMS += softprojector.ui \
     picturesettingwidget.ui \
     moduledownloaddialog.ui \
     moduleprogressdialog.ui \
-    projectordisplayscreen.ui
+    projectordisplayscreen.ui \
+    mediacontrol.ui
 TRANSLATIONS += translations/softpro_de.ts\
     translations/softpro_ru.ts\
     translations/softpro_cs.ts\

@@ -96,77 +96,10 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayoutControls">
-         <item>
-          <widget class="QPushButton" name="pushButtonOpen">
-           <property name="text">
-            <string>Open</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButtonPlayPause">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Aspect Ratio:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBoxAspectRatio">
-           <item>
-            <property name="text">
-             <string>Auto</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Scale</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4/3</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>16/9</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
+        <widget class="QWidget" name="widget" native="true"/>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayoutTime">
-         <item>
-          <widget class="QLabel" name="labelTime">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QHBoxLayout" name="horizontalLayoutControls"/>
        </item>
       </layout>
      </widget>
@@ -176,9 +109,6 @@
  </widget>
  <tabstops>
   <tabstop>listWidgetMediaFiles</tabstop>
-  <tabstop>pushButtonOpen</tabstop>
-  <tabstop>pushButtonPlayPause</tabstop>
-  <tabstop>comboBoxAspectRatio</tabstop>
   <tabstop>pushButtonGoLive</tabstop>
  </tabstops>
  <resources>

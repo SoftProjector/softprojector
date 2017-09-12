@@ -36,9 +36,15 @@ Rectangle {
 
     property int tranTime: 500
 
+    // Display Conrol signals
     signal exitClicked()
     signal nextClicked()
     signal prevClicked()
+
+    // Video signals
+    signal positionChanged(int position)
+    signal durationChanged(int duration)
+    signal playbackStateChanged(int state)
 
     MediaPlayer
     {
@@ -46,6 +52,18 @@ Rectangle {
         objectName: "player"
         autoPlay: false
         onSourceChanged: console.debug(player.source)
+        onPositionChanged:
+        {
+            dispArea.positionChanged(player.position)
+        }
+        onDurationChanged:
+        {
+            dispArea.durationChanged(player.duration)
+        }
+        onPlaybackStateChanged:
+        {
+            dispArea.playbackStateChanged(player.playbackState)
+        }
 
     }
 
@@ -538,7 +556,7 @@ Rectangle {
             textImage2.y = parent.y
         }
     }
-    
+
     function transitionBack1to2(tranType)
     {
         if(tranType === 1 || tranType === 2)
@@ -600,7 +618,7 @@ Rectangle {
             backImage2.y = parent.y
         }
     }
-    
+
     function transitionBack2to1(tranType)
     {
         if(tranType === 1 || tranType === 2)
@@ -672,7 +690,9 @@ Rectangle {
     {
         if(player.playbackState === MediaPlayer.StoppedState
                 || player.playbackState === MediaPlayer.PausedState)
+        {
             player.play()
+        }
 
     }
 
@@ -680,12 +700,32 @@ Rectangle {
     {
         if(player.playbackState === MediaPlayer.PlayingState
                 || player.playbackState === MediaPlayer.PausedState)
+        {
             player.stop()
+        }
+    }
+
+    function setVideoVolume(level)
+    {
+        player.volume = level
+    }
+
+    function setVideoMuted(toMute)
+    {
+        player.muted = toMute
+    }
+
+    function setVideoPosition(position)
+    {
+        player.seek(position)
     }
 
     function pauseVideo()
     {
-        player.pause()
+        if(player.playbackState === MediaPlayer.PlayingState)
+        {
+            player.pause()
+        }
     }
 
     function positionControls(iX,iY,iSize,dOpacity)
