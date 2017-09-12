@@ -435,9 +435,15 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     // Will get called when a key is pressed
     int key = event->key();
     if(key == Qt::Key_F6)
+    {
         ui->projectTab->setCurrentWidget(bibleWidget);
+        bibleWidget->setSearchActive();
+    }
     else if(key == Qt::Key_F7)
+    {
         ui->projectTab->setCurrentWidget(songWidget);
+        songWidget->setSearchActive();
+    }
     else if(key == Qt::Key_F8)
         ui->projectTab->setCurrentWidget(announceWidget);
     else if(key == Qt::Key_Left)

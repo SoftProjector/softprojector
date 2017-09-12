@@ -566,3 +566,9 @@ bool BibleWidget::isVerseSelected()
     else
         return false;
 }
+
+void BibleWidget::setSearchActive()
+{
+    ui->lineEditBook->setFocus();
+    ui->lineEditBook->selectAll();
+}
