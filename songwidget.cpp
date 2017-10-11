@@ -218,6 +218,9 @@ void SongWidget::on_songbook_menu_currentIndexChanged(int index)
 
     updateButtonStates();
 
+    // Sort by song number at initial load, and with songbook change
+    ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
+
     songs_model->emitLayoutChanged(); // forces the view to redraw
 }
 
@@ -229,7 +232,9 @@ void SongWidget::on_song_num_spinbox_valueChanged(int value)
         isSpinboxEditing = true;
         ui->lineEditSearch->clear();
         on_lineEditSearch_textEdited("");
-        ui->songs_view->sortByColumn(0,Qt::AscendingOrder);
+
+        // Sort by song number
+        ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
     }
 
     //int max_num = 0;
@@ -288,6 +293,9 @@ void SongWidget::on_lineEditSearch_textEdited(QString text)
     // If no full-text search is in progress, then filter
     if(!ui->pushButtonClearResults->isVisible())
     {
+        // Sort by song number
+        ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
+
         // These two options are mutually exclusive:
         bool match_beginning = (ui->comboBoxFilterType->currentIndex() == 1);
         bool exact_match = (ui->comboBoxFilterType->currentIndex() == 2);
