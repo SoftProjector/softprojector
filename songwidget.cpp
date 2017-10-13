@@ -293,8 +293,18 @@ void SongWidget::on_lineEditSearch_textEdited(QString text)
     // If no full-text search is in progress, then filter
     if(!ui->pushButtonClearResults->isVisible())
     {
-        // Sort by song number
+
+        // If search test is numeric, sort by the number, else sort by title
+        bool ok;
+        text.toInt(&ok);
+        if(ok)
+        {
         ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
+        }
+        else
+        {
+        ui->songs_view->sortByColumn(2,Qt::AscendingOrder);
+        }
 
         // These two options are mutually exclusive:
         bool match_beginning = (ui->comboBoxFilterType->currentIndex() == 1);
