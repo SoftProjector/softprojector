@@ -72,8 +72,8 @@ void PassiveSettingWidget::loadSettings()
 
     // Displpay screen two
     ui->groupBoxDisp2Sets->setChecked(mySettings2.useDisp2settings);
-    ui->groupBoxBackground2->setChecked(mySettings.useBackground);
-    ui->lineEditBackgroundPath2->setText(mySettings.backgroundName);
+    ui->groupBoxBackground2->setChecked(mySettings2.useBackground);
+    ui->lineEditBackgroundPath2->setText(mySettings2.backgroundName);
 }
 
 void PassiveSettingWidget::setDispScreen2Visible(bool visible)

@@ -294,16 +294,16 @@ void SongWidget::on_lineEditSearch_textEdited(QString text)
     if(!ui->pushButtonClearResults->isVisible())
     {
 
-        // If search test is numeric, sort by the number, else sort by title
+        // If search text is numeric, sort by the number, else sort by title
         bool ok;
         text.toInt(&ok);
         if(ok)
         {
-        ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
+            ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
         }
         else
         {
-        ui->songs_view->sortByColumn(2,Qt::AscendingOrder);
+            ui->songs_view->sortByColumn(2,Qt::AscendingOrder);
         }
 
         // These two options are mutually exclusive:

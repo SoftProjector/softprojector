@@ -658,7 +658,15 @@ void SoftProjector::updateScreen()
 
         if(hasDisplayScreen2)
         {
-            pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
+            if(theme.passive2.useDisp2settings)
+            {
+                pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
+            }
+            else
+            {
+                pds2->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
+            }
+
         }
            stopVideo();
         ui->actionShow->setEnabled(true);
