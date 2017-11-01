@@ -92,7 +92,7 @@ void EditWidget::on_btnSave_clicked()
         emit updateSongFromDatabase(newSong.songID,song_to_edit_id);
     }
     setArrowCursor();
-    
+
     resetUiItems();
     close();
 }
@@ -544,7 +544,7 @@ void EditWidget::on_toolButtonBrowseBackground_clicked()
     if( !filename.isNull() )
     {
         QPixmap p(filename);
-        editSong.background = p.scaled(1280,1280,Qt::KeepAspectRatio);
+        editSong.background = p;
         QFileInfo fi(filename);
         filename = fi.fileName();
         editSong.backgroundName = filename;

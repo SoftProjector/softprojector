@@ -299,10 +299,7 @@ void SongSettingWidget::on_buttonSongBackground_clicked()
     if(!filename.isNull())
     {
         QPixmap p(filename);
-        if(p.width()>1280 || p.height()>1280)
-            mySettings.backgroundPix = p.scaled(1280,1280,Qt::KeepAspectRatio);
-        else
-            mySettings.backgroundPix = p;
+        mySettings.backgroundPix = p;
         QFileInfo fi(filename);
         filename = fi.fileName();
         mySettings.backgroundName = filename;
@@ -317,10 +314,7 @@ void SongSettingWidget::on_buttonSongBackground2_clicked()
     if(!filename.isNull())
     {
         QPixmap p(filename);
-        if(p.width()>1280 || p.height()>1280)
-            mySettings2.backgroundPix = p.scaled(1280,1280,Qt::KeepAspectRatio);
-        else
-            mySettings2.backgroundPix = p;
+        mySettings2.backgroundPix = p;
         QFileInfo fi(filename);
         filename = fi.fileName();
         mySettings2.backgroundName = filename;
