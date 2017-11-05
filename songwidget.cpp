@@ -219,7 +219,7 @@ void SongWidget::on_songbook_menu_currentIndexChanged(int index)
     updateButtonStates();
 
     // Sort by song number at initial load, and with songbook change
-    ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
+    proxy_model->sort(1);
 
     songs_model->emitLayoutChanged(); // forces the view to redraw
 }
@@ -234,7 +234,7 @@ void SongWidget::on_song_num_spinbox_valueChanged(int value)
         on_lineEditSearch_textEdited("");
 
         // Sort by song number
-        ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
+        proxy_model->sort(1);
     }
 
     //int max_num = 0;
@@ -299,11 +299,11 @@ void SongWidget::on_lineEditSearch_textEdited(QString text)
         text.toInt(&ok);
         if(ok)
         {
-            ui->songs_view->sortByColumn(1,Qt::AscendingOrder);
+            proxy_model->sort(1);
         }
         else
         {
-            ui->songs_view->sortByColumn(2,Qt::AscendingOrder);
+            proxy_model->sort(2);
         }
 
         // These two options are mutually exclusive:
@@ -417,9 +417,24 @@ void SongWidget::deleteSong()
 
 void SongWidget::addNewSong(Song song, int initial_sid)
 {
+
     songs_model->addSong(song);
     allSongs.append(song);
-    ui->songs_view->selectRow(songs_model->rowCount()-1);
+
+    // Get added song row number to select it.
+    // If added song is not found list, no selection will be done
+    int row = 0;
+    for(int i(0);i<proxy_model->rowCount();++i)
+    {
+        row = i;
+        if(song.title == songs_model->getSong(
+                    proxy_model->mapToSource(
+                        ui->songs_view->indexAt(QPoint(0,i*20)))).title)
+        {
+            ui->songs_view->selectRow(row);
+            break;
+        }
+    }
 
     sendToPreview(song);
 }
