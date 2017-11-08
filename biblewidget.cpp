@@ -253,6 +253,8 @@ void BibleWidget::on_lineEditBook_textChanged(QString text)
             // while the rest of the filter must be the beginning of the second book word.
             QString num_str(text.at(0));
             QString name_str = text.remove(0, 1);
+            // Allow for space inbetween num_str and name_str e.g. "1 Peter"
+            name_str = name_str.trimmed();
             for(int i=0; i<all_books.count(); i++)
             {
                 QString book = all_books.at(i);
@@ -425,6 +427,8 @@ void BibleWidget::on_search_results_list_currentRowChanged(int currentRow)
 
         ui->chapter_ef->setText(search_results.at(currentRow).chapter);
         ui->verse_ef->setText(search_results.at(currentRow).verse);
+        // Scroll to latest history item
+        ui->history_listWidget->scrollToBottom();
     }
 }
 
