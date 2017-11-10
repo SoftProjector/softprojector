@@ -427,8 +427,6 @@ void BibleWidget::on_search_results_list_currentRowChanged(int currentRow)
 
         ui->chapter_ef->setText(search_results.at(currentRow).chapter);
         ui->verse_ef->setText(search_results.at(currentRow).verse);
-        // Scroll to latest history item
-        ui->history_listWidget->scrollToBottom();
     }
 }
 
@@ -443,6 +441,8 @@ void BibleWidget::addToHistory()
     BibleHistory b = getCurrentVerse();
     history_items.append(b);
     ui->history_listWidget->addItem(b.captionLong);
+    // Scroll to latest history item
+    ui->history_listWidget->scrollToBottom();
 }
 
 void BibleWidget::addToHistory(BibleHistory &b)
