@@ -25,9 +25,9 @@
 MediaWidget::MediaWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MediaWidget)//,
-//    m_AudioOutput(Phonon::VideoCategory)
 {
     ui->setupUi(this);
+    isReadyToPlay = false;
     player = new QMediaPlayer(this);
 
     mediaControls = new MediaControl(this);
@@ -130,6 +130,7 @@ void MediaWidget::loadMediaLibrary()
 
 void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
 {
+    qDebug()<<"statusChanged"<<status;
     switch (status) {
     case QMediaPlayer::BufferingMedia:
     case QMediaPlayer::LoadingMedia:
@@ -142,6 +143,10 @@ void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
         break;
     case QMediaPlayer::InvalidMedia:
         displayErrorMessage();
+        break;
+    case QMediaPlayer::LoadedMedia:
+    case QMediaPlayer::BufferedMedia:
+        isReadyToPlay = true;
         break;
     }
 }
@@ -224,11 +229,12 @@ void MediaWidget::dragMoveEvent(QDragMoveEvent *e)
 }
 
 
-void MediaWidget::playFile(QString filePath)
+void MediaWidget::playFile(QUrl filePath)
 {
+    isReadyToPlay = false;
     player->stop();
-    currentMediaUrl = QUrl::fromLocalFile(filePath);
-    QMediaContent m(currentMediaUrl);
+    currentMediaUrl = filePath;
+    QMediaContent m(filePath);
     player->setMedia(m);
 }
 
@@ -290,7 +296,7 @@ void MediaWidget::insertFiles(QStringList &files)
     {
         QFileInfo f(file);
         mediaFileNames.append(f.fileName());
-        mediaFilePaths.append(file);
+        mediaFilePaths.append(QUrl::fromLocalFile(file));
         sq.exec(QString("INSERT INTO Media (long_Path, short_path) VALUES('%1', '%2')").arg(file).arg(f.fileName()));
         ui->listWidgetMediaFiles->addItem(f.fileName());
     }
@@ -298,19 +304,23 @@ void MediaWidget::insertFiles(QStringList &files)
 
 void MediaWidget::hasVideoChanged(bool bHasVideo)
 {
+    qDebug()<<"hasVideoChanged"<<bHasVideo;
     if(!bHasVideo && videoWidget->isFullScreen())
         videoWidget->setFullScreen(false);
     ui->labelInfo->setVisible(!bHasVideo);
     ui->pushButtonGoLive->setEnabled(bHasVideo);
     videoWidget->setVisible(bHasVideo);
+//    isReadyToPlay = true;
 }
 
 void MediaWidget::prepareForProjection()
 {
     player->pause();
     VideoInfo v;
-    v.fileName = mediaFileNames.at(ui->listWidgetMediaFiles->currentRow());
-    v.filePath = mediaFilePaths.at(ui->listWidgetMediaFiles->currentRow());
+//    v.fileName = mediaFileNames.at(ui->listWidgetMediaFiles->currentRow());
+//    v.filePath = mediaFilePaths.at(ui->listWidgetMediaFiles->currentRow());
+    v.fileName = currentMediaUrl.fileName();
+    v.filePath = currentMediaUrl.toString();
     emit toProjector(v);
 }
 
@@ -379,6 +389,11 @@ VideoInfo MediaWidget::getMedia()
 
 void MediaWidget::setMediaFromSchedule(VideoInfo &v)
 {
+    if(currentMediaUrl == v.filePath)
+    {
+        // Same current Media File, do not update.
+        return;
+    }
     ui->listWidgetMediaFiles->clearSelection();
     playFile(v.filePath);
     player->pause();
@@ -386,10 +401,21 @@ void MediaWidget::setMediaFromSchedule(VideoInfo &v)
 
 void MediaWidget::goLiveFromSchedule()
 {
+    while (!isReadyToPlay)
+    {
+        Sleep(100);
+    }
+    qDebug()<<videoWidget->isVisible()<<ui->pushButtonGoLive->isEnabled();
     if(ui->pushButtonGoLive->isEnabled())
+    {
+        qDebug()<<"Go Live is Enabled";
         prepareForProjection();
+    }
     else
+    {
+        qDebug()<<"Start Playing";
         player->play();
+    }
 }
 
 bool MediaWidget::isValidMedia()

@@ -180,13 +180,14 @@ void ProjectorDisplayScreen::setBackVideo(QString path)
     item2->setProperty("fillMode",Qt::IgnoreAspectRatio);
 }
 
-void ProjectorDisplayScreen::setVideoSource(QObject* playerObject, QString path)
+void ProjectorDisplayScreen::setVideoSource(QObject* playerObject, QUrl path)
 {
-#if  (defined(Q_OS_UNIX))
-    // Prefix "file://" to the file name only for Unix like systems.
-    path = "file://" + path;
-#endif
-    playerObject->setProperty("source",path);
+//#if  (defined(Q_OS_UNIX))
+//    // Prefix "file://" to the file name only for Unix like systems.
+//    path = "file://" + path;
+//#endif
+//    playerObject->setProperty("source",path);
+    playerObject->setProperty("source",path.toString());
 }
 
 void ProjectorDisplayScreen::updateScreen()
