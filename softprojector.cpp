@@ -437,7 +437,7 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     if(key == Qt::Key_F6)
     {
         ui->projectTab->setCurrentWidget(bibleWidget);
-        bibleWidget->setSearchActive();
+        bibleWidget->setBibleBookActive();
     }
     else if(key == Qt::Key_F7)
     {
@@ -446,6 +446,11 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     }
     else if(key == Qt::Key_F8)
         ui->projectTab->setCurrentWidget(announceWidget);
+    if(key == Qt::Key_F9)
+    {
+        ui->projectTab->setCurrentWidget(bibleWidget);
+        bibleWidget->setBibleSearchActive();
+    }
     else if(key == Qt::Key_Left)
         prevSlide();
     else if(key == Qt::Key_Back)
