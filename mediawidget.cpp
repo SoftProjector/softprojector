@@ -150,7 +150,7 @@ void MediaWidget::displayErrorMessage()
 {
     QString errMsg1 = tr("Possible Fail reasons:");
     QString errMsg2 = tr(" - Unsupported media format");
-    QString errMsg3 = tr(" - Media file no longer existn or invalid path to file");
+    QString errMsg3 = tr(" - Media file no longer exists or invalid path to file");
 
     if(!player->errorString().isEmpty())
     {

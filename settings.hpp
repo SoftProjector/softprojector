@@ -108,7 +108,7 @@ public:
     QColor textColor;
     QColor textShadowColor;
     int textAlingmentV;
-    // 0 - Top, 1 - Middle, 3 - Botton
+    // 0 - Top, 1 - Middle, 3 - Bottom
     int textAlingmentH;
     // 0 - Left, 1 - Center, 3 - Right
 
@@ -138,7 +138,7 @@ public:
     //Layout
     int screenUse;
     int screenPosition;
-    // 0 - Top of Screen, 1 - Botton of Screen
+    // 0 - Top of Screen, 1 - Bottom of Screen
 
     bool useSameForDisp2;
 
