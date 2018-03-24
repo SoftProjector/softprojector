@@ -74,7 +74,7 @@ private slots:
     void setBackPixmap(QPixmap p, QColor c);
     void setTextPixmap(QPixmap p);
     void setBackVideo(QString path);
-    void setVideoSource(QObject *playerObject, QString path);
+    void setVideoSource(QObject *playerObject, QUrl path);
     void updateScreen();
 
     void exitSlideClicked();

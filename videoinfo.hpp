@@ -21,13 +21,14 @@
 #define VIDEOINFO_HPP
 
 #include <QString>
+#include <QUrl>
 
 class VideoInfo
 {
 public:
     VideoInfo();
 public:
-    QString filePath;
+    QUrl filePath;
     QString fileName;
     int aspectRatio;
 };
