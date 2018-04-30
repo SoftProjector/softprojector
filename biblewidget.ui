@@ -127,7 +127,7 @@
          <item>
           <widget class="QPushButton" name="search_button">
            <property name="toolTip">
-            <string>Quickly display  the selected Bible verse on the screen</string>
+            <string>Quickly display the selected Bible verse on the screen</string>
            </property>
            <property name="text">
             <string>Search</string>
@@ -508,7 +508,7 @@ Results</string>
               </sizepolicy>
              </property>
              <property name="toolTip">
-              <string>Quickly display  the selected Bible verse on the screen</string>
+              <string>Quickly display the selected Bible verse on the screen</string>
              </property>
              <property name="text">
               <string>Go Live (F5)</string>

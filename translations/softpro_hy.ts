@@ -477,7 +477,7 @@ Notes:
         <translation>Ներառում արտահայտ</translation>
     </message>
     <message>
-        <source>Quickly display  the selected Bible verse on the screen</source>
+        <source>Quickly display the selected Bible verse on the screen</source>
         <translation>Ցուցադրել ընտրված տեքստը էկրանին</translation>
     </message>
     <message>
@@ -1774,7 +1774,7 @@ Verse-Հատված 2
         <translation>Այս թեման պարունակում է լռելյայն կարքավորումներ.</translation>
     </message>
     <message>
-        <source>Select onto which screen to dispaly</source>
+        <source>Select onto which screen to display</source>
         <translation>Ընտրել ցուցադրման էկրանը</translation>
     </message>
     <message>
@@ -3183,7 +3183,7 @@ We recommend to resize images to display screen size.</source>
         <translation>Տեսամագնիտոֆոնի Սխալ</translation>
     </message>
     <message>
-        <source>Dispaly Screen</source>
+        <source>Display Screen</source>
         <translation>Էկրան</translation>
     </message>
     <message>

@@ -486,7 +486,7 @@ Copyright:</source>
         <translation>Содержит фразу</translation>
     </message>
     <message>
-        <source>Quickly display  the selected Bible verse on the screen</source>
+        <source>Quickly display the selected Bible verse on the screen</source>
         <translation>Вывести выбранный текст на экран</translation>
     </message>
     <message>
@@ -605,7 +605,7 @@ Results</source>
         <translation type="vanished">Ошибка видеоплеера</translation>
     </message>
     <message>
-        <source>Dispaly Screen</source>
+        <source>Display Screen</source>
         <translation type="vanished">Экран</translation>
     </message>
     <message>
@@ -1098,7 +1098,7 @@ Verse 2
         <translation>Эта тема содержить установки по умолчанию.</translation>
     </message>
     <message>
-        <source>Select onto which screen to dispaly</source>
+        <source>Select onto which screen to display</source>
         <translation>Выбор экрана для отображения</translation>
     </message>
     <message>
