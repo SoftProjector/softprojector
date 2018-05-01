@@ -889,7 +889,7 @@ Autorské právo:</translation>
     <message>
         <location filename="../biblewidget.ui" line="130"/>
         <location filename="../biblewidget.ui" line="511"/>
-        <source>Quickly display  the selected Bible verse on the screen</source>
+        <source>Quickly display the selected Bible verse on the screen</source>
         <translation>Rychlé zobrazení vybraného biblického verše na promítací ploše</translation>
     </message>
     <message>
@@ -1150,7 +1150,7 @@ Zkuste změnit hlavní Bibli a otevřete soubor s projektem znovu.</translation>
         <translation type="vanished">Hudba od: %1</translation>
     </message>
     <message>
-        <source>Dispaly Screen</source>
+        <source>Display Screen</source>
         <translation type="vanished">Zobrazovací obrazovka</translation>
     </message>
 </context>
@@ -1925,7 +1925,7 @@ Verš 2
     <message>
         <location filename="../generalsettingwidget.ui" line="81"/>
         <location filename="../generalsettingwidget.ui" line="117"/>
-        <source>Select onto which screen to dispaly</source>
+        <source>Select onto which screen to display</source>
         <translation>Vybrat, na které obrazovce se má zobrazovat</translation>
     </message>
     <message>

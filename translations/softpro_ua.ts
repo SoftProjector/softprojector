@@ -829,7 +829,7 @@ Copyright:</source>
     <message>
         <location filename="../biblewidget.ui" line="130"/>
         <location filename="../biblewidget.ui" line="511"/>
-        <source>Quickly display  the selected Bible verse on the screen</source>
+        <source>Quickly display the selected Bible verse on the screen</source>
         <translation>Вивести текст на екран</translation>
     </message>
     <message>
@@ -1041,7 +1041,7 @@ results.</source>
 <context>
     <name>DisplayScreen</name>
     <message>
-        <source>Dispaly Screen</source>
+        <source>Display Screen</source>
         <translation type="vanished">Екран</translation>
     </message>
     <message>
@@ -1828,7 +1828,7 @@ Verse 2
     <message>
         <location filename="../generalsettingwidget.ui" line="81"/>
         <location filename="../generalsettingwidget.ui" line="117"/>
-        <source>Select onto which screen to dispaly</source>
+        <source>Select onto which screen to display</source>
         <translation>Оберіть екран, на якому буде будуватися зображення</translation>
     </message>
     <message>
