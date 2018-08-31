@@ -137,7 +137,7 @@ Matvey Adzhigirey</source>
     </message>
     <message>
         <source>Announcements:</source>
-        <translation>Обьявление:</translation>
+        <translation>Объявление:</translation>
     </message>
 </context>
 <context>
@@ -152,11 +152,11 @@ Matvey Adzhigirey</source>
     </message>
     <message>
         <source>Left</source>
-        <translation>Лево</translation>
+        <translation>Влево</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Право</translation>
+        <translation>Вправо</translation>
     </message>
     <message>
         <source>Use blurred shadow</source>
@@ -288,7 +288,7 @@ Copyright:</source>
     </message>
     <message>
         <source>Left</source>
-        <translation>Лево</translation>
+        <translation>Влево</translation>
     </message>
     <message>
         <source>None</source>
@@ -296,7 +296,7 @@ Copyright:</source>
     </message>
     <message>
         <source>Right</source>
-        <translation>Право</translation>
+        <translation>Вправо</translation>
     </message>
     <message>
         <source>Use blurred shadow</source>
@@ -304,7 +304,7 @@ Copyright:</source>
     </message>
     <message>
         <source>Show Bible Version Abbriviation</source>
-        <translation>Показывать абревиатуру Библии</translation>
+        <translation>Показывать аббревиатуру Библии</translation>
     </message>
     <message>
         <source>Secondary Bible:</source>
@@ -400,7 +400,7 @@ Copyright:</source>
     </message>
     <message>
         <source>Effects</source>
-        <translation>Эфекты</translation>
+        <translation>Эффекты</translation>
     </message>
     <message>
         <source>This bible version will be used for the operator to select verses and search bible</source>
@@ -428,7 +428,7 @@ Copyright:</source>
     </message>
     <message>
         <source>Select to use either top portion of the screen or bottom.</source>
-        <translation>Выберете ныне себе, какую часть экрана использовать.</translation>
+        <translation>Выберите какую часть экрана использовать.</translation>
     </message>
     <message>
         <source>Images(%1)</source>
@@ -536,7 +536,7 @@ results.</source>
     </message>
     <message>
         <source>Contains Word Phrase</source>
-        <translation>Содержить слово/фразу</translation>
+        <translation>Содержит слово/фразу</translation>
     </message>
     <message>
         <source>Total
@@ -580,7 +580,7 @@ Results</source>
     </message>
     <message>
         <source>Please enter search text</source>
-        <translation>Пожалуйся, введите текст для поиска</translation>
+        <translation>Пожалуйста, введите текст для поиска</translation>
     </message>
 </context>
 <context>
@@ -634,7 +634,7 @@ Results</source>
     </message>
     <message>
         <source>Edit Announcement</source>
-        <translation>Редактировать обьявление</translation>
+        <translation>Редактировать объявление</translation>
     </message>
     <message>
         <source>Announce
@@ -643,12 +643,12 @@ Results</source>
 Slide
  - Text of the announcement goes here
 You can have both Annouce or Slide as announcement block titles.</source>
-        <translation>Обьявление
- - Здесь текст обьявления
+        <translation>Объявление
+ - Здесь текст объявления
 
 Слайд
- - И здесь текст обьявления
-   Вы можете .создавать блоки обьявлений.</translation>
+ - И здесь текст объявления
+   Вы можете создавать блоки объявлений.</translation>
     </message>
     <message>
         <source>Timed slides:</source>
@@ -664,7 +664,7 @@ You can have both Annouce or Slide as announcement block titles.</source>
     </message>
     <message>
         <source>Announcement title is missing</source>
-        <translation>Отсутствует название обьявления</translation>
+        <translation>Отсутствует название объявления</translation>
     </message>
     <message>
         <source>Use Private Settings</source>
@@ -673,8 +673,8 @@ You can have both Annouce or Slide as announcement block titles.</source>
     <message>
         <source>Announcement title cannot be left empty.
 Please enter announcement title.</source>
-        <translation>Обьявление не может быть без названия.
-Пожалуйста, введите название для этого обьявления.</translation>
+        <translation>Объявление не может быть без названия.
+Пожалуйста, введите название для этого объявления.</translation>
     </message>
 </context>
 <context>
@@ -855,7 +855,7 @@ In order to edit this song, you need to add it to database.
 
 Please select a Songbook to which you want to copy this song to:</source>
         <translation>В базе данных не найдено песни точно соответствующей редактируемой.
-Для продолжения редактирования, необходимо добавит песню в базу данных.
+Для продолжения редактирования, необходимо добавить песню в базу данных.
 
 Пожалуйста выберите сборник в который вы желаете поместить данную песню:</translation>
     </message>
@@ -1028,7 +1028,7 @@ Verse 2
     </message>
     <message>
         <source>Select an image for the wallpaper</source>
-        <translation>Выберете рисунок для фона</translation>
+        <translation>Выберите рисунок для фона</translation>
     </message>
     <message>
         <source>Harvest</source>
@@ -1091,11 +1091,11 @@ Verse 2
     </message>
     <message>
         <source>Right</source>
-        <translation>Право</translation>
+        <translation>Вправо</translation>
     </message>
     <message>
         <source>This theme will contain program default settings.</source>
-        <translation>Эта тема содержить установки по умолчанию.</translation>
+        <translation>Эта тема содержит установки по умолчанию.</translation>
     </message>
     <message>
         <source>Select onto which screen to display</source>
@@ -1103,11 +1103,11 @@ Verse 2
     </message>
     <message>
         <source>Secondary Display Screen:</source>
-        <translation>Дополнителный экран:</translation>
+        <translation>Дополнительный экран:</translation>
     </message>
     <message>
         <source>Comments:</source>
-        <translation>Коментарии:</translation>
+        <translation>Комментарии:</translation>
     </message>
     <message>
         <source>Bottom</source>
@@ -1187,7 +1187,7 @@ Verse 2
     </message>
     <message>
         <source>NOTE: Display screen controls will be visible on the primary display screen only when one monitor is avaliable.</source>
-        <translation>Обратите внимание, что клавиши управления экраном будуть видимы на основном экране только если один монитор используеться.</translation>
+        <translation>Обратите внимание, что клавиши управления экраном будут видимы на основном экране только если используется один монитор.</translation>
     </message>
     <message>
         <source>Show Display Screen on SoftProjector Startup</source>
@@ -1229,9 +1229,9 @@ Importing: %1</source>
 is not supported by current version of SoftProjector.
 You are trying to open Theme version %1.
 Please upgrade to latest version of SoftProjector and try again.</source>
-        <translation>Эта тема создана более позней версией SoftProjector
+        <translation>Эта тема создана более поздней версией SoftProjector
 и не может быть открыта. Нужен SoftProjector хотя бы версии %1.
- Пожалуйста, обновите SoftProjector до последний версии и 
+ Пожалуйста, обновите SoftProjector до последней версии и 
 попробуйте опять.</translation>
     </message>
     <message>
@@ -1244,7 +1244,7 @@ Please upgrade to latest version of SoftProjector and try again.</source>
     </message>
     <message>
         <source>This theme will contain program default settings.</source>
-        <translation>Эта тема содержить установки по умолчанию.</translation>
+        <translation>Эта тема содержит установки по умолчанию.</translation>
     </message>
     <message>
         <source>Export currently selected Bible to share with others.</source>
@@ -1348,14 +1348,14 @@ Has been saved to:
 is not supported by current version of SoftProjector.
 You are trying to open SongBook version %1.
 Please upgrade to latest version of SoftProjector and try again.</source>
-        <translation>Этот песенник создан более позней версией SoftProjector
+        <translation>Этот песенник создан более поздней версией SoftProjector
 и не может быть открыт. Нужен SoftProjector хотя бы версии %1.
- Пожалуйста, обновите SoftProjector до последний версии и 
+ Пожалуйста, обновите SoftProjector до последней версии и 
 попробуйте опять.</translation>
     </message>
     <message>
         <source>Comments:</source>
-        <translation>Коментарии:</translation>
+        <translation>Комментарии:</translation>
     </message>
     <message>
         <source>Bible Module Download</source>
@@ -1589,7 +1589,7 @@ Your current SoftProjector version does not support this format.</source>
     </message>
     <message>
         <source>Select a Theme to import</source>
-        <translation>Выберете тему для импорта</translation>
+        <translation>Выберите тему для импорта</translation>
     </message>
     <message>
         <source>Delete Theme?</source>
@@ -1671,7 +1671,7 @@ Your current SoftProjector version does not support this format.</source>
     <name>ModuleDownloadDialog</name>
     <message>
         <source>Select modules you wish to download and import.</source>
-        <translation>Выберете модули, которые желаете загрузить и импортировать.</translation>
+        <translation>Выберите модули которые желаете загрузить и импортировать.</translation>
     </message>
     <message>
         <source>Dialog</source>
@@ -1802,7 +1802,7 @@ Your current SoftProjector version does not support this format.</source>
         <source>It is highly recommended to reduce large images on import. This will improve load, save and display time of slideshows.
 We recommend to resize images to display screen size.</source>
         <translation>Для оптимизации показа и смены слайдов очень рекомендуется перед импортом
-изменять размеры изображений соответствено размерам экрана.</translation>
+изменять размеры изображений соответственно размерам экрана.</translation>
     </message>
     <message>
         <source>Entered &apos;%1&apos; custom width is not numeric. </source>
@@ -1936,7 +1936,7 @@ We recommend to resize images to display screen size.</source>
     </message>
     <message>
         <source>Right Margin</source>
-        <translation>Правоє</translation>
+        <translation>Правое</translation>
     </message>
     <message>
         <source>Millimeter</source>
@@ -1945,7 +1945,7 @@ We recommend to resize images to display screen size.</source>
     <message>
         <source>Tune: %1
 </source>
-        <translation>Тональьность: %1
+        <translation>Тональность: %1
 </translation>
     </message>
     <message>
@@ -1980,7 +1980,7 @@ We recommend to resize images to display screen size.</source>
         <source>Announcements: %1
 
 </source>
-        <translation>Обьявлений: %1
+        <translation>Объявлений: %1
 
 </translation>
     </message>
@@ -2045,7 +2045,7 @@ Notes:
     </message>
     <message>
         <source>This setting are displayed when nothing is to be projected.</source>
-        <translation>Эти настроки используются, когда ничего не отображается.</translation>
+        <translation>Эти настройки используются, когда ничего не отображается.</translation>
     </message>
     <message>
         <source>Bible Settings</source>
@@ -2169,7 +2169,7 @@ Please enter a title.</source>
     <name>SoftProjector</name>
     <message>
         <source>Open SoftProjector schedule:</source>
-        <translation>Открыть прораму SoftProjector:</translation>
+        <translation>Открыть программу SoftProjector:</translation>
     </message>
     <message>
         <source>Media</source>
@@ -2177,7 +2177,7 @@ Please enter a title.</source>
     </message>
     <message>
         <source>&amp;Copy Announcement...</source>
-        <translation>&amp;Копировать обьявление...</translation>
+        <translation>&amp;Копировать объявление...</translation>
     </message>
     <message>
         <source>Delete slideshow?</source>
@@ -2197,7 +2197,7 @@ Please enter a title.</source>
     </message>
     <message>
         <source>&amp;New Announcement...</source>
-        <translation>&amp;Новое обьявление...</translation>
+        <translation>&amp;Новое объявление...</translation>
     </message>
     <message>
         <source>Do you want to save current schedule?</source>
@@ -2245,7 +2245,7 @@ Please enter a title.</source>
     </message>
     <message>
         <source>&amp;Edit Announcement...</source>
-        <translation>&amp;Редактировать обьявление...</translation>
+        <translation>&amp;Редактировать объявление...</translation>
     </message>
     <message>
         <source>Cannot create a new song</source>
@@ -2253,11 +2253,11 @@ Please enter a title.</source>
     </message>
     <message>
         <source>Please select an announcement to edit</source>
-        <translation>Пожалуйста выберите обьявление для редактирования</translation>
+        <translation>Пожалуйста выберите объявление для редактирования</translation>
     </message>
     <message>
         <source>Please select an announcement to copy</source>
-        <translation>Пожалуйста выберите обьявление для копирования</translation>
+        <translation>Пожалуйста выберите объявление для копирования</translation>
     </message>
     <message>
         <source>Delete slideshow: &quot;</source>
@@ -2285,7 +2285,7 @@ Please enter a title.</source>
     </message>
     <message>
         <source>Delete Announcement?</source>
-        <translation>Удалить обьявление?</translation>
+        <translation>Удалить объявление?</translation>
     </message>
     <message>
         <source>This action will permanentrly delete this song</source>
@@ -2309,7 +2309,7 @@ Please enter a title.</source>
     </message>
     <message>
         <source>No announcement has been selected to delete</source>
-        <translation>Обьявление для удаления не выбрано</translation>
+        <translation>Объявление для удаления не выбрано</translation>
     </message>
     <message>
         <source>Do you want to save current schedule before opening a new schedule?</source>
@@ -2325,7 +2325,7 @@ Please enter a title.</source>
     </message>
     <message>
         <source>Please select a song to copy</source>
-        <translation>Выберете, пожалуйста, песню</translation>
+        <translation>Выберите, пожалуйста, песню</translation>
     </message>
     <message>
         <source>&amp;Delete Song</source>
@@ -2341,7 +2341,7 @@ Please enter a title.</source>
     </message>
     <message>
         <source>Please select a announcement to be printed.</source>
-        <translation>Пожалуйста выберите обьявление для печати.</translation>
+        <translation>Пожалуйста выберите объявление для печати.</translation>
     </message>
     <message>
         <source>Schedule not saved</source>
@@ -2349,19 +2349,19 @@ Please enter a title.</source>
     </message>
     <message>
         <source>&amp;Delete Announcement</source>
-        <translation>&amp;Удалить обьявление</translation>
+        <translation>&amp;Удалить объявление</translation>
     </message>
     <message>
         <source>This action will permanentrly delete this announcement</source>
-        <translation>Обьявление будет удалено навсегда</translation>
+        <translation>Объявление будет удалено навсегда</translation>
     </message>
     <message>
         <source>Delete announcement: &quot;</source>
-        <translation>Удалить обьявление: &quot;</translation>
+        <translation>Удалить объявление: &quot;</translation>
     </message>
     <message>
         <source>No announcement has been selected to be printed.</source>
-        <translation>Обьявление для печати не выбрано.</translation>
+        <translation>Объявление для печати не выбрано.</translation>
     </message>
     <message>
         <source>No media item has been selected to delete.</source>
@@ -2369,15 +2369,15 @@ Please enter a title.</source>
     </message>
     <message>
         <source>No slideshow has been selected to delete.</source>
-        <translation>Не выбрано слайдшову для удаления.</translation>
+        <translation>Не выбрано слайдшоу для удаления.</translation>
     </message>
     <message>
         <source>No announcement has been selected to edit</source>
-        <translation>Обьявление для редактирования не выбрано</translation>
+        <translation>Объявление для редактирования не выбрано</translation>
     </message>
     <message>
         <source>No announcement has been selected to copy</source>
-        <translation>Обьявление для копирования не выбрано</translation>
+        <translation>Объявление для копирования не выбрано</translation>
     </message>
     <message>
         <source>Announcements (F8)</source>
@@ -2393,11 +2393,11 @@ This schedule file version: </source>
     </message>
     <message>
         <source>No Announcement Selected</source>
-        <translation>Обьявление не выбрано</translation>
+        <translation>Объявление не выбрано</translation>
     </message>
     <message>
         <source>No announcement selected</source>
-        <translation>Обьявление не выбрано</translation>
+        <translation>Объявление не выбрано</translation>
     </message>
     <message>
         <source>Do you want to save current schedule before creating a new schedule?</source>
@@ -2419,7 +2419,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>SoftProjector schedule file </source>
-        <translation>Файлы програм SoftProjector </translation>
+        <translation>Файлы программы SoftProjector </translation>
     </message>
     <message>
         <source>Please select a media item to delete.</source>
@@ -2435,11 +2435,11 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>No slideshow has been selected to edit.</source>
-        <translation>Не выбрано слайдшову для редактирования.</translation>
+        <translation>Не выбрано слайдшоу для редактирования.</translation>
     </message>
     <message>
         <source>Please select an announcement to delete</source>
-        <translation>Пожалуйста выберите обьявление для удаления</translation>
+        <translation>Пожалуйста выберите объявление для удаления</translation>
     </message>
     <message>
         <source>Do you want to save current schedule before closing it?</source>
@@ -2666,7 +2666,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Prints selected Bible chapter, selected song and selected announcement.</source>
-        <translation>Печатать выбраную главу Библии, песню и обьявление.</translation>
+        <translation>Печатать выбранную главу Библии, песню и объявление.</translation>
     </message>
     <message>
         <source>File Tool Bar</source>
@@ -2762,7 +2762,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Edit Tool Bar</source>
-        <translation>Панельинструментов для редактирования</translation>
+        <translation>Панель инструментов для редактирования</translation>
     </message>
 </context>
 <context>
@@ -2871,11 +2871,11 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Left</source>
-        <translation>Лево</translation>
+        <translation>Влево</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Право</translation>
+        <translation>Вправо</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -2883,7 +2883,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Vertical Screen Use</source>
-        <translation>Использувать по-вертикали экрана</translation>
+        <translation>Использовать по-вертикали экрана</translation>
     </message>
     <message>
         <source>Use blurred shadow</source>
@@ -2987,7 +2987,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Vertical Screen Use:</source>
-        <translation>Использувать по-вертикали экрана:</translation>
+        <translation>Использовать по-вертикали экрана:</translation>
     </message>
     <message>
         <source>Underline</source>
@@ -2995,7 +2995,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Effects</source>
-        <translation>Эфекты</translation>
+        <translation>Эффекты</translation>
     </message>
     <message>
         <source>Select a image for song wallpaper</source>
@@ -3023,7 +3023,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Select to use either top portion of the screen or bottom.</source>
-        <translation>Выберете, какую часть экрана использовать.</translation>
+        <translation>Выберите какую часть экрана использовать.</translation>
     </message>
     <message>
         <source>Show Song Key</source>
@@ -3094,7 +3094,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Filter Type:</source>
-        <translation>Тип филтрации:</translation>
+        <translation>Тип фильтрации:</translation>
     </message>
     <message>
         <source>Contains Phrase</source>
@@ -3134,7 +3134,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Return</source>
-        <translation>Вернутся</translation>
+        <translation>Вернуться</translation>
     </message>
     <message>
         <source>Search</source>
@@ -3150,7 +3150,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Contains Word Phrase</source>
-        <translation>Содержить слово/фразу</translation>
+        <translation>Содержит слово/фразу</translation>
     </message>
     <message>
         <source>All song categories</source>
@@ -3198,7 +3198,7 @@ Please try again with different file name.</source>
     </message>
     <message>
         <source>Please enter search text</source>
-        <translation>Пожалуйся, введите текст для поиска</translation>
+        <translation>Пожалуйста, введите текст для поиска</translation>
     </message>
     <message>
         <source>Notes:</source>
