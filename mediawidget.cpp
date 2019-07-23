@@ -22,6 +22,10 @@
 #include "mediawidget.hpp"
 #include "ui_mediawidget.h"
 
+#ifdef Q_OS_WIN
+#include <Windows.h>// this need for Sleep function
+#endif
+
 MediaWidget::MediaWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MediaWidget)//,
@@ -403,7 +407,13 @@ void MediaWidget::goLiveFromSchedule()
 {
     while (!isReadyToPlay)
     {
-        Sleep(100);
+        int ms = 1000;
+#ifdef Q_OS_WIN
+        Sleep(uint(ms));
+#else
+        struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
+        nanosleep(&ts, nullptr);
+#endif
     }
     qDebug()<<videoWidget->isVisible()<<ui->pushButtonGoLive->isEnabled();
     if(ui->pushButtonGoLive->isEnabled())
