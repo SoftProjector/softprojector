@@ -183,7 +183,7 @@ void BibleWidget::sendToProjector(bool add_to_history)
 {
     bible.currentIdList = bible.previewIdList;
     QItemSelection selectedItems = ui->chapter_preview_list->selectionModel()->selection();
-  //  if(selectedItems.count())
+    if(selectedItems.count())
     {
         // Get the caption string to show above the show list (right-most list)
         QString cap = QString("%1 %2").arg(ui->listBook->currentItem()->text()).arg(ui->listChapterNum->currentItem()->text());
