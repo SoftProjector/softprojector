@@ -38,11 +38,11 @@ BibleSettings::BibleSettings()
     backgroundPix = QPixmap();
     textFont.fromString("Arial,48,-1,5,50,0,0,0,0,0");
     textColor = QColor(Qt::white);
-    textAlingmentV = 0;
-    textAlingmentH = 0;
+    textAlignmentV = 0;
+    textAlignmentH = 0;
     captionFont.fromString("Arial,36,-1,5,50,0,0,0,0,0");
     captionColor = QColor(Qt::white);
-    captionAlingment = 2;
+    captionAlignment = 2;
     captionPosition = 1;
     useAbbriviation = false;
     screenUse = 100;
@@ -72,8 +72,8 @@ SongSettings::SongSettings()
     backgroundPix = QPixmap();
     textColor = QColor(Qt::white);
     textFont.fromString("Arial,48,-1,5,50,0,0,0,0,0");
-    textAlingmentV = 1;
-    textAlingmentH = 1;
+    textAlignmentV = 1;
+    textAlignmentH = 1;
     screenUse = 100;
     screenPositon = 1;
     useDisp2settings = false;
@@ -90,8 +90,8 @@ AnnounceSettings::AnnounceSettings()
     backgroundPix = QPixmap();
     textFont.fromString("Arial,48,-1,5,50,0,0,0,0,0");
     textColor = QColor(Qt::white);
-    textAlingmentV = 0;
-    textAlingmentH = 1;
+    textAlignmentV = 0;
+    textAlignmentH = 1;
     useDisp2settings = false;
 }
 */
@@ -163,11 +163,11 @@ void Theme::saveBibleNew(int screen, BibleSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlingmentV);
-    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.textAlignmentV);
+    sq.addBindValue(settings.textAlignmentH);
     sq.addBindValue(settings.captionFont.toString());
     sq.addBindValue((unsigned int)(settings.captionColor.rgb()));
-    sq.addBindValue(settings.captionAlingment);
+    sq.addBindValue(settings.captionAlignment);
     sq.addBindValue(settings.captionPosition);
     sq.addBindValue(settings.useAbbriviation);
     sq.addBindValue(settings.screenUse);
@@ -205,8 +205,8 @@ void Theme::saveSongNew(int screen, SongSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont);
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlingmentV);
-    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.textAlignmentV);
+    sq.addBindValue(settings.textAlignmentH);
     sq.addBindValue(settings.screenUse);
     sq.addBindValue(settings.screenPosition);
     sq.addBindValue(settings.useDisp2settings);
@@ -229,8 +229,8 @@ void Theme::saveAnnounceNew(int screen, TextSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue(settings.textColor.rgb());
-    sq.addBindValue(settings.textAlingmentV);
-    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.textAlignmentV);
+    sq.addBindValue(settings.textAlignmentH);
     sq.addBindValue(settings.useDisp2settings);
     sq.exec();
 }
@@ -285,11 +285,11 @@ void Theme::saveBibleUpdate(int screen, BibleSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlingmentV);
-    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.textAlignmentV);
+    sq.addBindValue(settings.textAlignmentH);
     sq.addBindValue(settings.captionFont.toString());
     sq.addBindValue((unsigned int)(settings.captionColor.rgb()));
-    sq.addBindValue(settings.captionAlingment);
+    sq.addBindValue(settings.captionAlignment);
     sq.addBindValue(settings.captionPosition);
     sq.addBindValue(settings.useAbbriviation);
     sq.addBindValue(settings.screenUse);
@@ -328,8 +328,8 @@ void Theme::saveSongUpdate(int screen, SongSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont);
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlingmentV);
-    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.textAlignmentV);
+    sq.addBindValue(settings.textAlignmentH);
     sq.addBindValue(settings.screenUse);
     sq.addBindValue(settings.screenPosition);
     sq.addBindValue(settings.useDisp2settings);
@@ -353,8 +353,8 @@ void Theme::saveAnnounceUpdate(int screen, TextSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue(settings.textColor.rgb());
-    sq.addBindValue(settings.textAlingmentV);
-    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.textAlignmentV);
+    sq.addBindValue(settings.textAlignmentH);
     sq.addBindValue(settings.useDisp2settings);
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
@@ -436,11 +436,11 @@ void Theme::loadBible(int screen, BibleSettings &settings)
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
     settings.textFont.fromString(sr.field("text_font").value().toString());
     settings.textColor = QColor::fromRgb(sr.field("text_color").value().toUInt());
-    settings.textAlingmentV = sr.field("text_align_v").value().toInt();
-    settings.textAlingmentH = sr.field("text_align_h").value().toInt();
+    settings.textAlignmentV = sr.field("text_align_v").value().toInt();
+    settings.textAlignmentH = sr.field("text_align_h").value().toInt();
     settings.captionFont.fromString(sr.field("caption_font").value().toString());
     settings.captionColor = QColor::fromRgb(sr.field("caption_color").value().toUInt());
-    settings.captionAlingment = sr.field("caption_align").value().toInt();
+    settings.captionAlignment = sr.field("caption_align").value().toInt();
     settings.captionPosition = sr.field("caption_position").value().toInt();
     settings.useAbbriviation = sr.field("use_abbr").value().toBool();
     settings.screenUse = sr.field("screen_use").value().toInt();
@@ -474,8 +474,8 @@ void Theme::loadSong(int screen, SongSettings &settings)
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
     settings.textFont.fromString(sr.field("text_font").value().toString());
     settings.textColor = QColor::fromRgb(sr.field("text_color").value().toUInt());
-    settings.textAlingmentV = sr.field("text_align_v").value().toInt();
-    settings.textAlingmentH = sr.field("text_align_h").value().toInt();
+    settings.textAlignmentV = sr.field("text_align_v").value().toInt();
+    settings.textAlignmentH = sr.field("text_align_h").value().toInt();
     settings.screenUse = sr.field("screen_use").value().toInt();
     settings.screenPosition = sr.field("screen_position").value().toInt();
     settings.useDisp2settings = sr.field("use_disp_2").value().toBool();
@@ -496,8 +496,8 @@ void Theme::loadAnnounce(int screen, TextSettings &settings)
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
     settings.textFont.fromString(sr.field("text_font").value().toString());
     settings.textColor = QColor::fromRgb(sr.field("text_color").value().toUInt());
-    settings.textAlingmentV = sr.field("text_align_v").value().toInt();
-    settings.textAlingmentH = sr.field("text_align_h").value().toInt();
+    settings.textAlignmentV = sr.field("text_align_v").value().toInt();
+    settings.textAlignmentH = sr.field("text_align_h").value().toInt();
     settings.useDisp2settings = sr.field("use_disp_2").value().toBool();
 }
 

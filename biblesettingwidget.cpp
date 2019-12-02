@@ -70,19 +70,19 @@ void BibleSettingWidget::getSettings(BibleSettings &settings, BibleSettings &set
     mySettings2.useBackground = ui->groupBoxBackground2->isChecked();
     mySettings2.backgroundName = ui->lineEditBackPath2->text();
 
-    //Alingment
-    mySettings.textAlingmentV = ui->comboBoxVerticalAling->currentIndex();
-    mySettings.textAlingmentH = ui->comboBoxHorizontalAling->currentIndex();
+    //Alignment
+    mySettings.textAlignmentV = ui->comboBoxVerticalAling->currentIndex();
+    mySettings.textAlignmentH = ui->comboBoxHorizontalAling->currentIndex();
 
-    mySettings2.textAlingmentV = ui->comboBoxVerticalAling2->currentIndex();
-    mySettings2.textAlingmentH = ui->comboBoxHorizontalAling2->currentIndex();
+    mySettings2.textAlignmentV = ui->comboBoxVerticalAling2->currentIndex();
+    mySettings2.textAlignmentH = ui->comboBoxHorizontalAling2->currentIndex();
 
     //Caption Alignment
     mySettings.captionPosition = ui->comboBoxCaptionPosition->currentIndex();
-    mySettings.captionAlingment = ui->comboBoxCaptionAlign->currentIndex();
+    mySettings.captionAlignment = ui->comboBoxCaptionAlign->currentIndex();
 
     mySettings2.captionPosition = ui->comboBoxCaptionPosition2->currentIndex();
-    mySettings2.captionAlingment = ui->comboBoxCaptionAlign2->currentIndex();
+    mySettings2.captionAlignment = ui->comboBoxCaptionAlign2->currentIndex();
 
     // Version Abbreviations
     mySettings.useAbbriviation = ui->checkBoxAbbiviations->isChecked();
@@ -208,12 +208,12 @@ void BibleSettingWidget::loadSettings()
     ui->labelFont->setText(getFontText(mySettings.textFont));
     ui->labelFont2->setText(getFontText(mySettings2.textFont));
 
-    // Set alingment
-    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlingmentV);
-    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlingmentH);
+    // Set alignment
+    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlignmentV);
+    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlignmentH);
 
-    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlingmentV);
-    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlingmentH);
+    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlignmentV);
+    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlignmentH);
 
     // Set caption color
     p.setColor(QPalette::Base,mySettings.captionColor);
@@ -230,8 +230,8 @@ void BibleSettingWidget::loadSettings()
     ui->comboBoxCaptionPosition->setCurrentIndex(mySettings.captionPosition);
     ui->comboBoxCaptionPosition2->setCurrentIndex(mySettings2.captionPosition);
 
-    ui->comboBoxCaptionAlign->setCurrentIndex(mySettings.captionAlingment);
-    ui->comboBoxCaptionAlign2->setCurrentIndex(mySettings2.captionAlingment);
+    ui->comboBoxCaptionAlign->setCurrentIndex(mySettings.captionAlignment);
+    ui->comboBoxCaptionAlign2->setCurrentIndex(mySettings2.captionAlignment);
 
     // Set abbriviations use
     ui->checkBoxAbbiviations->setChecked(mySettings.useAbbriviation);
