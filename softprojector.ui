@@ -589,7 +589,7 @@
     <string>Show</string>
    </property>
    <property name="toolTip">
-    <string>Dsiplay to the screen (F4)</string>
+    <string>Display to the screen (F4)</string>
    </property>
    <property name="shortcut">
     <string>F4</string>
