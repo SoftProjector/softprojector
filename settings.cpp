@@ -26,8 +26,8 @@ TextSettingsBase::TextSettingsBase()
     textFont.fromString("Arial,16,-1,5,50,0,0,0,0,0");
     textColor = QColor(Qt::white);
     textShadowColor = QColor(Qt::black);
-    textAlingmentV = 0;
-    textAlingmentH = 0;
+    textAlignmentV = 0;
+    textAlignmentH = 0;
     backgroundType = 0;
     backgroundColor = QColor(Qt::black);
     backgroundName = "";
@@ -67,7 +67,7 @@ BibleSettings::BibleSettings()
     captionColor = QColor(Qt::white);
     isNotSameColor = false;
     captionShadowColor = QColor(Qt::black);
-    captionAlingment = 2;
+    captionAlignment = 2;
     captionPosition = 1;
     useAbbriviation = false;
     setChangeHandes();
@@ -75,8 +75,8 @@ BibleSettings::BibleSettings()
 
 SongSettings::SongSettings()
 {
-    textAlingmentV = 1;
-    textAlingmentH = 1;
+    textAlignmentV = 1;
+    textAlignmentH = 1;
     showStanzaTitle = false;
     showSongKey = false;
     showSongNumber = false;
@@ -165,10 +165,10 @@ void TextSettingsBase::loadBase(QSqlQuery &sq)
             textColor = QColor(sq.value(1).toUInt());
         else if(n == "textShadowColor")
             textShadowColor = QColor(sq.value(1).toUInt());
-        else if(n == "textAlingmentV")
-            textAlingmentV = sq.value(1).toInt();
-        else if(n == "textAlingmentH")
-            textAlingmentH = sq.value(1).toInt();
+        else if(n == "textAlignmentV")
+            textAlignmentV = sq.value(1).toInt();
+        else if(n == "textAlignmentH")
+            textAlignmentH = sq.value(1).toInt();
         else if(n == "backgroundType")
             backgroundType = sq.value(1).toInt();
         else if(n == "backgroundColor")
@@ -210,8 +210,8 @@ void TextSettingsBase::saveBase(QSqlQuery &sq)
     saveIndividualSettings(sq,id,themeId,"textFont",textFont.toString());
     saveIndividualSettings(sq,id,themeId,"textColor",textColor.rgb());
     saveIndividualSettings(sq,id,themeId,"textShadowColor",textShadowColor.rgb());
-    saveIndividualSettings(sq,id,themeId,"textAlingmentV",textAlingmentV);
-    saveIndividualSettings(sq,id,themeId,"textAlingmentH",textAlingmentH);
+    saveIndividualSettings(sq,id,themeId,"textAlignmentV",textAlignmentV);
+    saveIndividualSettings(sq,id,themeId,"textAlignmentH",textAlignmentH);
     saveIndividualSettings(sq,id,themeId,"transitionType",transitionType);
     saveIndividualSettings(sq,id,themeId,"effectsType",effectsType);
     saveIndividualSettings(sq,id,themeId,"backgroundType",backgroundType);
@@ -255,10 +255,10 @@ void TextSettingsBase::updateBase(QSqlQuery &sq)
         updateIndividualSettings(sq,id,themeId,"textShadowColor",textShadowColor.rgb());
 
     if(isChangedAlingV)
-        updateIndividualSettings(sq,id,themeId,"textAlingmentV",textAlingmentV);
+        updateIndividualSettings(sq,id,themeId,"textAlignmentV",textAlignmentV);
 
     if(isChangedAlingH)
-        updateIndividualSettings(sq,id,themeId,"textAlingmentH",textAlingmentH);
+        updateIndividualSettings(sq,id,themeId,"textAlignmentH",textAlignmentH);
 
     if(isChangesTranType)
         updateIndividualSettings(sq,id,themeId,"transitionType",transitionType);
@@ -434,8 +434,8 @@ void BibleSettings::load(QSqlQuery &sq)
             isNotSameColor = sq.value(1).toBool();
         else if(n == "captionShadowColor")
             captionShadowColor = QColor(sq.value(1).toUInt());
-        else if(n == "captionAlingment")
-            captionAlingment = sq.value(1).toInt();
+        else if(n == "captionAlignment")
+            captionAlignment = sq.value(1).toInt();
         else if(n == "captionPosition")
             captionPosition = sq.value(1).toInt();
         else if(n == "useAbbriviation")
@@ -464,7 +464,7 @@ void BibleSettings::save(QSqlQuery &sq)
     saveIndividualSettings(sq,id,themeId,"captionColor",captionColor.rgb());
     saveIndividualSettings(sq,id,themeId,"isNotSameColor",isNotSameColor);
     saveIndividualSettings(sq,id,themeId,"captionShadowColor",captionShadowColor.rgb());
-    saveIndividualSettings(sq,id,themeId,"captionAlingment",captionAlingment);
+    saveIndividualSettings(sq,id,themeId,"captionAlignment",captionAlignment);
     saveIndividualSettings(sq,id,themeId,"captionPosition",captionPosition);
     saveIndividualSettings(sq,id,themeId,"useAbbriviation",useAbbriviation);
 }
@@ -500,7 +500,7 @@ void BibleSettings::update(QSqlQuery &sq)
         updateIndividualSettings(sq,id,themeId,"captionShadowColor",captionShadowColor.rgb());
 
     if(isChangedCapAlign)
-        updateIndividualSettings(sq,id,themeId,"captionAlingment",captionAlingment);
+        updateIndividualSettings(sq,id,themeId,"captionAlignment",captionAlignment);
 
     if(isChangedCapPos)
         updateIndividualSettings(sq,id,themeId,"captionPosition",captionPosition);

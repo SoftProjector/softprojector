@@ -783,8 +783,8 @@ bool Song::isValid()
 
 void Song::getSettings(SongSettings &settings)
 {
-    settings.textAlingmentV = alignmentV;
-    settings.textAlingmentH = alignmentH;
+    settings.textAlignmentV = alignmentV;
+    settings.textAlignmentH = alignmentH;
     settings.useBackground = useBackground;
     settings.backgroundName = backgroundName;
     settings.backgroundPix = background;
