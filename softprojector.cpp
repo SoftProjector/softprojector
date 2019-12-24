@@ -483,6 +483,7 @@ void SoftProjector::setAnnounceText(Announcement announce, int row)
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/announce.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(currentAnnounce.title);
+    ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(5); // ?
     ui->listShow->setWordWrap(true);
@@ -509,6 +510,13 @@ void SoftProjector::setSongList(Song song, int row)
     ui->listShow->clear();
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/song_tab.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(song.title);
+    if(song.notes.isEmpty())
+        ui->labelSongNotes->setVisible(false);
+    else
+    {
+        ui->labelSongNotes->setText(QString("%1\n%2").arg(tr("Notes:","Notes to songs")).arg(song.notes));
+        ui->labelSongNotes->setVisible(true);
+    }
     ui->listShow->setSpacing(5);
     ui->listShow->setWordWrap(false);
     ui->listShow->addItems(song_list);
@@ -528,6 +536,7 @@ void SoftProjector::setChapterList(QStringList chapter_list, QString caption, QI
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/book.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(caption);
+    ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(2);
     ui->listShow->setWordWrap(true);
@@ -556,6 +565,7 @@ void SoftProjector::setPictureList(QList<SlideShowItem> &image_list,int row,QStr
     pictureShowList = image_list;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/photo.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(name);
+    ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(1);
     ui->listShow->setIconSize(QSize(100,100));
@@ -588,6 +598,7 @@ void SoftProjector::setVideo(VideoInfo &video)
     }
     new_list = true;
     ui->listShow->clear();
+    ui->labelSongNotes->setVisible(false);
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/video.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(currentVideo.fileName);
     new_list = false;
