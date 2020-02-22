@@ -244,6 +244,8 @@ private slots:
     void on_actionCloseDisplay_triggered();
     void updateCloseDisplayButtons(bool isOn);
 
+    void on_comboBox_currentIndexChanged(int index);
+
 protected:
     void closeEvent(QCloseEvent *event);
     void keyPressEvent(QKeyEvent *event);

@@ -192,6 +192,50 @@
          </widget>
         </item>
         <item>
+         <widget class="QComboBox" name="comboBox">
+          <item>
+           <property name="text">
+            <string>Light</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Blue Cerulean</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dark</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Brown Sand</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Blue NCS</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>High Contrast</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Blue Icy</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Qt</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
          <widget class="QListWidget" name="listShow">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">

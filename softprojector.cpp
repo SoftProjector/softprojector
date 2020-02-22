@@ -2484,3 +2484,45 @@ void SoftProjector::openScheduleItem(QSqlQuery &q, const int scid, Announcement 
     a.alignmentV = q.value(12).toInt();
     a.alignmentH = q.value(13).toInt();
 }
+
+void SoftProjector::on_comboBox_currentIndexChanged(int index)
+{
+    QPalette pal = window()->palette();
+
+    switch (index) {
+    case 0:
+        pal.setColor(QPalette::Window, QRgb(0xf0f0f0));
+        pal.setColor(QPalette::WindowText, QRgb(0x404044));
+        break;
+    case 1:
+        pal.setColor(QPalette::Window, QRgb(0x40434a));
+        pal.setColor(QPalette::WindowText, QRgb(0xd6d6d6));
+        break;
+
+    case 2:
+        pal.setColor(QPalette::Window, QRgb(0x121218));
+        pal.setColor(QPalette::WindowText, QRgb(0xd6d6d6));
+        break;
+    case 3:
+        pal.setColor(QPalette::Window, QRgb(0x9e8965));
+        pal.setColor(QPalette::WindowText, QRgb(0x404044));
+        break;
+    case 4:
+        pal.setColor(QPalette::Window, QRgb(0x018bba));
+        pal.setColor(QPalette::WindowText, QRgb(0x404044));
+        break;
+    case 5:
+        pal.setColor(QPalette::Window, QRgb(0xffab03));
+        pal.setColor(QPalette::WindowText, QRgb(0x181818));
+        break;
+    case 6:
+        pal.setColor(QPalette::Window, QRgb(0xcee7f0));
+        pal.setColor(QPalette::WindowText, QRgb(0x404044));
+        break;
+    default:
+        pal.setColor(QPalette::Window, QRgb(0xf0f0f0));
+        pal.setColor(QPalette::WindowText, QRgb(0x404044));
+        break;
+    }
+    window()->setPalette(pal);
+}
