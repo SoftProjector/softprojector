@@ -200,29 +200,42 @@ void SongWidget::sendToProjector(Song song, int row)
     counter.addSongCount(song);
 }
 
+/**
+ * @brief SongWidget::on_songbook_menu_currentIndexChanged Filters
+ * songs per selected songbook.
+ *
+ * @param index Songbook Index from Songbook menu
+ */
 void SongWidget::on_songbook_menu_currentIndexChanged(int index)
 {
     // Called when a different songbook is selected from the pull-down menu
 
-    songs_model->emitLayoutAboutToBeChanged(); //prepeare to chage layout
-    if( index == 0 )
-    {
-        proxy_model->setSongbookFilter("ALL");
+    QString songbookName = "ALL";
+
+    /*
+     *  For index greater than zero, its a specific songbook,
+     * filter by that songbook name.
+     *
+     * Todo: There can be a chance that there could be more than one
+     * songbook with same name. Fix this to filter by songbook ID rather
+     * than songbook name.
+     * */
+    if (index > 0){
+        songbookName = ui->songbook_menu->currentText();
+        ui->song_num_spinbox->setEnabled(true);
+    } else {
         ui->song_num_spinbox->setEnabled(false);
     }
-    else
-    {
-        QString songbook_name = ui->songbook_menu->currentText();
-        proxy_model->setSongbookFilter(songbook_name);
-        ui->song_num_spinbox->setEnabled(true);
-    }
+
+    songs_model->emitLayoutAboutToBeChanged(); //prepeare to chage layout
+    proxy_model->setSongbookFilter(songbookName);
+    songs_model->emitLayoutChanged(); // forces the view to redraw
 
     updateButtonStates();
 
     // Sort by song number at initial load, and with songbook change
     proxy_model->sort(1);
 
-    songs_model->emitLayoutChanged(); // forces the view to redraw
 }
 
 void SongWidget::on_song_num_spinbox_valueChanged(int value)
