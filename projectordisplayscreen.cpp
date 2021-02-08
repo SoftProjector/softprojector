@@ -302,9 +302,15 @@ void ProjectorDisplayScreen::renderPassiveText(QPixmap &back, bool useBack)
 {
     setTextPixmap(imGen.generateEmptyImage());
     if(useBack)
+    {
+        backType = B_PICTURE;
         setBackPixmap(back,0);
+    }
     else
+    {
+        backType = B_NONE;
         setBackPixmap(imGen.generateColorImage(m_color),0);
+    }
 
     updateScreen();
 }
