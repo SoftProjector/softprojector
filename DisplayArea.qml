@@ -45,6 +45,7 @@ Rectangle {
     signal positionChanged(int position)
     signal durationChanged(int duration)
     signal playbackStateChanged(int state)
+    signal playbackStopped()
 
     MediaPlayer
     {
@@ -64,7 +65,10 @@ Rectangle {
         {
             dispArea.playbackStateChanged(player.playbackState)
         }
-
+        onStopped:
+        {
+            dispArea.playbackStopped()
+        }
     }
 
     VideoOutput

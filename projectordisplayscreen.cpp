@@ -43,6 +43,7 @@ ProjectorDisplayScreen::ProjectorDisplayScreen(QWidget *parent) :
     connect(dispObj,SIGNAL(positionChanged(int)),this,SLOT(videoPositionChanged(int)));
     connect(dispObj,SIGNAL(durationChanged(int)),this,SLOT(videoDurationChanged(int)));
     connect(dispObj,SIGNAL(playbackStateChanged(int)),this,SLOT(videoPlaybackStateChanged(int)));
+    connect(dispObj,SIGNAL(playbackStopped()),this,SLOT(playbackStopped()));
 
     backImSwitch1 = backImSwitch2 = textImSwitch1 = textImSwitch2 = false;
     back1to2 = text1to2 = isNewBack = true;
@@ -467,6 +468,11 @@ void ProjectorDisplayScreen::stopVideo()
 {
     QObject *root = dispView->rootObject();
     QMetaObject::invokeMethod(root,"stopVideo");
+}
+
+void ProjectorDisplayScreen::playbackStopped()
+{
+    emit videoStopped();
 }
 
 void ProjectorDisplayScreen::setVideoVolume(int level)
