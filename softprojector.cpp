@@ -172,6 +172,7 @@ SoftProjector::SoftProjector(QWidget *parent)
             mediaControls,SLOT(setMaximumTime(qint64)));
     connect(pds1,SIGNAL(videoPlaybackStateChanged(QMediaPlayer::State)),
             mediaControls,SLOT(updatePlayerState(QMediaPlayer::State)));
+    connect(pds1,SIGNAL(videoStopped()),this,SLOT(videoStopped()));
     connect(mediaControls,SIGNAL(play()),this,SLOT(playVideo()));
     connect(mediaControls,SIGNAL(pause()),this,SLOT(pauseVideo()));
     connect(mediaControls,SIGNAL(stop()),this,SLOT(stopVideo()));
@@ -639,6 +640,12 @@ void SoftProjector::setVideoPosition(qint64 position)
     {
         pds2->setVideoPosition(position);
     }
+}
+
+void SoftProjector::videoStopped()
+{
+    showing = false;
+    updateScreen();
 }
 
 void SoftProjector::on_listShow_currentRowChanged(int currentRow)

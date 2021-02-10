@@ -189,6 +189,7 @@ private slots:
     void pauseVideo();
     void stopVideo();
     void setVideoPosition(qint64 position);
+    void videoStopped();
 
     void on_listShow_itemSelectionChanged();
     void on_rbMultiVerse_toggled(bool checked);
