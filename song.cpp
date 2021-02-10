@@ -584,9 +584,19 @@ void SongProxyModel::setCategoryFilter(int category)
     category_filter = QString::number(category);
 }
 
+/**
+ * @brief Reimplements QSortFilterProxyModel::filterAcceptsRow
+ * @param sourceRow source row at question
+ * @param sourceParent SongModel reference
+ * @return True if a sourceRow has matched a set filter
+ */
 bool SongProxyModel::filterAcceptsRow(int sourceRow,
                                       const QModelIndex &sourceParent) const
 {
+    bool retValue = false;
+    QRegExp rx;
+    QString s;
+
     QModelIndex index0 = sourceModel()->index(sourceRow, 0, sourceParent);//Category
     QModelIndex index1 = sourceModel()->index(sourceRow, 1, sourceParent);//Song Number
     QModelIndex index2 = sourceModel()->index(sourceRow, 2, sourceParent);//Song Title
@@ -596,7 +606,6 @@ bool SongProxyModel::filterAcceptsRow(int sourceRow,
     QString str1 = sourceModel()->data(index1).toString();//Song Number
     QString str2 = sourceModel()->data(index2).toString();//Song Title
     QString str3 = sourceModel()->data(index3).toString();//Songbook
-
 
     // Exclude rows that are not part of the selected songbook:
     if( songbook_filter != "ALL" )
@@ -612,25 +621,26 @@ bool SongProxyModel::filterAcceptsRow(int sourceRow,
         // No filter specified
         return true;
 
-    QRegExp rx;
+    // Process filtering
     rx.setCaseSensitivity(Qt::CaseInsensitive);
-    QString s = filter_string;
+    s = filter_string;
     s.replace(" ","\\W*");
+
     if(exact_match)
-        return ( str1.compare(filter_string, Qt::CaseInsensitive) == 0
+        retValue = ( str1.compare(filter_string, Qt::CaseInsensitive) == 0
                  || str2.compare(filter_string, Qt::CaseInsensitive) == 0 );
     else if(match_beginning)
     {
         rx.setPattern("^"+s);
-        return (str1.contains(rx)
-                || str2.contains(rx) );
+        retValue = (str1.contains(rx) || str2.contains(rx) );
     }
     else
     {
         rx.setPattern(s);
-        return (str1.contains(rx)
-                || str2.contains(rx) );
+        retValue = (str1.contains(rx) || str2.contains(rx) );
     }
+
+    return retValue;
 }
 
 SongDatabase::SongDatabase()
