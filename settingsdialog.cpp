@@ -50,6 +50,8 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
     // Connect display screen slot
     connect(generalSettingswidget,SIGNAL(setDisp2Use(bool)),this,SLOT(setUseDispScreen2(bool)));
+    connect(generalSettingswidget,SIGNAL(setDisp3Use(bool)),this,SLOT(setUseDispScreen3(bool)));
+    connect(generalSettingswidget,SIGNAL(setDisp4Use(bool)),this,SLOT(setUseDispScreen4(bool)));
     connect(generalSettingswidget,SIGNAL(themeChanged(int)),this,SLOT(changeTheme(int)));
 
     // Connect Apply to all
@@ -60,22 +62,27 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 }
 
 void SettingsDialog::loadSettings(GeneralSettings &sets, Theme &thm, SlideShowSettings &ssets,
-                                  BibleVersionSettings &bsets, BibleVersionSettings &bsets2)
+                                  BibleVersionSettings &bsets, BibleVersionSettings &bsets2,
+                                  BibleVersionSettings &bsets3, BibleVersionSettings &bsets4)
 {
     gsettings = sets;
     theme = thm;
     bsettings = bsets;
     bsettings2 = bsets2;
+    bsettings3 = bsets3;
+    bsettings4 = bsets4;
     ssettings = ssets;
 
     // remember main display window setting if they will be changed
     is_always_on_top = gsettings.displayIsOnTop;
     current_display_screen = gsettings.displayScreen;
     currentDisplayScreen2 = gsettings.displayScreen2;
+    currentDisplayScreen3 = gsettings.displayScreen3;
+    currentDisplayScreen4 = gsettings.displayScreen4;
 
     // Set individual items
     generalSettingswidget->setSettings(gsettings);
-    bibleSettingswidget->setBibleVersions(bsettings,bsettings2);
+    bibleSettingswidget->setBibleVersions(bsettings,bsettings2,bsettings3,bsettings4);
     pictureSettingWidget->setSettings(ssettings);
     setThemes();
 }
@@ -120,6 +127,23 @@ void SettingsDialog::setUseDispScreen2(bool toUse)
     announcementSettingswidget->setDispScreen2Visible(toUse);
 }
 
+void SettingsDialog::setUseDispScreen3(bool toUse)
+{
+    // TODO add GUI objects
+    passiveSettingwidget->setDispScreen3Visible(toUse);
+    bibleSettingswidget->setDispScreen3Visible(toUse);
+    //songSettingswidget->setDispScreen3Visible(toUse);
+    //announcementSettingswidget->setDispScreen3Visible(toUse);
+}
+
+void SettingsDialog::setUseDispScreen4(bool toUse)
+{
+    passiveSettingwidget->setDispScreen4Visible(toUse);
+    bibleSettingswidget->setDispScreen4Visible(toUse);
+    //songSettingswidget->setDispScreen4Visible(toUse);
+    //announcementSettingswidget->setDispScreen4Visible(toUse);
+}
+
 void SettingsDialog::on_buttonBox_clicked(QAbstractButton *button)
 {
     if(button == btnOk)
@@ -136,17 +160,19 @@ void SettingsDialog::on_buttonBox_clicked(QAbstractButton *button)
 void SettingsDialog::applySettings()
 {
     gsettings = generalSettingswidget->getSettings();
-    bibleSettingswidget->getBibleVersions(bsettings,bsettings2);
+    bibleSettingswidget->getBibleVersions(bsettings,bsettings2,bsettings3,bsettings4);
     pictureSettingWidget->getSettings(ssettings);
     getThemes();
 
     // Apply settings
-    emit updateSettings(gsettings,theme,ssettings,bsettings,bsettings2);
+    emit updateSettings(gsettings,theme,ssettings,bsettings,bsettings2,bsettings3,bsettings4);
 
     // Update <display_on_top> only when changed, or when screen location has been changed
     if(is_always_on_top!=gsettings.displayIsOnTop
             || current_display_screen!=gsettings.displayScreen
-            || currentDisplayScreen2!=gsettings.displayScreen2)
+            || currentDisplayScreen2!=gsettings.displayScreen2
+            || currentDisplayScreen3!=gsettings.displayScreen3
+            || currentDisplayScreen4!=gsettings.displayScreen4)
     {
         emit positionsDisplayWindow();
     }
@@ -161,20 +187,22 @@ void SettingsDialog::applySettings()
     is_always_on_top = gsettings.displayIsOnTop;
     current_display_screen = gsettings.displayScreen;
     currentDisplayScreen2 = gsettings.displayScreen2;
+    currentDisplayScreen3 = gsettings.displayScreen3;
+    currentDisplayScreen4 = gsettings.displayScreen4;
 }
 
 void SettingsDialog::getThemes()
 {
-    passiveSettingwidget->getSettings(theme.passive, theme.passive2);
-    bibleSettingswidget->getSettings(theme.bible, theme.bible2);
+    passiveSettingwidget->getSettings(theme.passive, theme.passive2, theme.passive3, theme.passive4);
+    bibleSettingswidget->getSettings(theme.bible, theme.bible2, theme.bible3, theme.bible4);
     songSettingswidget->getSettings(theme.song, theme.song2);
     announcementSettingswidget->getSettings(theme.announce, theme.announce2);
 }
 
 void SettingsDialog::setThemes()
 {
-    passiveSettingwidget->setSetings(theme.passive, theme.passive2);
-    bibleSettingswidget->setSettings(theme.bible, theme.bible2);
+    passiveSettingwidget->setSetings(theme.passive, theme.passive2, theme.passive3, theme.passive4);
+    bibleSettingswidget->setSettings(theme.bible, theme.bible2, theme.bible3, theme.bible4);
     songSettingswidget->setSettings(theme.song, theme.song2);
     announcementSettingswidget->setSettings(theme.announce, theme.announce2);
 }

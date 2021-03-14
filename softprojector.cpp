@@ -36,6 +36,8 @@ SoftProjector::SoftProjector(QWidget *parent)
     // Update Themes Bible Versions
     theme.bible.versions = mySettings.bibleSets;
     theme.bible2.versions = mySettings.bibleSets2;
+    theme.bible3.versions = mySettings.bibleSets3;
+    theme.bible4.versions = mySettings.bibleSets4;
 
     //Setting up the Display Screen
     desktop = new QDesktopWidget();
@@ -43,6 +45,8 @@ SoftProjector::SoftProjector(QWidget *parent)
     // so this will initialize the Display1 widget on the main screen:
     pds1 = new ProjectorDisplayScreen(desktop->screen(0));
     pds2 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
+    pds3 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
+    pds4 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
     // Don't worry, we'll move it later
 
     bibleWidget = new BibleWidget;
@@ -69,7 +73,7 @@ SoftProjector::SoftProjector(QWidget *parent)
     // display window (Mac OS X)
 
     // Apply Settings
-    applySetting(mySettings.general, theme, mySettings.slideSets, mySettings.bibleSets, mySettings.bibleSets2);
+    applySetting(mySettings.general, theme, mySettings.slideSets, mySettings.bibleSets, mySettings.bibleSets2, mySettings.bibleSets3, mySettings.bibleSets4);
 
     positionDisplayWindow();
 
@@ -105,8 +109,10 @@ SoftProjector::SoftProjector(QWidget *parent)
     connect(pds1,SIGNAL(nextSlide()),this,SLOT(nextSlide()));
     connect(pds1,SIGNAL(prevSlide()),this,SLOT(prevSlide()));
     connect(settingsDialog,SIGNAL(updateSettings(GeneralSettings&,Theme&,SlideShowSettings&,
+                                                 BibleVersionSettings&,BibleVersionSettings&,
                                                  BibleVersionSettings&,BibleVersionSettings&)),
             this,SLOT(updateSetting(GeneralSettings&,Theme&,SlideShowSettings&,
+                                    BibleVersionSettings&,BibleVersionSettings&,
                                     BibleVersionSettings&,BibleVersionSettings&)));
     connect(settingsDialog,SIGNAL(positionsDisplayWindow()),this,SLOT(positionDisplayWindow()));
     connect(settingsDialog,SIGNAL(updateScreen()),this,SLOT(updateScreen()));
@@ -197,6 +203,8 @@ SoftProjector::~SoftProjector()
     delete mediaPlayer;
     delete pds1;
     delete pds2;
+    delete pds3;
+    delete pds4;
     delete desktop;
     delete languageGroup;
     delete settingsDialog;
@@ -217,11 +225,15 @@ void SoftProjector::positionDisplayWindow()
     {
         pds1->setWindowFlags(Qt::WindowStaysOnTopHint);
         pds2->setWindowFlags(Qt::WindowStaysOnTopHint);
+        pds3->setWindowFlags(Qt::WindowStaysOnTopHint);
+        pds4->setWindowFlags(Qt::WindowStaysOnTopHint);
     }
     else
     {
         pds1->setWindowFlags(0); // Do not show always on top
         pds2->setWindowFlags(0); // Do not show always on top
+        pds3->setWindowFlags(0); // Do not show always on top
+        pds4->setWindowFlags(0); // Do not show always on top
     }
 
     if(desktop->screenCount() > 1)
@@ -272,6 +284,56 @@ void SoftProjector::positionDisplayWindow()
             pds2->hide();
         }
 
+        // check if to display tertiary display screen
+        if(mySettings.general.displayScreen3>=0)
+        {
+            hasDisplayScreen3 = true;
+            if (desktop->isVirtualDesktop())
+            {
+                // Move the display widget to screen 1 (tertiary screen):
+                pds3->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen3));
+                pds3->resetImGenSize();
+
+            }
+            pds3->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+            pds3->renderPassiveText(theme.passive3.backgroundPix,theme.passive3.useBackground);
+            pds3->setControlsVisible(false);
+            if(mySettings.general.displayOnStartUp)
+            {
+                pds3->showFullScreen();
+            }
+        }
+        else
+        {
+            hasDisplayScreen3 = false;
+            pds3->hide();
+        }
+
+        // check if to display quaternary display screen
+        if(mySettings.general.displayScreen4>=0)
+        {
+            hasDisplayScreen4 = true;
+            if (desktop->isVirtualDesktop())
+            {
+                // Move the display widget to screen 1 (quaternary screen):
+                pds4->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen4));
+                pds4->resetImGenSize();
+
+            }
+            pds4->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+            pds4->renderPassiveText(theme.passive4.backgroundPix,theme.passive4.useBackground);
+            pds4->setControlsVisible(false);
+            if(mySettings.general.displayOnStartUp)
+            {
+                pds4->showFullScreen();
+            }
+        }
+        else
+        {
+            hasDisplayScreen4 = false;
+            pds4->hide();
+        }
+
         // specify that there is more than one diplay screen(monitor) availbale
         isSingleScreen = false;
     }
@@ -284,6 +346,8 @@ void SoftProjector::positionDisplayWindow()
         showDisplayScreen(false);
         isSingleScreen = true;
         hasDisplayScreen2 = false;
+        hasDisplayScreen3 = false;
+        hasDisplayScreen4 = false;
     }
 }
 
@@ -336,12 +400,15 @@ void SoftProjector::saveSettings()
 }
 
 void SoftProjector::updateSetting(GeneralSettings &g, Theme &t, SlideShowSettings &ssets,
-                                  BibleVersionSettings &bsets, BibleVersionSettings &bsets2)
+                                  BibleVersionSettings &bsets, BibleVersionSettings &bsets2,
+                                  BibleVersionSettings &bsets3, BibleVersionSettings &bsets4)
 {
     mySettings.general = g;
     mySettings.slideSets = ssets;
     mySettings.bibleSets = bsets;
     mySettings.bibleSets2 = bsets2;
+    mySettings.bibleSets3 = bsets3;
+    mySettings.bibleSets4 = bsets4;
     mySettings.saveSettings();
     theme = t;
     bibleWidget->setSettings(mySettings.bibleSets);
@@ -349,12 +416,15 @@ void SoftProjector::updateSetting(GeneralSettings &g, Theme &t, SlideShowSetting
 
     theme.bible.versions = mySettings.bibleSets;
     theme.bible2.versions = mySettings.bibleSets2;
+    theme.bible3.versions = mySettings.bibleSets3;
+    theme.bible4.versions = mySettings.bibleSets4;
 }
 
 void SoftProjector::applySetting(GeneralSettings &g, Theme &t, SlideShowSettings &s,
-                                 BibleVersionSettings &b1, BibleVersionSettings &b2)
+                                 BibleVersionSettings &b1, BibleVersionSettings &b2,
+                                 BibleVersionSettings &b3, BibleVersionSettings &b4)
 {
-    updateSetting(g,t,s,b1,b2);
+    updateSetting(g,t,s,b1,b2,b3,b4);
 
     // Apply splitter states
     ui->splitter->restoreState(mySettings.spMain.spSplitter);
@@ -437,7 +507,7 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     if(key == Qt::Key_F6)
     {
         ui->projectTab->setCurrentWidget(bibleWidget);
-        bibleWidget->setBibleBookActive();
+        bibleWidget->setSearchActive();
     }
     else if(key == Qt::Key_F7)
     {
@@ -446,11 +516,6 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     }
     else if(key == Qt::Key_F8)
         ui->projectTab->setCurrentWidget(announceWidget);
-    if(key == Qt::Key_F9)
-    {
-        ui->projectTab->setCurrentWidget(bibleWidget);
-        bibleWidget->setBibleSearchActive();
-    }
     else if(key == Qt::Key_Left)
         prevSlide();
     else if(key == Qt::Key_Back)
@@ -483,7 +548,6 @@ void SoftProjector::setAnnounceText(Announcement announce, int row)
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/announce.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(currentAnnounce.title);
-    ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(5); // ?
     ui->listShow->setWordWrap(true);
@@ -510,13 +574,6 @@ void SoftProjector::setSongList(Song song, int row)
     ui->listShow->clear();
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/song_tab.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(song.title);
-    if(song.notes.isEmpty())
-        ui->labelSongNotes->setVisible(false);
-    else
-    {
-        ui->labelSongNotes->setText(QString("%1\n%2").arg(tr("Notes:","Notes to songs")).arg(song.notes));
-        ui->labelSongNotes->setVisible(true);
-    }
     ui->listShow->setSpacing(5);
     ui->listShow->setWordWrap(false);
     ui->listShow->addItems(song_list);
@@ -536,7 +593,6 @@ void SoftProjector::setChapterList(QStringList chapter_list, QString caption, QI
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/book.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(caption);
-    ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(2);
     ui->listShow->setWordWrap(true);
@@ -565,7 +621,6 @@ void SoftProjector::setPictureList(QList<SlideShowItem> &image_list,int row,QStr
     pictureShowList = image_list;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/photo.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(name);
-    ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(1);
     ui->listShow->setIconSize(QSize(100,100));
@@ -598,7 +653,6 @@ void SoftProjector::setVideo(VideoInfo &video)
     }
     new_list = true;
     ui->listShow->clear();
-    ui->labelSongNotes->setVisible(false);
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/video.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(currentVideo.fileName);
     new_list = false;
@@ -674,13 +728,39 @@ void SoftProjector::updateScreen()
 
         if(hasDisplayScreen2)
         {
-            if(theme.passive2.useDisp2settings)
+            if(!theme.passive2.useDisp1settings)
             {
                 pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
             }
             else
             {
                 pds2->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
+            }
+
+        }
+
+        if(hasDisplayScreen3)
+        {
+            if(!theme.passive3.useDisp1settings)
+            {
+                pds3->renderPassiveText(theme.passive3.backgroundPix,theme.passive3.useBackground);
+            }
+            else
+            {
+                pds3->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
+            }
+
+        }
+
+        if(hasDisplayScreen4)
+        {
+            if(!theme.passive4.useDisp1settings)
+            {
+                pds4->renderPassiveText(theme.passive4.backgroundPix,theme.passive4.useBackground);
+            }
+            else
+            {
+                pds4->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
             }
 
         }
@@ -756,7 +836,7 @@ void SoftProjector::showBible()
                           theme.bible);
     if(hasDisplayScreen2)
     {
-        if(theme.bible2.useDisp2settings)
+        if(!theme.bible2.useDisp1settings)
         {
             pds2->renderBibleText(bibleWidget->bible.
                                   getCurrentVerseAndCaption(currentRows,theme.bible2,
@@ -765,6 +845,38 @@ void SoftProjector::showBible()
         else
         {
             pds2->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible,
+                                                            mySettings.bibleSets),theme.bible);
+        }
+    }
+
+    if(hasDisplayScreen3)
+    {
+        if(!theme.bible3.useDisp1settings)
+        {
+            pds3->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible3,
+                                                            mySettings.bibleSets3),theme.bible3);
+        }
+        else
+        {
+            pds3->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible,
+                                                            mySettings.bibleSets),theme.bible);
+        }
+    }
+
+    if(hasDisplayScreen4)
+    {
+        if(!theme.bible4.useDisp1settings)
+        {
+            pds3->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible4,
+                                                            mySettings.bibleSets4),theme.bible4);
+        }
+        else
+        {
+            pds3->renderBibleText(bibleWidget->bible.
                                   getCurrentVerseAndCaption(currentRows,theme.bible,
                                                             mySettings.bibleSets),theme.bible);
         }
@@ -787,7 +899,7 @@ void SoftProjector::showSong(int currentRow)
     pds1->renderSongText(current_song.getStanza(currentRow),s1);
     if(hasDisplayScreen2)
     {
-        if(theme.song2.useDisp2settings)
+        if(!theme.song2.useDisp1settings)
         {
             pds2->renderSongText(current_song.getStanza(currentRow),s2);
         }
@@ -803,7 +915,7 @@ void SoftProjector::showAnnounce(int currentRow)
     pds1->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
     if(hasDisplayScreen2)
     {
-        if(theme.announce2.useDisp2settings)
+        if(!theme.announce2.useDisp1settings)
         {
             pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce2);
         }
@@ -854,6 +966,14 @@ void SoftProjector::on_actionClear_triggered()
     {
         pds2->renderNotText();
     }
+    if(hasDisplayScreen3)
+    {
+        pds3->renderNotText();
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->renderNotText();
+    }
     ui->actionClear->setEnabled(false);
     ui->actionShow->setEnabled(true);
 //    ui->actionHide->setEnabled(false);
@@ -868,6 +988,14 @@ void SoftProjector::on_actionCloseDisplay_triggered()
         {
             pds2->showFullScreen();
         }
+        if(hasDisplayScreen3)
+        {
+            pds3->showFullScreen();
+        }
+        if(hasDisplayScreen4)
+        {
+            pds4->showFullScreen();
+        }
     }
     else
     {
@@ -875,6 +1003,14 @@ void SoftProjector::on_actionCloseDisplay_triggered()
         if(hasDisplayScreen2)
         {
             pds2->hide();
+        }
+        if(hasDisplayScreen3)
+        {
+            pds3->hide();
+        }
+        if(hasDisplayScreen4)
+        {
+            pds4->hide();
         }
         showing = false;
     }
@@ -892,7 +1028,7 @@ void SoftProjector::updateCloseDisplayButtons(bool isOn)
 
 void SoftProjector::on_actionSettings_triggered()
 {
-    settingsDialog->loadSettings(mySettings.general,theme,mySettings.slideSets, mySettings.bibleSets,mySettings.bibleSets2);
+    settingsDialog->loadSettings(mySettings.general,theme,mySettings.slideSets, mySettings.bibleSets,mySettings.bibleSets2,mySettings.bibleSets3,mySettings.bibleSets4);
     settingsDialog->exec();
 }
 
@@ -1072,7 +1208,7 @@ void SoftProjector::on_actionManage_Database_triggered()
             t.setThemeId(sq.value(0).toInt());
             t.loadTheme();
             g.currentThemeId = t.getThemeId();
-            updateSetting(g,t,mySettings.slideSets,mySettings.bibleSets,mySettings.bibleSets2);
+            updateSetting(g,t,mySettings.slideSets,mySettings.bibleSets,mySettings.bibleSets2,mySettings.bibleSets3,mySettings.bibleSets4);
             updateScreen();
         }
     }
@@ -1133,7 +1269,7 @@ void SoftProjector::on_action_Help_triggered()
 
 void SoftProjector::newSong()
 {
-    if (!editWidget->isHidden()) //Prohibits editing a song when a different song already been edited.
+    if (!editWidget->isHidden()) // Prohibit editing a song when a different song already been edited.
     {
         QMessageBox ms(this);
         ms.setWindowTitle(tr("Cannot create a new song"));
@@ -1154,7 +1290,7 @@ void SoftProjector::editSong()
 {
     if (songWidget->isSongSelected())
     {
-        if(!editWidget->isHidden()) //Prohibits editing a song when a different song already been edited.
+        if(!editWidget->isHidden()) // Prohibit editing a song when a different song already been edited.
         {
             QMessageBox ms(this);
             ms.setWindowTitle(tr("Cannot start new edit"));

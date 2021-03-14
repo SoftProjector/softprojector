@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Display Screen</string>
+   <string>Dispaly Screen</string>
   </property>
   <property name="windowIcon">
    <iconset resource="softprojector.qrc">

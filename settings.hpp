@@ -27,14 +27,14 @@
 void saveIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);
 void updateIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);
 
-enum HorizontalAlignment
+enum HorizontalAlingment
 {
     A_TOP,
     A_MIDDLE,
     A_BOTTOM
 };
 
-enum VerticalAlignment
+enum VerticalAlingment
 {
     A_LEFT,
     A_CENTER,
@@ -101,15 +101,18 @@ public:
     bool isChangedTextFont, isChangedTextColor, isChangedTextShadowColor;
     bool isChangedAlingV, isChangedAlingH, isChangesTranType, isChangedEffectType;
     bool isChangedBackType, isChangedBackColor, isChangedBackPix, isChangedBackVid;
-    bool isChangedScreenUse, isChangedScreenPos, isChangedSameDisp2;
+    bool isChangedScreenUse, isChangedScreenPos, isChangedSameDisp2, isChangedSameDisp3, isChangedSameDisp4;
+    bool addBackgroundColorToText;
 
     //Text
     QFont textFont;
     QColor textColor;
     QColor textShadowColor;
-    int textAlignmentV;
-    // 0 - Top, 1 - Middle, 3 - Bottom
-    int textAlignmentH;
+    QColor textRecBackgroundColor;
+    QColor textGenBackgroundColor;
+    int textAlingmentV;
+    // 0 - Top, 1 - Middle, 3 - Botton
+    int textAlingmentH;
     // 0 - Left, 1 - Center, 3 - Right
 
     //Effects
@@ -133,14 +136,19 @@ public:
     bool useFading;
     bool useBlurShadow;
     bool useBackground;
+    bool useDisp1settings;
     bool useDisp2settings;
+    bool useDisp3settings;
+    bool useDisp4settings;
 
     //Layout
     int screenUse;
     int screenPosition;
-    // 0 - Top of Screen, 1 - Bottom of Screen
+    // 0 - Top of Screen, 1 - Botton of Screen
 
     bool useSameForDisp2;
+    bool useSameForDisp3;
+    bool useSameForDisp4;
 
     void saveBase();
     void saveBase(QSqlQuery &sq);
@@ -199,7 +207,7 @@ public:
     QColor captionColor;
     bool isNotSameColor;
     QColor captionShadowColor;
-    int captionAlignment;
+    int captionAlingment;
     int captionPosition;
     bool useAbbriviation;
 
@@ -280,6 +288,8 @@ public:
     bool displayIsOnTop;
     int displayScreen; // stores primary display screen location
     int displayScreen2; // stores secondary display screen location
+    int displayScreen3; // stores Tertiary display screen location
+    int displayScreen4; // stores Quaternary display screen location
     DisplayControlsSettings displayControls;
     int currentThemeId;
     bool displayOnStartUp;
@@ -295,8 +305,8 @@ public:
     QString backgroundPath;
     QFont textFont;
     QColor textColor;
-    int textAlignmentV;
-    int textAlignmentH;
+    int textAlingmentV;
+    int textAlingmentH;
 };
 
 class SpSettings
@@ -332,6 +342,8 @@ public:
     SpSettings spMain;
     BibleVersionSettings bibleSets;
     BibleVersionSettings bibleSets2;
+    BibleVersionSettings bibleSets3;
+    BibleVersionSettings bibleSets4;
     SlideShowSettings slideSets;
 
     bool isSpClosing;

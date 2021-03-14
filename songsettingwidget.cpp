@@ -89,12 +89,12 @@ void SongSettingWidget::getSettings(SongSettings &settings, SongSettings &settin
     mySettings2.useBackground = ui->groupBoxSongBackground2->isChecked();
     mySettings2.backgroundName = ui->lineEditSongBackground2->text();
 
-    // Save alignment
-    mySettings.textAlignmentV = ui->comboBoxVerticalAling->currentIndex();
-    mySettings.textAlignmentH = ui->comboBoxHorizontalAling->currentIndex();
+    // Save alingment
+    mySettings.textAlingmentV = ui->comboBoxVerticalAling->currentIndex();
+    mySettings.textAlingmentH = ui->comboBoxHorizontalAling->currentIndex();
 
-    mySettings2.textAlignmentV = ui->comboBoxVerticalAling2->currentIndex();
-    mySettings2.textAlignmentH = ui->comboBoxHorizontalAling2->currentIndex();
+    mySettings2.textAlingmentV = ui->comboBoxVerticalAling2->currentIndex();
+    mySettings2.textAlingmentH = ui->comboBoxHorizontalAling2->currentIndex();
 
     // Screen use
     mySettings.screenUse = ui->spinBoxScreenUse->value();
@@ -104,6 +104,7 @@ void SongSettingWidget::getSettings(SongSettings &settings, SongSettings &settin
     mySettings2.screenPosition = ui->comboBoxScreenUse2->currentIndex();
 
     // Use secondary display screen settings
+    mySettings2.useDisp1settings = !ui->groupBoxDisplay2->isChecked();
     mySettings2.useDisp2settings = ui->groupBoxDisplay2->isChecked();
 
     settings = mySettings;
@@ -165,14 +166,14 @@ void SongSettingWidget::loadSettings()
     p.setColor(QPalette::Base,mySettings.textColor);
     ui->graphicViewTextColor->setPalette(p);
     ui->labelFont->setText(getFontText(mySettings.textFont));
-    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlignmentV);
-    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlignmentH);
+    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlingmentV);
+    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlingmentH);
 
     p.setColor(QPalette::Base,mySettings2.textColor);
     ui->graphicViewTextColor2->setPalette(p);
     ui->labelFont2->setText(getFontText(mySettings2.textFont));
-    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlignmentV);
-    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlignmentH);
+    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlingmentV);
+    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlingmentH);
 
     // Set Screen Use
     ui->spinBoxScreenUse->setValue(mySettings.screenUse);
@@ -182,8 +183,8 @@ void SongSettingWidget::loadSettings()
     ui->comboBoxScreenUse2->setCurrentIndex(mySettings2.screenPosition);
 
     // Set secondary screen
-    ui->groupBoxDisplay2->setChecked(mySettings2.useDisp2settings);
-    on_groupBoxDisplay2_toggled(mySettings2.useDisp2settings);
+    ui->groupBoxDisplay2->setChecked(!mySettings2.useDisp1settings);
+    on_groupBoxDisplay2_toggled(!mySettings2.useDisp1settings);
 }
 
 void SongSettingWidget::setDispScreen2Visible(bool visible)

@@ -24,7 +24,7 @@ PassiveSettings::PassiveSettings()
     useBackground = false;
     backgroundName = "";
     backgroundPix = QPixmap();
-    useDisp2settings = false;
+    useDisp1settings = false;
 }
 
 BibleSettings::BibleSettings()
@@ -38,16 +38,16 @@ BibleSettings::BibleSettings()
     backgroundPix = QPixmap();
     textFont.fromString("Arial,48,-1,5,50,0,0,0,0,0");
     textColor = QColor(Qt::white);
-    textAlignmentV = 0;
-    textAlignmentH = 0;
+    textAlingmentV = 0;
+    textAlingmentH = 0;
     captionFont.fromString("Arial,36,-1,5,50,0,0,0,0,0");
     captionColor = QColor(Qt::white);
-    captionAlignment = 2;
+    captionAlingment = 2;
     captionPosition = 1;
     useAbbriviation = false;
     screenUse = 100;
     screenPosition = 1;
-    useDisp2settings = false;
+    useDisp1settings = false;
 }
 
 SongSettings::SongSettings()
@@ -72,11 +72,11 @@ SongSettings::SongSettings()
     backgroundPix = QPixmap();
     textColor = QColor(Qt::white);
     textFont.fromString("Arial,48,-1,5,50,0,0,0,0,0");
-    textAlignmentV = 1;
-    textAlignmentH = 1;
+    textAlingmentV = 1;
+    textAlingmentH = 1;
     screenUse = 100;
     screenPositon = 1;
-    useDisp2settings = false;
+    useDisp1settings = false;
 }
 
 AnnounceSettings::AnnounceSettings()
@@ -90,9 +90,9 @@ AnnounceSettings::AnnounceSettings()
     backgroundPix = QPixmap();
     textFont.fromString("Arial,48,-1,5,50,0,0,0,0,0");
     textColor = QColor(Qt::white);
-    textAlignmentV = 0;
-    textAlignmentH = 1;
-    useDisp2settings = false;
+    textAlingmentV = 0;
+    textAlingmentH = 1;
+    useDisp1settings = false;
 }
 */
 ThemeInfo::ThemeInfo()
@@ -124,8 +124,12 @@ void Theme::saveThemeNew()
     m_info.themeId = sq.value(0).toInt();
     savePassiveNew(1,passive);
     savePassiveNew(2,passive2);
+    savePassiveNew(3,passive3);
+    savePassiveNew(4,passive4);
     saveBibleNew(1,bible);
     saveBibleNew(2,bible2);
+    saveBibleNew(3,bible3);
+    saveBibleNew(4,bible4);
     saveSongNew(1,song);
     saveSongNew(2,song2);
     saveAnnounceNew(1,announce);
@@ -135,14 +139,14 @@ void Theme::saveThemeNew()
 void Theme::savePassiveNew(int screen, TextSettings &settings)
 {
     QSqlQuery sq;
-    sq.prepare("INSERT INTO ThemePassive (theme_id, disp, use_background, background_name, background, use_disp_2) "
+    sq.prepare("INSERT INTO ThemePassive (theme_id, disp, use_background, background_name, background, use_disp_1) "
                "VALUES(?,?,?,?,?,?)");
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
     sq.addBindValue(settings.useBackground);
     sq.addBindValue(settings.backgroundName);
     sq.addBindValue(pixToByte(settings.backgroundPix));
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.useDisp1settings);
     sq.exec();
 }
 
@@ -151,7 +155,7 @@ void Theme::saveBibleNew(int screen, BibleSettings &settings)
     QSqlQuery sq;
     sq.prepare("INSERT INTO ThemeBible (theme_id, disp, use_shadow, use_fading, use_blur_shadow, use_background, "
                "background_name, background, text_font, text_color, text_align_v, text_align_h, caption_font, "
-               "caption_color, caption_align, caption_position, use_abbr, screen_use, screen_position, use_disp_2) "
+               "caption_color, caption_align, caption_position, use_abbr, screen_use, screen_position, use_disp_1) "
                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
@@ -163,16 +167,16 @@ void Theme::saveBibleNew(int screen, BibleSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlignmentV);
-    sq.addBindValue(settings.textAlignmentH);
+    sq.addBindValue(settings.textAlingmentV);
+    sq.addBindValue(settings.textAlingmentH);
     sq.addBindValue(settings.captionFont.toString());
     sq.addBindValue((unsigned int)(settings.captionColor.rgb()));
-    sq.addBindValue(settings.captionAlignment);
+    sq.addBindValue(settings.captionAlingment);
     sq.addBindValue(settings.captionPosition);
     sq.addBindValue(settings.useAbbriviation);
     sq.addBindValue(settings.screenUse);
     sq.addBindValue(settings.screenPosition);
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.useDisp1settings);
     sq.exec();
 }
 
@@ -182,7 +186,7 @@ void Theme::saveSongNew(int screen, SongSettings &settings)
     sq.prepare("INSERT INTO ThemeSong (theme_id, disp, use_shadow, use_fading, use_blur_shadow, show_stanza_title, "
                "show_key, show_number, info_color, info_font, info_align, show_song_ending, ending_color, ending_font, "
                "ending_type, ending_position, use_background, background_name, background, text_font, text_color, "
-               "text_align_v, text_align_h, screen_use, screen_position, use_disp_2) "
+               "text_align_v, text_align_h, screen_use, screen_position, use_disp_1) "
                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
@@ -205,11 +209,11 @@ void Theme::saveSongNew(int screen, SongSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont);
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlignmentV);
-    sq.addBindValue(settings.textAlignmentH);
+    sq.addBindValue(settings.textAlingmentV);
+    sq.addBindValue(settings.textAlingmentH);
     sq.addBindValue(settings.screenUse);
     sq.addBindValue(settings.screenPosition);
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.useDisp1settings);
     sq.exec();
 }
 
@@ -217,7 +221,7 @@ void Theme::saveAnnounceNew(int screen, TextSettings &settings)
 {
     QSqlQuery sq;
     sq.prepare("INSERT INTO ThemeAnnounce (theme_id, disp, use_shadow, use_fading, use_blur_shadow, use_background, "
-               "background_name, background, text_font, text_color, text_align_v, text_align_h, use_disp_2) "
+               "background_name, background, text_font, text_color, text_align_v, text_align_h, use_disp_1) "
                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
@@ -229,9 +233,9 @@ void Theme::saveAnnounceNew(int screen, TextSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue(settings.textColor.rgb());
-    sq.addBindValue(settings.textAlignmentV);
-    sq.addBindValue(settings.textAlignmentH);
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.textAlingmentV);
+    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.useDisp1settings);
     sq.exec();
 }
 
@@ -246,8 +250,12 @@ void Theme::saveThemeUpdate()
 
     savePassiveUpdate(1,passive);
     savePassiveUpdate(2,passive2);
+    savePassiveUpdate(3,passive3);
+    savePassiveUpdate(4,passive4);
     saveBibleUpdate(1,bible);
     saveBibleUpdate(2,bible2);
+    saveBibleUpdate(3,bible3);
+    saveBibleUpdate(4,bible4);
     saveSongUpdate(1,song);
     saveSongUpdate(2,song2);
     saveAnnounceUpdate(1,announce);
@@ -257,12 +265,12 @@ void Theme::saveThemeUpdate()
 void Theme::savePassiveUpdate(int screen, TextSettings &settings)
 {
     QSqlQuery sq;
-    sq.prepare("UPDATE ThemePassive SET use_background = ?, background_name = ?, background = ?, use_disp_2 = ? "
+    sq.prepare("UPDATE ThemePassive SET use_background = ?, background_name = ?, background = ?, use_disp_1 = ? "
                "WHERE theme_id = ? AND disp = ?");
     sq.addBindValue(settings.useBackground);
     sq.addBindValue(settings.backgroundName);
     sq.addBindValue(pixToByte(settings.backgroundPix));
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.useDisp1settings);
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
     sq.exec();
@@ -275,7 +283,8 @@ void Theme::saveBibleUpdate(int screen, BibleSettings &settings)
     sq.prepare("UPDATE ThemeBible SET use_shadow = ?, use_fading = ?, use_blur_shadow = ?, "
                "use_background = ?, background_name = ?, background = ?, text_font = ?, text_color = ?, text_align_v = ?, "
                "text_align_h = ?, caption_font = ?, caption_color = ?, caption_align = ?, caption_position = ?, "
-               "use_abbr = ?, screen_use = ?, screen_position = ?, use_disp_2 = ? "
+               "use_abbr = ?, screen_use = ?, screen_position = ?, use_disp_1 = ?, "
+               "add_background_color_to_text = ?, text_rec_background_color = ?, text_gen_background_color = ? "
                "WHERE theme_id = ? AND disp = ?");
     sq.addBindValue(settings.useShadow);
     sq.addBindValue(settings.useFading);
@@ -285,16 +294,19 @@ void Theme::saveBibleUpdate(int screen, BibleSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlignmentV);
-    sq.addBindValue(settings.textAlignmentH);
+    sq.addBindValue(settings.textAlingmentV);
+    sq.addBindValue(settings.textAlingmentH);
     sq.addBindValue(settings.captionFont.toString());
     sq.addBindValue((unsigned int)(settings.captionColor.rgb()));
-    sq.addBindValue(settings.captionAlignment);
+    sq.addBindValue(settings.captionAlingment);
     sq.addBindValue(settings.captionPosition);
     sq.addBindValue(settings.useAbbriviation);
     sq.addBindValue(settings.screenUse);
     sq.addBindValue(settings.screenPosition);
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.useDisp1settings);
+    sq.addBindValue(settings.addBackgroundColorToText);
+    sq.addBindValue((unsigned int)(settings.textRecBackgroundColor.rgb()));
+    sq.addBindValue((unsigned int)(settings.textGenBackgroundColor.rgb()));
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
     sq.exec();
@@ -307,7 +319,7 @@ void Theme::saveSongUpdate(int screen, SongSettings &settings)
                "show_stanza_title = ?, show_key = ?, show_number = ?, info_color = ?, info_font = ?, info_align = ?, "
                "show_song_ending = ?, ending_color = ?, ending_font = ?, ending_type = ?, ending_position = ?, "
                "use_background = ?, background_name = ?, background = ?, text_font = ?, text_color = ?, text_align_v = ?, "
-               "text_align_h = ?, screen_use = ?, screen_position = ?, use_disp_2 = ? "
+               "text_align_h = ?, screen_use = ?, screen_position = ?, use_disp_1 = ? "
                "WHERE theme_id = ? AND disp = ?");
     sq.addBindValue(settings.useShadow);
     sq.addBindValue(settings.useFading);
@@ -328,11 +340,11 @@ void Theme::saveSongUpdate(int screen, SongSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont);
     sq.addBindValue((unsigned int)(settings.textColor.rgb()));
-    sq.addBindValue(settings.textAlignmentV);
-    sq.addBindValue(settings.textAlignmentH);
+    sq.addBindValue(settings.textAlingmentV);
+    sq.addBindValue(settings.textAlingmentH);
     sq.addBindValue(settings.screenUse);
     sq.addBindValue(settings.screenPosition);
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.useDisp1settings);
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
     sq.exec();
@@ -343,7 +355,7 @@ void Theme::saveAnnounceUpdate(int screen, TextSettings &settings)
     QSqlQuery sq;
     sq.prepare("UPDATE ThemeAnnounce SET use_shadow = ?, use_fading = ?, use_blur_shadow = ?, "
                "use_background = ?, background_name = ?, background = ?, text_font = ?, text_color = ?, "
-               "text_align_v = ?, text_align_h = ?, use_disp_2 = ? "
+               "text_align_v = ?, text_align_h = ?, use_disp_1 = ? "
                "WHERE theme_id = ? AND disp = ?");
     sq.addBindValue(settings.useShadow);
     sq.addBindValue(settings.useFading);
@@ -353,9 +365,9 @@ void Theme::saveAnnounceUpdate(int screen, TextSettings &settings)
     sq.addBindValue(pixToByte(settings.backgroundPix));
     sq.addBindValue(settings.textFont.toString());
     sq.addBindValue(settings.textColor.rgb());
-    sq.addBindValue(settings.textAlignmentV);
-    sq.addBindValue(settings.textAlignmentH);
-    sq.addBindValue(settings.useDisp2settings);
+    sq.addBindValue(settings.textAlingmentV);
+    sq.addBindValue(settings.textAlingmentH);
+    sq.addBindValue(settings.useDisp1settings);
     sq.addBindValue(m_info.themeId);
     sq.addBindValue(screen);
     sq.exec();
@@ -399,8 +411,12 @@ void Theme::loadTheme()
     {
         loadPassive(1,passive);
         loadPassive(2,passive2);
+        loadPassive(3,passive3);
+        loadPassive(4,passive4);
         loadBible(1,bible);
         loadBible(2,bible2);
+        loadBible(3,bible3);
+        loadBible(4,bible4);
         loadSong(1,song);
         loadSong(2,song2);
         loadAnnounce(1,announce);
@@ -418,7 +434,7 @@ void Theme::loadPassive(int screen, TextSettings &settings)
     settings.useBackground = sr.field("use_background").value().toBool();
     settings.backgroundName = sr.field("background_name").value().toString();
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
-    settings.useDisp2settings = sr.field("use_disp_2").value().toBool();
+    settings.useDisp1settings = sr.field("use_disp_1").value().toBool();
 }
 
 void Theme::loadBible(int screen, BibleSettings &settings)
@@ -436,16 +452,19 @@ void Theme::loadBible(int screen, BibleSettings &settings)
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
     settings.textFont.fromString(sr.field("text_font").value().toString());
     settings.textColor = QColor::fromRgb(sr.field("text_color").value().toUInt());
-    settings.textAlignmentV = sr.field("text_align_v").value().toInt();
-    settings.textAlignmentH = sr.field("text_align_h").value().toInt();
+    settings.textAlingmentV = sr.field("text_align_v").value().toInt();
+    settings.textAlingmentH = sr.field("text_align_h").value().toInt();
     settings.captionFont.fromString(sr.field("caption_font").value().toString());
     settings.captionColor = QColor::fromRgb(sr.field("caption_color").value().toUInt());
-    settings.captionAlignment = sr.field("caption_align").value().toInt();
+    settings.captionAlingment = sr.field("caption_align").value().toInt();
     settings.captionPosition = sr.field("caption_position").value().toInt();
     settings.useAbbriviation = sr.field("use_abbr").value().toBool();
     settings.screenUse = sr.field("screen_use").value().toInt();
     settings.screenPosition = sr.field("screen_position").value().toInt();
-    settings.useDisp2settings = sr.field("use_disp_2").value().toBool();
+    settings.useDisp1settings = sr.field("use_disp_1").value().toBool();
+    settings.addBackgroundColorToText = sr.field("add_background_color_to_text").value().toBool();
+    settings.textRecBackgroundColor = QColor::fromRgb(sr.field("text_rec_background_color").value().toUInt());
+    settings.textGenBackgroundColor = QColor::fromRgb(sr.field("text_gen_background_color").value().toUInt());
 }
 
 void Theme::loadSong(int screen, SongSettings &settings)
@@ -474,11 +493,11 @@ void Theme::loadSong(int screen, SongSettings &settings)
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
     settings.textFont.fromString(sr.field("text_font").value().toString());
     settings.textColor = QColor::fromRgb(sr.field("text_color").value().toUInt());
-    settings.textAlignmentV = sr.field("text_align_v").value().toInt();
-    settings.textAlignmentH = sr.field("text_align_h").value().toInt();
+    settings.textAlingmentV = sr.field("text_align_v").value().toInt();
+    settings.textAlingmentH = sr.field("text_align_h").value().toInt();
     settings.screenUse = sr.field("screen_use").value().toInt();
     settings.screenPosition = sr.field("screen_position").value().toInt();
-    settings.useDisp2settings = sr.field("use_disp_2").value().toBool();
+    settings.useDisp1settings = sr.field("use_disp_1").value().toBool();
 }
 
 void Theme::loadAnnounce(int screen, TextSettings &settings)
@@ -496,9 +515,9 @@ void Theme::loadAnnounce(int screen, TextSettings &settings)
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
     settings.textFont.fromString(sr.field("text_font").value().toString());
     settings.textColor = QColor::fromRgb(sr.field("text_color").value().toUInt());
-    settings.textAlignmentV = sr.field("text_align_v").value().toInt();
-    settings.textAlignmentH = sr.field("text_align_h").value().toInt();
-    settings.useDisp2settings = sr.field("use_disp_2").value().toBool();
+    settings.textAlingmentV = sr.field("text_align_v").value().toInt();
+    settings.textAlingmentH = sr.field("text_align_h").value().toInt();
+    settings.useDisp1settings = sr.field("use_disp_1").value().toBool();
 }
 
 void Theme::setThemeInfo(ThemeInfo info)

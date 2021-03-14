@@ -49,9 +49,10 @@ public:
 
 private:
     QSize m_screenSize;
-    bool m_shadow, m_blurShadow, m_isTextPrepared;
+    bool m_shadow, m_blurShadow, m_isTextPrepared, m_addBackgroundColorToText;
     int m_type; // 0 = empty, 1 = bible, 2 = song, 3 = announce
     int m_shadowOffset, m_blurRadius;
+    QColor m_textRecBackgroundColor, m_textGenBackgroundColor;
 
     Verse m_verse;
     BibleSettings m_bSets;

@@ -60,8 +60,7 @@ public slots:
     void clearHistory();
     void setSelectedHistory(BibleHistory &b);
     bool isVerseSelected();
-    void setBibleBookActive();
-    void setBibleSearchActive();
+    void setSearchActive();
 
 protected:
     virtual void changeEvent(QEvent *e);

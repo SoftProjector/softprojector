@@ -40,12 +40,11 @@ SongWidget::SongWidget(QWidget *parent) :
 
     // Modify the column widths:
     ui->songs_view->setColumnWidth(0, 0);//Category
-    ui->songs_view->setColumnHidden(0, true); // Hide category
-    ui->songs_view->resizeColumnToContents(1); // Song Number
+    ui->songs_view->setColumnWidth(1, 40);//Song Number
     ui->songs_view->setColumnWidth(2, 150);//Song Title
-    ui->songs_view->resizeColumnToContents(3); // Songbook
+    ui->songs_view->setColumnWidth(3, 80);//Songbook
     ui->songs_view->setColumnWidth(4, 50);//Tune
-    
+
     proxy_model->setSongbookFilter("ALL");
     proxy_model->setCategoryFilter(-1);
     loadSongbooks();
@@ -200,42 +199,29 @@ void SongWidget::sendToProjector(Song song, int row)
     counter.addSongCount(song);
 }
 
-/**
- * @brief SongWidget::on_songbook_menu_currentIndexChanged Filters
- * songs per selected songbook.
- *
- * @param index Songbook Index from Songbook menu
- */
 void SongWidget::on_songbook_menu_currentIndexChanged(int index)
 {
     // Called when a different songbook is selected from the pull-down menu
 
-    QString songbookName = "ALL";
-
-    /*
-     *  For index greater than zero, its a specific songbook,
-     * filter by that songbook name.
-     *
-     * Todo: There can be a chance that there could be more than one
-     * songbook with same name. Fix this to filter by songbook ID rather
-     * than songbook name.
-     * */
-    if (index > 0){
-        songbookName = ui->songbook_menu->currentText();
-        ui->song_num_spinbox->setEnabled(true);
-    } else {
+    songs_model->emitLayoutAboutToBeChanged(); //prepeare to chage layout
+    if( index == 0 )
+    {
+        proxy_model->setSongbookFilter("ALL");
         ui->song_num_spinbox->setEnabled(false);
     }
-
-    songs_model->emitLayoutAboutToBeChanged(); //prepeare to chage layout
-    proxy_model->setSongbookFilter(songbookName);
-    songs_model->emitLayoutChanged(); // forces the view to redraw
+    else
+    {
+        QString songbook_name = ui->songbook_menu->currentText();
+        proxy_model->setSongbookFilter(songbook_name);
+        ui->song_num_spinbox->setEnabled(true);
+    }
 
     updateButtonStates();
 
     // Sort by song number at initial load, and with songbook change
     proxy_model->sort(1);
 
+    songs_model->emitLayoutChanged(); // forces the view to redraw
 }
 
 void SongWidget::on_song_num_spinbox_valueChanged(int value)

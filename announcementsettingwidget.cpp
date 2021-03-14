@@ -69,12 +69,12 @@ void AnnouncementSettingWidget::loadSettings()
     ui->groupBoxBackground2->setChecked(mySettings2.useBackground);
     ui->lineEditBackground2->setText(mySettings2.backgroundName);
 
-    // Set Alignment
-    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlignmentV);
-    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlignmentH);
+    // Set Alingment
+    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlingmentV);
+    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlingmentH);
 
-    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlignmentV);
-    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlignmentH);
+    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlingmentV);
+    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlingmentH);
 
     // Set text color
     QPalette p;
@@ -88,8 +88,8 @@ void AnnouncementSettingWidget::loadSettings()
     ui->labelFont->setText(getFontText(mySettings.textFont));
     ui->labelFont2->setText(getFontText(mySettings2.textFont));
 
-    ui->groupBoxUseDisp2->setChecked(mySettings2.useDisp2settings);
-    on_groupBoxUseDisp2_toggled(mySettings2.useDisp2settings);
+    ui->groupBoxUseDisp2->setChecked(!mySettings2.useDisp1settings);
+    on_groupBoxUseDisp2_toggled(!mySettings2.useDisp1settings);
 }
 
 void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings &settings2)
@@ -111,12 +111,13 @@ void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings
     mySettings2.backgroundName = ui->lineEditBackground2->text();
 
     // Alingmet
-    mySettings.textAlignmentV = ui->comboBoxVerticalAling->currentIndex();
-    mySettings.textAlignmentH = ui->comboBoxHorizontalAling->currentIndex();
+    mySettings.textAlingmentV = ui->comboBoxVerticalAling->currentIndex();
+    mySettings.textAlingmentH = ui->comboBoxHorizontalAling->currentIndex();
 
-    mySettings2.textAlignmentV = ui->comboBoxVerticalAling2->currentIndex();
-    mySettings2.textAlignmentH = ui->comboBoxHorizontalAling2->currentIndex();
+    mySettings2.textAlingmentV = ui->comboBoxVerticalAling2->currentIndex();
+    mySettings2.textAlingmentH = ui->comboBoxHorizontalAling2->currentIndex();
 
+    mySettings2.useDisp1settings = !ui->groupBoxUseDisp2->isChecked();
     mySettings2.useDisp2settings = ui->groupBoxUseDisp2->isChecked();
 
     settings = mySettings;

@@ -22,16 +22,12 @@
 #include "mediawidget.hpp"
 #include "ui_mediawidget.h"
 
-#ifdef Q_OS_WIN
-#include <Windows.h>// this need for Sleep function
-#endif
-
 MediaWidget::MediaWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MediaWidget)//,
+//    m_AudioOutput(Phonon::VideoCategory)
 {
     ui->setupUi(this);
-    isReadyToPlay = false;
     player = new QMediaPlayer(this);
 
     mediaControls = new MediaControl(this);
@@ -134,7 +130,6 @@ void MediaWidget::loadMediaLibrary()
 
 void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
 {
-    qDebug()<<"statusChanged"<<status;
     switch (status) {
     case QMediaPlayer::BufferingMedia:
     case QMediaPlayer::LoadingMedia:
@@ -148,10 +143,6 @@ void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
     case QMediaPlayer::InvalidMedia:
         displayErrorMessage();
         break;
-    case QMediaPlayer::LoadedMedia:
-    case QMediaPlayer::BufferedMedia:
-        isReadyToPlay = true;
-        break;
     }
 }
 
@@ -159,7 +150,7 @@ void MediaWidget::displayErrorMessage()
 {
     QString errMsg1 = tr("Possible Fail reasons:");
     QString errMsg2 = tr(" - Unsupported media format");
-    QString errMsg3 = tr(" - Media file no longer exists or invalid path to file");
+    QString errMsg3 = tr(" - Media file no longer existn or invalid path to file");
 
     if(!player->errorString().isEmpty())
     {
@@ -233,12 +224,11 @@ void MediaWidget::dragMoveEvent(QDragMoveEvent *e)
 }
 
 
-void MediaWidget::playFile(QUrl filePath)
+void MediaWidget::playFile(QString filePath)
 {
-    isReadyToPlay = false;
     player->stop();
-    currentMediaUrl = filePath;
-    QMediaContent m(filePath);
+    currentMediaUrl = QUrl::fromLocalFile(filePath);
+    QMediaContent m(currentMediaUrl);
     player->setMedia(m);
 }
 
@@ -300,7 +290,7 @@ void MediaWidget::insertFiles(QStringList &files)
     {
         QFileInfo f(file);
         mediaFileNames.append(f.fileName());
-        mediaFilePaths.append(QUrl::fromLocalFile(file));
+        mediaFilePaths.append(file);
         sq.exec(QString("INSERT INTO Media (long_Path, short_path) VALUES('%1', '%2')").arg(file).arg(f.fileName()));
         ui->listWidgetMediaFiles->addItem(f.fileName());
     }
@@ -308,23 +298,19 @@ void MediaWidget::insertFiles(QStringList &files)
 
 void MediaWidget::hasVideoChanged(bool bHasVideo)
 {
-    qDebug()<<"hasVideoChanged"<<bHasVideo;
     if(!bHasVideo && videoWidget->isFullScreen())
         videoWidget->setFullScreen(false);
     ui->labelInfo->setVisible(!bHasVideo);
     ui->pushButtonGoLive->setEnabled(bHasVideo);
     videoWidget->setVisible(bHasVideo);
-//    isReadyToPlay = true;
 }
 
 void MediaWidget::prepareForProjection()
 {
     player->pause();
     VideoInfo v;
-//    v.fileName = mediaFileNames.at(ui->listWidgetMediaFiles->currentRow());
-//    v.filePath = mediaFilePaths.at(ui->listWidgetMediaFiles->currentRow());
-    v.fileName = currentMediaUrl.fileName();
-    v.filePath = currentMediaUrl.toString();
+    v.fileName = mediaFileNames.at(ui->listWidgetMediaFiles->currentRow());
+    v.filePath = mediaFilePaths.at(ui->listWidgetMediaFiles->currentRow());
     emit toProjector(v);
 }
 
@@ -393,11 +379,6 @@ VideoInfo MediaWidget::getMedia()
 
 void MediaWidget::setMediaFromSchedule(VideoInfo &v)
 {
-    if(currentMediaUrl == v.filePath)
-    {
-        // Same current Media File, do not update.
-        return;
-    }
     ui->listWidgetMediaFiles->clearSelection();
     playFile(v.filePath);
     player->pause();
@@ -405,27 +386,10 @@ void MediaWidget::setMediaFromSchedule(VideoInfo &v)
 
 void MediaWidget::goLiveFromSchedule()
 {
-    while (!isReadyToPlay)
-    {
-        int ms = 1000;
-#ifdef Q_OS_WIN
-        Sleep(uint(ms));
-#else
-        struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
-        nanosleep(&ts, nullptr);
-#endif
-    }
-    qDebug()<<videoWidget->isVisible()<<ui->pushButtonGoLive->isEnabled();
     if(ui->pushButtonGoLive->isEnabled())
-    {
-        qDebug()<<"Go Live is Enabled";
         prepareForProjection();
-    }
     else
-    {
-        qDebug()<<"Start Playing";
         player->play();
-    }
 }
 
 bool MediaWidget::isValidMedia()

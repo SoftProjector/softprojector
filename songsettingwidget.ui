@@ -448,7 +448,7 @@
         <item>
          <widget class="QLabel" name="labelVertical">
           <property name="text">
-           <string>Alignment:</string>
+           <string>Alingment:</string>
           </property>
          </widget>
         </item>

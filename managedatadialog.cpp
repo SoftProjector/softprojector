@@ -793,7 +793,7 @@ void ManageDataDialog::on_delete_songbook_pushButton_clicked()
     QMessageBox ms(this);
     ms.setWindowTitle(tr("Delete songbook?"));
     ms.setText(tr("Are you sure that you want to delete: ")+ name);
-    ms.setInformativeText(tr("This action will permanently delete this songbook"));
+    ms.setInformativeText(tr("This action will permanentrly delete this songbook"));
     ms.setIcon(QMessageBox::Question);
     ms.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     ms.setDefaultButton(QMessageBox::Yes);
@@ -1129,7 +1129,7 @@ void ManageDataDialog::on_delete_bible_pushButton_clicked()
     QMessageBox ms(this);
     ms.setWindowTitle(tr("Delete Bible?"));
     ms.setText(tr("Are you sure that you want to delete: ")+ name);
-    ms.setInformativeText(tr("This action will permanently delete this Bible"));
+    ms.setInformativeText(tr("This action will permanentrly delete this Bible"));
     ms.setIcon(QMessageBox::Question);
     ms.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     ms.setDefaultButton(QMessageBox::Yes);
@@ -1573,22 +1573,23 @@ void ManageDataDialog::exportTheme(QString path, bool all)
             sqt.exec("CREATE TABLE 'ThemeAnnounce' ('theme_id' INTEGER, 'disp' INTEGER, 'use_shadow' BOOL, "
                      "'use_fading' BOOL, 'use_blur_shadow' BOOL, 'use_background' BOOL, 'background_name' TEXT, "
                      "'background' BLOB, 'text_font' TEXT, 'text_color' INTEGER, 'text_align_v' INTEGER, "
-                     "'text_align_h' INTEGER, 'use_disp_2' BOOL)");
+                     "'text_align_h' INTEGER, 'use_disp_1' BOOL)");
             sqt.exec("CREATE TABLE 'ThemeBible' ('theme_id' INTEGER, 'disp' INTEGER, 'use_shadow' BOOL, "
                      "'use_fading' BOOL, 'use_blur_shadow' BOOL, 'use_background' BOOL, 'background_name' TEXT, "
                      "'background' BLOB, 'text_font' TEXT, 'text_color' INTEGER, 'text_align_v' INTEGER, "
                      "'text_align_h' INTEGER, 'caption_font' TEXT, 'caption_color' INTEGER, 'caption_align' INTEGER, "
                      "'caption_position' INTEGER, 'use_abbr' BOOL, 'screen_use' INTEGER, 'screen_position' INTEGER, "
-                     "'use_disp_2' BOOL)");
+                     "'use_disp_1' BOOL, 'add_background_color_to_text' BOOL, 'text_rec_background_color' INTEGER, "
+                     "'text_gen_background_color' INTEGER)");
             sqt.exec("CREATE TABLE 'ThemePassive' ('theme_id' INTEGER, 'disp' INTEGER, 'use_background' BOOL, "
-                     "'background_name' TEXT, 'background' BLOB, 'use_disp_2' BOOL)");
+                     "'background_name' TEXT, 'background' BLOB, 'use_disp_1' BOOL)");
             sqt.exec("CREATE TABLE 'ThemeSong' ('theme_id' INTEGER, 'disp' INTEGER, 'use_shadow' BOOL, 'use_fading' BOOL, "
                      "'use_blur_shadow' BOOL, 'show_stanza_title' BOOL, 'show_key' BOOL, 'show_number' BOOL, "
                      "'info_color' INTEGER, 'info_font' TEXT, 'info_align' INTEGER, 'show_song_ending' BOOL, "
                      "'ending_color' INTEGER, 'ending_font' TEXT, 'ending_type' INTEGER, 'ending_position' INTEGER, "
                      "'use_background' BOOL, 'background_name' TEXT, 'background' BLOB, 'text_font' TEXT, "
                      "'text_color' INTEGER, 'text_align_v' INTEGER, 'text_align_h' INTEGER, "
-                     "'screen_use' INTEGER, 'screen_position' INTEGER, 'use_disp_2' BOOL)");
+                     "'screen_use' INTEGER, 'screen_position' INTEGER, 'use_disp_1' BOOL)");
             sqt.exec("CREATE TABLE 'Themes' ('id' INTEGER , 'name' TEXT, 'comment' TEXT)");
 
             if(all)
@@ -1671,7 +1672,7 @@ void ManageDataDialog::transferTheme(QSqlQuery &sqf, QSqlQuery &sqt)
 void ManageDataDialog::transferThemeAnnounce(QSqlQuery &sqf, QSqlQuery &sqt, int tmId)
 {
     sqt.prepare("INSERT INTO ThemeAnnounce (theme_id, disp, use_shadow, use_fading, use_blur_shadow, use_background, "
-                "background_name, background, text_font, text_color, text_align_v, text_align_h, use_disp_2) "
+                "background_name, background, text_font, text_color, text_align_v, text_align_h, use_disp_1) "
                 "VALUES(:id, :di, :us, :uf, :uu, :ub, :bn, :ba, :tf, :tc, :av, :ah, :ud)");
 
     while(sqf.next())
@@ -1691,7 +1692,7 @@ void ManageDataDialog::transferThemeAnnounce(QSqlQuery &sqf, QSqlQuery &sqt, int
         sqt.bindValue(":tc",sqf.record().value("text_color"));
         sqt.bindValue(":av",sqf.record().value("text_align_v"));
         sqt.bindValue(":ah",sqf.record().value("text_align_h"));
-        sqt.bindValue(":ud",sqf.record().value("use_disp_2"));
+        sqt.bindValue(":ud",sqf.record().value("use_disp_1"));
         sqt.exec();
     }
 }
@@ -1700,9 +1701,10 @@ void ManageDataDialog::transferThemeBible(QSqlQuery &sqf, QSqlQuery &sqt, int tm
 {
     sqt.prepare("INSERT INTO ThemeBible (theme_id, disp, use_shadow, use_fading, use_blur_shadow, use_background, "
                 "background_name, background, text_font, text_color, text_align_v, text_align_h, caption_font, "
-                "caption_color, caption_align, caption_position, use_abbr, screen_use, screen_position, use_disp_2) "
+                "caption_color, caption_align, caption_position, use_abbr, screen_use, screen_position, use_disp_1,"
+                "add_background_color_to_text, text_rec_background_color, text_gen_background_color) "
                 "VALUES(:id, :di, :us, :uf, :uu, :ub, :bn, :ba, :tf, :tc, :av, :ah, :cf, :cc, :ca, :cp, "
-                ":ua, :su, :sp, :ud)");
+                ":ua, :su, :sp, :ud, :ab, :rc, :gc)");
 
     while(sqf.next())
     {
@@ -1728,14 +1730,17 @@ void ManageDataDialog::transferThemeBible(QSqlQuery &sqf, QSqlQuery &sqt, int tm
         sqt.bindValue(":ua",sqf.record().value("use_abbr"));
         sqt.bindValue(":su",sqf.record().value("screen_use"));
         sqt.bindValue(":sp",sqf.record().value("screen_position"));
-        sqt.bindValue(":ud",sqf.record().value("use_disp_2"));
+        sqt.bindValue(":ud",sqf.record().value("use_disp_1"));
+        sqt.bindValue(":ab",sqf.record().value("add_background_color_to_text"));
+        sqt.bindValue(":rc",sqf.record().value("text_rec_background_color"));
+        sqt.bindValue(":gc",sqf.record().value("text_gen_background_color"));
         sqt.exec();
     }
 }
 
 void ManageDataDialog::transferThemePassive(QSqlQuery &sqf, QSqlQuery &sqt, int tmId)
 {
-    sqt.prepare("INSERT INTO ThemePassive (theme_id, disp, use_background, background_name, background, use_disp_2) "
+    sqt.prepare("INSERT INTO ThemePassive (theme_id, disp, use_background, background_name, background, use_disp_1) "
                 "VALUES(:id, :di, :ub, :bn, :ba, :ud)");
 
     while(sqf.next())
@@ -1748,7 +1753,7 @@ void ManageDataDialog::transferThemePassive(QSqlQuery &sqf, QSqlQuery &sqt, int 
         sqt.bindValue(":ub",sqf.record().value("use_background"));
         sqt.bindValue(":bn",sqf.record().value("background_name"));
         sqt.bindValue(":ba",sqf.record().value("background"));
-        sqt.bindValue(":ud",sqf.record().value("use_disp_2"));
+        sqt.bindValue(":ud",sqf.record().value("use_disp_1"));
         sqt.exec();
     }
 }
@@ -1758,7 +1763,7 @@ void ManageDataDialog::transferThemeSong(QSqlQuery &sqf, QSqlQuery &sqt, int tmI
     sqt.prepare("INSERT INTO ThemeSong (theme_id, disp, use_shadow, use_fading, use_blur_shadow, show_stanza_title, "
                 "show_key, show_number, info_color, info_font, info_align, show_song_ending, ending_color, ending_font, "
                 "ending_type, ending_position, use_background, background_name, background, text_font, text_color, "
-                "text_align_v, text_align_h, screen_use, screen_position, use_disp_2) "
+                "text_align_v, text_align_h, screen_use, screen_position, use_disp_1) "
                 "VALUES(:id, :di, :us, :uf, :uu, :ss, :sk, :sn, :ic, :if, :ia, :se, :ec, :ef, :et, :ep, "
                 ":ub, :bn, :ba, :tf, :tc, :av, :ah, :su, :sp, :ud)");
 
@@ -1792,7 +1797,7 @@ void ManageDataDialog::transferThemeSong(QSqlQuery &sqf, QSqlQuery &sqt, int tmI
         sqt.bindValue(":ah",sqf.record().value("text_align_h"));
         sqt.bindValue(":su",sqf.record().value("screen_use"));
         sqt.bindValue(":sp",sqf.record().value("screen_position"));
-        sqt.bindValue(":ud",sqf.record().value("use_disp_2"));
+        sqt.bindValue(":ud",sqf.record().value("use_disp_1"));
         sqt.exec();
     }
 }
@@ -1806,7 +1811,7 @@ void ManageDataDialog::on_pushButtonThemeDelete_clicked()
     QMessageBox ms(this);
     ms.setWindowTitle(tr("Delete Theme?"));
     ms.setText(tr("Are you sure that you want to delete theme: ")+ name);
-    ms.setInformativeText(tr("This action will permanently delete this theme"));
+    ms.setInformativeText(tr("This action will permanentrly delete this theme"));
     ms.setIcon(QMessageBox::Question);
     ms.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     ms.setDefaultButton(QMessageBox::Yes);

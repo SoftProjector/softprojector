@@ -52,6 +52,8 @@ public slots:
 
 signals:
     void setDisp2Use(bool toUse);
+    void setDisp3Use(bool toUse);
+    void setDisp4Use(bool toUse);
     void themeChanged(int theme_id);
 
 private slots:
@@ -60,6 +62,8 @@ private slots:
     void loadSettings();
     void on_comboBoxDisplayScreen_activated(const QString &arg1);
     void on_comboBoxDisplayScreen_2_activated(int index);
+    void on_comboBoxDisplayScreen_3_activated(int index);
+    void on_comboBoxDisplayScreen_4_activated(int index);
     void on_pushButtonAddTheme_clicked();
     void on_comboBoxTheme_activated(int index);
 protected:

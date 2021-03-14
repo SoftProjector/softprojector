@@ -61,7 +61,7 @@ signals:
     void toProjector(VideoInfo &vid);
 
 private slots:
-    void playFile(QUrl filePath);
+    void playFile(QString filePath);
     void updateInfo();
 
     void handleDrop(QDropEvent *e);
@@ -94,11 +94,9 @@ private:
 
     QString audioExt;
     QString videoExt;
-    QList<QUrl> mediaFilePaths;
+    QStringList mediaFilePaths;
     QStringList mediaFileNames;
     QUrl currentMediaUrl;
-
-    bool isReadyToPlay;
 };
 
 #endif // MEDIAWIDGET_HPP

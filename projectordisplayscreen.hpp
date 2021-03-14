@@ -73,8 +73,7 @@ private slots:
     void setBackPixmap(QPixmap p,int fillMode); // 0 = Strech, 1 = keep aspect, 2 = keep aspect by expanding
     void setBackPixmap(QPixmap p, QColor c);
     void setTextPixmap(QPixmap p);
-    void setBackVideo(QString path);
-    void setVideoSource(QObject *playerObject, QUrl path);
+    void setVideoSource(QString path);
     void updateScreen();
 
     void exitSlideClicked();

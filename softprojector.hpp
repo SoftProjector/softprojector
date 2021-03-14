@@ -72,6 +72,8 @@ public:
     EditWidget *editWidget;
     ProjectorDisplayScreen *pds1;
     ProjectorDisplayScreen *pds2;
+    ProjectorDisplayScreen *pds3;
+    ProjectorDisplayScreen *pds4;
     PictureWidget *pictureWidget;
     MediaWidget *mediaPlayer;
     MediaControl *mediaControls;
@@ -89,7 +91,8 @@ public:
 
 public slots:
     void updateSetting(GeneralSettings &g,Theme &t, SlideShowSettings &ssets,
-                       BibleVersionSettings &bsets, BibleVersionSettings &bsets2);
+                       BibleVersionSettings &bsets, BibleVersionSettings &bsets2,
+                       BibleVersionSettings &bsets3, BibleVersionSettings &bsets4);
     void saveSettings();
     void positionDisplayWindow();
     void updateScreen();
@@ -115,6 +118,8 @@ private:
     QString cur_locale;
     bool isSingleScreen;
     bool hasDisplayScreen2;
+    bool hasDisplayScreen3;
+    bool hasDisplayScreen4;
 
     // shortcuts
     QShortcut *shpgUP;
@@ -139,7 +144,8 @@ private slots:
     void showDisplayScreen(bool show);
 
     void applySetting(GeneralSettings &g, Theme &t, SlideShowSettings &s,
-                      BibleVersionSettings &b1, BibleVersionSettings &b2);
+                      BibleVersionSettings &b1, BibleVersionSettings &b2,
+                      BibleVersionSettings &b3, BibleVersionSettings &b4);
     void on_actionSong_Counter_triggered();
     void on_projectTab_currentChanged(int index);
     void updateEditActions();

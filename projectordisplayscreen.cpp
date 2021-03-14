@@ -169,25 +169,15 @@ void ProjectorDisplayScreen::setTextPixmap(QPixmap p)
     }
 }
 
-void ProjectorDisplayScreen::setBackVideo(QString path)
+void ProjectorDisplayScreen::setVideoSource(QString path)
 {
     QObject *item = dispView->rootObject()->findChild<QObject*>("player");
     QObject *item2 = dispView->rootObject()->findChild<QObject*>("vidOut");
 
-    setVideoSource(item,path);
     item->setProperty("volume",0.0);
+    item->setProperty("source",path);
     item->setProperty("loops",QMediaPlaylist::Loop);
     item2->setProperty("fillMode",Qt::IgnoreAspectRatio);
-}
-
-void ProjectorDisplayScreen::setVideoSource(QObject* playerObject, QUrl path)
-{
-//#if  (defined(Q_OS_UNIX))
-//    // Prefix "file://" to the file name only for Unix like systems.
-//    path = "file://" + path;
-//#endif
-//    playerObject->setProperty("source",path);
-    playerObject->setProperty("source",path.toString());
 }
 
 void ProjectorDisplayScreen::updateScreen()
@@ -436,9 +426,8 @@ void ProjectorDisplayScreen::renderVideo(VideoInfo videoDetails)
     QObject *item = root->findChild<QObject*>("player");
     QObject *item2 = root->findChild<QObject*>("vidOut");
 
-    setVideoSource(item,videoDetails.filePath);
-
     item->setProperty("volume",1.0);
+    item->setProperty("source",videoDetails.filePath);
     item->setProperty("loops",QMediaPlaylist::CurrentItemOnce);
     item2->setProperty("fillMode",Qt::KeepAspectRatio);
 

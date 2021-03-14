@@ -48,11 +48,11 @@ public:
     QPixmap background;
     QFont textFont;
     QColor textColor;
-    int textAlignmentV;
-    int textAlignmentH;
+    int textAlingmentV;
+    int textAlingmentH;
     QFont captionFont;
     QColor captionColor;
-    int captionAlignment;
+    int captionAlingment;
     int captionPosition;
     bool useAbbriviations;
     int screenUse;
@@ -85,8 +85,8 @@ public:
     QPixmap background;
     QColor textColor;
     QFont textFont;
-    int textAlignmentV;
-    int textAlignmentH;
+    int textAlingmentV;
+    int textAlingmentH;
     int screenUse;
     int screenPositon; // 0 = Top, 1 = Bottom
     bool useDisp2settings;
@@ -104,8 +104,8 @@ public:
     QPixmap background;
     QFont textFont;
     QColor textColor;
-    int textAlignmentV;
-    int textAlignmentH;
+    int textAlingmentV;
+    int textAlingmentH;
 
     bool useDisp2settings;
 };
@@ -128,8 +128,12 @@ public:
     TextSettingsBase common2; // Holds secondary display screen settings
     TextSettings passive;
     TextSettings passive2; // Holds secondary display screen settings
+    TextSettings passive3;
+    TextSettings passive4; // Holds fourth display screen settings
     BibleSettings bible;
     BibleSettings bible2; // Holds secondary display screen settings
+    BibleSettings bible3;
+    BibleSettings bible4; // Holds fourth display screen settings
     SongSettings song;
     SongSettings song2; // Holds secondary display screen settings
     TextSettings announce;

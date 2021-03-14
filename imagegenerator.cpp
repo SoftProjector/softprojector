@@ -78,6 +78,9 @@ QPixmap ImageGenerator::generateBibleImage(Verse verse, BibleSettings &bSets)
 //    m_blurShadow = (m_bSets.effectsType == 2);
     m_shadow = m_bSets.useShadow;
     m_blurShadow = m_bSets.useBlurShadow;
+    m_addBackgroundColorToText = m_bSets.addBackgroundColorToText;
+    m_textRecBackgroundColor = m_bSets.textRecBackgroundColor;
+    m_textGenBackgroundColor = m_bSets.textGenBackgroundColor;
 
     m_isTextPrepared = false;
     return renderText();
@@ -123,7 +126,12 @@ QPixmap ImageGenerator::renderText()
 {
     QPixmap textMap(m_screenSize), shadowMap(m_screenSize), outMap(m_screenSize);
     //fill with transparent background
-    textMap.fill(QColor(0,0,0,0));
+    if(m_addBackgroundColorToText == 1)
+    {
+        textMap.fill(m_textGenBackgroundColor);
+    } else {
+        textMap.fill(QColor(0,0,0,0));
+    }
     shadowMap.fill(QColor(0,0,0,0));
     outMap.fill(QColor(0,0,0,0));
 
@@ -145,7 +153,7 @@ QPixmap ImageGenerator::renderText()
         }
         break;
     case 2:
-        // Braw Song
+        // Draw Song
         drawSongText(&textPaint,false);
         if(m_shadow)
         {
@@ -263,26 +271,26 @@ void ImageGenerator::drawBibleText(QPainter *painter, bool isShadow)
     int tflags = Qt::TextWordWrap;
     tflags = Qt::TextWordWrap;
 
-    if(m_bSets.textAlignmentV==0)
+    if(m_bSets.textAlingmentV==0)
         tflags += Qt::AlignTop;
-    else if(m_bSets.textAlignmentV==1)
+    else if(m_bSets.textAlingmentV==1)
         tflags += Qt::AlignVCenter;
-    else if(m_bSets.textAlignmentV==2)
+    else if(m_bSets.textAlingmentV==2)
         tflags += Qt::AlignBottom;
 
-    if(m_bSets.textAlignmentH==0)
+    if(m_bSets.textAlingmentH==0)
         tflags += Qt::AlignLeft;
-    else if(m_bSets.textAlignmentH==1)
+    else if(m_bSets.textAlingmentH==1)
         tflags += Qt::AlignHCenter;
-    else if(m_bSets.textAlignmentH==2)
+    else if(m_bSets.textAlingmentH==2)
         tflags += Qt::AlignRight;
 
     int cflags = Qt::AlignTop ;
-    if(m_bSets.captionAlignment==0)
+    if(m_bSets.captionAlingment==0)
         cflags += Qt::AlignLeft;
-    else if(m_bSets.captionAlignment==1)
+    else if(m_bSets.captionAlingment==1)
         cflags += Qt::AlignHCenter;
-    else if(m_bSets.captionAlignment==2)
+    else if(m_bSets.captionAlingment==2)
         cflags += Qt::AlignRight;
 
     bool exit1 = false, exit2 = false, exit3 = false;
@@ -421,6 +429,12 @@ void ImageGenerator::drawBibleTextToRect(QPainter *painter, QRect& trect, QRect&
     painter->setFont(m_bSets.textFont);
     trect = painter->boundingRect(left, top, width, height-crect.height(), tflags, ttext);
 
+    if(m_addBackgroundColorToText == 1)
+    {
+        int fillheight = trect.height()+crect.height();
+        painter->fillRect(QRect(0, top+height-fillheight-left, width+(left*2), top+height), QBrush(m_textRecBackgroundColor, Qt::SolidPattern));
+    }
+
     // reset capion location
     int ch = crect.height();
     int th = trect.height();
@@ -537,17 +551,17 @@ void ImageGenerator::drawSongText(QPainter *painter, bool isShadow)
     QRect caption_rect, num_rect, main_rect, ending_rect;
     int main_flags(0);
 
-    if(m_sSets.textAlignmentV==0)
+    if(m_sSets.textAlingmentV==0)
         main_flags += Qt::AlignTop;
-    else if(m_sSets.textAlignmentV==1)
+    else if(m_sSets.textAlingmentV==1)
         main_flags += Qt::AlignVCenter;
-    else if(m_sSets.textAlignmentV==2)
+    else if(m_sSets.textAlingmentV==2)
         main_flags += Qt::AlignBottom;
-    if(m_sSets.textAlignmentH==0)
+    if(m_sSets.textAlingmentH==0)
         main_flags += Qt::AlignLeft;
-    else if(m_sSets.textAlignmentH==1)
+    else if(m_sSets.textAlingmentH==1)
         main_flags += Qt::AlignHCenter;
-    else if(m_sSets.textAlignmentH==2)
+    else if(m_sSets.textAlingmentH==2)
         main_flags += Qt::AlignRight;
 
     QFont main_font = m_sSets.textFont;
@@ -579,6 +593,7 @@ void ImageGenerator::drawSongText(QPainter *painter, bool isShadow)
         // Prepare Main Text
         painter->setFont(main_font);
         main_rect = boundRectOrDrawText(painter, false, left, top, width, height, main_flags, main_text);
+
         mainh = main_rect.height();
         mainw = main_rect.width();
         totalh = caph+endh+mainh;
@@ -735,17 +750,17 @@ void ImageGenerator::drawAnnounceText(QPainter *painter, bool isShadow)
     int h = m_screenSize.height() - top - top;
 
     int flags = Qt::TextWordWrap;
-    if(m_aSets.textAlignmentV==0)
+    if(m_aSets.textAlingmentV==0)
         flags += Qt::AlignTop;
-    else if(m_aSets.textAlignmentV==1)
+    else if(m_aSets.textAlingmentV==1)
         flags += Qt::AlignVCenter;
-    else if(m_aSets.textAlignmentV==2)
+    else if(m_aSets.textAlingmentV==2)
         flags += Qt::AlignBottom;
-    if(m_aSets.textAlignmentH==0)
+    if(m_aSets.textAlingmentH==0)
         flags += Qt::AlignLeft;
-    else if(m_aSets.textAlignmentH==1)
+    else if(m_aSets.textAlingmentH==1)
         flags += Qt::AlignHCenter;
-    else if(m_aSets.textAlignmentH==2)
+    else if(m_aSets.textAlingmentH==2)
         flags += Qt::AlignRight;
 
     QFont font = m_aSets.textFont;
