@@ -83,6 +83,7 @@ private slots:
     void videoPositionChanged(int position);
     void videoDurationChanged(int duration);
     void videoPlaybackStateChanged(int state);
+    void playbackStopped();
 
 signals:
     void exitSlide();
@@ -92,6 +93,7 @@ signals:
     void videoPositionChanged(qint64 position);
     void videoDurationChanged(qint64 duration);
     void videoPlaybackStateChanged(QMediaPlayer::State state);
+    void videoStopped();
 
 protected:
     void keyReleaseEvent(QKeyEvent *event);
