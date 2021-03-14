@@ -877,13 +877,13 @@ void SoftProjector::showBible()
     {
         if(!theme.bible4.useDisp1settings)
         {
-            pds3->renderBibleText(bibleWidget->bible.
+            pds4->renderBibleText(bibleWidget->bible.
                                   getCurrentVerseAndCaption(currentRows,theme.bible4,
                                                             mySettings.bibleSets4),theme.bible4);
         }
         else
         {
-            pds3->renderBibleText(bibleWidget->bible.
+            pds4->renderBibleText(bibleWidget->bible.
                                   getCurrentVerseAndCaption(currentRows,theme.bible,
                                                             mySettings.bibleSets),theme.bible);
         }
@@ -915,6 +915,31 @@ void SoftProjector::showSong(int currentRow)
             pds2->renderSongText(current_song.getStanza(currentRow),s1);
         }
     }
+    if(hasDisplayScreen3)
+    {
+        pds3->renderSongText(current_song.getStanza(currentRow),s1);
+//        if(!theme.song3.useDisp1settings)
+//        {
+//            pds3->renderSongText(current_song.getStanza(currentRow),s3);
+//        }
+//        else
+//        {
+//            pds3->renderSongText(current_song.getStanza(currentRow),s1);
+//        }
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->renderSongText(current_song.getStanza(currentRow),s1);
+//        if(!theme.song4.useDisp1settings)
+//        {
+//            pds4->renderSongText(current_song.getStanza(currentRow),s4);
+//        }
+//        else
+//        {
+//            pds4->renderSongText(current_song.getStanza(currentRow),s1);
+//        }
+    }
+
 }
 
 void SoftProjector::showAnnounce(int currentRow)
@@ -931,6 +956,30 @@ void SoftProjector::showAnnounce(int currentRow)
             pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
         }
     }
+    if(hasDisplayScreen3)
+    {
+        pds3->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+//        if(!theme.announce3.useDisp1settings)
+//        {
+//            pds3->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce3);
+//        }
+//        else
+//        {
+//            pds3->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+//        }
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+//        if(!theme.announce4.useDisp1settings)
+//        {
+//            pds4->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce4);
+//        }
+//        else
+//        {
+//            pds4->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+//        }
+    }
 }
 
 void SoftProjector::showPicture(int currentRow)
@@ -939,6 +988,14 @@ void SoftProjector::showPicture(int currentRow)
     if(hasDisplayScreen2)
     {
         pds2->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
+    }
+    if(hasDisplayScreen3)
+    {
+        pds3->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
     }
 }
 
@@ -951,6 +1008,18 @@ void SoftProjector::showVideo()
         pds2->setVideoVolume(0);
         pds2->setVideoMuted(true);
         pds2->renderVideo(currentVideo);
+    }
+    if(hasDisplayScreen3)
+    {
+        pds3->setVideoVolume(0);
+        pds3->setVideoMuted(true);
+        pds3->renderVideo(currentVideo);
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->setVideoVolume(0);
+        pds4->setVideoMuted(true);
+        pds4->renderVideo(currentVideo);
     }
 }
 

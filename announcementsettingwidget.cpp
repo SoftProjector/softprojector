@@ -90,6 +90,15 @@ void AnnouncementSettingWidget::loadSettings()
 
     ui->groupBoxUseDisp2->setChecked(!mySettings2.useDisp1settings);
     on_groupBoxUseDisp2_toggled(!mySettings2.useDisp1settings);
+
+    ui->groupBoxUseDisp3->setChecked(false);
+    ui->groupBoxUseDisp4->setChecked(false);
+
+//    ui->groupBoxUseDisp3->setChecked(!mySettings3.useDisp1settings);
+//    on_groupBoxUseDisp3_toggled(!mySettings3.useDisp1settings);
+
+//    ui->groupBoxUseDisp4->setChecked(!mySettings4.useDisp1settings);
+//    on_groupBoxUseDisp4_toggled(!mySettings4.useDisp1settings);
 }
 
 void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings &settings2)
@@ -119,6 +128,12 @@ void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings
 
     mySettings2.useDisp1settings = !ui->groupBoxUseDisp2->isChecked();
     mySettings2.useDisp2settings = ui->groupBoxUseDisp2->isChecked();
+
+//    mySettings3.useDisp1settings = !ui->groupBoxUseDisp3->isChecked();
+//    mySettings3.useDisp3settings = ui->groupBoxUseDisp3->isChecked();
+
+//    mySettings4.useDisp1settings = !ui->groupBoxUseDisp4->isChecked();
+//    mySettings4.useDisp4settings = ui->groupBoxUseDisp4->isChecked();
 
     settings = mySettings;
     settings2 = mySettings2;

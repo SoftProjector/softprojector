@@ -107,6 +107,12 @@ void SongSettingWidget::getSettings(SongSettings &settings, SongSettings &settin
     mySettings2.useDisp1settings = !ui->groupBoxDisplay2->isChecked();
     mySettings2.useDisp2settings = ui->groupBoxDisplay2->isChecked();
 
+//    mySettings3.useDisp1settings = !ui->groupBoxDisplay3->isChecked();
+//    mySettings3.useDisp3settings = ui->groupBoxDisplay3->isChecked();
+
+//    mySettings4.useDisp1settings = !ui->groupBoxDisplay4->isChecked();
+//    mySettings4.useDisp4settings = ui->groupBoxDisplay4->isChecked();
+
     settings = mySettings;
     settings2 = mySettings2;
 }
@@ -185,6 +191,15 @@ void SongSettingWidget::loadSettings()
     // Set secondary screen
     ui->groupBoxDisplay2->setChecked(!mySettings2.useDisp1settings);
     on_groupBoxDisplay2_toggled(!mySettings2.useDisp1settings);
+
+    ui->groupBoxDisplay3->setChecked(false);
+    ui->groupBoxDisplay4->setChecked(false);
+
+//    ui->groupBoxDisplay3->setChecked(!mySettings3.useDisp1settings);
+//    on_groupBoxDisplay3_toggled(!mySettings3.useDisp1settings);
+
+//    ui->groupBoxDisplay4->setChecked(!mySettings4.useDisp1settings);
+//    on_groupBoxDisplay4_toggled(!mySettings4.useDisp1settings);
 }
 
 void SongSettingWidget::setDispScreen2Visible(bool visible)
