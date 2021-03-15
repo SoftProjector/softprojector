@@ -17,8 +17,6 @@
 //
 ***************************************************************************/
 
-#include "widget.h"
-
 #include <QApplication>
 #include <QMessageBox>
 #include <QtSql>
@@ -29,6 +27,7 @@
 // xxx - Official sub realeas. ex: 201 - for SoftProjector 2.01
 // 990xxx - Development release. ex: 990206 - for SoftProjector 2 Development Build 6 (2db6)
 int const dbVer = 2;
+
 bool connect(QString database_file)
 {
     database_file += "spData.sqlite";

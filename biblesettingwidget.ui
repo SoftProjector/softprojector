@@ -453,7 +453,7 @@
    <item>
     <widget class="QCheckBox" name="checkBoxAbbiviations">
      <property name="text">
-      <string>Show Bible Version Abbriviation</string>
+      <string>Show Bible Version Abbreviation</string>
      </property>
     </widget>
    </item>
@@ -504,7 +504,7 @@
           </item>
           <item>
            <property name="text">
-            <string>Botton of Screen</string>
+            <string>Bottom of Screen</string>
            </property>
           </item>
          </widget>
@@ -3152,6 +3152,7 @@
   <tabstop>toolButtonCaptionFont2</tabstop>
   <tabstop>comboBoxCaptionPosition2</tabstop>
   <tabstop>comboBoxCaptionAlign2</tabstop>
+  <tabstop>checkBoxAbbiviations2</tabstop>
   <tabstop>spinBoxMaxScreen2</tabstop>
   <tabstop>comboBoxScreenPosition2</tabstop>
   <tabstop>pushButtonDefault</tabstop>
