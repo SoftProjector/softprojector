@@ -89,12 +89,12 @@ void SongSettingWidget::getSettings(SongSettings &settings, SongSettings &settin
     mySettings2.useBackground = ui->groupBoxSongBackground2->isChecked();
     mySettings2.backgroundName = ui->lineEditSongBackground2->text();
 
-    // Save alingment
-    mySettings.textAlingmentV = ui->comboBoxVerticalAling->currentIndex();
-    mySettings.textAlingmentH = ui->comboBoxHorizontalAling->currentIndex();
+    // Save Alignment
+    mySettings.textAlignmentV = ui->comboBoxVerticalAling->currentIndex();
+    mySettings.textAlignmentH = ui->comboBoxHorizontalAling->currentIndex();
 
-    mySettings2.textAlingmentV = ui->comboBoxVerticalAling2->currentIndex();
-    mySettings2.textAlingmentH = ui->comboBoxHorizontalAling2->currentIndex();
+    mySettings2.textAlignmentV = ui->comboBoxVerticalAling2->currentIndex();
+    mySettings2.textAlignmentH = ui->comboBoxHorizontalAling2->currentIndex();
 
     // Screen use
     mySettings.screenUse = ui->spinBoxScreenUse->value();
@@ -172,14 +172,14 @@ void SongSettingWidget::loadSettings()
     p.setColor(QPalette::Base,mySettings.textColor);
     ui->graphicViewTextColor->setPalette(p);
     ui->labelFont->setText(getFontText(mySettings.textFont));
-    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlingmentV);
-    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlingmentH);
+    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlignmentV);
+    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlignmentH);
 
     p.setColor(QPalette::Base,mySettings2.textColor);
     ui->graphicViewTextColor2->setPalette(p);
     ui->labelFont2->setText(getFontText(mySettings2.textFont));
-    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlingmentV);
-    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlingmentH);
+    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlignmentV);
+    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlignmentH);
 
     // Set Screen Use
     ui->spinBoxScreenUse->setValue(mySettings.screenUse);

@@ -92,31 +92,31 @@ void BibleSettingWidget::getSettings(BibleSettings &settings, BibleSettings &set
     //mySettings3.addBackgroundColorToText = false;
     //mySettings4.addBackgroundColorToText = false;
 
-    //Alingment
-    mySettings.textAlingmentV = ui->comboBoxVerticalAling->currentIndex();
-    mySettings.textAlingmentH = ui->comboBoxHorizontalAling->currentIndex();
+    //Alignment
+    mySettings.textAlignmentV = ui->comboBoxVerticalAling->currentIndex();
+    mySettings.textAlignmentH = ui->comboBoxHorizontalAling->currentIndex();
 
-    mySettings2.textAlingmentV = ui->comboBoxVerticalAling2->currentIndex();
-    mySettings2.textAlingmentH = ui->comboBoxHorizontalAling2->currentIndex();
+    mySettings2.textAlignmentV = ui->comboBoxVerticalAling2->currentIndex();
+    mySettings2.textAlignmentH = ui->comboBoxHorizontalAling2->currentIndex();
 
-    mySettings3.textAlingmentV = ui->comboBoxVerticalAling3->currentIndex();
-    mySettings3.textAlingmentH = ui->comboBoxHorizontalAling3->currentIndex();
+    mySettings3.textAlignmentV = ui->comboBoxVerticalAling3->currentIndex();
+    mySettings3.textAlignmentH = ui->comboBoxHorizontalAling3->currentIndex();
 
-    mySettings4.textAlingmentV = ui->comboBoxVerticalAling4->currentIndex();
-    mySettings4.textAlingmentH = ui->comboBoxHorizontalAling4->currentIndex();
+    mySettings4.textAlignmentV = ui->comboBoxVerticalAling4->currentIndex();
+    mySettings4.textAlignmentH = ui->comboBoxHorizontalAling4->currentIndex();
 
     //Caption Alignment
     mySettings.captionPosition = ui->comboBoxCaptionPosition->currentIndex();
-    mySettings.captionAlingment = ui->comboBoxCaptionAlign->currentIndex();
+    mySettings.captionAlignment = ui->comboBoxCaptionAlign->currentIndex();
 
     mySettings2.captionPosition = ui->comboBoxCaptionPosition2->currentIndex();
-    mySettings2.captionAlingment = ui->comboBoxCaptionAlign2->currentIndex();
+    mySettings2.captionAlignment = ui->comboBoxCaptionAlign2->currentIndex();
 
     mySettings3.captionPosition = ui->comboBoxCaptionPosition3->currentIndex();
-    mySettings3.captionAlingment = ui->comboBoxCaptionAlign3->currentIndex();
+    mySettings3.captionAlignment = ui->comboBoxCaptionAlign3->currentIndex();
 
     mySettings4.captionPosition = ui->comboBoxCaptionPosition4->currentIndex();
-    mySettings4.captionAlingment = ui->comboBoxCaptionAlign4->currentIndex();
+    mySettings4.captionAlignment = ui->comboBoxCaptionAlign4->currentIndex();
 
     // Version Abbreviations
     mySettings.useAbbriviation = ui->checkBoxAbbiviations->isChecked();
@@ -343,18 +343,18 @@ void BibleSettingWidget::loadSettings()
     ui->labelFont3->setText(getFontText(mySettings3.textFont));
     ui->labelFont4->setText(getFontText(mySettings4.textFont));
 
-    // Set alingment
-    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlingmentV);
-    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlingmentH);
+    // Set Alignment
+    ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlignmentV);
+    ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlignmentH);
 
-    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlingmentV);
-    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlingmentH);
+    ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlignmentV);
+    ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlignmentH);
 
-    ui->comboBoxVerticalAling3->setCurrentIndex(mySettings3.textAlingmentV);
-    ui->comboBoxHorizontalAling3->setCurrentIndex(mySettings3.textAlingmentH);
+    ui->comboBoxVerticalAling3->setCurrentIndex(mySettings3.textAlignmentV);
+    ui->comboBoxHorizontalAling3->setCurrentIndex(mySettings3.textAlignmentH);
 
-    ui->comboBoxVerticalAling4->setCurrentIndex(mySettings4.textAlingmentV);
-    ui->comboBoxHorizontalAling4->setCurrentIndex(mySettings4.textAlingmentH);
+    ui->comboBoxVerticalAling4->setCurrentIndex(mySettings4.textAlignmentV);
+    ui->comboBoxHorizontalAling4->setCurrentIndex(mySettings4.textAlignmentH);
 
     // Set caption color
     p.setColor(QPalette::Base,mySettings.captionColor);
@@ -381,10 +381,10 @@ void BibleSettingWidget::loadSettings()
     ui->comboBoxCaptionPosition3->setCurrentIndex(mySettings3.captionPosition);
     ui->comboBoxCaptionPosition4->setCurrentIndex(mySettings4.captionPosition);
 
-    ui->comboBoxCaptionAlign->setCurrentIndex(mySettings.captionAlingment);
-    ui->comboBoxCaptionAlign2->setCurrentIndex(mySettings2.captionAlingment);
-    ui->comboBoxCaptionAlign3->setCurrentIndex(mySettings3.captionAlingment);
-    ui->comboBoxCaptionAlign4->setCurrentIndex(mySettings4.captionAlingment);
+    ui->comboBoxCaptionAlign->setCurrentIndex(mySettings.captionAlignment);
+    ui->comboBoxCaptionAlign2->setCurrentIndex(mySettings2.captionAlignment);
+    ui->comboBoxCaptionAlign3->setCurrentIndex(mySettings3.captionAlignment);
+    ui->comboBoxCaptionAlign4->setCurrentIndex(mySettings4.captionAlignment);
 
     // Set abbriviations use
     ui->checkBoxAbbiviations->setChecked(mySettings.useAbbriviation);
@@ -524,7 +524,7 @@ void BibleSettingWidget::loadBibleVersions()
     else
         ui->comboBoxSecondaryBible4->setCurrentIndex(bible_id_list.indexOf(bversion4.secondaryBible)+1);
 
-    // Set current trinaty bibile
+    // Set current trinary bible
     if(bversion.trinaryBible == "none")
         ui->comboBoxTrinaryBible->setCurrentIndex(0);
     else
@@ -549,7 +549,7 @@ void BibleSettingWidget::loadBibleVersions()
         ui->comboBoxTrinaryBible4->setCurrentIndex(bible_id_list.indexOf(bversion4.trinaryBible)+1);
     updateSecondaryBibleMenu4();
 
-    // Set current operator bibile
+    // Set current operator bible
     if(bversion.operatorBible == "same")
         ui->comboBoxOperatorBible->setCurrentIndex(0);
     else

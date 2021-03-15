@@ -508,7 +508,7 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     if(key == Qt::Key_F6)
     {
         ui->projectTab->setCurrentWidget(bibleWidget);
-        bibleWidget->setSearchActive();
+        bibleWidget->setBibleBookActive();
     }
     else if(key == Qt::Key_F7)
     {
@@ -517,6 +517,11 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     }
     else if(key == Qt::Key_F8)
         ui->projectTab->setCurrentWidget(announceWidget);
+	else if(key == Qt::Key_F9)
+    {
+        ui->projectTab->setCurrentWidget(bibleWidget);
+        bibleWidget->setBibleSearchActive();
+    }
     else if(key == Qt::Key_Left)
         prevSlide();
     else if(key == Qt::Key_Back)
@@ -549,6 +554,7 @@ void SoftProjector::setAnnounceText(Announcement announce, int row)
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/announce.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(currentAnnounce.title);
+	ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(5); // ?
     ui->listShow->setWordWrap(true);
@@ -575,6 +581,13 @@ void SoftProjector::setSongList(Song song, int row)
     ui->listShow->clear();
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/song_tab.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(song.title);
+	if(song.notes.isEmpty())
+        ui->labelSongNotes->setVisible(false);
+    else
+    {
+        ui->labelSongNotes->setText(QString("%1\n%2").arg(tr("Notes:","Notes to songs")).arg(song.notes));
+        ui->labelSongNotes->setVisible(true);
+    }
     ui->listShow->setSpacing(5);
     ui->listShow->setWordWrap(false);
     ui->listShow->addItems(song_list);
@@ -594,6 +607,7 @@ void SoftProjector::setChapterList(QStringList chapter_list, QString caption, QI
     new_list = true;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/book.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(caption);
+	ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(2);
     ui->listShow->setWordWrap(true);
@@ -622,6 +636,7 @@ void SoftProjector::setPictureList(QList<SlideShowItem> &image_list,int row,QStr
     pictureShowList = image_list;
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/photo.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(name);
+	ui->labelSongNotes->setVisible(false);
     ui->listShow->clear();
     ui->listShow->setSpacing(1);
     ui->listShow->setIconSize(QSize(100,100));
@@ -654,6 +669,7 @@ void SoftProjector::setVideo(VideoInfo &video)
     }
     new_list = true;
     ui->listShow->clear();
+	ui->labelSongNotes->setVisible(false);
     ui->labelIcon->setPixmap(QPixmap(":/icons/icons/video.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->labelShow->setText(currentVideo.fileName);
     new_list = false;
@@ -1345,7 +1361,7 @@ void SoftProjector::on_action_Help_triggered()
 
 void SoftProjector::newSong()
 {
-    if (!editWidget->isHidden()) // Prohibit editing a song when a different song already been edited.
+    if (!editWidget->isHidden()) // Prohibits editing a song when a different song already been edited.
     {
         QMessageBox ms(this);
         ms.setWindowTitle(tr("Cannot create a new song"));
@@ -1366,7 +1382,7 @@ void SoftProjector::editSong()
 {
     if (songWidget->isSongSelected())
     {
-        if(!editWidget->isHidden()) // Prohibit editing a song when a different song already been edited.
+        if(!editWidget->isHidden()) // Prohibits editing a song when a different song already been edited.
         {
             QMessageBox ms(this);
             ms.setWindowTitle(tr("Cannot start new edit"));

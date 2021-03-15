@@ -27,14 +27,14 @@
 void saveIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);
 void updateIndividualSettings(QSqlQuery &sq, QString sId, int tId, QString name, const QVariant &value);
 
-enum HorizontalAlingment
+enum HorizontalAlignment
 {
     A_TOP,
     A_MIDDLE,
     A_BOTTOM
 };
 
-enum VerticalAlingment
+enum VerticalAlignment
 {
     A_LEFT,
     A_CENTER,
@@ -110,9 +110,9 @@ public:
     QColor textShadowColor;
     QColor textRecBackgroundColor;
     QColor textGenBackgroundColor;
-    int textAlingmentV;
-    // 0 - Top, 1 - Middle, 3 - Botton
-    int textAlingmentH;
+    int textAlignmentV;
+    // 0 - Top, 1 - Middle, 3 - Bottom
+    int textAlignmentH;
     // 0 - Left, 1 - Center, 3 - Right
 
     //Effects
@@ -144,7 +144,7 @@ public:
     //Layout
     int screenUse;
     int screenPosition;
-    // 0 - Top of Screen, 1 - Botton of Screen
+    // 0 - Top of Screen, 1 - Bottom of Screen
 
     bool useSameForDisp2;
     bool useSameForDisp3;
@@ -207,7 +207,7 @@ public:
     QColor captionColor;
     bool isNotSameColor;
     QColor captionShadowColor;
-    int captionAlingment;
+    int captionAlignment;
     int captionPosition;
     bool useAbbriviation;
 
@@ -305,8 +305,8 @@ public:
     QString backgroundPath;
     QFont textFont;
     QColor textColor;
-    int textAlingmentV;
-    int textAlingmentH;
+    int textAlignmentV;
+    int textAlignmentH;
 };
 
 class SpSettings

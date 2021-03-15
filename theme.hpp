@@ -48,11 +48,11 @@ public:
     QPixmap background;
     QFont textFont;
     QColor textColor;
-    int textAlingmentV;
-    int textAlingmentH;
+    int textAlignmentV;
+    int textAlignmentH;
     QFont captionFont;
     QColor captionColor;
-    int captionAlingment;
+    int captionAlignment;
     int captionPosition;
     bool useAbbriviations;
     int screenUse;
@@ -85,8 +85,8 @@ public:
     QPixmap background;
     QColor textColor;
     QFont textFont;
-    int textAlingmentV;
-    int textAlingmentH;
+    int textAlignmentV;
+    int textAlignmentH;
     int screenUse;
     int screenPositon; // 0 = Top, 1 = Bottom
     bool useDisp2settings;
@@ -104,8 +104,8 @@ public:
     QPixmap background;
     QFont textFont;
     QColor textColor;
-    int textAlingmentV;
-    int textAlingmentH;
+    int textAlignmentV;
+    int textAlignmentH;
 
     bool useDisp2settings;
 };

@@ -183,11 +183,14 @@ void BibleWidget::sendToProjector(bool add_to_history)
 {
     bible.currentIdList = bible.previewIdList;
     QItemSelection selectedItems = ui->chapter_preview_list->selectionModel()->selection();
-    // Get the caption string to show above the show list (right-most list)
-    QString cap = QString("%1 %2").arg(ui->listBook->currentItem()->text()).arg(ui->listChapterNum->currentItem()->text());
-    emit goLive(bible.verseList, cap,selectedItems);
-    if (add_to_history)
-        addToHistory();
+    if(selectedItems.count())
+    {
+        // Get the caption string to show above the show list (right-most list)
+        QString cap = QString("%1 %2").arg(ui->listBook->currentItem()->text()).arg(ui->listChapterNum->currentItem()->text());
+        emit goLive(bible.verseList, cap,selectedItems);
+        if (add_to_history)
+            addToHistory();
+    }
 }
 
 void BibleWidget::on_lineEditBook_textChanged(QString text)
@@ -571,8 +574,14 @@ bool BibleWidget::isVerseSelected()
         return false;
 }
 
-void BibleWidget::setSearchActive()
+void BibleWidget::setBibleBookActive()
 {
     ui->lineEditBook->setFocus();
     ui->lineEditBook->selectAll();
+}
+
+void BibleWidget::setBibleSearchActive()
+{
+    ui->search_ef->setFocus();
+    ui->search_ef->selectAll();
 }

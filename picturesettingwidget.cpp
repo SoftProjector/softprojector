@@ -127,7 +127,7 @@ void PictureSettingWidget::on_lineEditBound_editingFinished()
         if(!ok)
         {
             QMessageBox mb(this);
-            mb.setWindowTitle(tr("Inalid Numeric Value"));
+            mb.setWindowTitle(tr("Invalid Numeric Value"));
             mb.setText(tr("Entered '%1' custom width is not numeric. ").arg(t));
             mb.exec();
             ui->lineEditBound->setFocus();

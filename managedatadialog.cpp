@@ -793,7 +793,7 @@ void ManageDataDialog::on_delete_songbook_pushButton_clicked()
     QMessageBox ms(this);
     ms.setWindowTitle(tr("Delete songbook?"));
     ms.setText(tr("Are you sure that you want to delete: ")+ name);
-    ms.setInformativeText(tr("This action will permanentrly delete this songbook"));
+    ms.setInformativeText(tr("This action will permanently delete this songbook"));
     ms.setIcon(QMessageBox::Question);
     ms.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     ms.setDefaultButton(QMessageBox::Yes);
@@ -1129,7 +1129,7 @@ void ManageDataDialog::on_delete_bible_pushButton_clicked()
     QMessageBox ms(this);
     ms.setWindowTitle(tr("Delete Bible?"));
     ms.setText(tr("Are you sure that you want to delete: ")+ name);
-    ms.setInformativeText(tr("This action will permanentrly delete this Bible"));
+    ms.setInformativeText(tr("This action will permanently delete this Bible"));
     ms.setIcon(QMessageBox::Question);
     ms.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     ms.setDefaultButton(QMessageBox::Yes);
@@ -1811,7 +1811,7 @@ void ManageDataDialog::on_pushButtonThemeDelete_clicked()
     QMessageBox ms(this);
     ms.setWindowTitle(tr("Delete Theme?"));
     ms.setText(tr("Are you sure that you want to delete theme: ")+ name);
-    ms.setInformativeText(tr("This action will permanentrly delete this theme"));
+    ms.setInformativeText(tr("This action will permanently delete this theme"));
     ms.setIcon(QMessageBox::Question);
     ms.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     ms.setDefaultButton(QMessageBox::Yes);
