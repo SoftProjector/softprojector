@@ -35,3 +35,12 @@ unknownsys_build/*
 win32_build/*
 unix_build/*
 mac_build/*
+build/*
+
+# IDE folder
+.vscode/*
+
+# App Image
+AppRun
+default.desktop
+checks.json
