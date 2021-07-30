@@ -41,11 +41,14 @@ public:
     // For now both primary and secondary information is stored in
     // primary_text and primary_caption
     QString primary_text;
-    QString secondary_text;
     QString primary_caption;
+    QString primary_abbr;
+    QString secondary_text;
     QString secondary_caption;
+    QString secondary_abbr;
     QString trinary_text;
     QString trinary_caption;
+    QString trinary_abbr;
 };
 
 class BibleSearch
@@ -96,7 +99,7 @@ public slots:
     void getVerseRef(QString vId, QString &book, int &chapter, int &verse);
     int getVerseNumberLast(QString vId);
     QStringList getChapter(int book, int chapter);
-    void getVerseAndCaption(QString &verse, QString &caption, QString verId, QString &bibId, bool useAbbr);
+    void getVerseAndCaption(QString& verse, QString& caption, QString& abbr, QString verId, QString& bibId, bool useAbbr);
     int getCurrentBookRow(QString book);
     Verse getCurrentVerseAndCaption(QList<int> currentRows, BibleSettings& sets, BibleVersionSettings& bv);
     void setBiblesId(QString& id);

@@ -88,7 +88,8 @@ SOURCES += main.cpp \
     projectordisplayscreen.cpp \
     imagegenerator.cpp \
     spimageprovider.cpp \
-    mediacontrol.cpp
+    mediacontrol.cpp \
+    httpserver.cpp
 HEADERS += softprojector.hpp \
     songwidget.hpp \
     biblewidget.hpp \
@@ -131,7 +132,8 @@ HEADERS += softprojector.hpp \
     projectordisplayscreen.hpp \
     imagegenerator.hpp \
     spimageprovider.hpp \
-    mediacontrol.hpp
+    mediacontrol.hpp \
+    httpserver.hpp
 FORMS += softprojector.ui \
     songwidget.ui \
     biblewidget.ui \

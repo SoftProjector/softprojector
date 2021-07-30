@@ -286,6 +286,8 @@ public:
     bool settingsChangedAll;
     bool settingsChangedMulti;
     bool settingsChangedSingle;
+    bool httpServerEnabled;
+    int httpServerPort;
 };
 
 class DisplaySettings

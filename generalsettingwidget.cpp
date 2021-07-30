@@ -59,7 +59,7 @@ void GeneralSettingWidget::loadSettings()
     loadThemes();
     ui->comboBoxTheme->setCurrentIndex(themeIdList.indexOf(mySettings.currentThemeId));
 
-    // Get display screen infomration
+    // Get display screen information
     monitors.clear();
     QDesktopWidget d;
     int screen_count = d.screenCount();
@@ -101,6 +101,10 @@ void GeneralSettingWidget::loadSettings()
     ui->comboBoxControlsAlignV->setCurrentIndex(mySettings.displayControls.alignmentV);
     ui->comboBoxControlsAlignH->setCurrentIndex(mySettings.displayControls.alignmentH);
     ui->horizontalSliderOpacity->setValue(mySettings.displayControls.opacity*100);
+
+    // Set HTTP Controls
+    ui->checkBoxEnableHttpServer->setChecked(mySettings.httpServerEnabled);
+    ui->lineEditHttpPort->setText(QString::number(mySettings.httpServerPort));
 }
 
 void GeneralSettingWidget::loadThemes()
@@ -138,6 +142,9 @@ GeneralSettings GeneralSettingWidget::getSettings()
     qreal r = ui->horizontalSliderOpacity->value();
     r = r/100;
     mySettings.displayControls.opacity = r;
+
+    mySettings.httpServerEnabled = ui->checkBoxEnableHttpServer->isChecked();
+    mySettings.httpServerPort = ui->lineEditHttpPort->text().toInt();
 
     return mySettings;
 }

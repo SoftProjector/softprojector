@@ -72,6 +72,8 @@ void SettingsDialog::loadSettings(GeneralSettings &sets, Theme &thm, SlideShowSe
     is_always_on_top = gsettings.displayIsOnTop;
     current_display_screen = gsettings.displayScreen;
     currentDisplayScreen2 = gsettings.displayScreen2;
+    current_http_enabled = gsettings.httpServerEnabled;
+    current_http_port = gsettings.httpServerPort;
 
     // Set individual items
     generalSettingswidget->setSettings(gsettings);
@@ -154,6 +156,13 @@ void SettingsDialog::applySettings()
     // Redraw the screen:
     emit updateScreen();
 
+    // Update HTTP server state
+    if(current_http_port!=gsettings.httpServerPort
+            || current_http_enabled!=gsettings.httpServerEnabled)
+    {
+        emit httpServerState(gsettings.httpServerEnabled,gsettings.httpServerPort);
+    }
+
     // Save Settings
     theme.saveThemeUpdate();
 
@@ -161,6 +170,8 @@ void SettingsDialog::applySettings()
     is_always_on_top = gsettings.displayIsOnTop;
     current_display_screen = gsettings.displayScreen;
     currentDisplayScreen2 = gsettings.displayScreen2;
+    current_http_enabled = gsettings.httpServerEnabled;
+    current_http_port = gsettings.httpServerPort;
 }
 
 void SettingsDialog::getThemes()

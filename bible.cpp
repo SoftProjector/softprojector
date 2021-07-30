@@ -178,20 +178,20 @@ Verse Bible::getCurrentVerseAndCaption(QList<int>  currentRows, BibleSettings& s
     Verse v;
 
     // get primary verse
-    getVerseAndCaption(v.primary_text,v.primary_caption,verse_id,bv.primaryBible,sets.useAbbriviation);
+    getVerseAndCaption(v.primary_text,v.primary_caption,v.primary_abbr,verse_id,bv.primaryBible,sets.useAbbriviation);
 
     // get secondary verse
     if(bv.primaryBible!=bv.secondaryBible && bv.secondaryBible!="none")
-        getVerseAndCaption(v.secondary_text,v.secondary_caption,verse_id,bv.secondaryBible,sets.useAbbriviation);
+        getVerseAndCaption(v.secondary_text,v.secondary_caption,v.secondary_abbr,verse_id,bv.secondaryBible,sets.useAbbriviation);
 
     // get trinary versse
     if(bv.trinaryBible!=bv.primaryBible && bv.trinaryBible!=bv.secondaryBible && bv.trinaryBible!="none")
-        getVerseAndCaption(v.trinary_text,v.trinary_caption,verse_id,bv.trinaryBible,sets.useAbbriviation);
+        getVerseAndCaption(v.trinary_text,v.trinary_caption,v.trinary_abbr,verse_id,bv.trinaryBible,sets.useAbbriviation);
 
     return v;
 }
 
-void Bible::getVerseAndCaption(QString& verse, QString& caption, QString verId, QString& bibId, bool useAbbr)
+void Bible::getVerseAndCaption(QString& verse, QString& caption, QString& abbr, QString verId, QString& bibId, bool useAbbr)
 {
     QString verse_old, verse_show, verse_n, verse_nold, verse_nfirst, chapter;
     QString book;
@@ -280,18 +280,19 @@ void Bible::getVerseAndCaption(QString& verse, QString& caption, QString verId, 
     caption = sq.value(0).toString() + caption;
     sq.clear();
 
-    // Add bible abbreveation if to to use it
-    if(useAbbr)
-    {
-        sq.exec("SELECT abbreviation FROM BibleVersions WHERE id = " + bibId);
-        sq.first();
-        QString abr = sq.value(0).toString().trimmed();
-        if (!abr.isEmpty())
+    // Add bible abbreviation if to to use it
+    sq.exec("SELECT abbreviation FROM BibleVersions WHERE id = " + bibId);
+    sq.first();
+    QString abr = sq.value(0).toString().trimmed();
+    if (!abr.isEmpty()) {
+        abbr = QString("%1").arg(abr);
+        if (useAbbr)
             caption = QString("%1 (%2)").arg(caption).arg(abr);
     }
 
     verse = verse.simplified();
     caption = caption.simplified();
+    abbr = abbr.simplified();
 }
 
 QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp)

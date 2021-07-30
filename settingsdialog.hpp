@@ -52,6 +52,7 @@ signals:
                         BibleVersionSettings& bsets, BibleVersionSettings& bsets2);
     void positionsDisplayWindow();
     void updateScreen();
+    void httpServerState(bool& state, int& port);
 
 private:
     Ui::SettingsDialog *ui;
@@ -59,6 +60,8 @@ private:
     int current_display_screen;
     int currentDisplayScreen2;
     bool is_always_on_top;
+    bool current_http_enabled;
+    int current_http_port;
 
     GeneralSettings gsettings;
     Theme theme;
