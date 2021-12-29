@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QtSql>
+#include <QStyleFactory>
 #include "softprojector.hpp"
 
 // Definitions for database versions 'dbVer' numbers
@@ -82,21 +83,23 @@ bool connect(QString database_file)
                     "'use_background' BOOL, 'background_name' TEXT, 'background' BLOB, 'count' INTEGER DEFAULT 0, 'date' TEXT)");
             sq.exec("CREATE TABLE 'ThemeAnnounce' ('theme_id' INTEGER, 'disp' INTEGER, 'use_shadow' BOOL, 'use_fading' BOOL, "
                     "'use_blur_shadow' BOOL, 'use_background' BOOL, 'background_name' TEXT, 'background' BLOB, 'text_font' TEXT, "
-                    "'text_color' INTEGER, 'text_align_v' INTEGER, 'text_align_h' INTEGER, 'use_disp_2' BOOL)");
+                    "'text_color' INTEGER, 'text_align_v' INTEGER, 'text_align_h' INTEGER, 'use_disp_1' BOOL)");
             sq.exec("CREATE TABLE 'ThemeBible' ('theme_id' INTEGER, 'disp' INTEGER, 'use_shadow' BOOL, 'use_fading' BOOL, "
                     "'use_blur_shadow' BOOL, 'use_background' BOOL, 'background_name' TEXT, 'background' BLOB, 'text_font' TEXT, "
                     "'text_color' INTEGER, 'text_align_v' INTEGER, 'text_align_h' INTEGER, 'caption_font' TEXT, "
                     "'caption_color' INTEGER, 'caption_align' INTEGER, 'caption_position' INTEGER, 'use_abbr' BOOL, "
-                    "'screen_use' INTEGER, 'screen_position' INTEGER, 'use_disp_2' BOOL)");
+                    "'screen_use' INTEGER, 'screen_position' INTEGER, 'use_disp_1' BOOL, "
+                    "'add_background_color_to_text' BOOL, 'text_rec_background_color' INTEGER, 'text_gen_background_color' INTEGER)");
             sq.exec("CREATE TABLE 'ThemePassive' ('theme_id' INTEGER, 'disp' INTEGER, 'use_background' BOOL, "
-                    "'background_name' TEXT, 'background' BLOB, 'use_disp_2' BOOL)");
+                    "'background_name' TEXT, 'background' BLOB, 'use_disp_1' BOOL)");
             sq.exec("CREATE TABLE 'ThemeSong' ('theme_id' INTEGER, 'disp' INTEGER, 'use_shadow' BOOL, 'use_fading' BOOL, "
                     "'use_blur_shadow' BOOL, 'show_stanza_title' BOOL, 'show_key' BOOL, 'show_number' BOOL, "
                     "'info_color' INTEGER, 'info_font' TEXT, 'info_align' INTEGER, 'show_song_ending' BOOL, "
                     "'ending_color' INTEGER, 'ending_font' TEXT, 'ending_type' INTEGER, 'ending_position' INTEGER, "
                     "'use_background' BOOL, 'background_name' TEXT, 'background' BLOB, 'text_font' TEXT, "
                     "'text_color' INTEGER, 'text_align_v' INTEGER, 'text_align_h' INTEGER, "
-                    "'screen_use' INTEGER, 'screen_position' INTEGER, 'use_disp_2' BOOL)");
+                    "'screen_use' INTEGER, 'screen_position' INTEGER, 'use_disp_1' BOOL, "
+                    "'add_background_color_to_text' BOOL, 'text_rec_background_color' INTEGER, 'text_gen_background_color' INTEGER)");
             //sq.exec("CREATE TABLE 'ThemeData' ('theme_id' INTEGER, 'type' TEXT, 'sets' TEXT)");
             sq.exec("CREATE TABLE 'Themes' ('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'name' TEXT, 'comment' TEXT)");
         }
@@ -195,6 +198,90 @@ int main(int argc, char *argv[])
         database_dir = cur_app_path + QDir::separator();
 #else
     database_dir = a.applicationDirPath() + QDir::separator();
+#endif
+#ifdef Q_OS_WIN
+    // Use Dark Theme
+    QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",QSettings::NativeFormat);
+    if(settings.value("SoftProjectorUseLightTheme")==0)
+    {
+        // Check if ini exists
+        QString iniFilePath = qApp->applicationDirPath()+"\\DarkTheme.ini";
+        bool darkTheme_Exists = ( QFile::exists(iniFilePath) );
+        QString darkColor,disabledColor,custom,WindowText,Base,ToolTipBase,ToolTipText,Text,ButtonText,BrightText,Link,Highlight,HighlightedText;
+
+        if(darkTheme_Exists)
+        {
+            // Load settings
+            QSettings settings(iniFilePath, QSettings::IniFormat);
+            darkColor = settings.value("Settings/darkColor","#2D2D2D").value<QString>();
+            disabledColor = settings.value("Settings/disabledColor","#7F7F7F").value<QString>();
+            custom = settings.value("Settings/custom").value<QString>();
+            WindowText = settings.value("Settings/WindowText","#FFFFFF").value<QString>();
+            Base = settings.value("Settings/Base","#121212").value<QString>();
+            ToolTipBase = settings.value("Settings/ToolTipBase","#FFFFFF").value<QString>();
+            ToolTipText = settings.value("Settings/ToolTipText","#FFFFFF").value<QString>();
+            Text = settings.value("Settings/Text","#cccccc").value<QString>();
+            ButtonText = settings.value("Settings/ButtonText","#FFFFFF").value<QString>();
+            BrightText = settings.value("Settings/BrightText","#FF0000").value<QString>();
+            Link = settings.value("Settings/Link","#2A82DA").value<QString>();
+            Highlight = settings.value("Settings/Highlight","#15416D").value<QString>();
+            HighlightedText = settings.value("Settings/HighlightedText","#FFFFFF").value<QString>();
+        } else {
+            // Create settings
+            QSettings* settings = new QSettings(iniFilePath, QSettings::IniFormat);
+            settings->setValue("Settings/darkColor","#2D2D2D");
+            darkColor = "#2D2D2D";
+            settings->setValue("Settings/disabledColor","#7F7F7F");
+            disabledColor = "#7F7F7F";
+            settings->setValue("Settings/custom","QToolTip { color: #ffffff; background-color: #15416d; border: 1px solid white; } QGroupBox { color: #e7d1ad; }");
+            custom = "QToolTip { color: #ffffff; background-color: #15416d; border: 1px solid white; } QGroupBox { color: #e7d1ad; }";
+            settings->setValue("Settings/WindowText","#FFFFFF");
+            WindowText = "#FFFFFF";
+            settings->setValue("Settings/Base","#121212");
+            Base = "#121212";
+            settings->setValue("Settings/ToolTipBase","#FFFFFF");
+            ToolTipBase = "#FFFFFF";
+            settings->setValue("Settings/ToolTipText","#FFFFFF");
+            ToolTipText = "#FFFFFF";
+            settings->setValue("Settings/Text","#cccccc");
+            Text = "#cccccc";
+            settings->setValue("Settings/ButtonText","#FFFFFF");
+            ButtonText = "#FFFFFF";
+            settings->setValue("Settings/BrightText","#FF0000");
+            BrightText = "#FF0000";
+            settings->setValue("Settings/Link","#2A82DA");
+            Link = "#2A82DA";
+            settings->setValue("Settings/Highlight","#15416D");
+            Highlight = "#15416D";
+            settings->setValue("Settings/HighlightedText","#FFFFFF");
+            HighlightedText = "#FFFFFF";
+            settings->setValue("Example/Use_this_to_generate_Hex_codes","https://www.color-hex.com/color/ffffff");
+            settings->sync();
+        }
+
+        // Apply settings to palette
+        QPalette darkPalette;
+        qApp->setStyle(QStyleFactory::create("Fusion"));
+        darkPalette.setColor(QPalette::Window, darkColor);
+        darkPalette.setColor(QPalette::WindowText, WindowText);
+        darkPalette.setColor(QPalette::Base, Base);
+        darkPalette.setColor(QPalette::AlternateBase, darkColor);
+        darkPalette.setColor(QPalette::ToolTipBase, ToolTipBase);
+        darkPalette.setColor(QPalette::ToolTipText, ToolTipText);
+        darkPalette.setColor(QPalette::Text, Text);
+        darkPalette.setColor(QPalette::Disabled, QPalette::Text, disabledColor);
+        darkPalette.setColor(QPalette::Button, darkColor);
+        darkPalette.setColor(QPalette::ButtonText, ButtonText);
+        darkPalette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledColor);
+        darkPalette.setColor(QPalette::BrightText, BrightText);
+        darkPalette.setColor(QPalette::Link, Link);
+        darkPalette.setColor(QPalette::Highlight, Highlight);
+        darkPalette.setColor(QPalette::HighlightedText, HighlightedText);
+        darkPalette.setColor(QPalette::Disabled, QPalette::HighlightedText, disabledColor);
+
+        qApp->setPalette(darkPalette);
+        qApp->setStyleSheet(custom);
+    }
 #endif
 
     // Try to connect to database

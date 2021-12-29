@@ -44,10 +44,12 @@ void AnnouncementSettingWidget::changeEvent(QEvent *e)
      }
 }
 
-void AnnouncementSettingWidget::setSettings(TextSettings &settings, TextSettings &settings2)
+void AnnouncementSettingWidget::setSettings(TextSettings &settings, TextSettings &settings2, TextSettings &settings3, TextSettings &settings4)
 {
     mySettings = settings;
     mySettings2 = settings2;
+    mySettings3 = settings3;
+    mySettings4 = settings4;
     loadSettings();
 }
 
@@ -62,6 +64,14 @@ void AnnouncementSettingWidget::loadSettings()
     ui->checkBoxUseFading2->setChecked(mySettings2.useFading);
     ui->checkBoxUseBlurredShadow2->setChecked(mySettings2.useBlurShadow);
 
+    ui->checkBoxUseShadow3->setChecked(mySettings3.useShadow);
+    ui->checkBoxUseFading3->setChecked(mySettings3.useFading);
+    ui->checkBoxUseBlurredShadow3->setChecked(mySettings3.useBlurShadow);
+
+    ui->checkBoxUseShadow4->setChecked(mySettings4.useShadow);
+    ui->checkBoxUseFading4->setChecked(mySettings4.useFading);
+    ui->checkBoxUseBlurredShadow4->setChecked(mySettings4.useBlurShadow);
+
     // Set background
     ui->groupBoxBackground->setChecked(mySettings.useBackground);
     ui->lineEditBackground->setText(mySettings.backgroundName);
@@ -69,12 +79,24 @@ void AnnouncementSettingWidget::loadSettings()
     ui->groupBoxBackground2->setChecked(mySettings2.useBackground);
     ui->lineEditBackground2->setText(mySettings2.backgroundName);
 
+    ui->groupBoxBackground3->setChecked(mySettings3.useBackground);
+    ui->lineEditBackground3->setText(mySettings3.backgroundName);
+
+    ui->groupBoxBackground4->setChecked(mySettings4.useBackground);
+    ui->lineEditBackground4->setText(mySettings4.backgroundName);
+
     // Set Alignment
     ui->comboBoxVerticalAling->setCurrentIndex(mySettings.textAlignmentV);
     ui->comboBoxHorizontalAling->setCurrentIndex(mySettings.textAlignmentH);
 
     ui->comboBoxVerticalAling2->setCurrentIndex(mySettings2.textAlignmentV);
     ui->comboBoxHorizontalAling2->setCurrentIndex(mySettings2.textAlignmentH);
+
+    ui->comboBoxVerticalAling3->setCurrentIndex(mySettings3.textAlignmentV);
+    ui->comboBoxHorizontalAling3->setCurrentIndex(mySettings3.textAlignmentH);
+
+    ui->comboBoxVerticalAling4->setCurrentIndex(mySettings4.textAlignmentV);
+    ui->comboBoxHorizontalAling4->setCurrentIndex(mySettings4.textAlignmentH);
 
     // Set text color
     QPalette p;
@@ -84,15 +106,29 @@ void AnnouncementSettingWidget::loadSettings()
     p.setColor(QPalette::Base,mySettings2.textColor);
     ui->graphicViewTextColor2->setPalette(p);
 
+    p.setColor(QPalette::Base,mySettings3.textColor);
+    ui->graphicViewTextColor3->setPalette(p);
+
+    p.setColor(QPalette::Base,mySettings4.textColor);
+    ui->graphicViewTextColor4->setPalette(p);
+
     // Set text font lable
     ui->labelFont->setText(getFontText(mySettings.textFont));
     ui->labelFont2->setText(getFontText(mySettings2.textFont));
+    ui->labelFont3->setText(getFontText(mySettings3.textFont));
+    ui->labelFont4->setText(getFontText(mySettings4.textFont));
 
-    ui->groupBoxUseDisp2->setChecked(mySettings2.useDisp2settings);
-    on_groupBoxUseDisp2_toggled(mySettings2.useDisp2settings);
+    ui->groupBoxUseDisp2->setChecked(!mySettings2.useDisp1settings);
+    on_groupBoxUseDisp2_toggled(!mySettings2.useDisp1settings);
+
+    ui->groupBoxUseDisp3->setChecked(!mySettings3.useDisp1settings);
+    on_groupBoxUseDisp3_toggled(!mySettings3.useDisp1settings);
+
+    ui->groupBoxUseDisp4->setChecked(!mySettings4.useDisp1settings);
+    on_groupBoxUseDisp4_toggled(!mySettings4.useDisp1settings);
 }
 
-void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings &settings2)
+void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings &settings2, TextSettings &settings3, TextSettings &settings4)
 {
     // Effects
     mySettings.useShadow = ui->checkBoxUseShadow->isChecked();
@@ -103,6 +139,14 @@ void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings
     mySettings2.useFading = ui->checkBoxUseFading2->isChecked();
     mySettings2.useBlurShadow = ui->checkBoxUseBlurredShadow2->isChecked();
 
+    mySettings3.useShadow = ui->checkBoxUseShadow3->isChecked();
+    mySettings3.useFading = ui->checkBoxUseFading3->isChecked();
+    mySettings3.useBlurShadow = ui->checkBoxUseBlurredShadow3->isChecked();
+
+    mySettings4.useShadow = ui->checkBoxUseShadow4->isChecked();
+    mySettings4.useFading = ui->checkBoxUseFading4->isChecked();
+    mySettings4.useBlurShadow = ui->checkBoxUseBlurredShadow4->isChecked();
+
     // Get Background
     mySettings.useBackground = ui->groupBoxBackground->isChecked();
     mySettings.backgroundName = ui->lineEditBackground->text();
@@ -110,17 +154,38 @@ void AnnouncementSettingWidget::getSettings(TextSettings &settings, TextSettings
     mySettings2.useBackground = ui->groupBoxBackground2->isChecked();
     mySettings2.backgroundName = ui->lineEditBackground2->text();
 
-    // Alingmet
+    mySettings3.useBackground = ui->groupBoxBackground3->isChecked();
+    mySettings3.backgroundName = ui->lineEditBackground3->text();
+
+    mySettings4.useBackground = ui->groupBoxBackground4->isChecked();
+    mySettings4.backgroundName = ui->lineEditBackground4->text();
+
+    // Alignmet
     mySettings.textAlignmentV = ui->comboBoxVerticalAling->currentIndex();
     mySettings.textAlignmentH = ui->comboBoxHorizontalAling->currentIndex();
 
     mySettings2.textAlignmentV = ui->comboBoxVerticalAling2->currentIndex();
     mySettings2.textAlignmentH = ui->comboBoxHorizontalAling2->currentIndex();
 
+    mySettings3.textAlignmentV = ui->comboBoxVerticalAling3->currentIndex();
+    mySettings3.textAlignmentH = ui->comboBoxHorizontalAling3->currentIndex();
+
+    mySettings4.textAlignmentV = ui->comboBoxVerticalAling4->currentIndex();
+    mySettings4.textAlignmentH = ui->comboBoxHorizontalAling4->currentIndex();
+
+    mySettings2.useDisp1settings = !ui->groupBoxUseDisp2->isChecked();
     mySettings2.useDisp2settings = ui->groupBoxUseDisp2->isChecked();
 
+    mySettings3.useDisp1settings = !ui->groupBoxUseDisp3->isChecked();
+    mySettings3.useDisp3settings = ui->groupBoxUseDisp3->isChecked();
+
+    mySettings4.useDisp1settings = !ui->groupBoxUseDisp4->isChecked();
+    mySettings4.useDisp4settings = ui->groupBoxUseDisp4->isChecked();
+
     settings = mySettings;
-    settings2 = mySettings2;
+    settings2 = mySettings2;    
+    settings3 = mySettings3;
+    settings4 = mySettings4;
 }
 
 void AnnouncementSettingWidget::on_checkBoxUseShadow_stateChanged(int arg1)
@@ -142,6 +207,28 @@ void AnnouncementSettingWidget::on_checkBoxUseShadow2_stateChanged(int arg1)
     {
         ui->checkBoxUseBlurredShadow2->setChecked(false);
         ui->checkBoxUseBlurredShadow2->setEnabled(false);
+    }
+}
+
+void AnnouncementSettingWidget::on_checkBoxUseShadow3_stateChanged(int arg1)
+{
+    if(arg1==2)
+        ui->checkBoxUseBlurredShadow3->setEnabled(true);
+    else
+    {
+        ui->checkBoxUseBlurredShadow3->setChecked(false);
+        ui->checkBoxUseBlurredShadow3->setEnabled(false);
+    }
+}
+
+void AnnouncementSettingWidget::on_checkBoxUseShadow4_stateChanged(int arg1)
+{
+    if(arg1==2)
+        ui->checkBoxUseBlurredShadow4->setEnabled(true);
+    else
+    {
+        ui->checkBoxUseBlurredShadow4->setChecked(false);
+        ui->checkBoxUseBlurredShadow4->setEnabled(false);
     }
 }
 
@@ -175,9 +262,49 @@ void AnnouncementSettingWidget::on_buttonBackground2_clicked()
     }
 }
 
+void AnnouncementSettingWidget::on_buttonBackground3_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select a image for announcement wallpaper"),
+                                                    ".", tr("Images(%1)").arg(getSupportedImageFormats()));
+    if(!filename.isNull())
+    {
+        QPixmap p(filename);
+        mySettings3.backgroundPix = p;
+        QFileInfo fi(filename);
+        filename = fi.fileName();
+        mySettings3.backgroundName = filename;
+        ui->lineEditBackground3->setText(filename);
+    }
+}
+
+void AnnouncementSettingWidget::on_buttonBackground4_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select a image for announcement wallpaper"),
+                                                    ".", tr("Images(%1)").arg(getSupportedImageFormats()));
+    if(!filename.isNull())
+    {
+        QPixmap p(filename);
+        mySettings4.backgroundPix = p;
+        QFileInfo fi(filename);
+        filename = fi.fileName();
+        mySettings4.backgroundName = filename;
+        ui->lineEditBackground4->setText(filename);
+    }
+}
+
 void AnnouncementSettingWidget::setDispScreen2Visible(bool visible)
 {
     ui->groupBoxUseDisp2->setVisible(visible);
+}
+
+void AnnouncementSettingWidget::setDispScreen3Visible(bool visible)
+{
+    ui->groupBoxUseDisp3->setVisible(visible);
+}
+
+void AnnouncementSettingWidget::setDispScreen4Visible(bool visible)
+{
+    ui->groupBoxUseDisp4->setVisible(visible);
 }
 
 void AnnouncementSettingWidget::on_toolButtonColor_clicked()
@@ -200,6 +327,26 @@ void AnnouncementSettingWidget::on_toolButtonColor2_clicked()
     ui->graphicViewTextColor2->setPalette(p);
 }
 
+void AnnouncementSettingWidget::on_toolButtonColor3_clicked()
+{
+    QColor c(QColorDialog::getColor(mySettings3.textColor,this));
+    if(c.isValid())
+        mySettings3.textColor = c;
+    QPalette p;
+    p.setColor(QPalette::Base,mySettings3.textColor);
+    ui->graphicViewTextColor3->setPalette(p);
+}
+
+void AnnouncementSettingWidget::on_toolButtonColor4_clicked()
+{
+    QColor c(QColorDialog::getColor(mySettings4.textColor,this));
+    if(c.isValid())
+        mySettings4.textColor = c;
+    QPalette p;
+    p.setColor(QPalette::Base,mySettings4.textColor);
+    ui->graphicViewTextColor4->setPalette(p);
+}
+
 void AnnouncementSettingWidget::on_toolButtonFont_clicked()
 {
     bool ok;
@@ -220,6 +367,26 @@ void AnnouncementSettingWidget::on_toolButtonFont2_clicked()
     ui->labelFont2->setText(getFontText(mySettings2.textFont));
 }
 
+void AnnouncementSettingWidget::on_toolButtonFont3_clicked()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok,mySettings3.textFont,this);
+    if(ok)
+        mySettings3.textFont = font;
+
+    ui->labelFont3->setText(getFontText(mySettings3.textFont));
+}
+
+void AnnouncementSettingWidget::on_toolButtonFont4_clicked()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok,mySettings4.textFont,this);
+    if(ok)
+        mySettings4.textFont = font;
+
+    ui->labelFont4->setText(getFontText(mySettings4.textFont));
+}
+
 void AnnouncementSettingWidget::on_groupBoxUseDisp2_toggled(bool arg1)
 {
     ui->groupBoxBackground2->setVisible(arg1);
@@ -227,11 +394,27 @@ void AnnouncementSettingWidget::on_groupBoxUseDisp2_toggled(bool arg1)
     ui->groupBoxTextProperties2->setVisible(arg1);
 }
 
+void AnnouncementSettingWidget::on_groupBoxUseDisp3_toggled(bool arg1)
+{
+    ui->groupBoxBackground3->setVisible(arg1);
+    ui->groupBoxEffects3->setVisible(arg1);
+    ui->groupBoxTextProperties3->setVisible(arg1);
+}
+
+void AnnouncementSettingWidget::on_groupBoxUseDisp4_toggled(bool arg1)
+{
+    ui->groupBoxBackground4->setVisible(arg1);
+    ui->groupBoxEffects4->setVisible(arg1);
+    ui->groupBoxTextProperties4->setVisible(arg1);
+}
+
 void AnnouncementSettingWidget::on_pushButtonDefault_clicked()
 {
     TextSettings a;
     mySettings = a;
     mySettings2 = a;
+    mySettings3 = a;
+    mySettings4 = a;
     loadSettings();
 }
 
@@ -262,6 +445,12 @@ void AnnouncementSettingWidget::setBackgroungds(QString name, QPixmap back)
     mySettings.backgroundPix = back;
     mySettings2.backgroundName = name;
     mySettings2.backgroundPix = back;
+    mySettings3.backgroundName = name;
+    mySettings3.backgroundPix = back;
+    mySettings4.backgroundName = name;
+    mySettings4.backgroundPix = back;
     ui->lineEditBackground->setText(name);
     ui->lineEditBackground2->setText(name);
+    ui->lineEditBackground3->setText(name);
+    ui->lineEditBackground4->setText(name);
 }

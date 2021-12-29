@@ -78,6 +78,9 @@ QPixmap ImageGenerator::generateBibleImage(Verse verse, BibleSettings &bSets)
 //    m_blurShadow = (m_bSets.effectsType == 2);
     m_shadow = m_bSets.useShadow;
     m_blurShadow = m_bSets.useBlurShadow;
+    m_bibleAddBKColorToText = m_bSets.bibleAddBKColorToText;
+    m_bibleTextRecBKColor = m_bSets.bibleTextRecBKColor;
+    m_bibleTextGenBKColor = m_bSets.bibleTextGenBKColor;
 
     m_isTextPrepared = false;
     return renderText();
@@ -97,6 +100,9 @@ QPixmap ImageGenerator::generateSongImage(Stanza stanza, SongSettings &sSets)
 //    m_blurShadow = (m_sSets.effectsType == 2);
     m_shadow = m_sSets.useShadow;
     m_blurShadow = m_sSets.useBlurShadow;
+    m_songAddBKColorToText = m_sSets.songAddBKColorToText;
+    m_songTextRecBKColor = m_sSets.songTextRecBKColor;
+    m_songTextGenBKColor = m_sSets.songTextGenBKColor;
 
     m_isTextPrepared = false;
     return renderText();
@@ -123,7 +129,14 @@ QPixmap ImageGenerator::renderText()
 {
     QPixmap textMap(m_screenSize), shadowMap(m_screenSize), outMap(m_screenSize);
     //fill with transparent background
-    textMap.fill(QColor(0,0,0,0));
+    if(m_bibleAddBKColorToText == 1 || m_songAddBKColorToText == 1 || m_announcementAddBKColorToText == 1)
+    {  
+        if(m_announcementAddBKColorToText == 1) textMap.fill(m_announcementTextGenBKColor);
+        if(m_songAddBKColorToText == 1) textMap.fill(m_songTextGenBKColor);
+        if(m_bibleAddBKColorToText == 1) textMap.fill(m_bibleTextGenBKColor);
+    } else {
+        textMap.fill(QColor(0,0,0,0));
+    }
     shadowMap.fill(QColor(0,0,0,0));
     outMap.fill(QColor(0,0,0,0));
 
@@ -145,7 +158,7 @@ QPixmap ImageGenerator::renderText()
         }
         break;
     case 2:
-        // Braw Song
+        // Draw Song
         drawSongText(&textPaint,false);
         if(m_shadow)
         {
@@ -421,6 +434,12 @@ void ImageGenerator::drawBibleTextToRect(QPainter *painter, QRect& trect, QRect&
     painter->setFont(m_bSets.textFont);
     trect = painter->boundingRect(left, top, width, height-crect.height(), tflags, ttext);
 
+    if(m_bibleAddBKColorToText == 1)
+    {
+        int fillheight = trect.height()+crect.height();
+        painter->fillRect(QRect(0, top+height-fillheight-left, width+(left*2), top+height), QBrush(m_bibleTextRecBKColor, Qt::SolidPattern));
+    }
+
     // reset capion location
     int ch = crect.height();
     int th = trect.height();
@@ -567,7 +586,7 @@ void ImageGenerator::drawSongText(QPainter *painter, bool isShadow)
         painter->setFont(m_sSets.endingFont);
         ending_rect = boundRectOrDrawText(painter, false, left, top, width, height, Qt::AlignHCenter | Qt::AlignTop, song_ending);
 
-        // Decrease songe ending font size so that it would fit in the screen width
+        // Decrease song ending font size so that it would fit in the screen width
         while(ending_rect.width()> width)
         {
             m_sSets.endingFont.setPointSize(m_sSets.endingFont.pointSize()-1);
@@ -579,6 +598,7 @@ void ImageGenerator::drawSongText(QPainter *painter, bool isShadow)
         // Prepare Main Text
         painter->setFont(main_font);
         main_rect = boundRectOrDrawText(painter, false, left, top, width, height, main_flags, main_text);
+
         mainh = main_rect.height();
         mainw = main_rect.width();
         totalh = caph+endh+mainh;
@@ -635,6 +655,12 @@ void ImageGenerator::drawSongText(QPainter *painter, bool isShadow)
     endh = m_sdSets.eRect.height();
     main_flags = m_sdSets.tFlags;
     mainh = height-caph-endh;
+
+    if(m_songAddBKColorToText == 1)
+    {
+        int fillheight = main_rect.height()+caption_rect.height();
+        painter->fillRect(QRect(0, top+height-fillheight-left, width+(left*2), top+height), QBrush(m_songTextRecBKColor, Qt::SolidPattern));
+    }
     if(m_sSets.infoAling == 0 && m_sSets.endingPosition == 0)
     {
         painter->setFont(m_sSets.infoFont);
@@ -791,6 +817,12 @@ void ImageGenerator::drawAnnounceText(QPainter *painter, bool isShadow)
         m_aSets.textFont = font;
         m_adSets.tRect = rect;
         m_isTextPrepared = true;
+    }
+
+    if(m_announcementAddBKColorToText == 1)
+    {
+        int fillheight = m_adSets.tRect.height();
+        painter->fillRect(QRect(0, top+h-fillheight-left, w+(left*2), top+h), QBrush(m_announcementTextRecBKColor, Qt::SolidPattern));
     }
 
     painter->setFont(m_aSets.textFont);

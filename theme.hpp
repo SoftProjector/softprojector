@@ -128,12 +128,20 @@ public:
     TextSettingsBase common2; // Holds secondary display screen settings
     TextSettings passive;
     TextSettings passive2; // Holds secondary display screen settings
+    TextSettings passive3;
+    TextSettings passive4; // Holds fourth display screen settings
     BibleSettings bible;
     BibleSettings bible2; // Holds secondary display screen settings
+    BibleSettings bible3;
+    BibleSettings bible4; // Holds fourth display screen settings
     SongSettings song;
     SongSettings song2; // Holds secondary display screen settings
+    SongSettings song3;
+    SongSettings song4; // Holds fourth display screen settings
     TextSettings announce;
     TextSettings announce2; // Holds secondary display screen settings
+    TextSettings announce3;
+    TextSettings announce4; // Holds fourth display screen settings
 
 public slots:
     void saveThemeNew();
