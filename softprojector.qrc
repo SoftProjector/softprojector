@@ -103,4 +103,29 @@
     <qresource prefix="/">
         <file>DisplayArea.qml</file>
     </qresource>
+    <qresource prefix="/styles">
+        <file>styles/dark.qss</file>
+        <file>styles/arrow-bottom.png</file>
+        <file>styles/arrow-down.png</file>
+        <file>styles/arrow-down-disabled.png</file>
+        <file>styles/arrow-left.png</file>
+        <file>styles/arrow-up.png</file>
+        <file>styles/arrow-up-disabled.png</file>
+        <file>styles/checkbox_checked.png</file>
+        <file>styles/checkbox_checked_disabled.png</file>
+        <file>styles/checkbox_checked_focus.png</file>
+        <file>styles/checkbox_unchecked.png</file>
+        <file>styles/checkbox_unchecked_disabled.png</file>
+        <file>styles/checkbox_unchecked_focus.png</file>
+        <file>styles/checked.png</file>
+        <file>styles/close.png</file>
+        <file>styles/close-hover.png</file>
+        <file>styles/menu_right_arrow.png</file>
+        <file>styles/radio_checked.png</file>
+        <file>styles/radio_checked_disabled.png</file>
+        <file>styles/radio_checked_focus.png</file>
+        <file>styles/radio_unchecked.png</file>
+        <file>styles/radio_unchecked_disabled.png</file>
+        <file>styles/radio_unchecked_focus.png</file>
+    </qresource>
 </RCC>

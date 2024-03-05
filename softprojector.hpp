@@ -41,6 +41,8 @@
 #include "slideshoweditor.hpp"
 #include "schedule.hpp"
 
+#include "styleeditor.h"
+
 class QActionGroup;
 
 namespace Ui
@@ -75,6 +77,8 @@ public:
     PictureWidget *pictureWidget;
     MediaWidget *mediaPlayer;
     MediaControl *mediaControls;
+
+    StyleEditor *styleEditor;
 
     bool showing; // whether we are currently showing to the projector
     Song current_song;
@@ -245,6 +249,8 @@ private slots:
     void updateCloseDisplayButtons(bool isOn);
 
     void on_comboBox_currentIndexChanged(int index);
+
+    void on_pushButtonStyleEditor_clicked();
 
 protected:
     void closeEvent(QCloseEvent *event);

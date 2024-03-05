@@ -55,6 +55,7 @@ SoftProjector::SoftProjector(QWidget *parent)
     pictureWidget = new PictureWidget;
     mediaPlayer = new MediaWidget;
     mediaControls = new MediaControl(this);
+    styleEditor = new StyleEditor;
 
     ui->setupUi(this);
 
@@ -205,6 +206,7 @@ SoftProjector::~SoftProjector()
     delete shSart1;
     delete shSart2;
     delete helpDialog;
+    delete styleEditor;
     delete ui;
 }
 
@@ -2525,4 +2527,10 @@ void SoftProjector::on_comboBox_currentIndexChanged(int index)
         break;
     }
     window()->setPalette(pal);
+}
+
+void SoftProjector::on_pushButtonStyleEditor_clicked()
+{
+    styleEditor->loadStyleSheet("Dark");
+    styleEditor->show();
 }

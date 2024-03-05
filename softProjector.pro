@@ -70,6 +70,7 @@ SOURCES += main.cpp \
     printpreviewdialog.cpp \
     controlbutton.cpp \
     passivesettingwidget.cpp \
+    styleeditor.cpp \
     theme.cpp \
     picturewidget.cpp \
     slideshow.cpp \
@@ -113,6 +114,7 @@ HEADERS += softprojector.hpp \
     printpreviewdialog.hpp \
     controlbutton.hpp \
     passivesettingwidget.hpp \
+    styleeditor.h \
     theme.hpp \
     picturewidget.hpp \
     slideshow.hpp \
@@ -158,7 +160,8 @@ FORMS += softprojector.ui \
     moduledownloaddialog.ui \
     moduleprogressdialog.ui \
     projectordisplayscreen.ui \
-    mediacontrol.ui
+    mediacontrol.ui \
+    styleeditor.ui
 TRANSLATIONS += translations/softpro_de.ts\
     translations/softpro_ru.ts\
     translations/softpro_cs.ts\

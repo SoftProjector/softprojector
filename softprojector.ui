@@ -236,6 +236,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButtonStyleEditor">
+          <property name="text">
+           <string>StyleEditor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QListWidget" name="listShow">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
