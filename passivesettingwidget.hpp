@@ -39,20 +39,26 @@ public:
     ~PassiveSettingWidget();
 
 public slots:
-    void setSetings(TextSettings &settings, TextSettings &settings2);
-    void getSettings(TextSettings &settings, TextSettings &settings2);
+    void setSetings(TextSettings &settings, TextSettings &settings2, TextSettings &settings3, TextSettings &settings4);
+    void getSettings(TextSettings &settings, TextSettings &settings2, TextSettings &settings3, TextSettings &settings4);
     void setDispScreen2Visible(bool visible);
+    void setDispScreen3Visible(bool visible);
+    void setDispScreen4Visible(bool visible);
 
 private slots:
     void loadSettings();
     void on_buttonBrowseBackgound_clicked();
     void on_groupBoxDisp2Sets_toggled(bool arg1);
+    void on_groupBoxDisp3Sets_toggled(bool arg1);
+    void on_groupBoxDisp4Sets_toggled(bool arg1);
     void on_buttonBrowseBackgound2_clicked();
+    void on_buttonBrowseBackgound3_clicked();
+    void on_buttonBrowseBackgound4_clicked();
     void on_pushButtonDefault_clicked();
 
 private:
     Ui::PassiveSettingWidget *ui;
-    TextSettings mySettings,mySettings2;
+    TextSettings mySettings,mySettings2,mySettings3,mySettings4;
 protected:
     virtual void changeEvent(QEvent *e);
 };

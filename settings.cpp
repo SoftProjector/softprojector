@@ -38,13 +38,21 @@ TextSettingsBase::TextSettingsBase()
     transitionType = 0;
     effectsType = 1;
     useSameForDisp2 = true;
+    useSameForDisp3 = true;
+    useSameForDisp4 = true;
 
     // older implementation, Use it for now
     useShadow = true;
     useFading = true;
     useBlurShadow = false;
     useBackground = false;
+    useDisp1settings = true;
     useDisp2settings = false;
+    useDisp3settings = false;
+    useDisp4settings = false;
+    announcementAddBKColorToText = false;
+    announcementTextRecBKColor = QColor(Qt::black);
+    announcementTextGenBKColor = QColor(Qt::green);
 
     setBaseChangeHandles();
 }
@@ -70,6 +78,9 @@ BibleSettings::BibleSettings()
     captionAlignment = 2;
     captionPosition = 1;
     useAbbriviation = false;
+    bibleAddBKColorToText = false;
+    bibleTextRecBKColor = QColor(Qt::black);
+    bibleTextGenBKColor = QColor(Qt::green);
     setChangeHandes();
 }
 
@@ -94,6 +105,9 @@ SongSettings::SongSettings()
     endingFont.fromString("Arial,16,-1,5,50,0,0,0,0,0");
     endingType = 0;
     endingPosition = 0;
+    songAddBKColorToText = false;
+    songTextRecBKColor = QColor(Qt::black);
+    songTextGenBKColor = QColor(Qt::green);
     setChangeHandes();
 }
 
@@ -131,7 +145,7 @@ void TextSettingsBase::setBaseChangeHandles()
             isChangedAlingV = isChangedAlingH = isChangesTranType =
             isChangedEffectType = isChangedBackType = isChangedBackColor =
             isChangedBackPix = isChangedBackVid = isChangedScreenUse =
-            isChangedScreenPos = isChangedSameDisp2 = true;
+            isChangedScreenPos = isChangedSameDisp2 = isChangedSameDisp3 = isChangedSameDisp4 = true;
 }
 
 void TextSettingsBase::resetBaseChangeHandles()
@@ -140,7 +154,7 @@ void TextSettingsBase::resetBaseChangeHandles()
             isChangedAlingV = isChangedAlingH = isChangesTranType =
             isChangedEffectType = isChangedBackType = isChangedBackColor =
             isChangedBackPix = isChangedBackVid = isChangedScreenUse =
-            isChangedScreenPos = isChangedSameDisp2 = false;
+            isChangedScreenPos = isChangedSameDisp2 = isChangedSameDisp3 = isChangedSameDisp4 = false;
 }
 
 void TextSettingsBase::loadBase()
@@ -190,6 +204,10 @@ void TextSettingsBase::loadBase(QSqlQuery &sq)
             effectsType = sq.value(1).toInt();
         else if(n == "useSameForDisp2")
             useSameForDisp2 = sq.value(1).toBool();
+        else if(n == "useSameForDisp3")
+            useSameForDisp3 = sq.value(1).toBool();
+        else if(n == "useSameForDisp4")
+            useSameForDisp4 = sq.value(1).toBool();
     }
     resetBaseChangeHandles();
 }
@@ -220,6 +238,8 @@ void TextSettingsBase::saveBase(QSqlQuery &sq)
     saveIndividualSettings(sq,id,themeId,"screenUse",screenUse);
     saveIndividualSettings(sq,id,themeId,"screenPosition",screenPosition);
     saveIndividualSettings(sq,id,themeId,"useSameForDisp2",useSameForDisp2);
+    saveIndividualSettings(sq,id,themeId,"useSameForDisp3",useSameForDisp3);
+    saveIndividualSettings(sq,id,themeId,"useSameForDisp4",useSameForDisp4);
 
     sq.prepare("INSERT INTO ThemeData (sid, theme_id, sname, svalue, sdata) VALUES (?,?,?,?,?)");
     sq.addBindValue(id);
@@ -283,6 +303,12 @@ void TextSettingsBase::updateBase(QSqlQuery &sq)
 
     if(isChangedSameDisp2)
         updateIndividualSettings(sq,id,themeId,"useSameForDisp2",useSameForDisp2);
+
+    if(isChangedSameDisp3)
+        updateIndividualSettings(sq,id,themeId,"useSameForDisp3",useSameForDisp3);
+
+    if(isChangedSameDisp4)
+        updateIndividualSettings(sq,id,themeId,"useSameForDisp4",useSameForDisp4);
 
     if(isChangedBackPix)
     {
@@ -708,6 +734,8 @@ GeneralSettings::GeneralSettings()
     displayIsOnTop = false;
     displayScreen = 0;
     displayScreen2 = -1; // interger "-1" mean "None" or not to display
+    displayScreen3 = -1;
+    displayScreen4 = -1;
     currentThemeId = 0;
     displayOnStartUp = false;
     settingsChangedAll = false;
@@ -759,8 +787,8 @@ void Settings::loadSettings()
 {
     QString t,n,v,s,sets; // type, name, value, userValues
     QStringList set,values;
-    bool dataGenOk,dataSpOk,dataB1Ok,dataB2Ok, dataPixOk;
-    dataGenOk = dataSpOk = dataB1Ok = dataB2Ok = dataPixOk = false;
+    bool dataGenOk,dataSpOk,dataB1Ok,dataB2Ok,dataB3Ok,dataB4Ok, dataPixOk;
+    dataGenOk = dataSpOk = dataB1Ok = dataB2Ok = dataB3Ok = dataB4Ok = dataPixOk = false;
     QSqlQuery sq;
     sq.exec(QString("SELECT type, sets FROM Settings "));
     while (sq.next())
@@ -790,6 +818,10 @@ void Settings::loadSettings()
                 else if (n == "displayScreen2")
                     general.displayScreen2 = v.toInt();
                 // End display screen 2 settings
+                else if (n == "displayScreen3")
+                    general.displayScreen3 = v.toInt();
+                else if (n == "displayScreen4")
+                    general.displayScreen4 = v.toInt();
                 else if (n == "dcIconSize")
                     general.displayControls.buttonSize = v.toInt();
                 else if (n == "dcAlignment")
@@ -865,6 +897,42 @@ void Settings::loadSettings()
                     bibleSets2.trinaryBible = v;
             }
         }
+        else if(t == "bible3")
+        {
+            dataB3Ok = true;
+            values = sets.split("\n");
+            for(int i(0);i<values.count();++i)
+            {
+                s = values.at(i);
+                set = s.split("=");
+                n = set.at(0).trimmed();
+                v = set.at(1).trimmed();
+                if(n == "primary")
+                    bibleSets3.primaryBible = v;
+                else if(n == "secondary")
+                    bibleSets3.secondaryBible = v;
+                else if (n == "trinary")
+                    bibleSets3.trinaryBible = v;
+            }
+        }
+        else if(t == "bible4")
+        {
+            dataB4Ok = true;
+            values = sets.split("\n");
+            for(int i(0);i<values.count();++i)
+            {
+                s = values.at(i);
+                set = s.split("=");
+                n = set.at(0).trimmed();
+                v = set.at(1).trimmed();
+                if(n == "primary")
+                    bibleSets4.primaryBible = v;
+                else if(n == "secondary")
+                    bibleSets4.secondaryBible = v;
+                else if (n == "trinary")
+                    bibleSets4.trinaryBible = v;
+            }
+        }
         else if(t == "pix")
         {
             dataPixOk = true;
@@ -890,14 +958,14 @@ void Settings::loadSettings()
     }
 
     // if no data exist, then create
-    if(!dataGenOk || !dataSpOk || !dataB1Ok || !dataB2Ok || !dataPixOk)
+    if(!dataGenOk || !dataSpOk || !dataB1Ok || !dataB2Ok || !dataB3Ok || !dataB4Ok|| !dataPixOk)
         saveNewSettings();
 }
 
 void Settings::saveSettings()
 {
     QSqlQuery sq;
-    QString gset,spset,b1set,b2set,pset;//general,bible,song,annouce,spmain
+    QString gset,spset,b1set,b2set,b3set,b4set,pset;//general,bible,song,annouce,spmain
 
     // **** Prepare general settings ***************************************
     if(general.displayIsOnTop)
@@ -911,6 +979,8 @@ void Settings::saveSettings()
     gset += "\ncurrentThemeId = " + QString::number(general.currentThemeId);
     gset += "\ndisplayScreen = " + QString::number(general.displayScreen);
     gset += "\ndisplayScreen2 = " + QString::number(general.displayScreen2);
+    gset += "\ndisplayScreen3 = " + QString::number(general.displayScreen3);
+    gset += "\ndisplayScreen4 = " + QString::number(general.displayScreen4);
     gset += "\ndcIconSize = " + QString::number(general.displayControls.buttonSize);
     gset += QString("\ndcAlignment = %1,%2").arg(general.displayControls.alignmentV).arg(general.displayControls.alignmentH);
     gset += "\ndcOpacity = " + QString::number(general.displayControls.opacity);
@@ -932,10 +1002,20 @@ void Settings::saveSettings()
     b1set += "\ntrinary = " + bibleSets.trinaryBible;
     b1set += "\noperator = " + bibleSets.operatorBible;
 
-    // **** prepare screen 1 bible versions
+    // **** prepare screen 2 bible versions
     b2set = "primary = " + bibleSets2.primaryBible;
     b2set += "\nsecondary = " + bibleSets2.secondaryBible;
     b2set += "\ntrinary = " + bibleSets2.trinaryBible;
+
+    // **** prepare screen 3 bible versions
+    b3set = "primary = " + bibleSets3.primaryBible;
+    b3set += "\nsecondary = " + bibleSets3.secondaryBible;
+    b3set += "\ntrinary = " + bibleSets3.trinaryBible;
+
+    // **** prepare screen 4 bible versions
+    b4set = "primary = " + bibleSets4.primaryBible;
+    b4set += "\nsecondary = " + bibleSets4.secondaryBible;
+    b4set += "\ntrinary = " + bibleSets4.trinaryBible;
 
     // **** prepare pix settings
     if(slideSets.expandSmall)
@@ -954,6 +1034,8 @@ void Settings::saveSettings()
     sq.exec(QString("UPDATE Settings SET sets = '%1' WHERE type = 'spMain'").arg(spset));
     sq.exec(QString("UPDATE Settings SET sets = '%1' WHERE type = 'bible1'").arg(b1set));
     sq.exec(QString("UPDATE Settings SET sets = '%1' WHERE type = 'bible2'").arg(b2set));
+    sq.exec(QString("UPDATE Settings SET sets = '%1' WHERE type = 'bible3'").arg(b3set));
+    sq.exec(QString("UPDATE Settings SET sets = '%1' WHERE type = 'bible4'").arg(b4set));
     sq.exec(QString("UPDATE Settings SET sets = '%1' WHERE type = 'pix'").arg(pset));
 }
 
@@ -964,6 +1046,8 @@ void Settings::saveNewSettings()
     sq.exec("INSERT OR REPLACE INTO Settings (type, sets) VALUES ('spMain', 'n=v')");
     sq.exec("INSERT OR REPLACE INTO Settings (type, sets) VALUES ('bible1', 'n=v')");
     sq.exec("INSERT OR REPLACE INTO Settings (type, sets) VALUES ('bible2', 'n=v')");
+    sq.exec("INSERT OR REPLACE INTO Settings (type, sets) VALUES ('bible3', 'n=v')");
+    sq.exec("INSERT OR REPLACE INTO Settings (type, sets) VALUES ('bible4', 'n=v')");
     sq.exec("INSERT OR REPLACE INTO Settings (type, sets) VALUES ('pix', 'n=v')");
 
     saveSettings();

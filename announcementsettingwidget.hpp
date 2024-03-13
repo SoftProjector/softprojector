@@ -38,9 +38,11 @@ public:
     ~AnnouncementSettingWidget();
 
 public slots:
-    void setSettings(TextSettings& settings, TextSettings &settings2);
-    void getSettings(TextSettings& settings, TextSettings &settings2);
+    void setSettings(TextSettings& settings, TextSettings &settings2, TextSettings& settings3, TextSettings &settings4);
+    void getSettings(TextSettings& settings, TextSettings &settings2, TextSettings& settings3, TextSettings &settings4);
     void setDispScreen2Visible(bool visible);
+    void setDispScreen3Visible(bool visible);
+    void setDispScreen4Visible(bool visible);
     void setBackgroungds(QString name, QPixmap back);
 
 signals:
@@ -52,18 +54,28 @@ private slots:
     void on_pushButtonDefault_clicked();
     void on_checkBoxUseShadow_stateChanged(int arg1);
     void on_groupBoxUseDisp2_toggled(bool arg1);
+    void on_groupBoxUseDisp3_toggled(bool arg1);
+    void on_groupBoxUseDisp4_toggled(bool arg1);
     void on_checkBoxUseShadow2_stateChanged(int arg1);
+    void on_checkBoxUseShadow3_stateChanged(int arg1);
+    void on_checkBoxUseShadow4_stateChanged(int arg1);
     void on_buttonBackground2_clicked();
+    void on_buttonBackground3_clicked();
+    void on_buttonBackground4_clicked();
     void on_toolButtonColor_clicked();
     void on_toolButtonColor2_clicked();
+    void on_toolButtonColor3_clicked();
+    void on_toolButtonColor4_clicked();
     void on_toolButtonFont_clicked();
     void on_toolButtonFont2_clicked();
+    void on_toolButtonFont3_clicked();
+    void on_toolButtonFont4_clicked();
     QString getFontText(QFont font);
 
     void on_pushButtonApplyToAll_clicked();
 
 private:
-    TextSettings mySettings, mySettings2;
+    TextSettings mySettings, mySettings2, mySettings3, mySettings4;
     Ui::AnnouncementSettingWidget *ui;
 protected:
     virtual void changeEvent(QEvent *e);

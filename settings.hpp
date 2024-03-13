@@ -101,7 +101,7 @@ public:
     bool isChangedTextFont, isChangedTextColor, isChangedTextShadowColor;
     bool isChangedAlingV, isChangedAlingH, isChangesTranType, isChangedEffectType;
     bool isChangedBackType, isChangedBackColor, isChangedBackPix, isChangedBackVid;
-    bool isChangedScreenUse, isChangedScreenPos, isChangedSameDisp2;
+    bool isChangedScreenUse, isChangedScreenPos, isChangedSameDisp2, isChangedSameDisp3, isChangedSameDisp4;
 
     //Text
     QFont textFont;
@@ -133,7 +133,15 @@ public:
     bool useFading;
     bool useBlurShadow;
     bool useBackground;
+    bool useDisp1settings;
     bool useDisp2settings;
+    bool useDisp3settings;
+    bool useDisp4settings;
+
+    // added Dynamic background
+    bool announcementAddBKColorToText;
+    QColor announcementTextRecBKColor;
+    QColor announcementTextGenBKColor;
 
     //Layout
     int screenUse;
@@ -141,6 +149,8 @@ public:
     // 0 - Top of Screen, 1 - Bottom of Screen
 
     bool useSameForDisp2;
+    bool useSameForDisp3;
+    bool useSameForDisp4;
 
     void saveBase();
     void saveBase(QSqlQuery &sq);
@@ -207,6 +217,11 @@ public:
     bool isChangedCapFont, isChangedCapColor, isChangedCapShadColor, isChangedNotSameFont;
     bool isChangedNotSameColor, isChangedCapAlign, isChangedCapPos, isChangedUseAbbriv;
 
+    // Dynamic Background Behind Text
+    bool bibleAddBKColorToText;
+    QColor bibleTextRecBKColor;
+    QColor bibleTextGenBKColor;
+
     void save();
     void save(QSqlQuery &sq);
     void update();
@@ -252,6 +267,11 @@ public:
     bool isChangedEndingShadColor, isChangedNotSameEndingFont, isChangedNotSameEndingColor;
     bool isChangedEndingType, isChangedEndingPosition;
 
+    // Dynamic Background Behind Text
+    bool songAddBKColorToText;
+    QColor songTextRecBKColor;
+    QColor songTextGenBKColor;
+
     void save();
     void save(QSqlQuery &sq);
     void update();
@@ -278,8 +298,11 @@ class GeneralSettings
 public:
     GeneralSettings();
     bool displayIsOnTop;
+    bool useDarkTheme;
     int displayScreen; // stores primary display screen location
     int displayScreen2; // stores secondary display screen location
+    int displayScreen3; // stores Tertiary display screen location
+    int displayScreen4; // stores Quaternary display screen location
     DisplayControlsSettings displayControls;
     int currentThemeId;
     bool displayOnStartUp;
@@ -332,6 +355,8 @@ public:
     SpSettings spMain;
     BibleVersionSettings bibleSets;
     BibleVersionSettings bibleSets2;
+    BibleVersionSettings bibleSets3;
+    BibleVersionSettings bibleSets4;
     SlideShowSettings slideSets;
 
     bool isSpClosing;

@@ -36,6 +36,8 @@ SoftProjector::SoftProjector(QWidget *parent)
     // Update Themes Bible Versions
     theme.bible.versions = mySettings.bibleSets;
     theme.bible2.versions = mySettings.bibleSets2;
+    theme.bible3.versions = mySettings.bibleSets3;
+    theme.bible4.versions = mySettings.bibleSets4;
 
     //Setting up the Display Screen
     desktop = new QDesktopWidget();
@@ -43,6 +45,8 @@ SoftProjector::SoftProjector(QWidget *parent)
     // so this will initialize the Display1 widget on the main screen:
     pds1 = new ProjectorDisplayScreen(desktop->screen(0));
     pds2 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
+    pds3 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
+    pds4 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
     // Don't worry, we'll move it later
 
     bibleWidget = new BibleWidget;
@@ -69,7 +73,7 @@ SoftProjector::SoftProjector(QWidget *parent)
     // display window (Mac OS X)
 
     // Apply Settings
-    applySetting(mySettings.general, theme, mySettings.slideSets, mySettings.bibleSets, mySettings.bibleSets2);
+    applySetting(mySettings.general, theme, mySettings.slideSets, mySettings.bibleSets, mySettings.bibleSets2, mySettings.bibleSets3, mySettings.bibleSets4);
 
     positionDisplayWindow();
 
@@ -105,8 +109,10 @@ SoftProjector::SoftProjector(QWidget *parent)
     connect(pds1,SIGNAL(nextSlide()),this,SLOT(nextSlide()));
     connect(pds1,SIGNAL(prevSlide()),this,SLOT(prevSlide()));
     connect(settingsDialog,SIGNAL(updateSettings(GeneralSettings&,Theme&,SlideShowSettings&,
+                                                 BibleVersionSettings&,BibleVersionSettings&,
                                                  BibleVersionSettings&,BibleVersionSettings&)),
             this,SLOT(updateSetting(GeneralSettings&,Theme&,SlideShowSettings&,
+                                    BibleVersionSettings&,BibleVersionSettings&,
                                     BibleVersionSettings&,BibleVersionSettings&)));
     connect(settingsDialog,SIGNAL(positionsDisplayWindow()),this,SLOT(positionDisplayWindow()));
     connect(settingsDialog,SIGNAL(updateScreen()),this,SLOT(updateScreen()));
@@ -198,6 +204,8 @@ SoftProjector::~SoftProjector()
     delete mediaPlayer;
     delete pds1;
     delete pds2;
+    delete pds3;
+    delete pds4;
     delete desktop;
     delete languageGroup;
     delete settingsDialog;
@@ -218,11 +226,15 @@ void SoftProjector::positionDisplayWindow()
     {
         pds1->setWindowFlags(Qt::WindowStaysOnTopHint);
         pds2->setWindowFlags(Qt::WindowStaysOnTopHint);
+        pds3->setWindowFlags(Qt::WindowStaysOnTopHint);
+        pds4->setWindowFlags(Qt::WindowStaysOnTopHint);
     }
     else
     {
         pds1->setWindowFlags(0); // Do not show always on top
         pds2->setWindowFlags(0); // Do not show always on top
+        pds3->setWindowFlags(0); // Do not show always on top
+        pds4->setWindowFlags(0); // Do not show always on top
     }
 
     if(desktop->screenCount() > 1)
@@ -273,6 +285,56 @@ void SoftProjector::positionDisplayWindow()
             pds2->hide();
         }
 
+        // check if to display tertiary display screen
+        if(mySettings.general.displayScreen3>=0)
+        {
+            hasDisplayScreen3 = true;
+            if (desktop->isVirtualDesktop())
+            {
+                // Move the display widget to screen 1 (tertiary screen):
+                pds3->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen3));
+                pds3->resetImGenSize();
+
+            }
+            pds3->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+            pds3->renderPassiveText(theme.passive3.backgroundPix,theme.passive3.useBackground);
+            pds3->setControlsVisible(false);
+            if(mySettings.general.displayOnStartUp)
+            {
+                pds3->showFullScreen();
+            }
+        }
+        else
+        {
+            hasDisplayScreen3 = false;
+            pds3->hide();
+        }
+
+        // check if to display quaternary display screen
+        if(mySettings.general.displayScreen4>=0)
+        {
+            hasDisplayScreen4 = true;
+            if (desktop->isVirtualDesktop())
+            {
+                // Move the display widget to screen 1 (quaternary screen):
+                pds4->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen4));
+                pds4->resetImGenSize();
+
+            }
+            pds4->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+            pds4->renderPassiveText(theme.passive4.backgroundPix,theme.passive4.useBackground);
+            pds4->setControlsVisible(false);
+            if(mySettings.general.displayOnStartUp)
+            {
+                pds4->showFullScreen();
+            }
+        }
+        else
+        {
+            hasDisplayScreen4 = false;
+            pds4->hide();
+        }
+
         // specify that there is more than one diplay screen(monitor) availbale
         isSingleScreen = false;
     }
@@ -285,6 +347,8 @@ void SoftProjector::positionDisplayWindow()
         showDisplayScreen(false);
         isSingleScreen = true;
         hasDisplayScreen2 = false;
+        hasDisplayScreen3 = false;
+        hasDisplayScreen4 = false;
     }
 }
 
@@ -337,12 +401,15 @@ void SoftProjector::saveSettings()
 }
 
 void SoftProjector::updateSetting(GeneralSettings &g, Theme &t, SlideShowSettings &ssets,
-                                  BibleVersionSettings &bsets, BibleVersionSettings &bsets2)
+                                  BibleVersionSettings &bsets, BibleVersionSettings &bsets2,
+                                  BibleVersionSettings &bsets3, BibleVersionSettings &bsets4)
 {
     mySettings.general = g;
     mySettings.slideSets = ssets;
     mySettings.bibleSets = bsets;
     mySettings.bibleSets2 = bsets2;
+    mySettings.bibleSets3 = bsets3;
+    mySettings.bibleSets4 = bsets4;
     mySettings.saveSettings();
     theme = t;
     bibleWidget->setSettings(mySettings.bibleSets);
@@ -350,12 +417,15 @@ void SoftProjector::updateSetting(GeneralSettings &g, Theme &t, SlideShowSetting
 
     theme.bible.versions = mySettings.bibleSets;
     theme.bible2.versions = mySettings.bibleSets2;
+    theme.bible3.versions = mySettings.bibleSets3;
+    theme.bible4.versions = mySettings.bibleSets4;
 }
 
 void SoftProjector::applySetting(GeneralSettings &g, Theme &t, SlideShowSettings &s,
-                                 BibleVersionSettings &b1, BibleVersionSettings &b2)
+                                 BibleVersionSettings &b1, BibleVersionSettings &b2,
+                                 BibleVersionSettings &b3, BibleVersionSettings &b4)
 {
-    updateSetting(g,t,s,b1,b2);
+    updateSetting(g,t,s,b1,b2,b3,b4);
 
     // Apply splitter states
     ui->splitter->restoreState(mySettings.spMain.spSplitter);
@@ -447,7 +517,7 @@ void SoftProjector::keyPressEvent(QKeyEvent *event)
     }
     else if(key == Qt::Key_F8)
         ui->projectTab->setCurrentWidget(announceWidget);
-    if(key == Qt::Key_F9)
+	else if(key == Qt::Key_F9)
     {
         ui->projectTab->setCurrentWidget(bibleWidget);
         bibleWidget->setBibleSearchActive();
@@ -613,6 +683,14 @@ void SoftProjector::playVideo()
     {
         pds2->playVideo();
     }
+    if(hasDisplayScreen3)
+    {
+        pds3->playVideo();
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->playVideo();
+    }
 }
 
 void SoftProjector::pauseVideo()
@@ -621,6 +699,14 @@ void SoftProjector::pauseVideo()
     if(hasDisplayScreen2)
     {
         pds2->pauseVideo();
+    }
+    if(hasDisplayScreen3)
+    {
+        pds3->pauseVideo();
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->pauseVideo();
     }
 }
 
@@ -631,6 +717,14 @@ void SoftProjector::stopVideo()
     {
         pds2->stopVideo();
     }
+    if(hasDisplayScreen3)
+    {
+        pds3->stopVideo();
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->stopVideo();
+    }
 }
 
 void SoftProjector::setVideoPosition(qint64 position)
@@ -639,6 +733,14 @@ void SoftProjector::setVideoPosition(qint64 position)
     if(hasDisplayScreen2)
     {
         pds2->setVideoPosition(position);
+    }
+    if(hasDisplayScreen3)
+    {
+        pds3->setVideoPosition(position);
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->setVideoPosition(position);
     }
 }
 
@@ -681,13 +783,39 @@ void SoftProjector::updateScreen()
 
         if(hasDisplayScreen2)
         {
-            if(theme.passive2.useDisp2settings)
+            if(!theme.passive2.useDisp1settings)
             {
                 pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
             }
             else
             {
                 pds2->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
+            }
+
+        }
+
+        if(hasDisplayScreen3)
+        {
+            if(!theme.passive3.useDisp1settings)
+            {
+                pds3->renderPassiveText(theme.passive3.backgroundPix,theme.passive3.useBackground);
+            }
+            else
+            {
+                pds3->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
+            }
+
+        }
+
+        if(hasDisplayScreen4)
+        {
+            if(!theme.passive4.useDisp1settings)
+            {
+                pds4->renderPassiveText(theme.passive4.backgroundPix,theme.passive4.useBackground);
+            }
+            else
+            {
+                pds4->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
             }
 
         }
@@ -763,7 +891,7 @@ void SoftProjector::showBible()
                           theme.bible);
     if(hasDisplayScreen2)
     {
-        if(theme.bible2.useDisp2settings)
+        if(!theme.bible2.useDisp1settings)
         {
             pds2->renderBibleText(bibleWidget->bible.
                                   getCurrentVerseAndCaption(currentRows,theme.bible2,
@@ -776,6 +904,38 @@ void SoftProjector::showBible()
                                                             mySettings.bibleSets),theme.bible);
         }
     }
+
+    if(hasDisplayScreen3)
+    {
+        if(!theme.bible3.useDisp1settings)
+        {
+            pds3->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible3,
+                                                            mySettings.bibleSets3),theme.bible3);
+        }
+        else
+        {
+            pds3->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible,
+                                                            mySettings.bibleSets),theme.bible);
+        }
+    }
+
+    if(hasDisplayScreen4)
+    {
+        if(!theme.bible4.useDisp1settings)
+        {
+            pds4->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible4,
+                                                            mySettings.bibleSets4),theme.bible4);
+        }
+        else
+        {
+            pds4->renderBibleText(bibleWidget->bible.
+                                  getCurrentVerseAndCaption(currentRows,theme.bible,
+                                                            mySettings.bibleSets),theme.bible);
+        }
+    }
 }
 
 void SoftProjector::showSong(int currentRow)
@@ -783,18 +943,22 @@ void SoftProjector::showSong(int currentRow)
     // Get Song Settings
     SongSettings s1 = theme.song;
     SongSettings s2 = theme.song2;
+    SongSettings s3 = theme.song3;
+    SongSettings s4 = theme.song4;
 
     // Apply Song specific settings if there is one
     if(current_song.usePrivateSettings)
     {
         current_song.getSettings(s1);
         current_song.getSettings(s2);
+        current_song.getSettings(s3);
+        current_song.getSettings(s4);
     }
 
     pds1->renderSongText(current_song.getStanza(currentRow),s1);
     if(hasDisplayScreen2)
     {
-        if(theme.song2.useDisp2settings)
+        if(!theme.song2.useDisp1settings)
         {
             pds2->renderSongText(current_song.getStanza(currentRow),s2);
         }
@@ -803,6 +967,29 @@ void SoftProjector::showSong(int currentRow)
             pds2->renderSongText(current_song.getStanza(currentRow),s1);
         }
     }
+    if(hasDisplayScreen3)
+    {
+        if(!theme.song3.useDisp1settings)
+        {
+            pds3->renderSongText(current_song.getStanza(currentRow),s3);
+        }
+        else
+        {
+            pds3->renderSongText(current_song.getStanza(currentRow),s1);
+        }
+    }
+    if(hasDisplayScreen4)
+    {
+        if(!theme.song4.useDisp1settings)
+        {
+            pds4->renderSongText(current_song.getStanza(currentRow),s4);
+        }
+        else
+        {
+            pds4->renderSongText(current_song.getStanza(currentRow),s1);
+        }
+    }
+
 }
 
 void SoftProjector::showAnnounce(int currentRow)
@@ -810,13 +997,35 @@ void SoftProjector::showAnnounce(int currentRow)
     pds1->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
     if(hasDisplayScreen2)
     {
-        if(theme.announce2.useDisp2settings)
+        if(!theme.announce2.useDisp1settings)
         {
             pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce2);
         }
         else
         {
             pds2->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+        }
+    }
+    if(hasDisplayScreen3)
+    {
+        if(!theme.announce3.useDisp1settings)
+        {
+            pds3->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce3);
+        }
+        else
+        {
+            pds3->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
+        }
+    }
+    if(hasDisplayScreen4)
+    {
+        if(!theme.announce4.useDisp1settings)
+        {
+            pds4->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce4);
+        }
+        else
+        {
+            pds4->renderAnnounceText(currentAnnounce.getAnnounceSlide(currentRow),theme.announce);
         }
     }
 }
@@ -827,6 +1036,14 @@ void SoftProjector::showPicture(int currentRow)
     if(hasDisplayScreen2)
     {
         pds2->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
+    }
+    if(hasDisplayScreen3)
+    {
+        pds3->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->renderSlideShow(pictureShowList.at(currentRow).image,mySettings.slideSets);
     }
 }
 
@@ -839,6 +1056,18 @@ void SoftProjector::showVideo()
         pds2->setVideoVolume(0);
         pds2->setVideoMuted(true);
         pds2->renderVideo(currentVideo);
+    }
+    if(hasDisplayScreen3)
+    {
+        pds3->setVideoVolume(0);
+        pds3->setVideoMuted(true);
+        pds3->renderVideo(currentVideo);
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->setVideoVolume(0);
+        pds4->setVideoMuted(true);
+        pds4->renderVideo(currentVideo);
     }
 }
 
@@ -861,6 +1090,14 @@ void SoftProjector::on_actionClear_triggered()
     {
         pds2->renderNotText();
     }
+    if(hasDisplayScreen3)
+    {
+        pds3->renderNotText();
+    }
+    if(hasDisplayScreen4)
+    {
+        pds4->renderNotText();
+    }
     ui->actionClear->setEnabled(false);
     ui->actionShow->setEnabled(true);
 //    ui->actionHide->setEnabled(false);
@@ -875,6 +1112,14 @@ void SoftProjector::on_actionCloseDisplay_triggered()
         {
             pds2->showFullScreen();
         }
+        if(hasDisplayScreen3)
+        {
+            pds3->showFullScreen();
+        }
+        if(hasDisplayScreen4)
+        {
+            pds4->showFullScreen();
+        }
     }
     else
     {
@@ -882,6 +1127,14 @@ void SoftProjector::on_actionCloseDisplay_triggered()
         if(hasDisplayScreen2)
         {
             pds2->hide();
+        }
+        if(hasDisplayScreen3)
+        {
+            pds3->hide();
+        }
+        if(hasDisplayScreen4)
+        {
+            pds4->hide();
         }
         showing = false;
     }
@@ -899,7 +1152,7 @@ void SoftProjector::updateCloseDisplayButtons(bool isOn)
 
 void SoftProjector::on_actionSettings_triggered()
 {
-    settingsDialog->loadSettings(mySettings.general,theme,mySettings.slideSets, mySettings.bibleSets,mySettings.bibleSets2);
+    settingsDialog->loadSettings(mySettings.general,theme,mySettings.slideSets, mySettings.bibleSets,mySettings.bibleSets2,mySettings.bibleSets3,mySettings.bibleSets4);
     settingsDialog->exec();
 }
 
@@ -1079,7 +1332,7 @@ void SoftProjector::on_actionManage_Database_triggered()
             t.setThemeId(sq.value(0).toInt());
             t.loadTheme();
             g.currentThemeId = t.getThemeId();
-            updateSetting(g,t,mySettings.slideSets,mySettings.bibleSets,mySettings.bibleSets2);
+            updateSetting(g,t,mySettings.slideSets,mySettings.bibleSets,mySettings.bibleSets2,mySettings.bibleSets3,mySettings.bibleSets4);
             updateScreen();
         }
     }

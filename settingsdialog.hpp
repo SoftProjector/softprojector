@@ -45,11 +45,13 @@ public:
 
 public slots:
     void loadSettings(GeneralSettings& sets, Theme &thm, SlideShowSettings &ssets,
-                      BibleVersionSettings &bsets, BibleVersionSettings &bsets2);
+                      BibleVersionSettings &bsets, BibleVersionSettings &bsets2,
+                      BibleVersionSettings &bsets3, BibleVersionSettings &bsets4);
 
 signals:
     void updateSettings(GeneralSettings& sets, Theme &thm, SlideShowSettings &ssets,
-                        BibleVersionSettings& bsets, BibleVersionSettings& bsets2);
+                        BibleVersionSettings& bsets, BibleVersionSettings& bsets2,
+                        BibleVersionSettings& bsets3, BibleVersionSettings& bsets4);
     void positionsDisplayWindow();
     void updateScreen();
 
@@ -58,12 +60,16 @@ private:
 
     int current_display_screen;
     int currentDisplayScreen2;
+    int currentDisplayScreen3;
+    int currentDisplayScreen4;
     bool is_always_on_top;
 
     GeneralSettings gsettings;
     Theme theme;
     BibleVersionSettings bsettings;
     BibleVersionSettings bsettings2;
+    BibleVersionSettings bsettings3;
+    BibleVersionSettings bsettings4;
     SlideShowSettings ssettings;
 
     GeneralSettingWidget *generalSettingswidget;
@@ -80,6 +86,8 @@ private:
 private slots:
     void on_listWidget_currentRowChanged(int currentRow);
     void setUseDispScreen2(bool toUse);
+    void setUseDispScreen3(bool toUse);
+    void setUseDispScreen4(bool toUse);
     void on_buttonBox_clicked(QAbstractButton *button);
     void applySettings();
     void changeTheme(int theme_id);
