@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "schedule.hpp"
+#include "../headers/schedule.hpp"
 
 Schedule::Schedule()
 {

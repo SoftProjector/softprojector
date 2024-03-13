@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "editannouncementdialog.hpp"
+#include "../headers/editannouncementdialog.hpp"
 #include "ui_editannouncementdialog.h"
 
 EditAnnouncementDialog::EditAnnouncementDialog(QWidget *parent) :

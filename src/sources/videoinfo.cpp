@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "videoinfo.hpp"
+#include "../headers/videoinfo.hpp"
 
 VideoInfo::VideoInfo()
 {

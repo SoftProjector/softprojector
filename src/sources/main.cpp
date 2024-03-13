@@ -21,7 +21,7 @@
 #include <QMessageBox>
 #include <QtSql>
 #include <QStyleFactory>
-#include "softprojector.hpp"
+#include "../headers/softprojector.hpp"
 
 // Definitions for database versions 'dbVer' numbers
 // x - Official release. ex: 2 - for SoftProjector 2

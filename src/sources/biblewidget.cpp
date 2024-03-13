@@ -17,9 +17,9 @@
 //
 ***************************************************************************/
 
-#include "biblewidget.hpp"
+#include "../headers/biblewidget.hpp"
 #include "ui_biblewidget.h"
-#include "song.hpp"
+#include "../headers/song.hpp"
 //#include <time.h>
 
 //double diffclock(clock_t clock1,clock_t clock2)

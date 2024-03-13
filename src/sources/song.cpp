@@ -17,9 +17,9 @@
 //
 ***************************************************************************/
 
-#include "song.hpp"
+#include "../headers/song.hpp"
 #include <QDebug>
-#include "spfunctions.hpp"
+#include "../headers/spfunctions.hpp"
 
 // for future use or chord import
 // to filter out ChorPro chords from within the song text

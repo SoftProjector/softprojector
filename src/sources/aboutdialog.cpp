@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "aboutdialog.hpp"
+#include "../headers/aboutdialog.hpp"
 #include "ui_aboutdialog.h"
 
 

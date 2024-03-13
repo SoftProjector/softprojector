@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "imagegenerator.hpp"
+#include "../headers/imagegenerator.hpp"
 
 
 ImageGenerator::ImageGenerator()

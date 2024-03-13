@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "projectordisplayscreen.hpp"
+#include "../headers/projectordisplayscreen.hpp"
 #include "ui_projectordisplayscreen.h"
 
 

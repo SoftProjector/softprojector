@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "spfunctions.hpp"
+#include "../headers/spfunctions.hpp"
 //spFunctions::spFunctions()
 //{
 //}

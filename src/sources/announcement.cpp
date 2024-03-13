@@ -19,7 +19,7 @@
 
 #include <QtSql>
 #include <QDebug>
-#include "announcement.hpp"
+#include "../headers/announcement.hpp"
 
 Announcement::Announcement()
 {

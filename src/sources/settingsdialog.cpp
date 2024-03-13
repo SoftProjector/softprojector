@@ -18,7 +18,7 @@
 ***************************************************************************/
 
 #include <QtSql>
-#include "settingsdialog.hpp"
+#include "../headers/settingsdialog.hpp"
 #include "ui_settingsdialog.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) :

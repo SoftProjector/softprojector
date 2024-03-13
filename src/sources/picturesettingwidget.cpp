@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "picturesettingwidget.hpp"
+#include "../headers/picturesettingwidget.hpp"
 #include "ui_picturesettingwidget.h"
 
 PictureSettingWidget::PictureSettingWidget(QWidget *parent) :

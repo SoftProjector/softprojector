@@ -18,10 +18,10 @@
 ***************************************************************************/
 
 #include <QDesktopWidget>
-#include "softprojector.hpp"
+#include "../headers/softprojector.hpp"
 #include "ui_softprojector.h"
-#include "aboutdialog.hpp"
-#include "editannouncementdialog.hpp"
+#include "../headers/aboutdialog.hpp"
+#include "../headers/editannouncementdialog.hpp"
 
 SoftProjector::SoftProjector(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::SoftProjectorClass)

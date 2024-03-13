@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "slideshow.hpp"
+#include "../headers/slideshow.hpp"
 
 SlideShowItem::SlideShowItem()
 {

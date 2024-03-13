@@ -17,9 +17,9 @@
 //
 ***************************************************************************/
 
-#include "editwidget.hpp"
+#include "../headers/editwidget.hpp"
 #include "ui_editwidget.h"
-#include "song.hpp"
+#include "../headers/song.hpp"
 
 EditWidget::EditWidget(QWidget *parent) :
     QWidget(parent),

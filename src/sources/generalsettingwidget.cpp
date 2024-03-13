@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "generalsettingwidget.hpp"
+#include "../headers/generalsettingwidget.hpp"
 #include "ui_generalsettingwidget.h"
 
 GeneralSettingWidget::GeneralSettingWidget(QWidget *parent) :

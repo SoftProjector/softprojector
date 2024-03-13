@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "videoplayerwidget.hpp"
+#include "../headers/videoplayerwidget.hpp"
 
 VideoPlayerWidget::VideoPlayerWidget(QWidget *parent): QVideoWidget(parent)
 {

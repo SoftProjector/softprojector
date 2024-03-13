@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "spimageprovider.hpp"
+#include "../headers/spimageprovider.hpp"
 
 SpImageProvider::SpImageProvider() :
     QQuickImageProvider(QQuickImageProvider::Pixmap)

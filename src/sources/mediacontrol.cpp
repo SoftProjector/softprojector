@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "mediacontrol.hpp"
+#include "../headers/mediacontrol.hpp"
 #include "ui_mediacontrol.h"
 
 MediaControl::MediaControl(QWidget *parent) :

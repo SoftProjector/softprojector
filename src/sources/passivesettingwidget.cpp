@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "passivesettingwidget.hpp"
+#include "../headers/passivesettingwidget.hpp"
 #include "ui_passivesettingwidget.h"
 
 PassiveSettingWidget::PassiveSettingWidget(QWidget *parent) :

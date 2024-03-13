@@ -19,7 +19,7 @@
 
 #include <QMediaMetaData>
 
-#include "mediawidget.hpp"
+#include "../headers/mediawidget.hpp"
 #include "ui_mediawidget.h"
 
 #ifdef Q_OS_WIN

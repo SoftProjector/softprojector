@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include "theme.hpp"
+#include "../headers/theme.hpp"
 /*
 PassiveSettings::PassiveSettings()
 {
