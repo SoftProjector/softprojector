@@ -305,8 +305,8 @@ bool AnnounceProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sour
     if(filterString.isEmpty())
         return true;
 
-    QRegExp rx;
-    rx.setCaseSensitivity(Qt::CaseInsensitive);
+    QRegularExpression rx;
+    rx.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
     QString fs = filterString;
     fs.replace(" ","\\W");
     if(matchExact)

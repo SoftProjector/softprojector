@@ -17,7 +17,7 @@
 //
 ***************************************************************************/
 
-#include <QDesktopWidget>
+#include <QWidget>
 #include "../headers/softprojector.hpp"
 #include "ui_softprojector.h"
 #include "../headers/aboutdialog.hpp"
@@ -40,7 +40,7 @@ SoftProjector::SoftProjector(QWidget *parent)
     theme.bible4.versions = mySettings.bibleSets4;
 
     //Setting up the Display Screen
-    desktop = new QDesktopWidget();
+    // desktop = new QDesktopWidget();
     // NOTE: With virtual desktop, desktop->screen() will always return the main screen,
     // so this will initialize the Display1 widget on the main screen:
     pds1 = new ProjectorDisplayScreen(desktop->screen(0));

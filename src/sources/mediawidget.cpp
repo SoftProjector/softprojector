@@ -186,8 +186,8 @@ void MediaWidget::handleDrop(QDropEvent *e)
     fext.remove("*");
     fext.replace(" ","$|");
     fext.append("$");
-    QRegExp rx(fext);
-    rx.setCaseSensitivity(Qt::CaseInsensitive);
+    QRegularExpression rx(fext);
+    rx.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
     foreach(const QUrl &url, urls)
     {
         QString fp = url.toLocalFile();

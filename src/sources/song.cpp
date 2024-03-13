@@ -28,7 +28,7 @@
 QString clean(QString str)
 {
     //Removes all none alphanumeric characters from the string
-    str.replace(QRegExp("[\\W*]")," ");
+    str.replace(QRegularExpression("[\\W*]")," ");
     str = str.simplified();
     return str;
 }
@@ -358,7 +358,7 @@ QString Song::getStanzaBlock(int &i, QStringList &list)
     while(i < list.count())
     {
         line = list.at(i);
-        if(line.contains(QRegExp("^&")))
+        if(line.contains(QRegularExpression("^&")))
             line.remove("&");
 
         if(isStanzaTitle(line) && (i!=j))
@@ -594,7 +594,7 @@ bool SongProxyModel::filterAcceptsRow(int sourceRow,
                                       const QModelIndex &sourceParent) const
 {
     bool retValue = false;
-    QRegExp rx;
+    QRegularExpression rx;
     QString s;
 
     QModelIndex index0 = sourceModel()->index(sourceRow, 0, sourceParent);//Category
@@ -622,7 +622,7 @@ bool SongProxyModel::filterAcceptsRow(int sourceRow,
         return true;
 
     // Process filtering
-    rx.setCaseSensitivity(Qt::CaseInsensitive);
+    rx.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
     s = filter_string;
     s.replace(" ","\\W*");
 

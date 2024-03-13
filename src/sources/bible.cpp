@@ -294,7 +294,7 @@ void Bible::getVerseAndCaption(QString& verse, QString& caption, QString verId, 
     caption = caption.simplified();
 }
 
-QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp)
+QList<BibleSearch> Bible::searchBible(bool allWords, QRegularExpression searchExp)
 {   ///////// Search entire Bible //////////
 
     QList<BibleSearch> return_results;
@@ -313,7 +313,7 @@ QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp)
                 bool hasAll = false;
                 for (int j(0);j<stl.count();++j)
                 {
-                    hasAll = bv.verseText.contains(QRegExp("\\b"+stl.at(j)+"\\b",Qt::CaseInsensitive));
+                    hasAll = bv.verseText.contains(QRegularExpression("\\b"+stl.at(j)+"\\b",QRegularExpression::CaseInsensitiveOption));
                     if(!hasAll)
                         break;
                 }
@@ -329,7 +329,7 @@ QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp)
     return return_results;
 }
 
-QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp, int book)
+QList<BibleSearch> Bible::searchBible(bool allWords, QRegularExpression searchExp, int book)
 {   ///////// Search in selected book //////////
 
     QList<BibleSearch> return_results;
@@ -348,7 +348,7 @@ QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp, int book
                 bool hasAll = false;
                 for (int j(0);j<stl.count();++j)
                 {
-                    hasAll = bv.verseText.contains(QRegExp("\\b"+stl.at(j)+"\\b",Qt::CaseInsensitive));
+                    hasAll = bv.verseText.contains(QRegularExpression("\\b"+stl.at(j)+"\\b",QRegularExpression::CaseInsensitiveOption));
                     if(!hasAll)
                         break;
                 }
@@ -363,7 +363,7 @@ QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp, int book
     return return_results;
 }
 
-QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp, int book, int chapter)
+QList<BibleSearch> Bible::searchBible(bool allWords, QRegularExpression searchExp, int book, int chapter)
 {   ///////// Search in selected chapter //////////
 
     QList<BibleSearch> return_results;
@@ -382,7 +382,7 @@ QList<BibleSearch> Bible::searchBible(bool allWords, QRegExp searchExp, int book
                 bool hasAll = false;
                 for (int j(0);j<stl.count();++j)
                 {
-                    hasAll = bv.verseText.contains(QRegExp("\\b"+stl.at(j)+"\\b",Qt::CaseInsensitive));
+                    hasAll = bv.verseText.contains(QRegularExpression("\\b"+stl.at(j)+"\\b",QRegularExpression::CaseInsensitiveOption));
                     if(!hasAll)
                         break;
                 }

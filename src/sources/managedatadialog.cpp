@@ -309,7 +309,7 @@ void ManageDataDialog::importSongbook(QString path)
                 sq.addBindValue(split[4]);//words
                 sq.addBindValue(split[5]);//music
                 QString st = split[6];
-                if(st.contains(QRegExp("@$|@%")))
+                if(st.contains(QRegularExpression("@$|@%")))
                     st = cleanSongLines(st);
                 sq.addBindValue(st);//song text
                 if (split.count() > 7)
@@ -488,7 +488,7 @@ void ManageDataDialog::importSongbook(QString path)
                                 sq.addBindValue(xtune);
                                 sq.addBindValue(xwords);
                                 sq.addBindValue(xmusic);
-                                if(xtext.contains(QRegExp("@$|@%")))
+                                if(xtext.contains(QRegularExpression("@$|@%")))
                                     xtext = cleanSongLines(xtext);
                                 sq.addBindValue(xtext);
                                 sq.addBindValue(xnotes);
@@ -584,7 +584,7 @@ void ManageDataDialog::importSongbook(QString path)
                             sq.bindValue(":wo",q.record().value("words"));
                             sq.bindValue(":mu",q.record().value("music"));
                             QString st = q.record().value("song_text").toString();
-                            if(st.contains(QRegExp("@$|@%")))
+                            if(st.contains(QRegularExpression("@$|@%")))
                                 st = cleanSongLines(st);
                             sq.bindValue(":st",st);
                             sq.bindValue(":no",q.record().value("notes"));
@@ -1976,17 +1976,17 @@ QString ManageDataDialog::getSaveFileName(QUrl url)
         // File already exist, overwrite it
         if(!QFile::remove(path))
         {
-            QRegExp rx("(.sps|.spb|.spt|.xml)");
-            rx.indexIn(basename);
+            QRegularExpression rx("(.sps|.spb|.spt|.xml)");
+            // rx.indexIn(basename);
             basename = basename.remove(rx);
 
             int i(1);
             while(QFile::exists(QString("%1%2%3_%4%5").arg(dir.absolutePath()).arg(dir.separator())
-                                .arg(basename).arg(i).arg(rx.cap(1))))
+                                     .arg(basename).arg(i).arg(rx.match(basename).captured(1))))
                 ++i;
 
             path = QString("%1%2%3_%4%5").arg(dir.absolutePath()).arg(dir.separator())
-                    .arg(basename).arg(i).arg(rx.cap(1));
+                    .arg(basename).arg(i).arg(rx.match(basename).captured(1));
         }
     }
 

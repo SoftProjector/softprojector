@@ -34,7 +34,7 @@ Highlight::Highlight(QTextDocument *parent)
              << QString::fromUtf8("^Verš[^\n]*") << QString::fromUtf8("^&Verš[^\n]*");
     foreach (const QString &pattern, patterns)
     {
-        rule.pattern = QRegExp(pattern);
+        rule.pattern = QRegularExpression(pattern);
         rule.format = verseFormat;
         highlightingRules.append(rule);
     }
@@ -53,7 +53,7 @@ Highlight::Highlight(QTextDocument *parent)
              << QString::fromUtf8("^Refrén[^\n]*") << QString::fromUtf8("^&Refrén[^\n]*");
     foreach (const QString &pattern, patterns)
     {
-        rule.pattern = QRegExp(pattern);
+        rule.pattern = QRegularExpression(pattern);
         rule.format = chorusFormat;
         highlightingRules.append(rule);
     }
@@ -74,7 +74,7 @@ Highlight::Highlight(QTextDocument *parent)
              << QString::fromUtf8("^Úvod[^\n]*") << QString::fromUtf8("^Závěr[^\n]*");
     foreach (const QString &pattern, patterns)
     {
-        rule.pattern = QRegExp(pattern);
+        rule.pattern = QRegularExpression(pattern);
         rule.format = vstavkaFormat;
         highlightingRules.append(rule);
     }
@@ -84,13 +84,11 @@ void Highlight::highlightBlock(const QString &text)
 {
     foreach (const HighlightingRule &rule, highlightingRules)
     {
-        QRegExp expression(rule.pattern);
-        int index = expression.indexIn(text);
-        while (index >= 0)
-        {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = expression.indexIn(text, index + length);
+        QRegularExpression expression(rule.pattern);
+        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+        while (matchIterator.hasNext()) {
+            QRegularExpressionMatch match = matchIterator.next();
+            setFormat(match.capturedStart(), match.capturedLength(), rule.format);
         }
     }
 
@@ -115,7 +113,7 @@ HighlightAnnounce::HighlightAnnounce(QTextDocument *parent)
              << QString::fromUtf8("^Oznámení[^\n]*") << QString::fromUtf8("^Snímek[^\n]*");
     foreach (const QString &pattern, patterns)
     {
-        rule.pattern = QRegExp(pattern);
+        rule.pattern = QRegularExpression(pattern);
         rule.format = announceFormat;
         highlightingRules.append(rule);
     }
@@ -125,13 +123,10 @@ void HighlightAnnounce::highlightBlock(const QString &text)
 {
     foreach (const HighlightingRule &rule, highlightingRules)
     {
-        QRegExp expression(rule.pattern);
-        int index = expression.indexIn(text);
-        while (index >= 0)
-        {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = expression.indexIn(text, index + length);
+        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+        while (matchIterator.hasNext()) {
+            QRegularExpressionMatch match = matchIterator.next();
+            setFormat(match.capturedStart(), match.capturedLength(), rule.format);
         }
     }
 
@@ -148,16 +143,13 @@ void HighlightSearch::highlightBlock(const QString &text)
 {
     foreach (const HighlightingRule &rule, highlightingRules)
     {
-        QRegExp expression(rule.pattern);
-        int index = expression.indexIn(text);
-        while (index >= 0)
-        {
-            int length = expression.matchedLength();
-            setFormat(index, length, rule.format);
-            index = expression.indexIn(text, index + length);
+        QRegularExpression expression(rule.pattern);
+        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+        while (matchIterator.hasNext()) {
+            QRegularExpressionMatch match = matchIterator.next();
+            setFormat(match.capturedStart(), match.capturedLength(), rule.format);
         }
     }
-
     setCurrentBlockState(0);
 }
 
@@ -166,7 +158,7 @@ void HighlightSearch::setHighlightText(QString text)
     HighlightingRule rule;
     highlightingRules.clear();
     resultFormat.setForeground(Qt::red);
-    rule.pattern = QRegExp(text,Qt::CaseInsensitive);
+    rule.pattern = QRegularExpression(text,QRegularExpression::CaseInsensitiveOption);
     rule.format = resultFormat;
     highlightingRules.append(rule);
 }

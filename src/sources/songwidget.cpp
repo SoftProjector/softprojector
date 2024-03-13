@@ -563,8 +563,8 @@ void SongWidget::on_pushButtonSearch_clicked()
     }
 
     // set filter
-    QRegExp rx;
-    rx.setCaseSensitivity(Qt::CaseInsensitive);
+    QRegularExpression rx;
+    rx.setPatternOptions(QRegularExpression::CaseInsensitiveOption);
     search_text.replace(" ","\\W*");
     if(type == 1 )
         // Search whole word exsact phrase only
@@ -591,7 +591,7 @@ void SongWidget::on_pushButtonSearch_clicked()
             bool hasAll = false;
             for(int j(0);j<stl.count();++j)
             {
-                hasAll = allSongs.at(i).songText.contains(QRegExp("\\b"+stl.at(j)+"\\b",Qt::CaseInsensitive));
+                hasAll = allSongs.at(i).songText.contains(QRegularExpression("\\b"+stl.at(j)+"\\b",QRegularExpression::CaseInsensitiveOption));
                 if(!hasAll)
                     break;
             }
