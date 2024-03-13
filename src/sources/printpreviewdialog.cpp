@@ -190,22 +190,30 @@ void PrintPreviewDialog::on_pushButtonPrint_clicked()
 }
 void PrintPreviewDialog::on_comboBox_currentIndexChanged(int index)
 {
-
-//}
-
-//void PrintPreviewDialog::on_comboBox_currentIndexChanged(const QString &arg1)
-//{
     // set margin boxes
-    double l(0),t(0),r(0),b(0);
+    QMarginsF margins(0,0,0,0);
 
     if(index == 0)
-        printer->getPageMargins(&l,&t,&r,&b,QPrinter::Inch);
+    {
+        margins = printer->pageLayout().margins(QPageLayout::Inch);
+    }
     else if(index == 1)
-        printer->getPageMargins(&l,&t,&r,&b,QPrinter::Millimeter);
+    {
+        margins = printer->pageLayout().margins(QPageLayout::Millimeter);
+    }
     else if(index == 2)
-        printer->getPageMargins(&l,&t,&r,&b,QPrinter::DevicePixel);
+    {
+    margins = printer->pageLayout().margins(QPageLayout::Point);
+    }
     else if(index == 3)
-        printer->getPageMargins(&l,&t,&r,&b,QPrinter::Point);
+    {
+        margins = printer->pageLayout().margins(QPageLayout::Point);
+    }
+    double l(0),t(0),r(0),b(0);
+    l = margins.left();
+    t = margins.top();
+    r = margins.right();
+    b = margins.bottom();
 
     if(index == 0)
     {
@@ -242,15 +250,16 @@ void PrintPreviewDialog::updateMargins()
     double t = ui->doubleSpinBoxTop->value();
     double r = ui->doubleSpinBoxRight->value();
     double b = ui->doubleSpinBoxBottom->value();
+    QMargins margins(l,t,r,b);
 
     if(ui->comboBox->currentIndex() == 0)
-        printer->setPageMargins(l,t,r,b,QPrinter::Inch);
+        printer->setPageMargins(margins,QPageLayout::Inch);
     else if(ui->comboBox->currentIndex() == 1)
-        printer->setPageMargins(l,t,r,b,QPrinter::Millimeter);
+        printer->setPageMargins(margins,QPageLayout::Millimeter);
     else if(ui->comboBox->currentIndex() == 2)
-        printer->setPageMargins(l,t,r,b,QPrinter::DevicePixel);
+        printer->setPageMargins(margins,QPageLayout::Point);
     else if(ui->comboBox->currentIndex() == 3)
-        printer->setPageMargins(l,t,r,b,QPrinter::Point);
+        printer->setPageMargins(margins,QPageLayout::Point);
 }
 
 void PrintPreviewDialog::on_doubleSpinBoxLeft_editingFinished()

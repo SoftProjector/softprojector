@@ -25,11 +25,11 @@
 #include <QGraphicsBlurEffect>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
-#include <settings.hpp>
-#include <displaysetting.hpp>
-#include <bible.hpp>
-#include <song.hpp>
-#include <announcement.hpp>
+#include "settings.hpp"
+#include "displaysetting.hpp"
+#include "bible.hpp"
+#include "song.hpp"
+#include "announcement.hpp"
 
 class ImageGenerator
 {
