@@ -1055,8 +1055,5 @@ void Settings::saveNewSettings()
 
 QByteArray Settings::textToByt(QString text)
 {
-    QByteArray b;
-    b.insert(0,text);
-    b = b.fromHex(b);
-    return b;
+    return text.toUtf8();
 }

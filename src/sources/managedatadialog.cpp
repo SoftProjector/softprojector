@@ -20,6 +20,8 @@
 #include "../headers/managedatadialog.hpp"
 #include "ui_managedatadialog.h"
 
+using namespace Qt::StringLiterals;
+
 Module::Module()
 {
 
@@ -348,7 +350,7 @@ void ManageDataDialog::importSongbook(QString path)
             while(!xml.atEnd())
             {
                 xml.readNext();
-                if(xml.StartElement && xml.name() == "spSongBook")
+                if(xml.StartElement && xml.name() == "spSongBook"_L1)
                 {
                     double sb_version = xml.attributes().value("version").toString().toDouble();
                     if(sb_version == 2.0) // check supported songbook version
@@ -361,10 +363,10 @@ void ManageDataDialog::importSongbook(QString path)
                                    "background_name, count, date)"
                                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-                        while(xml.tokenString() != "EndElement" && xml.name() != "spSongBook")
+                        while(xml.tokenString() != "EndElement" && xml.name() != "spSongBook"_L1)
                         {
                             xml.readNext();
-                            if(xml.StartElement && xml.name() == "SongBook")
+                            if(xml.StartElement && xml.name() == "SongBook"_L1)
                             {
                                 QString xtitle,xinfo;
                                 // Read songbook data
@@ -372,12 +374,12 @@ void ManageDataDialog::importSongbook(QString path)
                                 while(xml.tokenString() != "EndElement")
                                 {
                                     xml.readNext();
-                                    if(xml.StartElement && xml.name() == "title")
+                                    if(xml.StartElement && xml.name() == "title"_L1)
                                     {
                                         xtitle = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "info")
+                                    else if(xml.StartElement && xml.name() == "info"_L1)
                                     {
                                         xinfo = xml.readElementText();
                                         xml.readNext();
@@ -399,7 +401,7 @@ void ManageDataDialog::importSongbook(QString path)
 
                                 xml.readNext();
                             }
-                            else if (xml.StartElement && xml.name() == "Song")
+                            else if (xml.StartElement && xml.name() == "Song"_L1)
                             {
                                 QString xnum,xtitle,xcat,xtune,xwords,xmusic,xtext,xnotes,
                                         xuse,xalign,xcolor,xfont,xback,xcount,xdate;
@@ -409,72 +411,72 @@ void ManageDataDialog::importSongbook(QString path)
                                 while(xml.tokenString() != "EndElement")
                                 {
                                     xml.readNext();
-                                    if(xml.StartElement && xml.name() == "title")
+                                    if(xml.StartElement && xml.name() == "title"_L1)
                                     {
                                         xtitle = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "category")
+                                    else if(xml.StartElement && xml.name() == "category"_L1)
                                     {
                                         xcat = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "tune")
+                                    else if(xml.StartElement && xml.name() == "tune"_L1)
                                     {
                                         xtune = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "words")
+                                    else if(xml.StartElement && xml.name() == "words"_L1)
                                     {
                                         xwords = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "music")
+                                    else if(xml.StartElement && xml.name() == "music"_L1)
                                     {
                                         xmusic = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "song_text")
+                                    else if(xml.StartElement && xml.name() == "song_text"_L1)
                                     {
                                         xtext = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "notes")
+                                    else if(xml.StartElement && xml.name() == "notes"_L1)
                                     {
                                         xnotes = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "use_private")
+                                    else if(xml.StartElement && xml.name() == "use_private"_L1)
                                     {
                                         xuse = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "alignment")
+                                    else if(xml.StartElement && xml.name() == "alignment"_L1)
                                     {
                                         xalign = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "color")
+                                    else if(xml.StartElement && xml.name() == "color"_L1)
                                     {
                                         xcolor = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "font")
+                                    else if(xml.StartElement && xml.name() == "font"_L1)
                                     {
                                         xfont = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "background")
+                                    else if(xml.StartElement && xml.name() == "background"_L1)
                                     {
                                         xback = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "count")
+                                    else if(xml.StartElement && xml.name() == "count"_L1)
                                     {
                                         xcount = xml.readElementText();
                                         xml.readNext();
                                     }
-                                    else if(xml.StartElement && xml.name() == "date")
+                                    else if(xml.StartElement && xml.name() == "date"_L1)
                                     {
                                         xdate = xml.readElementText();
                                         xml.readNext();
@@ -1107,7 +1109,7 @@ void ManageDataDialog::exportBible(QString path, Bibles bible)
     if (ofile.open(QIODevice::WriteOnly))
     {
         QTextStream out(&ofile);
-        out.setCodec("UTF8");
+        out.setEncoding(QStringConverter::Utf8);
         out << to_file;
     }
     ofile.close();
@@ -2102,30 +2104,30 @@ QStringList ManageDataDialog::getModList(QString filepath)
         while(!xml.atEnd())
         {
             xml.readNext();
-            if(xml.StartElement && xml.name() == "Modules")
+            if(xml.StartElement && xml.name() == "Modules"_L1)
             {
                 xml.readNext();
-                while(xml.tokenString() != "EndElement" && xml.name() != "Modules")
+                while(xml.tokenString() != "EndElement" && xml.name() != "Modules"_L1)
                 {
                     xml.readNext();
-                    if(xml.StartElement && xml.name() == "Module")
+                    if(xml.StartElement && xml.name() == "Module"_L1)
                     {
                         xml.readNext();
                         while(xml.tokenString() != "EndElement")
                         {
                             //                            qDebug()<<"loop2";
                             xml.readNext();
-                            if(xml.StartElement && xml.name() == "name")
+                            if(xml.StartElement && xml.name() == "name"_L1)
                             {
                                 name = xml.readElementText();
                                 xml.readNext();
                             }
-                            else if(xml.StartElement && xml.name() == "link")
+                            else if(xml.StartElement && xml.name() == "link"_L1)
                             {
                                 link = xml.readElementText();
                                 xml.readNext();
                             }
-                            else if(xml.StartElement && xml.name() == "size")
+                            else if(xml.StartElement && xml.name() == "size"_L1)
                             {
                                 size = xml.readElementText().toInt();
                                 xml.readNext();

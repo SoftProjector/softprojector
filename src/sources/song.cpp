@@ -16,7 +16,7 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ***************************************************************************/
-
+#include <algorithm>
 #include "../headers/song.hpp"
 #include <QDebug>
 #include "../headers/spfunctions.hpp"
@@ -814,7 +814,7 @@ int SongDatabase::lastUser(QString songbook_id)
     sq.exec("SELECT number FROM Songs WHERE songbook_id = " +songbook_id);
     while (sq.next())
         lastInt << sq.value(0).toInt();
-    qSort(lastInt);
+    std::sort(lastInt.begin(), lastInt.end());
     if (lastInt.isEmpty())
         last=1;
     else
