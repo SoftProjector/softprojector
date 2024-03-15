@@ -25,7 +25,6 @@
 #include <QQuickView>
 #include <QQuickItem>
 #include <QtQml>
-#include <QMediaPlaylist>
 #include <QMediaPlayer>
 #include "spimageprovider.hpp"
 #include "imagegenerator.hpp"
@@ -93,7 +92,7 @@ signals:
 
     void videoPositionChanged(qint64 position);
     void videoDurationChanged(qint64 duration);
-    void videoPlaybackStateChanged(QMediaPlayer::State state);
+    void videoPlaybackStateChanged(QMediaPlayer::PlaybackState state);
     void videoStopped();
 
 protected:

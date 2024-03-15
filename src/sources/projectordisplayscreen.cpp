@@ -17,6 +17,7 @@
 //
 ***************************************************************************/
 
+#include "../3rdparty/headers/qmediaplaylist.h"
 #include "../headers/projectordisplayscreen.hpp"
 #include "ui_projectordisplayscreen.h"
 
@@ -260,7 +261,7 @@ void ProjectorDisplayScreen::videoDurationChanged(int duration)
 
 void ProjectorDisplayScreen::videoPlaybackStateChanged(int state)
 {
-    emit videoPlaybackStateChanged((QMediaPlayer::State)state);
+    emit videoPlaybackStateChanged((QMediaPlayer::PlaybackState)state);
 }
 
 void ProjectorDisplayScreen::keyReleaseEvent(QKeyEvent *event)

@@ -41,7 +41,7 @@ public slots:
     void setVolume(int level);
     void updateTime(qint64 time);
     void setMaximumTime(qint64 maxTime);
-    void updatePlayerState(QMediaPlayer::State state);
+    void updatePlayerState(QMediaPlayer::PlaybackState state);
 
 signals:
     void volumeChanged(int);
@@ -62,7 +62,7 @@ private slots:
 
 private:
     Ui::MediaControl *ui;
-    QMediaPlayer::State mPlayerState;
+    QMediaPlayer::PlaybackState mPlayerState;
     qint64 mDuration;
 
     QIcon mPlayIcon;
