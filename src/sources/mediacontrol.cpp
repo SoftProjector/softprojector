@@ -86,7 +86,7 @@ void MediaControl::setMaximumTime(qint64 maxTime)
     ui->horizontalSliderTime->setMaximum(maxTime/1000);
 }
 
-void MediaControl::updatePlayerState(QMediaPlayer::State state)
+void MediaControl::updatePlayerState(QMediaPlayer::PlaybackState state)
 {
     mPlayerState = state;
 

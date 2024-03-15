@@ -86,7 +86,7 @@ private:
     QFile outFile;
     QList<Module> moduleList;
     ModuleProgressDialog *progressDia;
-    QTime downTime;
+    QElapsedTimer downTime;
     Ui::ManageDataDialog *ui;
 
 private slots:

@@ -38,7 +38,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent * pe);
-    void enterEvent(QEvent * e);
+    void enterEvent(QEnterEvent *e);
     void leaveEvent(QEvent * e);
     void mousePressEvent(QMouseEvent * e);
     void mouseReleaseEvent(QMouseEvent * e);

@@ -238,8 +238,8 @@ void MediaWidget::playFile(QUrl filePath)
     isReadyToPlay = false;
     player->stop();
     currentMediaUrl = filePath;
-    QMediaContent m(filePath);
-    player->setMedia(m);
+    QUrl m(filePath);
+    player->setSource(m);
 }
 
 void MediaWidget::updateInfo()
@@ -247,11 +247,12 @@ void MediaWidget::updateInfo()
     int maxLength = 50;
     QString font = "<font color=#49fff9>";
 
-    QString fName = player->currentMedia().canonicalUrl().fileName();
-    QString tAlbum = player->metaData(QMediaMetaData::AlbumTitle).toString();
-    QString tTitle = player->metaData(QMediaMetaData::Title).toString();
-    QString tArtist = player->metaData(QMediaMetaData::AlbumArtist).toString();
-    int tBitrate = player->metaData(QMediaMetaData::AudioBitRate).toInt();
+    QString fName = player->source().fileName();
+    QMediaMetaData md = player->metaData();
+    QString tAlbum = md.stringValue(QMediaMetaData::AlbumTitle);
+    QString tTitle = md.stringValue(QMediaMetaData::Title);
+    QString tArtist = md.stringValue(QMediaMetaData::AlbumArtist);
+    int tBitrate = md.stringValue(QMediaMetaData::AudioBitRate).toInt();
 
     if (fName.length() > maxLength)
         fName = fName.left(maxLength) + "...";

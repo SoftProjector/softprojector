@@ -74,7 +74,7 @@ void ControlButton::paintEvent(QPaintEvent * pe)
     }
 }
 
-void ControlButton::enterEvent(QEvent * e)
+void ControlButton::enterEvent(QEnterEvent * e)
 {
     m_hovered = true;
     this->repaint();
