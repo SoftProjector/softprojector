@@ -43,10 +43,10 @@ SoftProjector::SoftProjector(QWidget *parent)
     // desktop = new QDesktopWidget();
     // NOTE: With virtual desktop, desktop->screen() will always return the main screen,
     // so this will initialize the Display1 widget on the main screen:
-    pds1 = new ProjectorDisplayScreen(desktop->screen(0));
-    pds2 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
-    pds3 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
-    pds4 = new ProjectorDisplayScreen(desktop->screen(0)); //for future
+    pds1 = new ProjectorDisplayScreen();
+    pds2 = new ProjectorDisplayScreen(); //for future
+    pds3 = new ProjectorDisplayScreen(); //for future
+    pds4 = new ProjectorDisplayScreen(); //for future
     // Don't worry, we'll move it later
 
     bibleWidget = new BibleWidget;
@@ -158,8 +158,8 @@ SoftProjector::SoftProjector(QWidget *parent)
     // Create and connect shortcuts
     shpgUP = new QShortcut(Qt::Key_PageUp,this);
     shpgDwn = new QShortcut(Qt::Key_PageDown,this);
-    shSart1 = new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_B),this);
-    shSart2 = new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5),this);
+    shSart1 = new QShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_B),this);
+    shSart2 = new QShortcut(QKeySequence(Qt::SHIFT | Qt::Key_F5),this);
     connect(shpgUP,SIGNAL(activated()),this,SLOT(prevSlide()));
     connect(shpgDwn,SIGNAL(activated()),this,SLOT(nextSlide()));
     connect(shSart1,SIGNAL(activated()),this,SLOT(on_actionShow_triggered()));
@@ -198,15 +198,11 @@ SoftProjector::~SoftProjector()
     delete bibleWidget;
     delete announceWidget;
     delete manageDialog;
-//    delete playerSlider;
-//    delete playerAudioOutput;
-//    delete volumeSlider;
     delete mediaPlayer;
     delete pds1;
     delete pds2;
     delete pds3;
     delete pds4;
-    delete desktop;
     delete languageGroup;
     delete settingsDialog;
     delete shpgUP;
@@ -231,18 +227,21 @@ void SoftProjector::positionDisplayWindow()
     }
     else
     {
-        pds1->setWindowFlags(0); // Do not show always on top
-        pds2->setWindowFlags(0); // Do not show always on top
-        pds3->setWindowFlags(0); // Do not show always on top
-        pds4->setWindowFlags(0); // Do not show always on top
+        // pds1->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
+        // pds2->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
+        // pds3->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
+        // pds4->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
     }
 
-    if(desktop->screenCount() > 1)
+    qDebug()<< "Screen Count: " << QApplication::primaryScreen()->virtualSiblings().count();
+
+    if(QApplication::primaryScreen()->virtualSiblings().count() > 1)
     {
-        if (desktop->isVirtualDesktop())
+
+        // if (desktop->isVirtualDesktop())
         {
             // Move the display widget to screen 1 (secondary screen):
-            pds1->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen));
+            pds1->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen)->geometry());
         }
 
         pds1->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
@@ -263,10 +262,10 @@ void SoftProjector::positionDisplayWindow()
         if(mySettings.general.displayScreen2>=0)
         {
             hasDisplayScreen2 = true;
-            if (desktop->isVirtualDesktop())
+            // if (desktop->isVirtualDesktop())
             {
                 // Move the display widget to screen 1 (secondary screen):
-                pds2->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen2));
+                pds2->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen2)->geometry());
                 pds2->resetImGenSize();
 
             }
@@ -289,10 +288,10 @@ void SoftProjector::positionDisplayWindow()
         if(mySettings.general.displayScreen3>=0)
         {
             hasDisplayScreen3 = true;
-            if (desktop->isVirtualDesktop())
+            // if (desktop->isVirtualDesktop())
             {
                 // Move the display widget to screen 1 (tertiary screen):
-                pds3->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen3));
+                pds3->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen3)->geometry());
                 pds3->resetImGenSize();
 
             }
@@ -314,10 +313,10 @@ void SoftProjector::positionDisplayWindow()
         if(mySettings.general.displayScreen4>=0)
         {
             hasDisplayScreen4 = true;
-            if (desktop->isVirtualDesktop())
+            // if (desktop->isVirtualDesktop())
             {
                 // Move the display widget to screen 1 (quaternary screen):
-                pds4->setGeometry(desktop->screenGeometry(mySettings.general.displayScreen4));
+                pds4->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen4)->geometry());
                 pds4->resetImGenSize();
 
             }
@@ -342,7 +341,8 @@ void SoftProjector::positionDisplayWindow()
     {
         // Single monitor only: Do not show on strat up.
         // Will be shown only when items were sent to the projector.
-        pds1->setGeometry(desktop->screenGeometry());
+        qDebug()<< "Setting Primary screen";
+        pds1->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(0)->geometry());
         pds1->resetImGenSize();
         showDisplayScreen(false);
         isSingleScreen = true;
@@ -2668,7 +2668,7 @@ void SoftProjector::openScheduleItem(QSqlQuery &q, const int scid, Song &s)
     q.first();
     QSqlRecord r = q.record();
     s.songID = r.field("songid").value().toInt();
-    s.songbook_id = r.field("sbid").value().toInt();
+    s.songbook_id = r.field("sbid").value().toString();
     s.songbook_name = r.field("sbName").value().toString();
     s.number = r.field("number").value().toInt();
     s.title = r.field("title").value().toString();

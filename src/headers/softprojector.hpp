@@ -68,7 +68,6 @@ public:
     BibleWidget *bibleWidget;
     AnnounceWidget *announceWidget;
     ManageDataDialog *manageDialog;
-    QDesktopWidget *desktop;
     EditWidget *editWidget;
     ProjectorDisplayScreen *pds1;
     ProjectorDisplayScreen *pds2;

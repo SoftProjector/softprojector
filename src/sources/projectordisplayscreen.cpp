@@ -31,7 +31,7 @@ ProjectorDisplayScreen::ProjectorDisplayScreen(QWidget *parent) :
     imProvider = new SpImageProvider;
     dispView->engine()->addImageProvider(QLatin1String("improvider"),imProvider);
     QWidget *w = QWidget::createWindowContainer(dispView,this);
-    dispView->setSource(QUrl("qrc:/DisplayArea.qml"));
+    dispView->setSource(QUrl("qrc:/qml/qml/DisplayArea.qml"));
     ui->verticalLayout->addWidget(w);
 
     // Create Display object for retriaving signals back from the display screen

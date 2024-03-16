@@ -67,16 +67,24 @@ void GeneralSettingWidget::loadSettings()
 
     // Get display screen infomration
     monitors.clear();
-    QDesktopWidget d;
-    int screen_count = d.screenCount();
+
+    int screen_count = QApplication::screens().count();
+    int i = 1;
     ui->comboBoxDisplayScreen->clear();
-    for(int i(0); i<screen_count;++i)
-        monitors << QString("%1 - %2x%3").arg(i+1).arg(d.screenGeometry(i).width()).arg(d.screenGeometry(i).height());
+    for(QScreen * s: QApplication::screens())
+    {
+        monitors << QString("%1 - %2x%3").arg(i).arg(s->geometry().width()).arg(s->geometry().height());
+        ++i;
+    }
 
     if(screen_count>1)
+    {
         ui->groupBoxDisplayScreen->setEnabled(true);
+    }
     else
+    {
         ui->groupBoxDisplayScreen->setEnabled(false);
+    }
 
     // Fill display screen comboBoxes
     ui->comboBoxDisplayScreen->clear();
