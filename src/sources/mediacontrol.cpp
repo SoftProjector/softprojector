@@ -19,6 +19,14 @@
 
 #include "../headers/mediacontrol.hpp"
 #include "ui_mediacontrol.h"
+#include <QTimer>
+#include <QMouseEvent>
+#include <QStyle>
+
+bool MediaControl::isMuted() const
+{
+    return ui->pushButtonMute->isChecked();
+}
 
 MediaControl::MediaControl(QWidget *parent) :
     QWidget(parent),
@@ -34,6 +42,8 @@ MediaControl::MediaControl(QWidget *parent) :
     mPauseIcon = QIcon(":icons/icons/pause.png");
     mMuteIcon = QIcon(":icons/icons/speakerMute.png");
     mUnmuteIcon = QIcon(":icons/icons/speaker.png");
+    
+    ui->horizontalSliderTime->installEventFilter(this);
 }
 
 MediaControl::~MediaControl()
@@ -48,7 +58,12 @@ void MediaControl::setVolume(int level)
 
 void MediaControl::updateTime(qint64 time)
 {
-    ui->horizontalSliderTime->setValue(time/1000);
+    if (mIsSeeking) return;   // don't fight the user's drag
+
+    // Throttle slider updates to avoid UI stuttering with millisecond resolution
+    if (qAbs(ui->horizontalSliderTime->value() - time) > 100 || time == 0) {
+        ui->horizontalSliderTime->setValue(time);
+    }
 
     QString timeString;
     if (time || mDuration)
@@ -77,13 +92,17 @@ void MediaControl::updateTime(qint64 time)
             timeString += " / " + stopTime.toString(timeFormat);
         }
     }
-    ui->labelTime->setText(timeString);
+    
+    if (m_lastTimeString != timeString) {
+        ui->labelTime->setText(timeString);
+        m_lastTimeString = timeString;
+    }
 }
 
 void MediaControl::setMaximumTime(qint64 maxTime)
 {
     mDuration = maxTime;
-    ui->horizontalSliderTime->setMaximum(maxTime/1000);
+    ui->horizontalSliderTime->setMaximum(maxTime);
 }
 
 void MediaControl::updatePlayerState(QMediaPlayer::PlaybackState state)
@@ -138,13 +157,47 @@ void MediaControl::on_pushButtonMute_toggled(bool checked)
     }
 }
 
+void MediaControl::on_horizontalSliderTime_sliderPressed()
+{
+    mIsSeeking = true;   // block position updates from the player
+}
+
 void MediaControl::on_horizontalSliderTime_sliderReleased()
 {
-    emit timeChanged(ui->horizontalSliderTime->value() * 1000);
+    // Delayed release of mIsSeeking to avoid jump-back/stuttering UI.
+    // Give the player time (300ms) to update its position before resume UI synchronization.
+    QTimer::singleShot(300, this, [this](){ mIsSeeking = false; });
+
+    emit timeChanged(ui->horizontalSliderTime->value());
 }
 
 void MediaControl::on_horizontalSliderVolume_sliderMoved(int position)
 {
     emit volumeChanged(position);
+}
+
+bool MediaControl::eventFilter(QObject *obj, QEvent *event)
+{
+    if (obj == ui->horizontalSliderTime && event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        if (mouseEvent->button() == Qt::LeftButton)
+        {
+            // Calculate new value based on click position
+            int newVal = QStyle::sliderValueFromPosition(ui->horizontalSliderTime->minimum(), 
+                                                        ui->horizontalSliderTime->maximum(), 
+                                                        mouseEvent->position().toPoint().x(), 
+                                                        ui->horizontalSliderTime->width());
+            
+            mIsSeeking = true;
+            ui->horizontalSliderTime->setValue(newVal);
+            emit timeChanged((qint64)newVal);
+            
+            // Allow 500ms for seeking to settle before resuming UI position synchronization
+            QTimer::singleShot(500, this, [this](){ mIsSeeking = false; });
+            return true; // event handled
+        }
+    }
+    return QWidget::eventFilter(obj, event);
 }
 

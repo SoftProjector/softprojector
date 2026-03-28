@@ -86,8 +86,6 @@ public:
     Theme theme;
     Settings mySettings;
 
-    SoftProjector *softProjector;
-
 public slots:
     void updateSetting(GeneralSettings &g,Theme &t, SlideShowSettings &ssets,
                        BibleVersionSettings &bsets, BibleVersionSettings &bsets2,
@@ -201,6 +199,7 @@ private slots:
     void on_actionPrint_triggered();
     void on_actionPrintSchedule_triggered();
 
+    void exitProjector();
     void nextSlide();
     void prevSlide();
 

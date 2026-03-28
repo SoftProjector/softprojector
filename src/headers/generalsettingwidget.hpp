@@ -40,13 +40,12 @@ public:
 private:
     Ui::GeneralSettingWidget *ui;
     GeneralSettings mySettings;
-    Settings allSetings;
     QStringList monitors;
     QStringList themes;
     QList<int> themeIdList;
 
 public slots:
-    void setSettings(GeneralSettings settings);
+    void setSettings(GeneralSettings sets);
     void updateSecondaryDisplayScreen();
     GeneralSettings getSettings();
 

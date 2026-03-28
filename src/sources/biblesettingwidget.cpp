@@ -44,12 +44,12 @@ void BibleSettingWidget::changeEvent(QEvent *e)
      }
 }
 
-void BibleSettingWidget::setSettings(BibleSettings &settings, BibleSettings &settings2, BibleSettings &settings3, BibleSettings &settings4)
+void BibleSettingWidget::setSettings(BibleSettings &sets, BibleSettings &sets2, BibleSettings &sets3, BibleSettings &sets4)
 {
-    mySettings = settings;
-    mySettings2 = settings2;
-    mySettings3 = settings3;
-    mySettings4 = settings4;
+    mySettings = sets;
+    mySettings2 = sets2;
+    mySettings3 = sets3;
+    mySettings4 = sets4;
 
     loadSettings();
 }
@@ -293,6 +293,7 @@ void BibleSettingWidget::getBibleVersions(BibleVersionSettings &bver, BibleVersi
 
 void BibleSettingWidget::loadSettings()
 {
+    bool oldBlock = this->blockSignals(true);
     // Set Effects
     ui->checkBoxUseShadow->setChecked(mySettings.useShadow);
     ui->checkBoxUseFading->setChecked(mySettings.useFading);
@@ -449,22 +450,46 @@ void BibleSettingWidget::loadSettings()
     // Set if to use quaternary screen settings
     ui->groupBoxUseDisp4->setChecked(!mySettings4.useDisp1settings);
     on_groupBoxUseDisp4_toggled(!mySettings4.useDisp1settings);
+
+    this->blockSignals(oldBlock);
 }
 
 void BibleSettingWidget::loadBibleVersions()
 {
+    // Block all bible combo signals
+    ui->comboBoxPrimaryBible->blockSignals(true);
+    ui->comboBoxSecondaryBible->blockSignals(true);
+    ui->comboBoxTrinaryBible->blockSignals(true);
+    ui->comboBoxOperatorBible->blockSignals(true);
+
+    ui->comboBoxPrimaryBible2->blockSignals(true);
+    ui->comboBoxSecondaryBible2->blockSignals(true);
+    ui->comboBoxTrinaryBible2->blockSignals(true);
+
+    ui->comboBoxPrimaryBible3->blockSignals(true);
+    ui->comboBoxSecondaryBible3->blockSignals(true);
+    ui->comboBoxTrinaryBible3->blockSignals(true);
+
+    ui->comboBoxPrimaryBible4->blockSignals(true);
+    ui->comboBoxSecondaryBible4->blockSignals(true);
+    ui->comboBoxTrinaryBible4->blockSignals(true);
+
     // Clear items if exitst
     bibles.clear();
     bible_id_list.clear();
+    bibles.detach();
+    bible_id_list.detach();
 
     // Get Bibles that exist in the database
     QSqlQuery sq;
     sq.exec("SELECT bible_name, id FROM BibleVersions");
     while(sq.next())
     {
-        bibles << sq.value(0).toString();
-        bible_id_list << sq.value(1).toString();
+        bibles.append(sq.value(0).toString());
+        bible_id_list.append(sq.value(1).toString());
     }
+    bibles.detach();
+    bible_id_list.detach();
     sq.clear();
 
     // Fill bibles comboboxes
@@ -580,17 +605,39 @@ void BibleSettingWidget::loadBibleVersions()
     else
         ui->comboBoxOperatorBible->setCurrentIndex(bible_id_list.indexOf(bversion.operatorBible)+1);
     updateOperatorBibleMenu();
+
+    // Unblock signals
+    ui->comboBoxPrimaryBible->blockSignals(false);
+    ui->comboBoxSecondaryBible->blockSignals(false);
+    ui->comboBoxTrinaryBible->blockSignals(false);
+    ui->comboBoxOperatorBible->blockSignals(false);
+
+    ui->comboBoxPrimaryBible2->blockSignals(false);
+    ui->comboBoxSecondaryBible2->blockSignals(false);
+    ui->comboBoxTrinaryBible2->blockSignals(false);
+
+    ui->comboBoxPrimaryBible3->blockSignals(false);
+    ui->comboBoxSecondaryBible3->blockSignals(false);
+    ui->comboBoxTrinaryBible3->blockSignals(false);
+
+    ui->comboBoxPrimaryBible4->blockSignals(false);
+    ui->comboBoxSecondaryBible4->blockSignals(false);
+    ui->comboBoxTrinaryBible4->blockSignals(false);
 }
 
 void BibleSettingWidget::updateSecondaryBibleMenu()
 {
+    int primaryIndex = ui->comboBoxPrimaryBible->currentIndex();
+    if (primaryIndex < 0 || primaryIndex >= bibles.count() || primaryIndex >= bible_id_list.count())
+        return;
+
     QString pbible = ui->comboBoxPrimaryBible->currentText();
     QString sbible = ui->comboBoxSecondaryBible->currentText();
     secondary_bibles = bibles;
     secondary_bibles.removeOne(pbible);
 
     secondary_id_list = bible_id_list;
-    secondary_id_list.removeAt(ui->comboBoxPrimaryBible->currentIndex());
+    secondary_id_list.removeAt(primaryIndex);
     ui->comboBoxSecondaryBible->clear();
     ui->comboBoxSecondaryBible->addItem(tr("None"));
     ui->comboBoxSecondaryBible->addItems(secondary_bibles);
@@ -605,13 +652,17 @@ void BibleSettingWidget::updateSecondaryBibleMenu()
 
 void BibleSettingWidget::updateSecondaryBibleMenu2()
 {
+    int primaryIndex = ui->comboBoxPrimaryBible2->currentIndex();
+    if (primaryIndex < 0 || primaryIndex >= bibles.count() || primaryIndex >= bible_id_list.count())
+        return;
+
     QString pbible = ui->comboBoxPrimaryBible2->currentText();
     QString sbible = ui->comboBoxSecondaryBible2->currentText();
     secondary_bibles2 = bibles;
     secondary_bibles2.removeOne(pbible);
 
     secondary_id_list2 = bible_id_list;
-    secondary_id_list2.removeAt(ui->comboBoxPrimaryBible2->currentIndex());
+    secondary_id_list2.removeAt(primaryIndex);
     ui->comboBoxSecondaryBible2->clear();
     ui->comboBoxSecondaryBible2->addItem(tr("None"));
     ui->comboBoxSecondaryBible2->addItems(secondary_bibles2);
@@ -626,13 +677,17 @@ void BibleSettingWidget::updateSecondaryBibleMenu2()
 // Bible for Display 3
 void BibleSettingWidget::updateSecondaryBibleMenu3()
 {
+    int primaryIndex = ui->comboBoxPrimaryBible3->currentIndex();
+    if (primaryIndex < 0 || primaryIndex >= bibles.count() || primaryIndex >= bible_id_list.count())
+        return;
+
     QString pbible = ui->comboBoxPrimaryBible3->currentText();
     QString sbible = ui->comboBoxSecondaryBible3->currentText();
     secondary_bibles3 = bibles;
     secondary_bibles3.removeOne(pbible);
 
     secondary_id_list3 = bible_id_list;
-    secondary_id_list3.removeAt(ui->comboBoxPrimaryBible3->currentIndex());
+    secondary_id_list3.removeAt(primaryIndex);
     ui->comboBoxSecondaryBible3->clear();
     ui->comboBoxSecondaryBible3->addItem(tr("None"));
     ui->comboBoxSecondaryBible3->addItems(secondary_bibles3);
@@ -647,13 +702,17 @@ void BibleSettingWidget::updateSecondaryBibleMenu3()
 // Bible for Display 4
 void BibleSettingWidget::updateSecondaryBibleMenu4()
 {
+    int primaryIndex = ui->comboBoxPrimaryBible4->currentIndex();
+    if (primaryIndex < 0 || primaryIndex >= bibles.count() || primaryIndex >= bible_id_list.count())
+        return;
+
     QString pbible = ui->comboBoxPrimaryBible4->currentText();
     QString sbible = ui->comboBoxSecondaryBible4->currentText();
     secondary_bibles4 = bibles;
     secondary_bibles4.removeOne(pbible);
 
     secondary_id_list4 = bible_id_list;
-    secondary_id_list4.removeAt(ui->comboBoxPrimaryBible4->currentIndex());
+    secondary_id_list4.removeAt(primaryIndex);
     ui->comboBoxSecondaryBible4->clear();
     ui->comboBoxSecondaryBible4->addItem(tr("None"));
     ui->comboBoxSecondaryBible4->addItems(secondary_bibles4);
@@ -675,13 +734,17 @@ void BibleSettingWidget::updateTrinaryBibleMenu()
     else
     {
         ui->comboBoxTrinaryBible->setEnabled(true);
+        int secondaryIndex = ui->comboBoxSecondaryBible->currentIndex();
+        if (secondaryIndex < 1 || secondaryIndex - 1 >= secondary_id_list.count())
+            return;
+
         QString sbible = ui->comboBoxSecondaryBible->currentText();
         QString tbible = ui->comboBoxTrinaryBible->currentText();
         QStringList trinary_bibles = secondary_bibles;
         trinary_bibles.removeOne(sbible);
 
         trinary_id_list = secondary_id_list;
-        trinary_id_list.removeAt(ui->comboBoxSecondaryBible->currentIndex()-1);
+        trinary_id_list.removeAt(secondaryIndex - 1);
         ui->comboBoxTrinaryBible->clear();
         ui->comboBoxTrinaryBible->addItem(tr("None"));
         ui->comboBoxTrinaryBible->addItems(trinary_bibles);
@@ -703,13 +766,17 @@ void BibleSettingWidget::updateTrinaryBibleMenu2()
     else
     {
         ui->comboBoxTrinaryBible2->setEnabled(true);
+        int secondaryIndex = ui->comboBoxSecondaryBible2->currentIndex();
+        if (secondaryIndex < 1 || secondaryIndex - 1 >= secondary_id_list2.count())
+            return;
+
         QString sbible = ui->comboBoxSecondaryBible2->currentText();
         QString tbible = ui->comboBoxTrinaryBible2->currentText();
         QStringList trinary_bibles = secondary_bibles2;
         trinary_bibles.removeOne(sbible);
 
         trinary_id_list2 = secondary_id_list2;
-        trinary_id_list2.removeAt(ui->comboBoxSecondaryBible2->currentIndex()-1);
+        trinary_id_list2.removeAt(secondaryIndex - 1);
         ui->comboBoxTrinaryBible2->clear();
         ui->comboBoxTrinaryBible2->addItem(tr("None"));
         ui->comboBoxTrinaryBible2->addItems(trinary_bibles);
@@ -731,13 +798,17 @@ void BibleSettingWidget::updateTrinaryBibleMenu3()
     else
     {
         ui->comboBoxTrinaryBible3->setEnabled(true);
+        int secondaryIndex = ui->comboBoxSecondaryBible3->currentIndex();
+        if (secondaryIndex < 1 || secondaryIndex - 1 >= secondary_id_list3.count())
+            return;
+
         QString sbible = ui->comboBoxSecondaryBible3->currentText();
         QString tbible = ui->comboBoxTrinaryBible3->currentText();
         QStringList trinary_bibles = secondary_bibles3;
         trinary_bibles.removeOne(sbible);
 
         trinary_id_list3 = secondary_id_list3;
-        trinary_id_list3.removeAt(ui->comboBoxSecondaryBible3->currentIndex()-1);
+        trinary_id_list3.removeAt(secondaryIndex - 1);
         ui->comboBoxTrinaryBible3->clear();
         ui->comboBoxTrinaryBible3->addItem(tr("None"));
         ui->comboBoxTrinaryBible3->addItems(trinary_bibles);
@@ -759,13 +830,17 @@ void BibleSettingWidget::updateTrinaryBibleMenu4()
     else
     {
         ui->comboBoxTrinaryBible4->setEnabled(true);
+        int secondaryIndex = ui->comboBoxSecondaryBible4->currentIndex();
+        if (secondaryIndex < 1 || secondaryIndex - 1 >= secondary_id_list4.count())
+            return;
+
         QString sbible = ui->comboBoxSecondaryBible4->currentText();
         QString tbible = ui->comboBoxTrinaryBible4->currentText();
         QStringList trinary_bibles = secondary_bibles4;
         trinary_bibles.removeOne(sbible);
 
         trinary_id_list4 = secondary_id_list4;
-        trinary_id_list4.removeAt(ui->comboBoxSecondaryBible4->currentIndex()-1);
+        trinary_id_list4.removeAt(secondaryIndex - 1);
         ui->comboBoxTrinaryBible4->clear();
         ui->comboBoxTrinaryBible4->addItem(tr("None"));
         ui->comboBoxTrinaryBible4->addItems(trinary_bibles);
@@ -779,13 +854,17 @@ void BibleSettingWidget::updateTrinaryBibleMenu4()
 
 void BibleSettingWidget::updateOperatorBibleMenu()
 {
+    int primaryIndex = ui->comboBoxPrimaryBible->currentIndex();
+    if (primaryIndex < 0 || primaryIndex >= bibles.count() || primaryIndex >= bible_id_list.count())
+        return;
+
     QString pbible = ui->comboBoxPrimaryBible->currentText();
     QString obible = ui->comboBoxOperatorBible->currentText();
     QStringList operator_bibles = bibles;
     operator_bibles.removeOne(pbible);
 
     operator_id_list = bible_id_list;
-    operator_id_list.removeAt(ui->comboBoxPrimaryBible->currentIndex());
+    operator_id_list.removeAt(primaryIndex);
     ui->comboBoxOperatorBible->clear();
     ui->comboBoxOperatorBible->addItem(tr("Same as primary Bible"));
     ui->comboBoxOperatorBible->addItems(operator_bibles);

@@ -44,17 +44,22 @@ void GeneralSettingWidget::changeEvent(QEvent *e)
      }
 }
 
-void GeneralSettingWidget::setSettings(GeneralSettings settings)
+void GeneralSettingWidget::setSettings(GeneralSettings sets)
 {
-    mySettings = settings;
+    mySettings = sets;
     loadSettings();
 }
 
 void GeneralSettingWidget::loadSettings()
 {
-    ui->checkBoxDisplayOnTop->setChecked(mySettings.displayIsOnTop);
-    QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",QSettings::NativeFormat);
-    if(settings.value("SoftProjectorUseLightTheme")==0)
+    // Block signals to prevent recursive calls or premature updates while loading
+    bool oldBlock = this->blockSignals(true);
+    ui->comboBoxDisplayScreen->blockSignals(true);
+    ui->comboBoxDisplayScreen_2->blockSignals(true);
+    ui->comboBoxDisplayScreen_3->blockSignals(true);
+    ui->comboBoxDisplayScreen_4->blockSignals(true);
+    QSettings regSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
+    if(regSettings.value("SoftProjectorUseLightTheme")==0)
         ui->checkBoxUseDarkTheme->setChecked(true);
     else
         ui->checkBoxUseDarkTheme->setChecked(false);
@@ -67,15 +72,19 @@ void GeneralSettingWidget::loadSettings()
 
     // Get display screen infomration
     monitors.clear();
+    monitors.detach(); // Explicitly detach to ensure it's mutable
 
-    int screen_count = QApplication::screens().count();
+    QList<QScreen*> screens = QGuiApplication::screens();
+    int screen_count = screens.count();
     int i = 1;
     ui->comboBoxDisplayScreen->clear();
-    for(QScreen * s: QApplication::screens())
+    for(int j = 0; j < screens.count(); ++j)
     {
-        monitors << QString("%1 - %2x%3").arg(i).arg(s->geometry().width()).arg(s->geometry().height());
+        QScreen *s = screens.at(j);
+        monitors.append(QString("%1 - %2x%3").arg(i).arg(s->geometry().width()).arg(s->geometry().height()));
         ++i;
     }
+    monitors.detach();
 
     if(screen_count>1)
     {
@@ -157,6 +166,13 @@ void GeneralSettingWidget::loadSettings()
     ui->comboBoxControlsAlignV->setCurrentIndex(mySettings.displayControls.alignmentV);
     ui->comboBoxControlsAlignH->setCurrentIndex(mySettings.displayControls.alignmentH);
     ui->horizontalSliderOpacity->setValue(mySettings.displayControls.opacity*100);
+
+    // Unblock signals
+    ui->comboBoxDisplayScreen->blockSignals(false);
+    ui->comboBoxDisplayScreen_2->blockSignals(false);
+    ui->comboBoxDisplayScreen_3->blockSignals(false);
+    ui->comboBoxDisplayScreen_4->blockSignals(false);
+    this->blockSignals(oldBlock);
 }
 
 void GeneralSettingWidget::loadThemes()
@@ -165,11 +181,15 @@ void GeneralSettingWidget::loadThemes()
     sq.exec("SELECT id, name FROM Themes");
     themeIdList.clear();
     themes.clear();
+    themeIdList.detach();
+    themes.detach();
     while(sq.next())
     {
-        themeIdList<< sq.value(0).toInt();
-        themes<<sq.value(1).toString();
+        themeIdList.append(sq.value(0).toInt());
+        themes.append(sq.value(1).toString());
     }
+    themeIdList.detach();
+    themes.detach();
     ui->comboBoxTheme->clear();
     ui->comboBoxTheme->addItems(themes);
 }
@@ -215,9 +235,11 @@ void GeneralSettingWidget::updateSecondaryDisplayScreen()
     QString ds3 = ui->comboBoxDisplayScreen_3->currentText();
     QString ds4 = ui->comboBoxDisplayScreen_4->currentText();
     QStringList monitors2 = monitors;
+    monitors2.detach();
     //Display 2 (ds2)
     monitors2.removeOne(ds1);
 
+    ui->comboBoxDisplayScreen_2->blockSignals(true);
     ui->comboBoxDisplayScreen_2->clear();
     ui->comboBoxDisplayScreen_2->addItem(tr("None"));
     ui->comboBoxDisplayScreen_2->addItems(monitors2);
@@ -230,11 +252,13 @@ void GeneralSettingWidget::updateSecondaryDisplayScreen()
         ui->comboBoxDisplayScreen_2->setCurrentIndex(0);
         emit setDisp2Use(false);
     }
+    ui->comboBoxDisplayScreen_2->blockSignals(false);
 
     // Display 3 (ds3)
     monitors2.removeOne(ds1);
     monitors2.removeOne(ds2);
 
+    ui->comboBoxDisplayScreen_3->blockSignals(true);
     ui->comboBoxDisplayScreen_3->clear();
     ui->comboBoxDisplayScreen_3->addItem(tr("None"));
     ui->comboBoxDisplayScreen_3->addItems(monitors2);
@@ -247,12 +271,14 @@ void GeneralSettingWidget::updateSecondaryDisplayScreen()
         ui->comboBoxDisplayScreen_3->setCurrentIndex(0);
         emit setDisp3Use(false);
     }
+    ui->comboBoxDisplayScreen_3->blockSignals(false);
 
     // Display 4 (ds4)
     monitors2.removeOne(ds1);
     monitors2.removeOne(ds2);
     monitors2.removeOne(ds3);
 
+    ui->comboBoxDisplayScreen_4->blockSignals(true);
     ui->comboBoxDisplayScreen_4->clear();
     ui->comboBoxDisplayScreen_4->addItem(tr("None"));
     ui->comboBoxDisplayScreen_4->addItems(monitors2);
@@ -265,6 +291,7 @@ void GeneralSettingWidget::updateSecondaryDisplayScreen()
         ui->comboBoxDisplayScreen_4->setCurrentIndex(0);
         emit setDisp4Use(false);
     }
+    ui->comboBoxDisplayScreen_4->blockSignals(false);
 }
 
 void GeneralSettingWidget::on_comboBoxDisplayScreen_activated(const QString &arg1)

@@ -47,18 +47,42 @@ Rectangle {
     signal playbackStateChanged(int state)
     signal playbackStopped()
 
+    property bool audioEnabled: (typeof audioEnabledInjected !== 'undefined') ? audioEnabledInjected : true
+    property int lastReportedPosition: 0
+    property int backType: 0 // Injected from C++ (None=0, Solid=1, Pix=2, Video=3)
+
+    AudioOutput {
+        id: audioOut
+        objectName: "audioOut"
+        volume: 1.0
+    }
+
     MediaPlayer
     {
         id: player
         objectName: "player"
+        videoOutput: vidOut
+        // Only connect the audio output if volume is > 0 and audio is enabled.
+        // This saves massive resources and prevents stuttering on silent background videos.
+        audioOutput: (audioEnabled && audioOut.volume > 0) ? audioOut : null
+        
         onSourceChanged: console.debug(player.source)
         onPositionChanged:
         {
-            dispArea.positionChanged(player.position)
+            // Throttle position reporting to about 5Hz to avoid flooding the UI thread
+            if (Math.abs(player.position - lastReportedPosition) > 200) {
+                dispArea.positionChanged(player.position)
+                lastReportedPosition = player.position
+            }
         }
         onDurationChanged:
         {
-            dispArea.durationChanged(player.duration)
+            var d = player.duration
+            if (d == 0 && player.metaData) {
+                // Fallback for formats that only show duration in metadata (e.g. MKV in WMF)
+                d = player.metaData.duration || 0
+            }
+            dispArea.durationChanged(d)
         }
         onPlaybackStateChanged:
         {
@@ -71,189 +95,47 @@ Rectangle {
         id: vidOut
         objectName: "vidOut"
         anchors.fill: parent
+        visible: player.hasVideo
     }
 
     Image
     {
         id: backImage1
         objectName: "backImage1"
-//        anchors.fill: parent
+        anchors.fill: parent
         cache: false
-//        transform: Rotation
-//            {
-//            id: rotBack1
-//            angle: 0
-//            axis {x:0; y:0; z:0}
-//            origin {x:backImage1/2; y:backImage1/2}
-//        }
     }
 
     Image
     {
         id: backImage2
         objectName: "backImage2"
-//        anchors.fill: parent
+        anchors.fill: parent
         cache: false
-//        transform: Rotation
-//            {
-//            id: rotBack2
-//            angle: rotation1
-//            axis {x:0; y:0; z:0}
-//            origin {x:backImage2/2; y:backImage2/2}
-//        }
     }
 
     Image
     {
         id: textImage1
         objectName: "textImage1"
-//        anchors.fill: parent
-//        fillMode: Image.Stretch
-//        anchors.centerIn: parent
+        anchors.fill: parent
         cache: false
-//        transform: Rotation
-//            {
-//            id: rotText1
-//            angle: 0
-//            axis {x:0; y:0; z:0}
-//            origin {x:textImage1/2; y:textImage1/2}
-//        }
     }
 
     Image
     {
         id: textImage2
         objectName: "textImage2"
-//        anchors.fill: parent
-//        fillMode: Image.Stretch
-//        anchors.centerIn: parent
+        anchors.fill: parent
         cache: false
-//        transform: Rotation
-//            {
-//            id: rotText2
-//            angle: rotation2
-//            axis {x:0; y:0; z:0}
-//            origin {x:textImage2/2; y:textImage2/2}
-//        }
     }
 
-    Rectangle
-    {
-        id: controls
-        objectName: "controls"
-//        opacity: 0.5
-        color: "#00000000"
-        height: 128
-        width: height*3 +20
-
-        x:20; y:20
-
-        Image
-        {
-            id: prevBtn
-            objectName: "prevBtn"
-            source: "qrc:/icons/icons/controlPrev.png"
-            width: parent.height; height: parent.height
-
-            MouseArea
-            {
-                id: maPrev
-                anchors.fill: parent
-                hoverEnabled: true
-                onHoveredChanged:
-                {
-                    if(maPrev.containsMouse)
-                        prevBtn.source = "qrc:/icons/icons/controlPrevHovered.png"
-                    else
-                        prevBtn.source= "qrc:/icons/icons/controlPrev.png"
-                }
-                onPressed:
-                {
-                    prevBtn.source = "qrc:/icons/icons/controlPrevPressed.png"
-                }
-                onReleased:
-                {
-                    prevBtn.source = "qrc:/icons/icons/controlPrevHovered.png"
-                }
-                onClicked:
-                {
-                    dispArea.prevClicked()
-                }
-            }
-        }
-
-        Image
-        {
-            id: nextBtn
-            objectName: "nextBtn"
-            source: "qrc:/icons/icons/controlNext.png"
-            width: prevBtn.width; height: prevBtn.height
-            anchors.left: prevBtn.right
-            anchors.leftMargin: 10
-            anchors.top: prevBtn.top
-            opacity: prevBtn.opacity
-            MouseArea
-            {
-                id: maNext
-                anchors.fill: parent
-                hoverEnabled: true
-                onHoveredChanged:
-                {
-                    if(maNext.containsMouse)
-                        nextBtn.source = "qrc:/icons/icons/controlNextHovered.png"
-                    else
-                        nextBtn.source= "qrc:/icons/icons/controlNext.png"
-                }
-                onPressed:
-                {
-                    nextBtn.source = "qrc:/icons/icons/controlNextPressed.png"
-                }
-                onReleased:
-                {
-                    nextBtn.source = "qrc:/icons/icons/controlNextHovered.png"
-                }
-                onClicked:
-                {
-                    dispArea.nextClicked()
-                }
-            }
-        }
-
-        Image
-        {
-            id: exitBtn
-            objectName: "exitBtn"
-            source: "qrc:/icons/icons/controlExit.png"
-            width: prevBtn.width; height: prevBtn.height
-            anchors.left: nextBtn.right
-            anchors.leftMargin: 10
-            anchors.top: prevBtn.top
-            opacity: prevBtn.opacity
-            MouseArea
-            {
-                id: maExit
-                anchors.fill: parent
-                hoverEnabled: true
-                onHoveredChanged:
-                {
-                    if(maExit.containsMouse)
-                        exitBtn.source = "qrc:/icons/icons/controlExitHovered.png"
-                    else
-                        exitBtn.source= "qrc:/icons/icons/controlExit.png"
-                }
-                onPressed:
-                {
-                    exitBtn.source = "qrc:/icons/icons/controlExitPressed.png"
-                }
-                onReleased:
-                {
-                    exitBtn.source = "qrc:/icons/icons/controlExitHovered.png"
-                }
-                onClicked:
-                {
-                    dispArea.exitClicked()
-                }
-            }
+    // Global Key Handling for Escape
+    focus: true
+    Keys.onReleased: (event) => {
+        if (event.key === Qt.Key_Escape) {
+            dispArea.exitClicked();
+            event.accepted = true;
         }
     }
 
@@ -704,17 +586,17 @@ Rectangle {
 
     function setVideoVolume(level)
     {
-        player.volume = level
+        audioOut.volume = level
     }
 
     function setVideoMuted(toMute)
     {
-        player.muted = toMute
+        audioOut.muted = toMute
     }
 
     function setVideoPosition(position)
     {
-        player.seek(position)
+        player.position = position
     }
 
     function pauseVideo()
@@ -725,18 +607,5 @@ Rectangle {
         }
     }
 
-    function positionControls(iX,iY,iSize,dOpacity)
-    {
-        controls.height = iSize;
-        controls.opacity = dOpacity;
-        controls.x = iX;
-        controls.y = iY;
-    }
-
-    function setControlsVisible(isVisible)
-    {
-        //controls.opacity = dOpacity;
-        controls.visible = isVisible;
-    }
 }
 

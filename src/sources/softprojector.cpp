@@ -47,6 +47,10 @@ SoftProjector::SoftProjector(QWidget *parent)
     pds2 = new ProjectorDisplayScreen(); //for future
     pds3 = new ProjectorDisplayScreen(); //for future
     pds4 = new ProjectorDisplayScreen(); //for future
+    // Disable audio for additional display screens to avoid resource contention and audio stuttering
+    pds2->setAudioEnabled(false);
+    pds3->setAudioEnabled(false);
+    pds4->setAudioEnabled(false);
     // Don't worry, we'll move it later
 
     bibleWidget = new BibleWidget;
@@ -105,9 +109,21 @@ SoftProjector::SoftProjector(QWidget *parent)
     connect(manageDialog, SIGNAL(setMainArrowCursor()), this, SLOT(setArrowCursor()));
     connect(manageDialog, SIGNAL(setMainWaitCursor()), this, SLOT(setWaitCursor()));
     connect(languageGroup, SIGNAL(triggered(QAction*)), this, SLOT(switchLanguage(QAction*)));
-    connect(pds1,SIGNAL(exitSlide()),this,SLOT(on_actionHide_triggered()));
+    connect(pds1,SIGNAL(exitSlide()),this,SLOT(exitProjector()));
     connect(pds1,SIGNAL(nextSlide()),this,SLOT(nextSlide()));
     connect(pds1,SIGNAL(prevSlide()),this,SLOT(prevSlide()));
+    
+    connect(pds2,SIGNAL(exitSlide()),this,SLOT(exitProjector()));
+    connect(pds2,SIGNAL(nextSlide()),this,SLOT(nextSlide()));
+    connect(pds2,SIGNAL(prevSlide()),this,SLOT(prevSlide()));
+
+    connect(pds3,SIGNAL(exitSlide()),this,SLOT(exitProjector()));
+    connect(pds3,SIGNAL(nextSlide()),this,SLOT(nextSlide()));
+    connect(pds3,SIGNAL(prevSlide()),this,SLOT(prevSlide()));
+
+    connect(pds4,SIGNAL(exitSlide()),this,SLOT(exitProjector()));
+    connect(pds4,SIGNAL(nextSlide()),this,SLOT(nextSlide()));
+    connect(pds4,SIGNAL(prevSlide()),this,SLOT(prevSlide()));
     connect(settingsDialog,SIGNAL(updateSettings(GeneralSettings&,Theme&,SlideShowSettings&,
                                                  BibleVersionSettings&,BibleVersionSettings&,
                                                  BibleVersionSettings&,BibleVersionSettings&)),
@@ -176,8 +192,8 @@ SoftProjector::SoftProjector(QWidget *parent)
             mediaControls,SLOT(updateTime(qint64)));
     connect(pds1,SIGNAL(videoDurationChanged(qint64)),
             mediaControls,SLOT(setMaximumTime(qint64)));
-    connect(pds1,SIGNAL(videoPlaybackStateChanged(QMediaPlayer::State)),
-            mediaControls,SLOT(updatePlayerState(QMediaPlayer::State)));
+    connect(pds1,SIGNAL(videoPlaybackStateChanged(QMediaPlayer::PlaybackState)),
+            mediaControls,SLOT(updatePlayerState(QMediaPlayer::PlaybackState)));
     connect(pds1,SIGNAL(videoStopped()),this,SLOT(videoStopped()));
     connect(mediaControls,SIGNAL(play()),this,SLOT(playVideo()));
     connect(mediaControls,SIGNAL(pause()),this,SLOT(pauseVideo()));
@@ -225,58 +241,47 @@ void SoftProjector::positionDisplayWindow()
         pds3->setWindowFlags(Qt::WindowStaysOnTopHint);
         pds4->setWindowFlags(Qt::WindowStaysOnTopHint);
     }
-    else
+
+    QList<QScreen*> screens = QGuiApplication::screens();
+    int screenCount = screens.count();
+    qDebug() << "Screen Count: " << screenCount;
+
+    if(screenCount > 1)
     {
-        // pds1->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
-        // pds2->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
-        // pds3->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
-        // pds4->setWindowFlags(Qt::WindowStaysOnBottomHint); // Do not show always on top
-    }
-
-    qDebug()<< "Screen Count: " << QApplication::primaryScreen()->virtualSiblings().count();
-
-    if(QApplication::primaryScreen()->virtualSiblings().count() > 1)
-    {
-
-        // if (desktop->isVirtualDesktop())
+        // Display Screen 1
+        int s1 = mySettings.general.displayScreen;
+        if(s1 >= 0 && s1 < screenCount)
         {
-            // Move the display widget to screen 1 (secondary screen):
-            pds1->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen)->geometry());
+            pds1->setGeometry(screens.at(s1)->geometry());
+        }
+        else
+        {
+            // Default to screen 2 (index 1) if s1 is out of range
+            pds1->setGeometry(screens.at(1)->geometry());
         }
 
-        pds1->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+        pds1->setCursor(Qt::BlankCursor);
         pds1->resetImGenSize();
         pds1->renderPassiveText(theme.passive.backgroundPix,theme.passive.useBackground);
-        pds1->setControlsVisible(false);
 
         if(mySettings.general.displayOnStartUp)
         {
             pds1->showFullScreen();
-
             ui->actionCloseDisplay->setChecked(true);
             updateCloseDisplayButtons(true);
-
         }
 
-        // check if to display secondary display screen
-        if(mySettings.general.displayScreen2>=0)
+        // Display Screen 2
+        int s2 = mySettings.general.displayScreen2;
+        if(s2 >= 0 && s2 < screenCount)
         {
             hasDisplayScreen2 = true;
-            // if (desktop->isVirtualDesktop())
-            {
-                // Move the display widget to screen 1 (secondary screen):
-                pds2->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen2)->geometry());
-                pds2->resetImGenSize();
-
-            }
-
-            pds2->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+            pds2->setGeometry(screens.at(s2)->geometry());
+            pds2->resetImGenSize();
+            pds2->setCursor(Qt::BlankCursor);
             pds2->renderPassiveText(theme.passive2.backgroundPix,theme.passive2.useBackground);
-            pds2->setControlsVisible(false);
             if(mySettings.general.displayOnStartUp)
-            {
                 pds2->showFullScreen();
-            }
         }
         else
         {
@@ -284,24 +289,17 @@ void SoftProjector::positionDisplayWindow()
             pds2->hide();
         }
 
-        // check if to display tertiary display screen
-        if(mySettings.general.displayScreen3>=0)
+        // Display Screen 3
+        int s3 = mySettings.general.displayScreen3;
+        if(s3 >= 0 && s3 < screenCount)
         {
             hasDisplayScreen3 = true;
-            // if (desktop->isVirtualDesktop())
-            {
-                // Move the display widget to screen 1 (tertiary screen):
-                pds3->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen3)->geometry());
-                pds3->resetImGenSize();
-
-            }
-            pds3->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+            pds3->setGeometry(screens.at(s3)->geometry());
+            pds3->resetImGenSize();
+            pds3->setCursor(Qt::BlankCursor);
             pds3->renderPassiveText(theme.passive3.backgroundPix,theme.passive3.useBackground);
-            pds3->setControlsVisible(false);
             if(mySettings.general.displayOnStartUp)
-            {
                 pds3->showFullScreen();
-            }
         }
         else
         {
@@ -309,40 +307,28 @@ void SoftProjector::positionDisplayWindow()
             pds3->hide();
         }
 
-        // check if to display quaternary display screen
-        if(mySettings.general.displayScreen4>=0)
+        // Display Screen 4
+        int s4 = mySettings.general.displayScreen4;
+        if(s4 >= 0 && s4 < screenCount)
         {
             hasDisplayScreen4 = true;
-            // if (desktop->isVirtualDesktop())
-            {
-                // Move the display widget to screen 1 (quaternary screen):
-                pds4->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(mySettings.general.displayScreen4)->geometry());
-                pds4->resetImGenSize();
-
-            }
-            pds4->setCursor(Qt::BlankCursor); //Sets a Blank Mouse to the screen
+            pds4->setGeometry(screens.at(s4)->geometry());
+            pds4->resetImGenSize();
+            pds4->setCursor(Qt::BlankCursor);
             pds4->renderPassiveText(theme.passive4.backgroundPix,theme.passive4.useBackground);
-            pds4->setControlsVisible(false);
             if(mySettings.general.displayOnStartUp)
-            {
                 pds4->showFullScreen();
-            }
         }
         else
         {
             hasDisplayScreen4 = false;
             pds4->hide();
         }
-
-        // specify that there is more than one diplay screen(monitor) availbale
         isSingleScreen = false;
     }
     else
     {
-        // Single monitor only: Do not show on strat up.
-        // Will be shown only when items were sent to the projector.
-        qDebug()<< "Setting Primary screen";
-        pds1->setGeometry(QApplication::primaryScreen()->virtualSiblings().at(0)->geometry());
+        pds1->setGeometry(screens.at(0)->geometry());
         pds1->resetImGenSize();
         showDisplayScreen(false);
         isSingleScreen = true;
@@ -357,8 +343,6 @@ void SoftProjector::showDisplayScreen(bool show)
     if(show)
     {
         pds1->showFullScreen();
-        pds1->positionControls(mySettings.general.displayControls);
-        pds1->setControlsVisible(true);
     }
     else
     {
@@ -412,6 +396,13 @@ void SoftProjector::updateSetting(GeneralSettings &g, Theme &t, SlideShowSetting
     mySettings.bibleSets4 = bsets4;
     mySettings.saveSettings();
     theme = t;
+    
+    // Cache the passive background image in all projectors
+    pds1->setPassiveBackground(theme.passive.backgroundPix);
+    if(hasDisplayScreen2) pds2->setPassiveBackground(theme.passive.backgroundPix);
+    if(hasDisplayScreen3) pds3->setPassiveBackground(theme.passive.backgroundPix);
+    if(hasDisplayScreen4) pds4->setPassiveBackground(theme.passive.backgroundPix);
+
     bibleWidget->setSettings(mySettings.bibleSets);
     pictureWidget->setSettings(mySettings.slideSets);
 
@@ -670,7 +661,11 @@ void SoftProjector::setVideo(VideoInfo &video)
     new_list = true;
     ui->listShow->clear();
     ui->labelSongNotes->setVisible(false);
-    ui->labelIcon->setPixmap(QPixmap(":/icons/icons/video.png").scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    
+    // Set appropriate icon based on whether there's a video track
+    const char* iconPath = video.hasVideo ? ":/icons/icons/video.png" : ":/icons/icons/speaker.png";
+    ui->labelIcon->setPixmap(QPixmap(iconPath).scaled(16,16,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    
     ui->labelShow->setText(currentVideo.fileName);
     new_list = false;
     updateScreen();
@@ -725,22 +720,30 @@ void SoftProjector::stopVideo()
     {
         pds4->stopVideo();
     }
+    mediaPlayer->stopVideo();
 }
 
 void SoftProjector::setVideoPosition(qint64 position)
 {
+    // Only mute to hide stuttering if we are currently playing.
+    // If paused, seeking is silent anyway and muting might cause unnecessary backend state changes.
+    bool shouldMuteGuard = (mediaControls->playbackState() == QMediaPlayer::PlayingState);
+    bool wasMuted = mediaControls->isMuted();
+
+    if (shouldMuteGuard) {
+        pds1->setVideoMuted(true);
+    }
+
     pds1->setVideoPosition(position);
-    if(hasDisplayScreen2)
-    {
-        pds2->setVideoPosition(position);
-    }
-    if(hasDisplayScreen3)
-    {
-        pds3->setVideoPosition(position);
-    }
-    if(hasDisplayScreen4)
-    {
-        pds4->setVideoPosition(position);
+    if(hasDisplayScreen2) pds2->setVideoPosition(position);
+    if(hasDisplayScreen3) pds3->setVideoPosition(position);
+    if(hasDisplayScreen4) pds4->setVideoPosition(position);
+
+    if (shouldMuteGuard) {
+        // Restore volume/mute state after a short delay
+        QTimer::singleShot(300, this, [this, wasMuted]() {
+            pds1->setVideoMuted(wasMuted);
+        });
     }
 }
 
@@ -1140,6 +1143,24 @@ void SoftProjector::on_actionCloseDisplay_triggered()
     }
 
     updateCloseDisplayButtons(ui->actionCloseDisplay->isChecked());
+}
+
+void SoftProjector::exitProjector()
+{
+    qDebug() << "SoftProjector: exitProjector() called from screen UI. Showing:" << showing;
+    
+    if (showing) {
+        // If content is currently showing, first go to passive background
+        on_actionHide_triggered();
+    } else {
+        // If already on passive background, completely exit the live session
+        // Ensure media is stopped before closing
+        stopVideo();
+        
+        // Toggle the display off
+        ui->actionCloseDisplay->setChecked(false);
+        on_actionCloseDisplay_triggered();
+    }
 }
 
 void SoftProjector::updateCloseDisplayButtons(bool isOn)
@@ -1853,6 +1874,7 @@ void SoftProjector::on_actionPrintSchedule_triggered()
 
 void SoftProjector::nextSlide()
 {
+    qDebug() << "SoftProjector: nextSlide() called.";
     // selects next item in the show list
     int current = ui->listShow->currentRow();
     if(ui->rbMultiVerse->isChecked())
@@ -1866,12 +1888,25 @@ void SoftProjector::nextSlide()
         if(current < ui->listShow->count()-1)
             ui->rbMultiVerse->setChecked(false);
     }
-    if(current < ui->listShow->count()-1)
+    
+    if(current < ui->listShow->count()-1) {
         ui->listShow->setCurrentRow(current+1);
+    } else {
+        // End of current show list reached. Advance to next item in schedule if possible.
+        int curScheduleRow = ui->listWidgetSchedule->currentRow();
+        if (curScheduleRow < ui->listWidgetSchedule->count() - 1) {
+            int nextRow = curScheduleRow + 1;
+            ui->listWidgetSchedule->setCurrentRow(nextRow);
+            QModelIndex nextIndex = ui->listWidgetSchedule->model()->index(nextRow, 0);
+            qDebug() << "SoftProjector: Advancing to next schedule item, row:" << nextRow;
+            on_listWidgetSchedule_doubleClicked(nextIndex);
+        }
+    }
 }
 
 void SoftProjector::prevSlide()
 {
+    qDebug() << "SoftProjector: prevSlide() called.";
     // selects previous item in the show list
     int current = ui->listShow->currentRow();
     if(ui->rbMultiVerse->isChecked())
@@ -1888,8 +1923,20 @@ void SoftProjector::prevSlide()
         if(current>0)
             ui->rbMultiVerse->setChecked(false);
     }
-    if(current>0)
+    
+    if(current>0) {
         ui->listShow->setCurrentRow(current-1);
+    } else {
+        // Start of current show list reached. Go to previous item in schedule if possible.
+        int curScheduleRow = ui->listWidgetSchedule->currentRow();
+        if (curScheduleRow > 0) {
+            int prevRow = curScheduleRow - 1;
+            ui->listWidgetSchedule->setCurrentRow(prevRow);
+            QModelIndex prevIndex = ui->listWidgetSchedule->model()->index(prevRow, 0);
+            qDebug() << "SoftProjector: Going back to previous schedule item, row:" << prevRow;
+            on_listWidgetSchedule_doubleClicked(prevIndex);
+        }
+    }
 }
 
 //void SoftProjector::on_pushButtonPlay_clicked()
@@ -2030,6 +2077,7 @@ void SoftProjector::reloadShceduleList()
 
 void SoftProjector::on_listWidgetSchedule_doubleClicked(const QModelIndex &index)
 {
+    qDebug() << "SoftProjector: on_listWidgetSchedule_doubleClicked row:" << index.row();
     Schedule s = schedule.at(index.row());
     if(s.stype == "bible")
     {
@@ -2722,6 +2770,14 @@ void SoftProjector::openScheduleItem(QSqlQuery &q, const int scid, VideoInfo &v)
     v.fileName = q.value(0).toString();
     v.filePath = q.value(1).toString();
     v.aspectRatio = q.value(2).toInt();
+    
+    // Heuristic: determine if it has video based on common audio extensions
+    QString ext = v.fileName.split('.').last().toLower();
+    if (ext == "mp3" || ext == "m4a" || ext == "wav" || ext == "aac" || ext == "flac" || ext == "ogg" || ext == "wma") {
+        v.hasVideo = false;
+    } else {
+        v.hasVideo = true; // Default to true for other files (videos) 
+    }
 }
 
 void SoftProjector::openScheduleItem(QSqlQuery &q, const int scid, Announcement &a)

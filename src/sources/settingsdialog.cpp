@@ -65,6 +65,7 @@ void SettingsDialog::loadSettings(GeneralSettings &sets, Theme &thm, SlideShowSe
                                   BibleVersionSettings &bsets, BibleVersionSettings &bsets2,
                                   BibleVersionSettings &bsets3, BibleVersionSettings &bsets4)
 {
+    bool oldBlock = this->blockSignals(true);
     gsettings = sets;
     theme = thm;
     bsettings = bsets;
@@ -85,18 +86,12 @@ void SettingsDialog::loadSettings(GeneralSettings &sets, Theme &thm, SlideShowSe
     bibleSettingswidget->setBibleVersions(bsettings,bsettings2,bsettings3,bsettings4);
     pictureSettingWidget->setSettings(ssettings);
     setThemes();
+    this->blockSignals(oldBlock);
 }
 
 SettingsDialog::~SettingsDialog()
 {
     delete ui;
-
-    delete generalSettingswidget;
-    delete passiveSettingwidget;
-    delete bibleSettingswidget;
-    delete songSettingswidget;
-    delete announcementSettingswidget;
-
     delete btnOk;
     delete btnCancel;
     delete btnApply;
@@ -200,10 +195,20 @@ void SettingsDialog::getThemes()
 
 void SettingsDialog::setThemes()
 {
+    bool old1 = passiveSettingwidget->blockSignals(true);
+    bool old2 = bibleSettingswidget->blockSignals(true);
+    bool old3 = songSettingswidget->blockSignals(true);
+    bool old4 = announcementSettingswidget->blockSignals(true);
+
     passiveSettingwidget->setSetings(theme.passive, theme.passive2, theme.passive3, theme.passive4);
     bibleSettingswidget->setSettings(theme.bible, theme.bible2, theme.bible3, theme.bible4);
     songSettingswidget->setSettings(theme.song, theme.song2, theme.song3, theme.song4);
     announcementSettingswidget->setSettings(theme.announce, theme.announce2, theme.announce3, theme.announce4);
+
+    passiveSettingwidget->blockSignals(old1);
+    bibleSettingswidget->blockSignals(old2);
+    songSettingswidget->blockSignals(old3);
+    announcementSettingswidget->blockSignals(old4);
 }
 
 void SettingsDialog::changeTheme(int theme_id)

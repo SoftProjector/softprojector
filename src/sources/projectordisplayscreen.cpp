@@ -17,7 +17,6 @@
 //
 ***************************************************************************/
 
-#include "../3rdparty/headers/qmediaplaylist.h"
 #include "../headers/projectordisplayscreen.hpp"
 #include "ui_projectordisplayscreen.h"
 
@@ -30,9 +29,9 @@ ProjectorDisplayScreen::ProjectorDisplayScreen(QWidget *parent) :
     dispView = new QQuickView;
     imProvider = new SpImageProvider;
     dispView->engine()->addImageProvider(QLatin1String("improvider"),imProvider);
-    QWidget *w = QWidget::createWindowContainer(dispView,this);
+    m_videoWidget = QWidget::createWindowContainer(dispView,this);
     dispView->setSource(QUrl("qrc:/qml/qml/DisplayArea.qml"));
-    ui->verticalLayout->addWidget(w);
+    ui->verticalLayout->addWidget(m_videoWidget);
 
     // Create Display object for retriaving signals back from the display screen
     QObject *dispObj = dispView->rootObject();
@@ -48,6 +47,7 @@ ProjectorDisplayScreen::ProjectorDisplayScreen(QWidget *parent) :
 
     backImSwitch1 = backImSwitch2 = textImSwitch1 = textImSwitch2 = false;
     back1to2 = text1to2 = isNewBack = true;
+    tranType = TR_FADE;
     m_color.setRgb(0,0,0,0);// = QColor(QColor::black());
 }
 
@@ -178,7 +178,7 @@ void ProjectorDisplayScreen::setBackVideo(QString path)
 
     setVideoSource(item,path);
     item->setProperty("volume",0.0);
-    item->setProperty("loops",QMediaPlaylist::Loop);
+    item->setProperty("loops", -1); // Qt6 QML: MediaPlayer.Infinite = loop forever
     item2->setProperty("fillMode",Qt::IgnoreAspectRatio);
 }
 
@@ -195,6 +195,8 @@ void ProjectorDisplayScreen::setVideoSource(QObject* playerObject, QUrl path)
 void ProjectorDisplayScreen::updateScreen()
 {
     QObject *root = dispView->rootObject();
+    root->setProperty("backType", backType);    // Inject current background type (None/Image/Video)
+    
     QMetaObject::invokeMethod(root,"stopTransitions");
     //    QString tranType = "seq";
 
@@ -241,11 +243,13 @@ void ProjectorDisplayScreen::exitSlideClicked()
 
 void ProjectorDisplayScreen::nextSlideClicked()
 {
+    qDebug() << "PDS: nextSlideClicked() from QML.";
     emit nextSlide();
 }
 
 void ProjectorDisplayScreen::prevSlideClicked()
 {
+    qDebug() << "PDS: prevSlideClicked() from QML.";
     emit prevSlide();
 }
 
@@ -294,19 +298,28 @@ void ProjectorDisplayScreen::keyReleaseEvent(QKeyEvent *event)
         QWidget::keyReleaseEvent(event);
 }
 
+void ProjectorDisplayScreen::setPassiveBackground(QPixmap pix)
+{
+    m_passiveBack = pix;
+}
+
 void ProjectorDisplayScreen::renderNotText()
 {
     setTextPixmap(imGen.generateEmptyImage());
     updateScreen();
 }
 
-void ProjectorDisplayScreen::renderPassiveText(QPixmap &back, bool useBack)
+void ProjectorDisplayScreen::renderPassiveText(QPixmap pix, bool useBack)
 {
+    qDebug() << "PDS: renderPassiveText called. UseBack:" << useBack << "PixSize:" << pix.size();
+    setPassiveBackground(pix);
+    
+    tranType = TR_FADE;
     setTextPixmap(imGen.generateEmptyImage());
     if(useBack)
     {
         backType = B_PICTURE;
-        setBackPixmap(back,0);
+        setBackPixmap(m_passiveBack,0);
     }
     else
     {
@@ -420,26 +433,56 @@ void ProjectorDisplayScreen::renderSlideShow(QPixmap slide, SlideShowSettings &s
 {
     tranType = TR_FADE;
 
+    // Use passive background if available, otherwise solid color
+    if (!m_passiveBack.isNull()) {
+        setBackPixmap(m_passiveBack, 0); // 0 = Stretch
+    } else {
+        setBackPixmap(imGen.generateColorImage(m_color), 0);
+    }
+
+    // Generate foreground with the slide centered on top
+    QPixmap foreground = imGen.generateEmptyImage();
+    QPainter painter(&foreground);
+    
     bool expand;
-    if(slide.width()<imGen.width() && slide.height()<imGen.height())
+    if(slide.width() < imGen.width() && slide.height() < imGen.height())
         expand = ssSets.expandSmall;
     else
         expand = true;
 
-    setTextPixmap(imGen.generateEmptyImage());
-    if(expand)
-        setBackPixmap(slide,ssSets.fitType +1);
-    else
-        setBackPixmap(slide,3);
-    updateScreen();
+    Qt::AspectRatioMode aspect = Qt::KeepAspectRatio;
+    if (expand) {
+        if (ssSets.fitType == 0)      aspect = Qt::IgnoreAspectRatio;           
+        else if (ssSets.fitType == 1) aspect = Qt::KeepAspectRatio;             
+        else if (ssSets.fitType == 2) aspect = Qt::KeepAspectRatioByExpanding;  
+    }
 
+    QPixmap scaledSlide = slide.scaled(imGen.getScreenSize(), aspect, Qt::SmoothTransformation);
+    int x = (foreground.width() - scaledSlide.width()) / 2;
+    int y = (foreground.height() - scaledSlide.height()) / 2;
+    
+    painter.drawPixmap(x, y, scaledSlide);
+    painter.end();
+
+    setTextPixmap(foreground);
+    updateScreen();
 }
 
 void ProjectorDisplayScreen::renderVideo(VideoInfo videoDetails)
 {
     backType = B_VIDEO;
     setTextPixmap(imGen.generateEmptyImage());
-    setBackPixmap(imGen.generateColorImage(m_color),0);
+    
+    if (videoDetails.hasVideo) {
+        setBackPixmap(imGen.generateColorImage(m_color),0);
+    } else {
+        // Fallback to passive background image if available
+        if (!m_passiveBack.isNull()) {
+            setBackPixmap(m_passiveBack, 0); // 0 = Stretch
+        } else {
+            setBackPixmap(imGen.generateColorImage(m_color), 0);
+        }
+    }
     QObject *root = dispView->rootObject();
     QObject *item = root->findChild<QObject*>("player");
     QObject *item2 = root->findChild<QObject*>("vidOut");
@@ -447,8 +490,11 @@ void ProjectorDisplayScreen::renderVideo(VideoInfo videoDetails)
     setVideoSource(item,videoDetails.filePath);
 
     item->setProperty("volume",1.0);
-    item->setProperty("loops",QMediaPlaylist::CurrentItemOnce);
+    item->setProperty("loops", 1); // Qt6 QML: play once
     item2->setProperty("fillMode",Qt::KeepAspectRatio);
+    
+    // Ensure display view has focus to capture global keys like Escape
+    m_videoWidget->setFocus(Qt::ActiveWindowFocusReason);
 
     updateScreen();
 }
@@ -486,7 +532,7 @@ void ProjectorDisplayScreen::setVideoVolume(int level)
 void ProjectorDisplayScreen::setVideoMuted(bool muted)
 {
     QObject *root = dispView->rootObject();
-    QMetaObject::invokeMethod(root,"setVideoVolume",Q_ARG(QVariant,(!muted)));
+    QMetaObject::invokeMethod(root,"setVideoMuted",Q_ARG(QVariant,muted));
 }
 
 void ProjectorDisplayScreen::setVideoPosition(qint64 position)
@@ -495,59 +541,7 @@ void ProjectorDisplayScreen::setVideoPosition(qint64 position)
     QMetaObject::invokeMethod(root,"setVideoPosition",Q_ARG(QVariant,position));
 }
 
-void ProjectorDisplayScreen::positionControls(DisplayControlsSettings &dSettings)
+void ProjectorDisplayScreen::setAudioEnabled(bool enabled)
 {
-    //mySettings = dSettings;
-
-    // set icon size
-    int buttonSize(dSettings.buttonSize);
-    if(buttonSize == 0)
-        buttonSize = 16;
-    else if(buttonSize == 1)
-        buttonSize = 24;
-    else if(buttonSize == 2)
-        buttonSize = 32;
-    else if(buttonSize == 3)
-        buttonSize = 48;
-    else if(buttonSize == 4)
-        buttonSize = 64;
-    else if(buttonSize == 5)
-        buttonSize = 96;
-    else
-        buttonSize = 48;
-
-
-    // calculate button position
-    int y(this->height()), x(this->width()), margin(20);
-
-    // calculate y position
-    if(dSettings.alignmentV==0)//top
-        y = margin;
-    else if(dSettings.alignmentV==1)//middle
-        y = (y-buttonSize)/2;
-    else if(dSettings.alignmentV==2)//buttom
-        y = y-buttonSize-margin;
-    else
-        y = y-buttonSize-margin;
-
-    // calculate x position
-    int xt((buttonSize*3)+20); //total width of the button group
-    if(dSettings.alignmentH==0)
-        x = margin;
-    else if(dSettings.alignmentH==1)
-        x = (x-xt)/2;
-    else if (dSettings.alignmentH==2)
-        x = x-xt-margin;
-    else
-        x = (x-xt)/2;
-
-    QObject *root = dispView->rootObject();
-    QMetaObject::invokeMethod(root,"positionControls",Q_ARG(QVariant,x),Q_ARG(QVariant,y),Q_ARG(QVariant,buttonSize),Q_ARG(QVariant,dSettings.opacity));
-
-}
-
-void ProjectorDisplayScreen::setControlsVisible(bool visible)
-{
-    QObject *root = dispView->rootObject();
-    QMetaObject::invokeMethod(root,"setControlsVisible",Q_ARG(QVariant,visible));
+    dispView->rootContext()->setContextProperty("audioEnabledInjected", enabled);
 }

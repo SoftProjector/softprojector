@@ -56,7 +56,7 @@ Schedule::Schedule(VideoInfo &m)
     scid = -1;
     stype = "media";
     name = m.fileName;
-    icon = QIcon(":/icons/icons/video.png");
+    icon = QIcon(m.hasVideo ? ":/icons/icons/video.png" : ":/icons/icons/speaker.png");
     media = m;
 }
 

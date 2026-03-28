@@ -22,4 +22,5 @@
 VideoInfo::VideoInfo()
 {
     aspectRatio = 0;
+    hasVideo = true;
 }

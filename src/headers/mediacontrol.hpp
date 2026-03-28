@@ -42,6 +42,8 @@ public slots:
     void updateTime(qint64 time);
     void setMaximumTime(qint64 maxTime);
     void updatePlayerState(QMediaPlayer::PlaybackState state);
+    QMediaPlayer::PlaybackState playbackState() const { return mPlayerState; }
+    bool isMuted() const;
 
 signals:
     void volumeChanged(int);
@@ -55,10 +57,13 @@ private slots:
     void on_pushButtonStop_clicked();
     void on_pushButtonPlayPause_clicked();
     void on_pushButtonMute_toggled(bool checked);
+    void on_horizontalSliderTime_sliderPressed();
     void on_horizontalSliderTime_sliderReleased();
     void on_horizontalSliderVolume_sliderMoved(int position);
 
 
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
     Ui::MediaControl *ui;
@@ -69,6 +74,9 @@ private:
     QIcon mPauseIcon;
     QIcon mMuteIcon;
     QIcon mUnmuteIcon;
+
+    bool mIsSeeking = false;
+    QString m_lastTimeString;
 };
 
 #endif // MEDIACONTROL_HPP

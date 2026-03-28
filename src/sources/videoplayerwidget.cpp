@@ -32,7 +32,7 @@ VideoPlayerWidget::VideoPlayerWidget(QWidget *parent): QVideoWidget(parent)
 
 void VideoPlayerWidget::setFullScreen(bool enabled)
 {
-    setFullScreen(enabled);
+    QVideoWidget::setFullScreen(enabled);
 }
 
 //void VideoPlayerWidget::mouseDoubleClickEvent(QMouseEvent *e)

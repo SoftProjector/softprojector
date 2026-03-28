@@ -173,6 +173,7 @@ void SongSettingWidget::getSettings(SongSettings &settings, SongSettings &settin
 
 void SongSettingWidget::loadSettings()
 {
+    bool oldBlock = this->blockSignals(true);
     QPalette p;
     // Set Effects
     ui->checkBoxUseShadow->setChecked(mySettings.useShadow);
@@ -347,6 +348,8 @@ void SongSettingWidget::loadSettings()
 
     ui->groupBoxDisplay4->setChecked(!mySettings4.useDisp1settings);
     on_groupBoxDisplay4_toggled(!mySettings4.useDisp1settings);
+
+    this->blockSignals(oldBlock);
 }
 
 void SongSettingWidget::setDispScreen2Visible(bool visible)

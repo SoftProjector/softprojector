@@ -17,7 +17,9 @@
 //
 ***************************************************************************/
 
+#include <QMediaPlayer>
 #include <QMediaMetaData>
+#include <QAudioOutput>
 
 #include "../headers/mediawidget.hpp"
 #include "ui_mediawidget.h"
@@ -37,28 +39,58 @@ MediaWidget::MediaWidget(QWidget *parent) :
     mediaControls = new MediaControl(this);
      ui->horizontalLayoutControls->addWidget(mediaControls);
 
+    // Qt6 audio output (replaces QMediaPlayer::setVolume/setMuted)
+    audioOutput = new QAudioOutput(this);
+    player->setAudioOutput(audioOutput);
+
     connect(player, SIGNAL(metaDataChanged()), this, SLOT(updateInfo()));
     connect(player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)),
             this, SLOT(statusChanged(QMediaPlayer::MediaStatus)));
-//    connect(player, SIGNAL(bufferStatusChanged(int)), this, SLOT(bufferingProgress(int)));
-    connect(player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(hasVideoChanged(bool)));
-//    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
+    // Qt6: videoAvailableChanged removed; use hasVideoChanged triggered from statusChanged
+    connect(player, &QMediaPlayer::sourceChanged, this, [this](const QUrl &) {
+        // When source changes, reset video visibility until media loads
+        hasVideoChanged(false);
+    });
 
-
-    connect(mediaControls, SIGNAL(muted(bool)),player,SLOT(setMuted(bool)));
+    connect(mediaControls, &MediaControl::muted, audioOutput, &QAudioOutput::setMuted);
     connect(mediaControls, SIGNAL(play()),player,SLOT(play()));
     connect(mediaControls, SIGNAL(pause()),player,SLOT(pause()));
     connect(mediaControls, SIGNAL(stop()),player,SLOT(stop()));
-    connect(mediaControls, SIGNAL(timeChanged(qint64)),player,SLOT(setPosition(qint64)));
-    connect(mediaControls, SIGNAL(volumeChanged(int)),player,SLOT(setVolume(int)));
+    connect(mediaControls, &MediaControl::timeChanged, this, [this](qint64 pos) {
+        // Temporarily mute to hide stuttering sound during seek
+        bool wasMuted = audioOutput->isMuted();
+        audioOutput->setMuted(true);
+        
+        player->setPosition(pos);
+        
+        // Restore muted state after a short delay
+        QTimer::singleShot(300, this, [this, wasMuted]() {
+            audioOutput->setMuted(wasMuted);
+        });
+    });
+    connect(mediaControls, &MediaControl::volumeChanged, this, [this](int v) {
+        float fv = v / 100.0f;
+        audioOutput->setVolume(fv);
+        // Dynamically detach audio output if volume is 0 to save resources and avoid sync stuttering
+        player->setAudioOutput(fv > 0 ? audioOutput : nullptr);
+    });
 
-
-    connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), mediaControls, SLOT(updatePlayerState(QMediaPlayer::State)));
-    connect(player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(displayErrorMessage()));
+    // Qt6: stateChanged(QMediaPlayer::State) → playbackStateChanged(QMediaPlayer::PlaybackState)
+    connect(player, SIGNAL(playbackStateChanged(QMediaPlayer::PlaybackState)),
+            mediaControls, SLOT(updatePlayerState(QMediaPlayer::PlaybackState)));
+    connect(player, SIGNAL(errorOccurred(QMediaPlayer::Error, const QString&)),
+            this, SLOT(displayErrorMessage()));
     connect(player, SIGNAL(durationChanged(qint64)), mediaControls, SLOT(setMaximumTime(qint64)));
-    connect(player, SIGNAL(positionChanged(qint64)), mediaControls, SLOT(updateTime(qint64)));
-    connect(player, SIGNAL(volumeChanged(int)),mediaControls,SLOT(setVolume(int)));
-  videoWidget = new VideoPlayerWidget(this);
+    connect(player, &QMediaPlayer::positionChanged, this, [this](qint64 pos) {
+        if (qAbs(pos - lastReportedPosition) > 200 || pos == 0) {
+            mediaControls->updateTime(pos);
+            lastReportedPosition = pos;
+        }
+    });
+    // Sync initial volume to audioOutput
+    audioOutput->setVolume(1.0f);
+
+    videoWidget = new VideoPlayerWidget(this);
     player->setVideoOutput(videoWidget);
 
     mediaControls->setVolume(100);
@@ -100,6 +132,7 @@ MediaWidget::MediaWidget(QWidget *parent) :
 MediaWidget::~MediaWidget()
 {
     delete player;
+    delete audioOutput;
     delete videoWidget;
     delete mediaControls;
 //    delete timeSlider;
@@ -138,8 +171,14 @@ void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
     switch (status) {
     case QMediaPlayer::BufferingMedia:
     case QMediaPlayer::LoadingMedia:
-        ui->labelInfo->setText(QString("<center><strong><font color=#49fff9>%1</font>")
-                               .arg(tr("Loading...")));
+        // Delay showing "Loading..." to avoid flickering/stuttering during short buffer events
+        QTimer::singleShot(500, this, [this]() {
+            if (player->mediaStatus() == QMediaPlayer::BufferingMedia || 
+                player->mediaStatus() == QMediaPlayer::LoadingMedia) {
+                ui->labelInfo->setText(QString("<center><strong><font color=#49fff9>%1</font>")
+                                       .arg(tr("Loading...")));
+            }
+        });
         break;
     case QMediaPlayer::StalledMedia:
         ui->labelInfo->setText(QString("<center><strong><font color=#49fff9>%1</font>")
@@ -151,6 +190,21 @@ void MediaWidget::statusChanged(QMediaPlayer::MediaStatus status)
     case QMediaPlayer::LoadedMedia:
     case QMediaPlayer::BufferedMedia:
         isReadyToPlay = true;
+        updateInfo(); // Clear "Loading..." and show metadata
+        // Qt6: videoAvailableChanged removed — check if player has a video track
+        hasVideoChanged(player->hasVideo());
+        
+        if (m_autoGoLiveAfterLoad) {
+            m_autoGoLiveAfterLoad = false;
+            qDebug() << "MediaWidget: Auto-projection flag detected after load. Going live.";
+            goLiveFromSchedule();
+        }
+        break;
+    case QMediaPlayer::NoMedia:
+    case QMediaPlayer::EndOfMedia:
+        hasVideoChanged(false);
+        break;
+    default:
         break;
     }
 }
@@ -248,6 +302,15 @@ void MediaWidget::updateInfo()
     QString font = "<font color=#49fff9>";
 
     QString fName = player->source().fileName();
+    qint64 dur = player->duration();
+    if (dur == 0) {
+        // Fallback for types (like MKV in WMF) that report duration in metadata but not directly.
+        dur = player->metaData().value(QMediaMetaData::Duration).toLongLong();
+    }
+    if (dur > 0) {
+        mediaControls->setMaximumTime(dur);
+    }
+
     QMediaMetaData md = player->metaData();
     QString tAlbum = md.stringValue(QMediaMetaData::AlbumTitle);
     QString tTitle = md.stringValue(QMediaMetaData::Title);
@@ -312,10 +375,13 @@ void MediaWidget::hasVideoChanged(bool bHasVideo)
     qDebug()<<"hasVideoChanged"<<bHasVideo;
     if(!bHasVideo && videoWidget->isFullScreen())
         videoWidget->setFullScreen(false);
+    
     ui->labelInfo->setVisible(!bHasVideo);
-    ui->pushButtonGoLive->setEnabled(bHasVideo);
+    
+    // Enable "Go Live" if we have either video or audio content loaded
+    ui->pushButtonGoLive->setEnabled(bHasVideo || player->hasAudio());
+    
     videoWidget->setVisible(bHasVideo);
-//    isReadyToPlay = true;
 }
 
 void MediaWidget::prepareForProjection()
@@ -326,6 +392,16 @@ void MediaWidget::prepareForProjection()
 //    v.filePath = mediaFilePaths.at(ui->listWidgetMediaFiles->currentRow());
     v.fileName = currentMediaUrl.fileName();
     v.filePath = currentMediaUrl.toString();
+    v.hasVideo = player->hasVideo();
+    
+    // Heuristic: If it's a known audio-only extension, force hasVideo to false
+    // to ensure passive background is shown even if the file has embedded album art (which Qt sees as a video track).
+    QString ext = v.fileName.split('.').last().toLower();
+    if (v.hasVideo && (ext == "mp3" || ext == "m4a" || ext == "wav" || ext == "aac" || ext == "flac" || ext == "ogg" || ext == "wma")) {
+        qDebug() << "MediaWidget: Forced hasVideo to false for audio file extension:" << ext;
+        v.hasVideo = false;
+    }
+    
     emit toProjector(v);
 }
 
@@ -406,17 +482,13 @@ void MediaWidget::setMediaFromSchedule(VideoInfo &v)
 
 void MediaWidget::goLiveFromSchedule()
 {
-    while (!isReadyToPlay)
-    {
-        int ms = 1000;
-#ifdef Q_OS_WIN
-        Sleep(uint(ms));
-#else
-        struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
-        nanosleep(&ts, nullptr);
-#endif
+    if (!isReadyToPlay) {
+        qDebug() << "MediaWidget: Media not ready yet, setting auto-projection flag.";
+        m_autoGoLiveAfterLoad = true;
+        return;
     }
-    qDebug()<<videoWidget->isVisible()<<ui->pushButtonGoLive->isEnabled();
+    
+    qDebug() << "MediaWidget: goLiveFromSchedule, isReadyToPlay:" << isReadyToPlay;
     if(ui->pushButtonGoLive->isEnabled())
     {
         qDebug()<<"Go Live is Enabled";
@@ -435,4 +507,13 @@ bool MediaWidget::isValidMedia()
         return true;
     else
         return false;
+}
+
+void MediaWidget::stopVideo()
+{
+    qDebug() << "MediaWidget: stopping video.";
+    m_autoGoLiveAfterLoad = false;
+    player->stop();
+    hasVideoChanged(false);
+    ui->labelInfo->setText(tr("<center>Stopped</center>"));
 }

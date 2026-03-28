@@ -435,8 +435,12 @@ void Theme::loadTheme()
         loadBible(4,bible4);
         loadSong(1,song);
         loadSong(2,song2);
+        loadSong(3,song3);
+        loadSong(4,song4);
         loadAnnounce(1,announce);
         loadAnnounce(2,announce2);
+        loadAnnounce(3,announce3);
+        loadAnnounce(4,announce4);
     }
 }
 
@@ -451,6 +455,10 @@ void Theme::loadPassive(int screen, TextSettings &settings)
     settings.backgroundName = sr.field("background_name").value().toString();
     settings.backgroundPix.loadFromData(sr.field("background").value().toByteArray());
     settings.useDisp1settings = sr.field("use_disp_1").value().toBool();
+    
+    qDebug() << "Theme: Loaded passive for screen" << screen 
+             << "UseBackground:" << settings.useBackground 
+             << "PixSize:" << settings.backgroundPix.size();
 }
 
 void Theme::loadBible(int screen, BibleSettings &settings)

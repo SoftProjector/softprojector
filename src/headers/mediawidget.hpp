@@ -22,6 +22,7 @@
 
 #include <QtWidgets>
 #include <QMediaPlayer>
+#include <QAudioOutput>
 #include <QtSql>
 //#include <phonon>
 //#include <phonon/MediaObject>
@@ -51,6 +52,7 @@ public slots:
     void setMediaFromSchedule(VideoInfo &v);
     void goLiveFromSchedule();
     bool isValidMedia();
+    void stopVideo();
 protected:
     void dragEnterEvent(QDragEnterEvent *e);
     void dragMoveEvent(QDragMoveEvent *e);
@@ -87,6 +89,7 @@ private:
     QIcon unmuteIcon;
 
     QMediaPlayer *player;
+    QAudioOutput *audioOutput;
     VideoPlayerWidget *videoWidget;
     MediaControl *mediaControls;
 
@@ -99,6 +102,8 @@ private:
     QUrl currentMediaUrl;
 
     bool isReadyToPlay;
+    bool m_autoGoLiveAfterLoad = false;
+    qint64 lastReportedPosition = 0;
 };
 
 #endif // MEDIAWIDGET_HPP

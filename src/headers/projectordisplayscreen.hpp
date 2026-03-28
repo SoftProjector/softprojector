@@ -51,7 +51,8 @@ public slots:
     void resetImGenSize();
 
     void renderNotText();
-    void renderPassiveText(QPixmap &back,bool useBack);
+    void setPassiveBackground(QPixmap pix);
+    void renderPassiveText(QPixmap pix,bool useBack);
     void renderBibleText(Verse bVerse, BibleSettings &bSets);
     void renderSongText(Stanza stanza, SongSettings &sSets);
     void renderAnnounceText(AnnounceSlide announce, TextSettings &aSets);
@@ -65,8 +66,7 @@ public slots:
     void setVideoMuted(bool muted);
     void setVideoPosition(qint64 position);
 
-    void positionControls(DisplayControlsSettings & dSettings);
-    void setControlsVisible(bool visible);
+    void setAudioEnabled(bool enabled);
 
 private slots:
     void setBackPixmap(QPixmap p,int fillMode); // 0 = Strech, 1 = keep aspect, 2 = keep aspect by expanding
@@ -101,6 +101,7 @@ protected:
 private:
     Ui::ProjectorDisplayScreen *ui;
     QQuickView *dispView;
+    QWidget *m_videoWidget;
     SpImageProvider *imProvider;
     ImageGenerator imGen;
     bool backImSwitch1, textImSwitch1, backImSwitch2, textImSwitch2;
@@ -110,6 +111,7 @@ private:
    // DisplayControlsSettings mySettings;
 
     QPixmap back;
+    QPixmap m_passiveBack;
 };
 
 #endif // PROJECTORDISPLAYSCREEN_HPP

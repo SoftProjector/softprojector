@@ -109,6 +109,11 @@ bool connect(QString database_file)
 
 int main(int argc, char *argv[])
 {
+#ifdef Q_OS_WIN
+    // Force the native Windows Media Foundation backend. 
+    // This is required for smooth WMV playback and audio sync.
+    qputenv("QT_MEDIA_BACKEND", "windows");
+#endif
     QApplication a(argc, argv);
     a.setApplicationName("SoftProjector");
 
