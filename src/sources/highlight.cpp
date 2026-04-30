@@ -78,6 +78,13 @@ Highlight::Highlight(QTextDocument *parent)
         rule.format = vstavkaFormat;
         highlightingRules.append(rule);
     }
+
+    // Translation formating
+    translationFormat.setForeground(Qt::black);
+    translationFormat.setBackground(Qt::green);
+    rule.pattern = QRegularExpression("^=[^\n]*");
+    rule.format = translationFormat;
+    highlightingRules.append(rule);
 }
 
 void Highlight::highlightBlock(const QString &text)

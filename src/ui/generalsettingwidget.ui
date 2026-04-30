@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>412</width>
-    <height>440</height>
+    <width>371</width>
+    <height>519</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -92,18 +92,28 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBoxDisplayScreen">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>162</width>
-          <height>20</height>
-         </size>
+        <property name="toolTip">
+         <string>Select onto which screen to display</string>
         </property>
-       </spacer>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_displayScreen_2">
+        <property name="text">
+         <string>Secondary Display Screen:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
       </item>
       <item row="0" column="2">
        <spacer name="horizontalSpacer_2">
@@ -233,6 +243,16 @@
       <string>Primary Display Screen Controls</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelControlsInfo">
+        <property name="text">
+         <string>NOTE: Display screen controls will be visible on the primary display screen only when one monitor is avaliable.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
@@ -371,15 +391,154 @@
         </item>
        </layout>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="labelControlsInfo">
-        <property name="text">
-         <string>NOTE: Display screen controls will be visible on the primary display screen only when one monitor is avaliable.</string>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="gridGroupBox">
+     <property name="title">
+      <string>HTTP Server (changes require restart)</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="topMargin">
+       <number>9</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
+      </property>
+      <property name="bottomMargin">
+       <number>9</number>
+      </property>
+      <item row="5" column="1">
+       <widget class="QSpinBox" name="spinBoxWebSocketPort">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
         </property>
-        <property name="wordWrap">
+        <property name="frame">
          <bool>true</bool>
         </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+        <property name="value">
+         <number>8089</number>
+        </property>
        </widget>
+      </item>
+      <item row="4" column="2">
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_httpPort">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777213</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>HTTP Port:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" colspan="3">
+       <widget class="QCheckBox" name="checkBoxDisableScreens">
+        <property name="toolTip">
+         <string>Disable display forms for HTTP-only use (restart required).</string>
+        </property>
+        <property name="text">
+         <string>Disable Screens</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_webSocketPort">
+        <property name="text">
+         <string>WebSocket Port:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="spinBoxHttpPort">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="maximum">
+         <number>9999</number>
+        </property>
+        <property name="value">
+         <number>8087</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QCheckBox" name="checkBoxEnableHttpServer">
+        <property name="text">
+         <string>Enable HTTP Server</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_ipAddress">
+        <property name="text">
+         <string>IP Address:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEditHTTPServerIPAddress"/>
       </item>
      </layout>
     </widget>
@@ -392,7 +551,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>14</height>
+       <height>40</height>
       </size>
      </property>
     </spacer>

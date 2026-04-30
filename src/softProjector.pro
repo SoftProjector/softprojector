@@ -27,7 +27,8 @@ QT += core \
     quick \
     printsupport \
     multimedia \
-    multimediawidgets
+    multimediawidgets \
+    websockets
 
 TARGET = SoftProjector
 TEMPLATE = app
@@ -46,6 +47,9 @@ RCC_DIR = $${RES_DIR}/rcc
 OUT_PWD = $${RES_DIR}/bin
 
 SOURCES += sources/main.cpp \
+    ../3rdparty/sources/qmediaplaylist.cpp \
+    ../3rdparty/sources/qmediaplaylist_p.cpp \
+    ../3rdparty/sources/qplaylistfileparser.cpp \
     sources/softprojector.cpp \
     sources/songwidget.cpp \
     sources/biblewidget.cpp \
@@ -88,8 +92,13 @@ SOURCES += sources/main.cpp \
     sources/projectordisplayscreen.cpp \
     sources/imagegenerator.cpp \
     sources/spimageprovider.cpp \
-    sources/mediacontrol.cpp
+    sources/mediacontrol.cpp \
+    sources/httpserver.cpp \
+    sources/websocketserver.cpp
 HEADERS += headers/softprojector.hpp \
+    ../3rdparty/headers/qmediaplaylist.h \
+    ../3rdparty/headers/qmediaplaylist_p.h \
+    ../3rdparty/headers/qplaylistfileparser.h \
     headers/songwidget.hpp \
     headers/biblewidget.hpp \
     headers/editwidget.hpp \
@@ -131,7 +140,9 @@ HEADERS += headers/softprojector.hpp \
     headers/projectordisplayscreen.hpp \
     headers/imagegenerator.hpp \
     headers/spimageprovider.hpp \
-    headers/mediacontrol.hpp
+    headers/mediacontrol.hpp \
+    headers/httpserver.hpp \
+    headers/websocketserver.hpp
 FORMS += ui/softprojector.ui \
     ui/songwidget.ui \
     ui/biblewidget.ui \

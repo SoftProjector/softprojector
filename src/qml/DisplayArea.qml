@@ -19,6 +19,7 @@
 
 import QtQuick
 import QtMultimedia
+import QtWebSockets
 
 Rectangle {
     id: dispArea

@@ -1,4 +1,4 @@
-<RCC>
+    <RCC>
     <qresource prefix="/icons">
         <file>icons/effectsBlurredShadow.png</file>
         <file>icons/effectsNone.png</file>
@@ -102,5 +102,8 @@
     </qresource>
     <qresource prefix="/qml">
         <file>qml/DisplayArea.qml</file>
+    </qresource>
+    <qresource prefix="/html">
+        <file>html/httpserver.html</file>
     </qresource>
 </RCC>

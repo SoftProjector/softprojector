@@ -69,6 +69,7 @@ private:
 private slots:
     void addNewSong(Song song, QString msgNewSongbook, QString msgCaption);
     void addSongbook();
+    bool validateSong();
     void on_btnCancel_clicked();
     void on_btnSave_clicked();
     void resetUiItems();

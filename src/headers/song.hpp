@@ -30,6 +30,7 @@ bool isStanzaAndVerseTitle(QString string);
 bool isStanzaRefrainTitle(QString string);
 bool isStanzaAndRefrainTitle(QString string);
 bool isStanzaSlideTitle(QString string);
+QString getStanzaBlock(int &i, QStringList &list, bool includeTranslation = false);
 
 class Stanza
 {
@@ -68,7 +69,7 @@ public:
     void readData();
     void saveUpdate();
     void saveNew();
-    QStringList getSongTextList();
+    QStringList getSongTextList(bool includeTranslation = false);
     Stanza getStanza(int current);
     QString getSongbookName();
     bool isValid();
@@ -86,6 +87,7 @@ public:
     QString musicBy;
     QString songText;
     QString notes;
+    bool useTranslation; // Show verse translations or not.
     bool usePrivateSettings;
     int alignmentV;
     int alignmentH;
@@ -101,7 +103,6 @@ public:
 
 private:
     void setDefaults();
-    QString getStanzaBlock(int &i, QStringList &list);
     void removeLastChorus(QStringList ct, QStringList &list);
 };
 

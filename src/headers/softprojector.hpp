@@ -40,6 +40,8 @@
 #include "videoinfo.hpp"
 #include "slideshoweditor.hpp"
 #include "schedule.hpp"
+#include "httpserver.hpp"
+#include "websocketserver.hpp"
 
 class QActionGroup;
 
@@ -76,10 +78,16 @@ public:
     PictureWidget *pictureWidget;
     MediaWidget *mediaPlayer;
     MediaControl *mediaControls;
+    WebSocketServer *webSocketServer;
+    HttpServer *httpServer;
 
     bool showing; // whether we are currently showing to the projector
     Song current_song;
     int current_song_verse;
+    QStringList currentSongVerses; // List of song verse blocks.
+    QStringList currentSongTranslatedVerses; // List of translation-only verse blocks.
+    QStringList currentSongVerseSplitList; // List of the current verse split into lines.
+    QStringList currentSongTranslatedVerseSplitList; // List of the current translation-only verse split into lines.
     Verse current_verse;
     Announcement currentAnnounce;
     QString version_string;
@@ -95,6 +103,7 @@ public slots:
     void saveSettings();
     void positionDisplayWindow();
     void updateScreen();
+    void httpServerState(bool &state, QString &httpServerIPAddress, int &httpServerPort, int &webSocketServerPort);
 
     void setWaitCursor();
     void setArrowCursor();
@@ -139,6 +148,7 @@ private:
     QList<Schedule> schedule;
     QDir appDataDir;
 
+    bool songSplitVerse;
 private slots:
     void showDisplayScreen(bool show);
 
@@ -250,6 +260,15 @@ private slots:
     void on_actionCloseDisplay_triggered();
     void updateCloseDisplayButtons(bool isOn);
 
+    void sendBibleVerseToServer();
+    void sendSongVerseToServer();
+    void showSongVerseSplit(bool enabled);
+    void sendSongVerseSplit();
+    QStringList splitSongVerse(QString verse);
+    void setSongVerseSplitList(int currentVerseIndex, QString selectRow = "first");
+    void on_songVerseSplitListWidget_itemSelectionChanged();
+    void on_songVerseSplitListWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_songVerseSplitListWidgetNavigation(Qt::Key);
 protected:
     void closeEvent(QCloseEvent *event);
     void keyPressEvent(QKeyEvent *event);

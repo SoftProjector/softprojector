@@ -35,3 +35,5 @@ unknownsys_build/*
 win32_build/*
 unix_build/*
 mac_build/*
+/src/build
+/src/win32_build

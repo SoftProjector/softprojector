@@ -309,6 +309,11 @@ public:
     bool settingsChangedAll;
     bool settingsChangedMulti;
     bool settingsChangedSingle;
+    bool httpServerEnabled;
+    QString httpServerIPAddress;
+    int webSocketServerPort;
+    int httpServerPort;
+    bool disableScreens;
 };
 
 class DisplaySettings

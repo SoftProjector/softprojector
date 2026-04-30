@@ -43,7 +43,7 @@ SongWidget::SongWidget(QWidget *parent) :
     ui->songs_view->setColumnHidden(0, true); // Hide category
     ui->songs_view->resizeColumnToContents(1); // Song Number
     ui->songs_view->setColumnWidth(2, 150);//Song Title
-    ui->songs_view->resizeColumnToContents(3); // Songbook
+    ui->songs_view->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents); // Songbook
     ui->songs_view->setColumnWidth(4, 50);//Tune
     
     proxy_model->setSongbookFilter("ALL");
@@ -56,6 +56,11 @@ SongWidget::SongWidget(QWidget *parent) :
     // set highligher
     highlight = new HighlighterDelegate(ui->listPreview);
     ui->listWidgetDummy->setVisible(false);
+
+    searchTimer = new QTimer(this);
+    searchTimer->setSingleShot(true);
+    connect(searchTimer, &QTimer::timeout, this, &SongWidget::processSearch);
+
 }
 
 SongWidget::~SongWidget()
@@ -182,6 +187,8 @@ void SongWidget::sendToPreview(Song song)
         ui->label_notes->setVisible(true);
     }
     preview_song = song;
+    ui->btnLive->setEnabled(true);
+    ui->enableSplitVerseCheckBox->setEnabled(true);
 }
 
 void SongWidget::sendToPreviewFromSchedule(Song &song)
@@ -193,6 +200,8 @@ void SongWidget::sendToPreviewFromSchedule(Song &song)
 
 void SongWidget::sendToProjector(Song song, int row)
 {
+    emit enableSongSplitVerse(ui->enableSplitVerseCheckBox->isChecked());
+
     // Display the specified song text in the right-most column of softProjector:
     emit sendSong(song, row);
 
@@ -303,6 +312,13 @@ void SongWidget::on_btnLive_clicked()
 
 void SongWidget::on_lineEditSearch_textEdited(QString text)
 {
+    searchText = text;
+    // The search only actually runs when the user stops typing for 0.2 seconds.
+    searchTimer->start(200);
+}
+
+void SongWidget::processSearch()
+{
     // Check if full-text search is in progress
     // If no full-text search is in progress, then filter
     if(!ui->pushButtonClearResults->isVisible())
@@ -310,7 +326,7 @@ void SongWidget::on_lineEditSearch_textEdited(QString text)
 
         // If search text is numeric, sort by the number, else sort by title
         bool ok;
-        text.toInt(&ok);
+        searchText.toInt(&ok);
         if(ok)
         {
             proxy_model->sort(1);
@@ -324,9 +340,7 @@ void SongWidget::on_lineEditSearch_textEdited(QString text)
         bool match_beginning = (ui->comboBoxFilterType->currentIndex() == 1);
         bool exact_match = (ui->comboBoxFilterType->currentIndex() == 2);
 
-        songs_model->emitLayoutAboutToBeChanged(); // prepares view to be redrawn
-        proxy_model->setFilterString(text, match_beginning, exact_match);
-        songs_model->emitLayoutChanged(); // forces the view to redraw
+        proxy_model->setFilterString(searchText, match_beginning, exact_match);
 
         // Select the first row that matches the new filter:
         ui->songs_view->selectRow(0);
@@ -430,7 +444,7 @@ void SongWidget::deleteSong()
 }
 
 void SongWidget::addNewSong(Song song, int initial_sid)
-{
+{ // TODO: fix bug, crashes if adding 2 songs with same title in a row.
 
     songs_model->addSong(song);
     allSongs.append(song);
@@ -555,7 +569,7 @@ void SongWidget::on_pushButtonSearch_clicked()
     int type = ui->comboBoxSearchType->currentIndex();
 
     // Make sure that there is some text to do a search for, if none, then return
-    if(search_text.count()<1)
+    if(search_text.length()<1)
     {
         ui->lineEditSearch->clear();
         ui->lineEditSearch->setPlaceholderText(tr("Please enter search text"));
@@ -671,3 +685,12 @@ void SongWidget::setSearchActive()
     ui->lineEditSearch->setFocus();
     ui->lineEditSearch->selectAll();
 }
+
+/*
+ * Show/Hide the song verse split list.
+ */
+void SongWidget::on_enableSplitVerseCheckBox_toggled(bool checked)
+{
+    emit enableSongSplitVerse(checked);
+}
+

@@ -43,7 +43,7 @@ private:
     };
     QVector<HighlightingRule> highlightingRules;
 
-    QTextCharFormat verseFormat, chorusFormat, vstavkaFormat;
+    QTextCharFormat verseFormat, chorusFormat, vstavkaFormat, translationFormat;
 };
 
 // *** Announcement editor highlighter

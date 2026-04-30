@@ -56,7 +56,7 @@ void EditWidget::changeEvent(QEvent *e)
     }
 }
 
-void EditWidget::on_btnSave_clicked()
+bool EditWidget::validateSong()
 {
     // Check if song title exists. A song title MUST exits
     QString song_title = ui->lineEditTitle->text();
@@ -70,10 +70,50 @@ void EditWidget::on_btnSave_clicked()
         mb.setIcon(QMessageBox::Warning);
         mb.exec();
         ui->lineEditTitle->setFocus();
+        return false;
+    }
+
+    // Validate translation lyrics line count matches original.
+    // Must be same for showing split verse.
+    QStringList lyricLines = ui->textEditSong->toPlainText().trimmed().split("\n");
+    QStringList lyrics; // Create the verse blocks.
+    for (int i = 0; i < lyricLines.length(); i++) {
+        if (isStanzaTitle(lyricLines[i])) {
+            lyrics.append(getStanzaBlock(i, lyricLines, true));
+        }
+    }
+
+    for (const QString &verse : qAsConst(lyrics)) {
+        if (!verse.contains("=")) { continue; }
+
+        QStringList split = verse.split("=");
+        if (split.length() == 2) {
+            // Validate amount of lines.
+            QStringList original = split[0].split("\n");
+            original.removeFirst(); // Remove the "Verse/Chorus" titles.
+            QStringList translation = split[1].split("\n");
+            if (original.count() == translation.count()) {
+                continue;
+            }
+        }
+        QMessageBox mb(this);
+        mb.setText(tr("The translated text must have the same amount of lines as the original. Must have same amount of lines between '='"));
+        mb.setWindowTitle(tr("Validation error"));
+        mb.setIcon(QMessageBox::Warning);
+        mb.exec();
+        return false;
+    }
+
+    return true;
+}
+
+void EditWidget::on_btnSave_clicked()
+{
+    if (!validateSong()) {
         return;
     }
-    setSave();
 
+    setSave();
     setWaitCursor();
     if (is_new)
     {
@@ -150,6 +190,7 @@ void EditWidget::resetUiItems()
     ui->lineEditKey->setText(ss.tune);
     ui->comboBoxCategory->setCurrentIndex(cat_ids.indexOf(ss.category));
     ui->checkBoxSongSettings->setChecked(ss.usePrivateSettings);
+    ui->checkBoxUseTranslation->setChecked(ss.useTranslation);
     ui->groupBoxSettings->setVisible(ss.usePrivateSettings);
     ui->comboBoxVAlignment->setCurrentIndex(ss.alignmentV);
     ui->comboBoxHAlignment->setCurrentIndex(ss.alignmentH);
@@ -175,6 +216,7 @@ void EditWidget::setUiItems()
     ui->lineEditKey->setText(editSong.tune);
     ui->comboBoxCategory->setCurrentIndex(cat_ids.indexOf(editSong.category));
     setSongbook(editSong.songID);
+    ui->checkBoxUseTranslation->setChecked(editSong.useTranslation);
     ui->checkBoxSongSettings->setChecked(editSong.usePrivateSettings);
     ui->groupBoxSettings->setVisible(editSong.usePrivateSettings);
     ui->comboBoxVAlignment->setCurrentIndex(editSong.alignmentV);
@@ -201,10 +243,10 @@ void EditWidget::setSave(){
     newSong.tune = ui->lineEditKey->text();
     newSong.wordsBy = ui->lineEditWordsBy->text();
     newSong.musicBy = ui->lineEditMusicBy->text();
-//    newSong.songText = resetLyric(ui->textEditSong->toPlainText());
     newSong.songText = ui->textEditSong->toPlainText().trimmed();
     newSong.alignmentV = ui->comboBoxVAlignment->currentIndex();
     newSong.alignmentH = ui->comboBoxHAlignment->currentIndex();
+    newSong.useTranslation = ui->checkBoxUseTranslation->isChecked();
     newSong.usePrivateSettings = ui->checkBoxSongSettings->isChecked();
     newSong.useBackground = ui->checkBoxUseBackground->isChecked();
     newSong.backgroundName = ui->lineEditBackgroundPath->text();
@@ -417,34 +459,13 @@ void EditWidget::loadCategories(bool ui_update)
 
 int EditWidget::isInDatabase(Song *song)
 {
-    QString s_title(""), s_id("0"), sb_id("0");
     QSqlQuery sq;
-
-    // check if song is part of songbook
-    sq.exec("SELECT id FROM Songbooks WHERE name = '" + song->songbook_name + "'");
-    while(sq.next())
-        sb_id = sq.value(0).toString().trimmed();
-    sq.clear();
-    if(sb_id == "0")
-        return 0; // no such songbook in database
-
-    // get song id
-    sq.exec("SELECT id, title from Songs WHERE songbook_id = '" + sb_id +"' AND number = '" + QString::number(song->number) +"'");
-    while(sq.next())
-    {
-        s_id = sq.value(0).toString().trimmed();
-        s_title = sq.value(1).toString().trimmed();
+    sq.exec("SELECT id from Songs WHERE id = " + QString::number(song->songID));
+    if (sq.first()) {
+        int s_id = sq.value(0).toInt();
+        return s_id;
     }
-    sq.clear();
-    if(s_id == "0")
-        return 0; // no matching song
-    song->songID = s_id.toInt();
-
-    // get song title
-    if(s_title!=song->title.trimmed())
-        return 0;
-    else
-        return s_id.toInt();
+    return 0;
 }
 
 void EditWidget::on_checkBoxSongSettings_toggled(bool checked)

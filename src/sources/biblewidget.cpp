@@ -195,6 +195,11 @@ void BibleWidget::sendToProjector(bool add_to_history)
 
 void BibleWidget::on_lineEditBook_textChanged(QString text)
 {
+    if (text == "0") {
+        ui->lineEditBook->clear();
+        return;
+    }
+
     // Called when the bible book filter field is modified.
     QStringList all_books = bible.getBooks();
 
@@ -376,7 +381,7 @@ void BibleWidget::on_search_button_clicked()
 
     if (!search_results.isEmpty()) // If have results, then show them
     {
-        if( not ui->result_label->isVisible() )
+        if( ! ui->result_label->isVisible() )
         {
             ui->lineEditBook->clear();
             hidden_splitter_state = ui->results_splitter->saveState();
