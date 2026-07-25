@@ -1,8 +1,8 @@
 // Copyright (C) 2016 The Qt Company Ltd.
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 
-#include "../include/qmediaplaylist.h"
-#include "../include/qmediaplaylist_p.h"
+#include "../headers/qmediaplaylist.h"
+#include "../headers/qmediaplaylist_p.h"
 #include "qplaylistfileparser.h"
 
 #include <QCoreApplication>

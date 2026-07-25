@@ -45,6 +45,17 @@ UI_DIR = $${RES_DIR}/ui
 RCC_DIR = $${RES_DIR}/rcc
 OUT_PWD = $${RES_DIR}/bin
 
+# Vendored QMediaPlaylist (removed from Qt6 multimedia; kept here for Qt6 build)
+INCLUDEPATH += $${PWD}/../3rdparty/headers
+
+SOURCES += $${PWD}/../3rdparty/sources/qmediaplaylist.cpp \
+    $${PWD}/../3rdparty/sources/qmediaplaylist_p.cpp \
+    $${PWD}/../3rdparty/sources/qplaylistfileparser.cpp
+
+HEADERS += $${PWD}/../3rdparty/headers/qmediaplaylist.h \
+    $${PWD}/../3rdparty/headers/qmediaplaylist_p.h \
+    $${PWD}/../3rdparty/headers/qplaylistfileparser.h
+
 SOURCES += sources/main.cpp \
     sources/softprojector.cpp \
     sources/songwidget.cpp \
