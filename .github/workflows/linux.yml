@@ -1,0 +1,87 @@
+name: Linux build
+
+on:
+  push:
+    branches: [ master, linux-port ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ubuntu:
+    name: Build on Ubuntu (Qt6)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt6 build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            qt6-base-dev \
+            qt6-base-dev-tools \
+            qt6-declarative-dev \
+            qt6-multimedia-dev \
+            qt6-tools-dev \
+            libgl1-mesa-dev
+
+      - name: Build
+        run: |
+          mkdir -p build && cd build
+          qmake6 ../src/softProjector.pro
+          make -j"$(nproc)"
+
+      - name: Headless smoke test
+        run: |
+          cd src/unix_build/bin
+          # Exit 124 (still running when the timeout fires) or 0 both mean it
+          # started without crashing; anything else is a failure.
+          set +e
+          QT_QPA_PLATFORM=offscreen timeout 10 ./SoftProjector
+          code=$?
+          set -e
+          if [ "$code" != "124" ] && [ "$code" != "0" ]; then
+            echo "SoftProjector exited with $code"
+            exit 1
+          fi
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: SoftProjector-ubuntu-x86_64
+          path: src/unix_build/bin/SoftProjector
+
+  fedora-rpm:
+    name: Build RPM on Fedora
+    runs-on: ubuntu-24.04
+    container:
+      image: fedora:41
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          dnf -y install \
+            gcc-c++ make git rpm-build rpmdevtools \
+            qt6-qtbase-devel \
+            qt6-qtdeclarative-devel \
+            qt6-qtmultimedia-devel \
+            qt6-qttools-devel \
+            desktop-file-utils
+
+      - name: Build RPM
+        run: |
+          # git archive needs the checkout dir marked safe inside the container
+          git config --global --add safe.directory "$PWD"
+          rpmdev-setuptree
+          VERSION=$(rpmspec -q --qf '%{version}\n' packaging/rpm/softprojector.spec | head -1)
+          git archive --format=tar.gz \
+            --prefix="softprojector-${VERSION}/" \
+            -o ~/rpmbuild/SOURCES/softprojector-${VERSION}.tar.gz HEAD
+          rpmbuild -ba packaging/rpm/softprojector.spec
+
+      - name: Upload RPM
+        uses: actions/upload-artifact@v4
+        with:
+          name: SoftProjector-fedora-rpm
+          path: ~/rpmbuild/RPMS/*/*.rpm
