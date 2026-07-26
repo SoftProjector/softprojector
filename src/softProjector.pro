@@ -181,3 +181,19 @@ RESOURCES += softprojector.qrc
 win32 {
     RC_FILE = softprojector.rc
 }
+
+# Linux/Unix (non-macOS) install rules — used by `make install` and by the
+# RPM/AppImage packaging. Override the prefix with `qmake PREFIX=/some/path`.
+unix:!macx {
+    isEmpty(PREFIX): PREFIX = /usr
+
+    target.path = $$PREFIX/bin
+
+    desktop.path = $$PREFIX/share/applications
+    desktop.files = $$PWD/../packaging/linux/softprojector.desktop
+
+    icon.path = $$PREFIX/share/icons/hicolor/128x128/apps
+    icon.files = $$PWD/icons/softprojector.png
+
+    INSTALLS += target desktop icon
+}
