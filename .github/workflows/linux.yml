@@ -6,6 +6,12 @@ on:
   pull_request:
   workflow_dispatch:
 
+# A branch push and its pull request point at the same commit. Group runs by
+# that commit and cancel redundant ones so the two events don't build twice.
+concurrency:
+  group: linux-build-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: true
+
 jobs:
   ubuntu:
     name: Build on Ubuntu (Qt6)
