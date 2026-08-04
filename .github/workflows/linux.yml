@@ -2,7 +2,7 @@ name: Linux build
 
 on:
   push:
-    branches: [ master, linux-port ]
+    branches: [ '**' ]
   pull_request:
   workflow_dispatch:
 
