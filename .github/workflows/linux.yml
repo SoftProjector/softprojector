@@ -37,13 +37,26 @@ jobs:
           qmake6 ../src/softProjector.pro
           make -j"$(nproc)"
 
+      - name: Install QML runtime modules for the smoke test
+        run: |
+          # The projector display loads QtQuick + QtMultimedia QML at startup;
+          # these runtime modules are separate from the -dev build packages.
+          sudo apt-get install -y --no-install-recommends \
+            qml6-module-qtquick \
+            qml6-module-qtquick-window \
+            qml6-module-qtmultimedia || true
+
       - name: Headless smoke test
         run: |
           cd src/unix_build/bin
+          # Headless: the offscreen platform plugin, plus QtQuick's software
+          # renderer since CI has no GPU.
+          export QT_QPA_PLATFORM=offscreen
+          export QT_QUICK_BACKEND=software
           # Exit 124 (still running when the timeout fires) or 0 both mean it
           # started without crashing; anything else is a failure.
           set +e
-          QT_QPA_PLATFORM=offscreen timeout 10 ./SoftProjector
+          timeout 10 ./SoftProjector
           code=$?
           set -e
           if [ "$code" != "124" ] && [ "$code" != "0" ]; then
@@ -63,12 +76,18 @@ jobs:
     container:
       image: fedora:41
     steps:
+      # The fedora image has no git, so actions/checkout would fall back to a
+      # REST tarball download with no .git directory, breaking `git archive`.
+      # Install git first so checkout performs a real clone.
+      - name: Install git
+        run: dnf -y install git
+
       - uses: actions/checkout@v4
 
       - name: Install build dependencies
         run: |
           dnf -y install \
-            gcc-c++ make git rpm-build rpmdevtools \
+            gcc-c++ make rpm-build rpmdevtools \
             qt6-qtbase-devel \
             qt6-qtdeclarative-devel \
             qt6-qtmultimedia-devel \
