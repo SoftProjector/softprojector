@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=SoftProjector
+GenericName=Media Projection
+Comment=Display song lyrics, Bible verses and media for church services
+Exec=SoftProjector
+Icon=softprojector
+Terminal=false
+Categories=Office;Presentation;
+Keywords=projector;church;lyrics;bible;presentation;worship;

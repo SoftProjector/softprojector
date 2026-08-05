@@ -53,11 +53,14 @@ void GeneralSettingWidget::setSettings(GeneralSettings settings)
 void GeneralSettingWidget::loadSettings()
 {
     ui->checkBoxDisplayOnTop->setChecked(mySettings.displayIsOnTop);
+#ifdef Q_OS_WIN
+    // The dark theme is applied only on Windows (see main.cpp) and its
+    // preference is stored in the Windows registry.
     QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",QSettings::NativeFormat);
-    if(settings.value("SoftProjectorUseLightTheme")==0)
-        ui->checkBoxUseDarkTheme->setChecked(true);
-    else
-        ui->checkBoxUseDarkTheme->setChecked(false);
+    ui->checkBoxUseDarkTheme->setChecked(settings.value("SoftProjectorUseLightTheme")==0);
+#else
+    ui->checkBoxUseDarkTheme->setChecked(false);
+#endif
     ui->labelDarkThemeInfo->setToolTip(qApp->applicationDirPath()+"/DarkTheme.ini");
     ui->checkBoxDisplayOnStartUp->setChecked(mySettings.displayOnStartUp);
 
@@ -353,6 +356,9 @@ void GeneralSettingWidget::on_comboBoxTheme_activated(int index)
 
 void GeneralSettingWidget::on_checkBoxUseDarkTheme_clicked()
 {
+#ifdef Q_OS_WIN
+    // The dark theme is a Windows-only feature; its preference is stored in the
+    // Windows registry and applied at startup (see main.cpp).
     QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
     if (ui->checkBoxUseDarkTheme->isChecked())
         settings.setValue("SoftProjectorUseLightTheme", 0);
@@ -361,4 +367,5 @@ void GeneralSettingWidget::on_checkBoxUseDarkTheme_clicked()
     QMessageBox msgBox;
     msgBox.setText("Re-launch the application for the changes to take place.");
     msgBox.exec();
+#endif
 }

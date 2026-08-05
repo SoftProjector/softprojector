@@ -21,6 +21,9 @@
 #include <QMessageBox>
 #include <QtSql>
 #include <QStyleFactory>
+#include <QStandardPaths>
+#include <QFileInfo>
+#include <QDir>
 #include "../headers/softprojector.hpp"
 
 // Definitions for database versions 'dbVer' numbers
@@ -197,7 +200,21 @@ int main(int argc, char *argv[])
     else
         database_dir = cur_app_path + QDir::separator();
 #else
-    database_dir = a.applicationDirPath() + QDir::separator();
+    // Prefer writing beside the binary when that location is writable
+    // (portable install / running from the build directory). When it is not —
+    // e.g. a system package installed under /usr/bin — fall back to a per-user
+    // data directory so the database can still be created.
+    {
+        const QString appDir = a.applicationDirPath();
+        if (QFileInfo(appDir).isWritable())
+            database_dir = appDir + QDir::separator();
+        else
+        {
+            const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+            QDir().mkpath(dataDir);
+            database_dir = dataDir + QDir::separator();
+        }
+    }
 #endif
 #ifdef Q_OS_WIN
     // Use Dark Theme
